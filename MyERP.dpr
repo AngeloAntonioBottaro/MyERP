@@ -1,4 +1,4 @@
-program MyProject;
+program MyERP;
 
 uses
   Vcl.Forms,
@@ -51,7 +51,7 @@ uses
 begin
   Application.Initialize;
   TStyleManager.TrySetStyle('Amethyst Kamri');
-  Application.Title := 'AAB Softwares';
+  Application.Title := 'AAB Softwares - ERP Simples';
 
   ViewSplash := TViewSplash.Create(nil);
   try
