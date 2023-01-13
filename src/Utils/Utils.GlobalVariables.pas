@@ -33,7 +33,7 @@ implementation
 procedure RefreshVariables;
 begin
    //PASTAS
-   VG_PastaPadrao     := PASTA_PADRAO;
+   VG_PastaPadrao     := PASTA_PADRAO + '\ERP';
    VG_PastaRelatorios := VG_PastaPadrao + PASTA_RELATORIO;
    VG_PastaImagens    := VG_PastaPadrao + PASTA_IMAGEM;
    VG_PastaArquivos   := VG_PastaPadrao + PASTA_ARQUIVO;
