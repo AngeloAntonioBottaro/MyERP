@@ -121,7 +121,6 @@
         <DCCReference Include="src\Utils\Utils.GlobalVariables.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Interfaces.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Splash.pas"/>
-        <DCCReference Include="..\MyLibrary\Utils.VclLibrary.pas"/>
         <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.Interfaces.pas"/>
         <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.pas"/>
         <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.Search.pas"/>
@@ -130,7 +129,6 @@
             <Form>MySearchComponentsView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\MyLibrary\Utils.MyLibrary.pas"/>
         <DCCReference Include="src\Utils\Utils.GlobalConstants.pas"/>
         <DCCReference Include="src\View\Cidades\View.Cidades.Cad.pas">
             <Form>ViewCidadesCad</Form>
@@ -188,22 +186,24 @@
             <Form>ViewFuncionariosFuncoesBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\MyMsg\src\MyMessage.Interfaces.pas"/>
-        <DCCReference Include="..\MyMsg\src\MyMessage.pas"/>
-        <DCCReference Include="..\MyMsg\src\MyMessage.Types.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.Exceptions.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.pas"/>
         <DCCReference Include="..\MyExceptions\Src\MyExceptions.Base.pas"/>
         <DCCReference Include="..\MyExceptions\Src\MyExceptions.pas"/>
-        <DCCReference Include="..\MyMsg\src\MyMessage.View.pas">
-            <Form>MyMessageView</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Login.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Imagens.DM.pas">
             <Form>ModelSistemaImagensDM</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.VclLibrary.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.Interfaces.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.Types.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.View.pas">
+            <Form>MyMessageView</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
