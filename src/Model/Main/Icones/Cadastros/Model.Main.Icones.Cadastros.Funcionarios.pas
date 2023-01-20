@@ -12,11 +12,11 @@ uses
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
-   AValue.Add(TMainIconName.cbFunc,
+   AValue.Add(TMainIconName.ckFuncionarios,
               TModelMainIconesFields.Create
                .Caption('funcionários')
-               .ComponentName(TMainIconName.cbFunc.ToString)
-               .ResourceName('func')
+               .ComponentName(TMainIconName.ckFuncionarios.ToString)
+               .ResourceName('funcionarios')
                .Hint('Cadastro de funcionários'));
 end;
 

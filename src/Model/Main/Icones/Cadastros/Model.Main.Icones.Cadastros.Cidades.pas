@@ -1,4 +1,4 @@
-unit Model.Main.Icones.Cadastros.Produtos;
+unit Model.Main.Icones.Cadastros.Cidades;
 
 interface
 
@@ -12,13 +12,13 @@ uses
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
-   AValue.Add(TMainIconName.ckProdutos,
+   AValue.Add(TMainIconName.ckCidades,
               TModelMainIconesFields.Create
-               .Caption('Produtos')
-               .ComponentName(TMainIconName.ckProdutos.ToString)
-               .ResourceName('produtos')
-               .Hint('Cadastro de produtos')
-               //.PopupMenu(ViewMain.PopupMenuProdutos)
+               .Caption('Cadastro de cidades')
+               .ComponentName(TMainIconName.ckCidades.ToString)
+               .ResourceName('cidades')
+               .Hint('Cadastro de cidades')
+               //.PopupMenu(ViewMain.pMenuVeiculos)
                );
 end;
 

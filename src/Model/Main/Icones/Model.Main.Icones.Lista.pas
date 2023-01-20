@@ -5,6 +5,7 @@ interface
 uses
   System.SysUtils,
   System.Generics.Collections,
+  Data.DB,
   Model.Main.Icones.Fields,
   Model.Main.Icones.Types,
   Model.Main.Icones.Interfaces;
@@ -23,11 +24,7 @@ type
 implementation
 
 uses
-  C4D.Exceptions,
-  Data.DB,
-  Utils.Solusys,
-  Common.Utils.Variaveis,
-  Model.Sistema.DM;
+  MyExceptions;
 
 constructor TModelMainIconesLista.Create;
 begin
@@ -49,13 +46,10 @@ procedure TModelMainIconesLista.AtualizaVisibilidades;
 var
  LIndex: TMainIconName;
 begin
-   if(not cons_TB_conf_icones('where(id_funcionario = "' + V_IdFuncLog + '" or id_funcionario = "0") ' + 'and(id_empresa = "' + V_IdEmpresaLog + '") '))then
-     raise ExceptionOb.Create('Não foi possível consultar os icones');
-
    for LIndex in FListaPairsIconesFields.ToSortKeys do
    begin
       FListaPairsIconesFields.Items[LIndex].Visible(False);
-      if(ModelSistemaDm.TB_conf_icones.Locate('icone', FListaPairsIconesFields.Items[LIndex].ComponentName, [loCaseInsensitive]))then
+      //if(ModelSistemaDm.TB_conf_icones.Locate('icone', FListaPairsIconesFields.Items[LIndex].ComponentName, [loCaseInsensitive]))then
         FListaPairsIconesFields.Items[LIndex].Visible(True);
    end;
 end;

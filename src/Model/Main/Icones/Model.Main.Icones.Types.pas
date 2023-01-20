@@ -5,16 +5,15 @@ interface
 uses
   System.SysUtils,
   System.TypInfo,
-  C4D.Utils.ObjectDictionary,
+  Utils.MyObjectDictionary,
   Model.Main.Icones.Fields;
 
 type
   {$SCOPEDENUMS ON}
-  TMainIconName = (cbClientes, cbLimiteDiario, cbDescPreEspeciais, cbTuristico, cbVeiculos, cbProdutos, cbConsultaProdutos, cbAjusteEstoque,
-                   cbGrades, cbBarras, cbFunc, cbPontoFunc, cbFornecedores, cbBackupSistema);
+  TMainIconName = (ckClientes, ckProdutos, ckConsultaProdutos, ckFornecedores, ckFuncionarios, ckCidades, ckBackupSistema);
   {$SCOPEDENUMS OFF}
 
-  TPairMainIconesFields     = TC4DUtilsObjectDictionary<TMainIconName, TModelMainIconesFields>;
+  TPairMainIconesFields     = TUtilsMyObjectDictionary<TMainIconName, TModelMainIconesFields>;
   TProcPairMainIconesFields = TProc<TPairMainIconesFields>;
 
   TMainIconNameHelper = record helper for TMainIconName

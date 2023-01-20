@@ -38,10 +38,15 @@ type
     CadastrosFuncionariosFuncoes1: TMenuItem;
     CadastrosCidades1: TMenuItem;
     Sair1: TMenuItem;
+    pMenuMain: TPopupMenu;
+    AtualizarIconesDeAtalhos1: TMenuItem;
+    CadastrosFornecedores1: TMenuItem;
+    CadastrosFornecedoresCadastro1: TMenuItem;
+    CadastrosClientesCadastro1: TMenuItem;
+    AtualizarSistema1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosCidades1Click(Sender: TObject);
-    procedure CadastrosClientes1Click(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
     procedure CadastrosGruposProdutos1Click(Sender: TObject);
     procedure CadastrosSubgruposProdutos1Click(Sender: TObject);
@@ -49,11 +54,17 @@ type
     procedure CadastrosFuncionariosFuncoes1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Sair1Click(Sender: TObject);
+    procedure AtualizarIconesDeAtalhos1Click(Sender: TObject);
+    procedure CadastrosClientesCadastro1Click(Sender: TObject);
+    procedure CadastrosFornecedoresCadastro1Click(Sender: TObject);
+    procedure AtualizarSistema1Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     procedure DoLoggin;
     procedure ConfForm;
     procedure ProcessStatus;
     procedure ProcessImageLogo;
+    procedure CriarIconesAtalhos;
   public
   end;
 
@@ -65,13 +76,14 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.VclLibrary,
+  Utils.MyVclLibrary,
   Utils.MyLibrary,
   Utils.Versao,
   Utils.GlobalVariables,
   MyMessage,
   MyExceptions,
   Model.Sistema.Imagens.DM,
+  Model.Main.Icones,
   View.Login,
   View.Cidades.Cad,
   View.Clientes.Cad,
@@ -79,7 +91,7 @@ uses
   View.Produtos.Grupos.Cad,
   View.Produtos.SubGrupos.Cad,
   View.Funcionarios.Cad,
-  View.Funcionarios.Funcoes.Cad;
+  View.Funcionarios.Funcoes.Cad, View.Fornecedores.Cad;
 
 procedure TViewMain.FormCreate(Sender: TObject);
 begin
@@ -90,16 +102,35 @@ begin
    Self.Caption := Application.Title + TUtilsVersao.CompleteVersion;
 end;
 
+procedure TViewMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   case(Key)of
+    VK_ESCAPE: if(Shift = [])then Sair1.Click;
+   end;
+
+   inherited;
+end;
+
 procedure TViewMain.FormShow(Sender: TObject);
 begin
-   Self.ConfForm;
    Self.DoLoggin;
+   Self.ConfForm;
 end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    if(not showPerguntaN('Deseja encerrar o sistema?'))then
      Abort;
+end;
+
+procedure TViewMain.AtualizarIconesDeAtalhos1Click(Sender: TObject);
+begin
+   Self.CriarIconesAtalhos;
+end;
+
+procedure TViewMain.AtualizarSistema1Click(Sender: TObject);
+begin
+   Self.ConfForm;
 end;
 
 procedure TViewMain.CadastrosCidades1Click(Sender: TObject);
@@ -112,13 +143,23 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosClientes1Click(Sender: TObject);
+procedure TViewMain.CadastrosClientesCadastro1Click(Sender: TObject);
 begin
    if(ViewClientesCad = nil)then Application.CreateForm(TViewClientesCad, ViewClientesCad);
    try
      ViewClientesCad.ShowModal;
    finally
      FreeAndNil(ViewClientesCad);
+   end;
+end;
+
+procedure TViewMain.CadastrosFornecedoresCadastro1Click(Sender: TObject);
+begin
+   if(ViewFornecedoresCad = nil)then Application.CreateForm(TViewFornecedoresCad, ViewFornecedoresCad);
+   try
+     ViewFornecedoresCad.ShowModal;
+   finally
+     FreeAndNil(ViewFornecedoresCad);
    end;
 end;
 
@@ -195,6 +236,7 @@ begin
             Sleep(50);
             Self.ProcessStatus;
             Self.ProcessImageLogo;
+            Self.CriarIconesAtalhos;
          end);
     end
    );
@@ -218,6 +260,18 @@ begin
      imgLogo.Picture.LoadFromFile(VG_Logo);
    except on E: Exception do
      showErro('Não foi possível carregar a logo do sistema');
+   end;
+end;
+
+procedure TViewMain.CriarIconesAtalhos;
+begin
+   try
+     TModelMainIcones.GetInstance
+      .AtualizaVisibilidades
+      .Componentes
+       .Formulario(Self)
+       .CriarPanelIcones;
+   except on E: Exception do
    end;
 end;
 

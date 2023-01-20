@@ -4,7 +4,6 @@ interface
 
 uses
   System.Sysutils,
-  C4D.Utils.Pairs,
   Model.Main.Icones.Lista,
   Model.Main.Icones.Types,
   Model.Main.Icones.Interfaces,

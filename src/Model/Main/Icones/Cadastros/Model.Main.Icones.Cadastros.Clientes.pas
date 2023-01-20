@@ -12,13 +12,13 @@ uses
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
-   AValue.Add(TMainIconName.cbClientes,
+   AValue.Add(TMainIconName.ckClientes,
               TModelMainIconesFields.Create
                .Caption('Clientes')
-               .ComponentName(TMainIconName.cbClientes.ToString)
+               .ComponentName(TMainIconName.ckClientes.ToString)
                .ResourceName('clientes')
                .Hint('Tela de cadastro de clientes')
-               .PopupMenu(ViewMain.pMenuRelatorios)
+               //.PopupMenu(ViewMain.pMenuRelatorios)
                .Tag(789001));
 end;
 

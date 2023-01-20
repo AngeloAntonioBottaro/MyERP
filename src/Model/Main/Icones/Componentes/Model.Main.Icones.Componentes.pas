@@ -23,7 +23,7 @@ type
 implementation
 
 uses
-  C4D.Exceptions;
+  MyExceptions;
 
 class function TModelMainIconesComponentes.New: IModelMainIconesComponentes;
 begin
@@ -39,7 +39,7 @@ end;
 function TModelMainIconesComponentes.Formulario: TForm;
 begin
    if(not Assigned(FFormulario))then
-     raise ExceptionOb.Create('Formulário não informado');
+     raise ExceptionMsg.Create('Formulário não informado');
 
    Result := FFormulario;
 end;

@@ -11,10 +11,13 @@ object ViewMain: TViewMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   Menu = MainMenu
   OldCreateOrder = False
+  PopupMenu = pMenuMain
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -113,7 +116,11 @@ object ViewMain: TViewMain
           0000000000000000000000000000000000000000000000000000}
         Caption = '&Clientes'
         ImageIndex = 0
-        OnClick = CadastrosClientes1Click
+        object CadastrosClientesCadastro1: TMenuItem
+          Caption = 'Cadastro'
+          ImageIndex = 0
+          OnClick = CadastrosClientesCadastro1Click
+        end
       end
       object CadastrosProdutos1: TMenuItem
         Bitmap.Data = {
@@ -293,6 +300,15 @@ object ViewMain: TViewMain
           OnClick = CadastrosSubgruposProdutos1Click
         end
       end
+      object CadastrosFornecedores1: TMenuItem
+        Caption = '&Fornecedores'
+        ImageIndex = 12
+        object CadastrosFornecedoresCadastro1: TMenuItem
+          Caption = '&Cadastro'
+          ImageIndex = 12
+          OnClick = CadastrosFornecedoresCadastro1Click
+        end
+      end
       object CadastrosFuncionarios1: TMenuItem
         Bitmap.Data = {
           76060000424D7606000000000000360000002800000014000000140000000100
@@ -347,7 +363,7 @@ object ViewMain: TViewMain
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
-        Caption = '&Funcion'#225'rios'
+        Caption = 'F&uncion'#225'rios'
         ImageIndex = 2
         object CadastrosFuncionariosCadastro1: TMenuItem
           Bitmap.Data = {
@@ -537,6 +553,19 @@ object ViewMain: TViewMain
     object Sair1: TMenuItem
       Caption = '&Sair'
       OnClick = Sair1Click
+    end
+  end
+  object pMenuMain: TPopupMenu
+    Left = 112
+    Top = 64
+    object AtualizarIconesDeAtalhos1: TMenuItem
+      Caption = 'Atualizar '#237'cones de atalhos'
+      OnClick = AtualizarIconesDeAtalhos1Click
+    end
+    object AtualizarSistema1: TMenuItem
+      Caption = 'Atualizar sistema'
+      ShortCut = 116
+      OnClick = AtualizarSistema1Click
     end
   end
 end

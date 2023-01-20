@@ -16,7 +16,6 @@ type
    ['{E4A90298-8199-4E90-AE91-D4F36545449E}']
    function Formulario(AFormulario: TForm): IModelMainIconesComponentes;
    procedure CriarPanelIcones;
-   procedure CriarCheckBoxIcones;
   end;
 
   IModelMainIconesList = interface

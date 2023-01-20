@@ -200,7 +200,6 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\MyUtilsLibrary\Utils.MyLibrary.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.VclLibrary.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.Interfaces.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.Types.pas"/>
@@ -208,6 +207,55 @@
             <Form>MyMessageView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyVclLibrary.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Criacoes.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Fields.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.RegistrarProc.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Types.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelAtalhos.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.ConsultaProdutos.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyObjectDictionary.pas"/>
+        <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Cad.pas">
+            <Form>ViewFornecedoresCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Busca.pas">
+            <Form>ViewFornecedoresBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <RcItem Include="Files\Images\PNG\Menus\Group.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>clientes</ResourceId>
+        </RcItem>
+        <RcItem Include="Files\Images\PNG\Menus\Product.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>produtos</ResourceId>
+        </RcItem>
+        <RcItem Include="Files\Images\PNG\Menus\User.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>funcionarios</ResourceId>
+        </RcItem>
+        <RcItem Include="Files\Images\PNG\Menus\Packaging.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>consulta_produtos</ResourceId>
+        </RcItem>
+        <RcItem Include="Files\Images\PNG\Menus\ClientManagement.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>fornecedores</ResourceId>
+        </RcItem>
+        <RcItem Include="Files\Images\PNG\Menus\CityBuildings.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>cidades</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -234,7 +282,43 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Files\Images\PNG\Menus\User.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Files\Images\PNG\Menus\ClientManagement.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Files\Images\PNG\Menus\Group.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Files\Images\PNG\Menus\Packaging.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Files\Images\PNG\Menus\Product.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Files\Images\PNG\Menus\CityBuildings.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\AABSoft\ERP\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MyERP.exe</RemoteName>
                         <Overwrite>true</Overwrite>

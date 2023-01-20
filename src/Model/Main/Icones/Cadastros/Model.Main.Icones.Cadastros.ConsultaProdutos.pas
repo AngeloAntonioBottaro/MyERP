@@ -12,13 +12,14 @@ uses
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
-   AValue.Add(TMainIconName.cbConsultaProdutos,
+   AValue.Add(TMainIconName.ckConsultaProdutos,
               TModelMainIconesFields.Create
                .Caption('Consulta produtos')
-               .ComponentName(TMainIconName.cbConsultaProdutos.ToString)
+               .ComponentName(TMainIconName.ckConsultaProdutos.ToString)
                .ResourceName('consulta_produtos')
                .Hint('Tela de consulta de produtos')
-               .PopupMenu(ViewMain.PopupMenuProdutos));
+               //.PopupMenu(ViewMain.PopupMenuProdutos)
+               );
 end;
 
 initialization

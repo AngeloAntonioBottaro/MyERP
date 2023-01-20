@@ -31,7 +31,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.VclLibrary;
+  Utils.MyVclLibrary;
 
 procedure TViewBase.FormCreate(Sender: TObject);
 begin

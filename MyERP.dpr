@@ -1,5 +1,7 @@
 program MyERP;
 
+{$R *.dres}
+
 uses
   Vcl.Forms,
   Vcl.Themes,
@@ -40,11 +42,29 @@ uses
   Model.Sistema.Login in 'src\Model\Sistema\Model.Sistema.Login.pas',
   Model.Sistema.Imagens.DM in 'src\Model\Sistema\Model.Sistema.Imagens.DM.pas' {ModelSistemaImagensDM: TDataModule},
   Utils.MyLibrary in '..\MyUtilsLibrary\Utils.MyLibrary.pas',
-  Utils.VclLibrary in '..\MyUtilsLibrary\Utils.VclLibrary.pas',
   MyMessage.Interfaces in '..\MyMessage\src\MyMessage.Interfaces.pas',
   MyMessage in '..\MyMessage\src\MyMessage.pas',
   MyMessage.Types in '..\MyMessage\src\MyMessage.Types.pas',
-  MyMessage.View in '..\MyMessage\src\MyMessage.View.pas' {MyMessageView};
+  MyMessage.View in '..\MyMessage\src\MyMessage.View.pas' {MyMessageView},
+  Utils.MyVclLibrary in '..\MyUtilsLibrary\Utils.MyVclLibrary.pas',
+  Model.Main.Icones.Criacoes in 'src\Model\Main\Icones\Model.Main.Icones.Criacoes.pas',
+  Model.Main.Icones.Fields in 'src\Model\Main\Icones\Model.Main.Icones.Fields.pas',
+  Model.Main.Icones.Interfaces in 'src\Model\Main\Icones\Model.Main.Icones.Interfaces.pas',
+  Model.Main.Icones.Lista in 'src\Model\Main\Icones\Model.Main.Icones.Lista.pas',
+  Model.Main.Icones.Lista.RegistrarProc in 'src\Model\Main\Icones\Model.Main.Icones.Lista.RegistrarProc.pas',
+  Model.Main.Icones in 'src\Model\Main\Icones\Model.Main.Icones.pas',
+  Model.Main.Icones.Types in 'src\Model\Main\Icones\Model.Main.Icones.Types.pas',
+  Model.Main.Icones.Componentes.PanelAtalhos in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelAtalhos.pas',
+  Model.Main.Icones.Componentes in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.pas',
+  Model.Main.Icones.Cadastros.Clientes in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas',
+  Model.Main.Icones.Cadastros.ConsultaProdutos in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.ConsultaProdutos.pas',
+  Model.Main.Icones.Cadastros.Fornecedores in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas',
+  Model.Main.Icones.Cadastros.Funcionarios in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas',
+  Model.Main.Icones.Cadastros.Produtos in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas',
+  Model.Main.Icones.Cadastros.Cidades in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas',
+  Utils.MyObjectDictionary in '..\MyUtilsLibrary\Utils.MyObjectDictionary.pas',
+  View.Fornecedores.Cad in 'src\View\Fornecedores\View.Fornecedores.Cad.pas' {ViewFornecedoresCad},
+  View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca};
 
 {$R *.res}
 
