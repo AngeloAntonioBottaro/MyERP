@@ -26,8 +26,10 @@ type
     Image1: TImage;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnLogarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure SystemTerminate;
+    procedure OnError;
   public
   end;
 
@@ -50,7 +52,7 @@ end;
 procedure TViewLogin.btnLogarClick(Sender: TObject);
 begin
    TModelSistemaLogin.New
-    .DoCancel(Self.SystemTerminate)
+    .DoError(Self.OnError)
     .UsuarioLogin(edtUsuarioLogin.Text)
     .UsuarioSenha(edtUsuarioSenha.Text)
     .ProcessaLogin;
@@ -59,7 +61,17 @@ begin
      Exit;
 
    Self.Close;
-   ModalResult := mrOk;
+end;
+
+procedure TViewLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   if(VG_UsuarioLogadoId = 0)then
+     Self.SystemTerminate;
+end;
+
+procedure TViewLogin.OnError;
+begin
+   edtUsuarioLogin.SetFocus;
 end;
 
 procedure TViewLogin.SystemTerminate;

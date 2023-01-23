@@ -18,8 +18,8 @@ begin
                .ComponentName(TMainIconName.ckFornecedores.ToString)
                .ResourceName('fornecedores')
                .Hint('Cadastro de Fornecedores')
-               //.PopupMenu(ViewMain.pMenuRelatorios)
-               .Tag(789011));
+               .OnClickViewMain(ViewMain.CadastrosFornecedoresCadastro1Click)
+               );
 end;
 
 initialization

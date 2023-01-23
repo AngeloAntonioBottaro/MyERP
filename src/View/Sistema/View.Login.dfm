@@ -2,6 +2,7 @@ inherited ViewLogin: TViewLogin
   Caption = 'Login'
   ClientHeight = 132
   ClientWidth = 310
+  OnClose = FormClose
   ExplicitWidth = 326
   ExplicitHeight = 171
   PixelsPerInch = 96

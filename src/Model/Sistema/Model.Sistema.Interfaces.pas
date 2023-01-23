@@ -15,7 +15,7 @@ type
 
   IModelSistemaLogin = interface
    ['{B36FD284-E0A3-4C21-AB5F-6334B02FD0B8}']
-   function DoCancel(ACancel: TProc): IModelSistemaLogin;
+   function DoError(AError: TProc): IModelSistemaLogin;
    function UsuarioLogin(AValue: string): IModelSistemaLogin;
    function UsuarioSenha(AValue: string): IModelSistemaLogin;
    function ProcessaLogin: IModelSistemaLogin;

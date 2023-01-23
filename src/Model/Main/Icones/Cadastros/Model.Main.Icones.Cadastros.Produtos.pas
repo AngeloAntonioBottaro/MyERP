@@ -18,7 +18,7 @@ begin
                .ComponentName(TMainIconName.ckProdutos.ToString)
                .ResourceName('produtos')
                .Hint('Cadastro de produtos')
-               //.PopupMenu(ViewMain.PopupMenuProdutos)
+               .OnClickViewMain(ViewMain.CadastrosProdutosCadastro1Click)
                );
 end;
 

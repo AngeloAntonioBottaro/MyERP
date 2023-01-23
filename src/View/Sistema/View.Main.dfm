@@ -18,6 +18,7 @@ object ViewMain: TViewMain
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -117,8 +118,8 @@ object ViewMain: TViewMain
         Caption = '&Clientes'
         ImageIndex = 0
         object CadastrosClientesCadastro1: TMenuItem
-          Caption = 'Cadastro'
-          ImageIndex = 0
+          Caption = '&Cadastro'
+          ImageIndex = 1
           OnClick = CadastrosClientesCadastro1Click
         end
       end
@@ -180,7 +181,7 @@ object ViewMain: TViewMain
         ImageIndex = 7
         object CadastrosProdutosCadastro1: TMenuItem
           Caption = '&Cadastro'
-          ImageIndex = 8
+          ImageIndex = 9
           OnClick = CadastrosProdutosCadastro1Click
         end
         object CadastrosGruposProdutos1: TMenuItem
@@ -238,7 +239,7 @@ object ViewMain: TViewMain
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           Caption = '&Grupos'
-          ImageIndex = 9
+          ImageIndex = 10
           OnClick = CadastrosGruposProdutos1Click
         end
         object CadastrosSubgruposProdutos1: TMenuItem
@@ -296,16 +297,16 @@ object ViewMain: TViewMain
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           Caption = '&Sub-grupo'
-          ImageIndex = 10
+          ImageIndex = 11
           OnClick = CadastrosSubgruposProdutos1Click
         end
       end
       object CadastrosFornecedores1: TMenuItem
         Caption = '&Fornecedores'
-        ImageIndex = 12
+        ImageIndex = 13
         object CadastrosFornecedoresCadastro1: TMenuItem
           Caption = '&Cadastro'
-          ImageIndex = 12
+          ImageIndex = 16
           OnClick = CadastrosFornecedoresCadastro1Click
         end
       end
@@ -364,7 +365,7 @@ object ViewMain: TViewMain
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         Caption = 'F&uncion'#225'rios'
-        ImageIndex = 2
+        ImageIndex = 3
         object CadastrosFuncionariosCadastro1: TMenuItem
           Bitmap.Data = {
             76060000424D7606000000000000360000002800000014000000140000000100
@@ -420,7 +421,7 @@ object ViewMain: TViewMain
             00000069A0A60072A5FF007DB0FF007EB1FF0087BAFF008ABDFF0080AE950000
             0001000000000000000000000000000000000000000000000000}
           Caption = '&Cadastro'
-          ImageIndex = 3
+          ImageIndex = 4
           OnClick = CadastrosFuncionariosCadastro1Click
         end
         object CadastrosFuncionariosFuncoes1: TMenuItem
@@ -478,7 +479,7 @@ object ViewMain: TViewMain
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           Caption = '&Fun'#231#245'es'
-          ImageIndex = 5
+          ImageIndex = 6
           OnClick = CadastrosFuncionariosFuncoes1Click
         end
       end
@@ -537,8 +538,12 @@ object ViewMain: TViewMain
           90FFF9CA90FFF9CA90FFF9CA90FFF9CA90FF0000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         Caption = 'C&idades'
-        ImageIndex = 11
-        OnClick = CadastrosCidades1Click
+        ImageIndex = 12
+        object CadastrosCidades1Cadastro1: TMenuItem
+          Caption = '&Cadastro'
+          ImageIndex = 14
+          OnClick = CadastrosCidades1Cadastro1Click
+        end
       end
     end
     object Movimentacoes1: TMenuItem

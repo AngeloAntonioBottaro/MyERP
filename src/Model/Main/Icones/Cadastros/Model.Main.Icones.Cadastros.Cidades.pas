@@ -14,11 +14,11 @@ procedure Registrar(AValue: TPairMainIconesFields);
 begin
    AValue.Add(TMainIconName.ckCidades,
               TModelMainIconesFields.Create
-               .Caption('Cadastro de cidades')
+               .Caption('Cidades')
                .ComponentName(TMainIconName.ckCidades.ToString)
                .ResourceName('cidades')
                .Hint('Cadastro de cidades')
-               //.PopupMenu(ViewMain.pMenuVeiculos)
+               .OnClickViewMain(ViewMain.CadastrosCidades1Cadastro1Click)
                );
 end;
 

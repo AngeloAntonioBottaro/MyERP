@@ -12,9 +12,10 @@ type
   private
     FUsuarioLogin: string;
     FUsuarioSenha: string;
-    FDOCancel: TProc;
+    FDoError: TProc;
+    procedure OnError(AMessage: string = '');
   protected
-    function DoCancel(ACancel: TProc): IModelSistemaLogin;
+    function DoError(AError: TProc): IModelSistemaLogin;
     function UsuarioLogin(AValue: string): IModelSistemaLogin;
     function UsuarioSenha(AValue: string): IModelSistemaLogin;
     function ProcessaLogin: IModelSistemaLogin;
@@ -26,6 +27,7 @@ implementation
 
 uses
   MyExceptions,
+  MyMessage,
   Utils.GlobalVariables;
 
 class function TModelSistemaLogin.New: IModelSistemaLogin;
@@ -33,10 +35,10 @@ begin
    Result := Self.Create;
 end;
 
-function TModelSistemaLogin.DoCancel(ACancel: TProc): IModelSistemaLogin;
+function TModelSistemaLogin.DoError(AError: TProc): IModelSistemaLogin;
 begin
-   Result := Self;
-   FDOCancel := ACancel;
+   Result   := Self;
+   FDoError := AError;
 end;
 
 function TModelSistemaLogin.UsuarioLogin(AValue: string): IModelSistemaLogin;
@@ -56,16 +58,27 @@ begin
    Result := Self;
 
    if(FUsuarioLogin.IsEmpty)then
-     raise ExceptionMsg.Create('Login do usuário não informado');
+     Self.OnError('Login do usuário não informado');
 
    if(FUsuarioSenha.IsEmpty)then
-     raise ExceptionMsg.Create('Senha do usuário não informada');
+     Self.OnError('Senha do usuário não informada');
 
    if(FUsuarioLogin <> '1')or(FUsuarioSenha <> '1')then
-     raise ExceptionMsg.Create('Usuário não encontrado');
+     Self.OnError('Usuário não encontrado');
 
    VG_UsuarioLogadoId   := 1;
    VG_UsuarioLogadoNome := 'Master';
+end;
+
+procedure TModelSistemaLogin.OnError(AMessage: string = '');
+begin
+   if(not AMessage.IsEmpty)then
+     showInformacao(AMessage);
+
+   if(Assigned(FDoError))then
+     FDoError();
+
+   Abort;
 end;
 
 end.

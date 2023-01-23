@@ -44,9 +44,9 @@ type
     CadastrosFornecedoresCadastro1: TMenuItem;
     CadastrosClientesCadastro1: TMenuItem;
     AtualizarSistema1: TMenuItem;
+    CadastrosCidades1Cadastro1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure CadastrosCidades1Click(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
     procedure CadastrosGruposProdutos1Click(Sender: TObject);
     procedure CadastrosSubgruposProdutos1Click(Sender: TObject);
@@ -59,6 +59,9 @@ type
     procedure CadastrosFornecedoresCadastro1Click(Sender: TObject);
     procedure AtualizarSistema1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure CadastrosCidades1Cadastro1Click(Sender: TObject);
+    procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ConfForm;
@@ -91,7 +94,9 @@ uses
   View.Produtos.Grupos.Cad,
   View.Produtos.SubGrupos.Cad,
   View.Funcionarios.Cad,
-  View.Funcionarios.Funcoes.Cad, View.Fornecedores.Cad;
+  View.Funcionarios.Funcoes.Cad,
+  View.Fornecedores.Cad,
+  View.Produtos.Busca;
 
 procedure TViewMain.FormCreate(Sender: TObject);
 begin
@@ -133,7 +138,17 @@ begin
    Self.ConfForm;
 end;
 
-procedure TViewMain.CadastrosCidades1Click(Sender: TObject);
+procedure TViewMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);
+begin
+   if(ViewProdutosBusca = nil)then Application.CreateForm(TViewProdutosBusca, ViewProdutosBusca);
+   try
+     ViewProdutosBusca.ShowModal;
+   finally
+     FreeAndNil(ViewProdutosBusca);
+   end;
+end;
+
+procedure TViewMain.CadastrosCidades1Cadastro1Click(Sender: TObject);
 begin
    if(ViewCidadesCad = nil)then Application.CreateForm(TViewCidadesCad, ViewCidadesCad);
    try
@@ -278,6 +293,24 @@ end;
 procedure TViewMain.Sair1Click(Sender: TObject);
 begin
    Self.Close;
+end;
+
+procedure TViewMain.FormResize(Sender: TObject);
+var
+ LTask: ITask;
+begin
+   LTask := TTask.Create(
+    procedure
+    begin
+       TThread.Synchronize(nil,
+         procedure
+         begin
+            Sleep(50);
+            Self.CriarIconesAtalhos;
+         end);
+    end
+   );
+   LTask.Start;
 end;
 
 end.

@@ -159,6 +159,8 @@ begin
    FPanel.BevelOuter  := TBevelCut(bvNone);
    FPanel.PopupMenu   := FModelMainIconesFields.PopupMenu;
    FPanel.Tag         := FModelMainIconesFields.Tag;
+
+   FPanel.OnClick     := FModelMainIconesFields.OnClickViewMain();
 end;
 
 procedure TModelMainIconesComponentesPanelAtalhos.CriarImageIcone;
@@ -173,6 +175,9 @@ begin
    FImage.Hint           := FModelMainIconesFields.Hint;
    FImage.Proportional   := True;
    FImage.Center         := True;
+
+   FImage.OnClick        := FModelMainIconesFields.OnClickViewMain();
+
    Self.CarregarImagemIcone;
 end;
 
@@ -187,12 +192,14 @@ begin
    FLabel.ParentShowHint := True;
    FLabel.Hint           := FModelMainIconesFields.Hint;
    FLabel.Alignment      := taCenter;
-   FLabel.Font.Color     := clRed;     
+   FLabel.Font.Color     := clRed;
    FLabel.Font.Size      := FModelMainIconesFields.FontSize;
    FLabel.Font.Name      := 'Arial';
    FLabel.Font.Style     := [fsBold];
    FLabel.Layout         := tlTop;
    FLabel.WordWrap       := True;
+
+   FLabel.OnClick        := FModelMainIconesFields.OnClickViewMain();
 end;
 
 procedure TModelMainIconesComponentesPanelAtalhos.CarregarImagemIcone;

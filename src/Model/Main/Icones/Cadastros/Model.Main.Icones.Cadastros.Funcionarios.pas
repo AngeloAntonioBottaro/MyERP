@@ -17,7 +17,9 @@ begin
                .Caption('funcionários')
                .ComponentName(TMainIconName.ckFuncionarios.ToString)
                .ResourceName('funcionarios')
-               .Hint('Cadastro de funcionários'));
+               .Hint('Cadastro de funcionários')
+               .OnClickViewMain(ViewMain.CadastrosFuncionariosCadastro1Click)
+               );
 end;
 
 initialization

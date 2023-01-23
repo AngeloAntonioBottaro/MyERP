@@ -17,9 +17,9 @@ begin
                .Caption('Clientes')
                .ComponentName(TMainIconName.ckClientes.ToString)
                .ResourceName('clientes')
-               .Hint('Tela de cadastro de clientes')
-               //.PopupMenu(ViewMain.pMenuRelatorios)
-               .Tag(789001));
+               .Hint('Cadastro de clientes')
+               .OnClickViewMain(ViewMain.CadastrosClientesCadastro1Click)
+               );
 end;
 
 initialization

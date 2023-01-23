@@ -57,7 +57,6 @@ uses
   Model.Main.Icones.Componentes.PanelAtalhos in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelAtalhos.pas',
   Model.Main.Icones.Componentes in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.pas',
   Model.Main.Icones.Cadastros.Clientes in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas',
-  Model.Main.Icones.Cadastros.ConsultaProdutos in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.ConsultaProdutos.pas',
   Model.Main.Icones.Cadastros.Fornecedores in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas',
   Model.Main.Icones.Cadastros.Funcionarios in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas',
   Model.Main.Icones.Cadastros.Produtos in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas',

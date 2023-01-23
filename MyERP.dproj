@@ -218,7 +218,6 @@
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelAtalhos.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.ConsultaProdutos.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas"/>
@@ -244,10 +243,6 @@
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>funcionarios</ResourceId>
         </RcItem>
-        <RcItem Include="Files\Images\PNG\Menus\Packaging.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>consulta_produtos</ResourceId>
-        </RcItem>
         <RcItem Include="Files\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>fornecedores</ResourceId>
@@ -255,6 +250,10 @@
         <RcItem Include="Files\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>
+        </RcItem>
+        <RcItem Include="Files\Images\PNG\Menus\ProductSearch.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>consulta_produtos</ResourceId>
         </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -300,7 +299,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Files\Images\PNG\Menus\Packaging.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="Files\Images\PNG\Menus\ProductSearch.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
