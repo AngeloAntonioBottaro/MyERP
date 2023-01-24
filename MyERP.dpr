@@ -20,7 +20,6 @@ uses
   MySearchComponents.Search in '..\MySearchScreen\Src\MySearchComponents.Search.pas',
   MySearchComponents.Utils in '..\MySearchScreen\Src\MySearchComponents.Utils.pas',
   MySearchComponents.View in '..\MySearchScreen\Src\MySearchComponents.View.pas' {MySearchComponentsView},
-  Utils.GlobalConstants in 'src\Utils\Utils.GlobalConstants.pas',
   View.Cidades.Cad in 'src\View\Cidades\View.Cidades.Cad.pas' {ViewCidadesCad},
   View.Cidades.Busca in 'src\View\Cidades\View.Cidades.Busca.pas' {ViewCidadesBusca},
   View.Clientes.Cad in 'src\View\Clientes\View.Clientes.Cad.pas' {ViewClientesCad},
@@ -63,7 +62,10 @@ uses
   Model.Main.Icones.Cadastros.Cidades in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas',
   Utils.MyObjectDictionary in '..\MyUtilsLibrary\Utils.MyObjectDictionary.pas',
   View.Fornecedores.Cad in 'src\View\Fornecedores\View.Fornecedores.Cad.pas' {ViewFornecedoresCad},
-  View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca};
+  View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca},
+  Utils.MyConsts in '..\MyUtilsLibrary\Utils.MyConsts.pas',
+  Utils.MyTypes in '..\MyUtilsLibrary\Utils.MyTypes.pas',
+  Model.Sistema.Main in 'src\Model\Sistema\Model.Sistema.Main.pas';
 
 {$R *.res}
 

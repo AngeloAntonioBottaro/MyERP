@@ -132,7 +132,6 @@
             <Form>MySearchComponentsView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\Utils\Utils.GlobalConstants.pas"/>
         <DCCReference Include="src\View\Cidades\View.Cidades.Cad.pas">
             <Form>ViewCidadesCad</Form>
             <FormType>dfm</FormType>
@@ -231,6 +230,9 @@
             <Form>ViewFornecedoresBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyConsts.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyTypes.pas"/>
+        <DCCReference Include="src\Model\Sistema\Model.Sistema.Main.pas"/>
         <RcItem Include="Files\Images\PNG\Menus\Group.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>clientes</ResourceId>

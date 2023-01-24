@@ -17,7 +17,8 @@ uses
   Vcl.ComCtrls,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  View.Base;
+  View.Base,
+  Model.Sistema.Interfaces;
 
 type
   TViewMain = class(TViewBase)
@@ -63,8 +64,9 @@ type
     procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
   private
+    FModelSistemaMain: IModelSistemaMain;
     procedure DoLoggin;
-    procedure ConfForm;
+    procedure ConfiguraFormulario;
     procedure ProcessStatus;
     procedure ProcessImageLogo;
     procedure CriarIconesAtalhos;
@@ -96,10 +98,14 @@ uses
   View.Funcionarios.Cad,
   View.Funcionarios.Funcoes.Cad,
   View.Fornecedores.Cad,
-  View.Produtos.Busca;
+  View.Produtos.Busca,
+  Model.Sistema.Main;
 
+{$REGION 'FormEvents'}
 procedure TViewMain.FormCreate(Sender: TObject);
 begin
+   FModelSistemaMain := TModelSistemaMain.New;
+
    TMyVclLibrary.New
     .FormMaximized
     .ConfForm(Self);
@@ -118,8 +124,25 @@ end;
 
 procedure TViewMain.FormShow(Sender: TObject);
 begin
-   Self.DoLoggin;
-   Self.ConfForm;
+   FModelSistemaMain.FormShow;
+end;
+
+procedure TViewMain.FormResize(Sender: TObject);
+var
+ LTask: ITask;
+begin
+   LTask := TTask.Create(
+    procedure
+    begin
+       TThread.Synchronize(nil,
+         procedure
+         begin
+            Sleep(50);
+            Self.CriarIconesAtalhos;
+         end);
+    end
+   );
+   LTask.Start;
 end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -127,7 +150,9 @@ begin
    if(not showPerguntaN('Deseja encerrar o sistema?'))then
      Abort;
 end;
+{$ENDREGION 'FormEvents'}
 
+{$REGION 'MenuEvents'}
 procedure TViewMain.AtualizarIconesDeAtalhos1Click(Sender: TObject);
 begin
    Self.CriarIconesAtalhos;
@@ -135,7 +160,7 @@ end;
 
 procedure TViewMain.AtualizarSistema1Click(Sender: TObject);
 begin
-   Self.ConfForm;
+   Self.ConfiguraFormulario;
 end;
 
 procedure TViewMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);
@@ -228,17 +253,14 @@ begin
    end;
 end;
 
-procedure TViewMain.DoLoggin;
+procedure TViewMain.Sair1Click(Sender: TObject);
 begin
-   if(ViewLogin = nil)then Application.CreateForm(TViewLogin, ViewLogin);
-   try
-     ViewLogin.ShowModal;
-   finally
-     FreeAndNil(ViewLogin);
-   end;
+   Self.Close;
 end;
+{$ENDREGION}
 
-procedure TViewMain.ConfForm;
+{$REGION 'Procedures'}
+procedure TViewMain.ConfiguraFormulario;
 var
  LTask: ITask;
 begin
@@ -289,28 +311,6 @@ begin
    except on E: Exception do
    end;
 end;
-
-procedure TViewMain.Sair1Click(Sender: TObject);
-begin
-   Self.Close;
-end;
-
-procedure TViewMain.FormResize(Sender: TObject);
-var
- LTask: ITask;
-begin
-   LTask := TTask.Create(
-    procedure
-    begin
-       TThread.Synchronize(nil,
-         procedure
-         begin
-            Sleep(50);
-            Self.CriarIconesAtalhos;
-         end);
-    end
-   );
-   LTask.Start;
-end;
+{$ENDREGION 'Procedures'}
 
 end.

@@ -178,7 +178,7 @@ object ViewMain: TViewMain
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         Caption = '&Produtos'
-        ImageIndex = 7
+        ImageIndex = 8
         object CadastrosProdutosCadastro1: TMenuItem
           Caption = '&Cadastro'
           ImageIndex = 9

@@ -21,6 +21,11 @@ type
    function ProcessaLogin: IModelSistemaLogin;
   end;
 
+  IModelSistemaMain = interface
+   ['{1654D3E6-CB56-4575-A40C-5C71FD6E8997}']
+   function FormShow: IModelSistemaMain;
+  end;
+
 implementation
 
 end.

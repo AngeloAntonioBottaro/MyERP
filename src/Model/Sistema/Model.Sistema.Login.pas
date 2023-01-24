@@ -26,7 +26,6 @@ type
 implementation
 
 uses
-  MyExceptions,
   MyMessage,
   Utils.GlobalVariables;
 

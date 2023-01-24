@@ -41,6 +41,7 @@ implementation
 {$R *.dfm}
 
 uses
+  Utils.MyVclLibrary,
   Utils.GlobalVariables,
   Model.Sistema.Login;
 
@@ -71,7 +72,7 @@ end;
 
 procedure TViewLogin.OnError;
 begin
-   edtUsuarioLogin.SetFocus;
+   MyVclLibrary.SetFocusOn(edtUsuarioLogin);
 end;
 
 procedure TViewLogin.SystemTerminate;
