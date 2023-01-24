@@ -11,8 +11,12 @@ uses
 type
   TModelSistemaSplash = class(TInterfacedObject, IModelSistemaSplash)
   private
+    class var FInstance: IModelSistemaSplash;
+
     FDisplayInformation: TProc<string>;
     FLoadingComplete: Boolean;
+
+    constructor Create;
 
     procedure WriteInformation(AValue: String);
     procedure CriarPastasSistema;
@@ -24,8 +28,7 @@ type
     function LoadingComplete: Boolean;
     function StartApplication: IModelSistemaSplash;
   public
-    class function New: IModelSistemaSplash;
-    constructor Create;
+    class function GetInstance: IModelSistemaSplash;
   end;
 
 implementation
@@ -35,14 +38,18 @@ uses
   Utils.GlobalVariables,
   Model.Sistema.Imagens.DM;
 
-class function TModelSistemaSplash.New: IModelSistemaSplash;
+class function TModelSistemaSplash.GetInstance: IModelSistemaSplash;
 begin
-   Result := Self.Create;
+   if(not Assigned(FInstance))then
+     FInstance := TModelSistemaSplash.Create;
+
+   Result := FInstance;
 end;
 
 constructor TModelSistemaSplash.Create;
 begin
-   FLoadingComplete := False;
+   FLoadingComplete           := False;
+   VG_DataHoraAberturaSistema := Now;
 end;
 
 function TModelSistemaSplash.DisplayInformation(AValue: TProc<string>): IModelSistemaSplash;

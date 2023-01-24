@@ -555,6 +555,12 @@ object ViewMain: TViewMain
     object Relatorios1: TMenuItem
       Caption = '&Relat'#243'rios'
     end
+    object Suporte1: TMenuItem
+      Caption = 'Suporte'
+      object SuporteSobreSistema1: TMenuItem
+        Caption = 'Sobre o sistema'
+      end
+    end
     object Sair1: TMenuItem
       Caption = '&Sair'
       OnClick = Sair1Click

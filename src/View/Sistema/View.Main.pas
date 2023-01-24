@@ -8,7 +8,6 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  System.Threading,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -17,8 +16,7 @@ uses
   Vcl.ComCtrls,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  View.Base,
-  Model.Sistema.Interfaces;
+  View.Base;
 
 type
   TViewMain = class(TViewBase)
@@ -46,6 +44,8 @@ type
     CadastrosClientesCadastro1: TMenuItem;
     AtualizarSistema1: TMenuItem;
     CadastrosCidades1Cadastro1: TMenuItem;
+    Suporte1: TMenuItem;
+    SuporteSobreSistema1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -64,11 +64,9 @@ type
     procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
   private
-    FModelSistemaMain: IModelSistemaMain;
     procedure DoLoggin;
-    procedure ConfiguraFormulario;
     procedure ProcessStatus;
-    procedure ProcessImageLogo;
+    procedure ProcessImageLogo(AImageFile: string);
     procedure CriarIconesAtalhos;
   public
   end;
@@ -104,13 +102,18 @@ uses
 {$REGION 'FormEvents'}
 procedure TViewMain.FormCreate(Sender: TObject);
 begin
-   FModelSistemaMain := TModelSistemaMain.New;
+   Self.Caption := Application.Title + TUtilsVersao.CompleteVersion;
 
    TMyVclLibrary.New
     .FormMaximized
     .ConfForm(Self);
 
-   Self.Caption := Application.Title + TUtilsVersao.CompleteVersion;
+   TModelSistemaMain.GetInstance
+    .OnCriarIconesAtalhos(Self.CriarIconesAtalhos)
+    .OnFormResize(Self.CriarIconesAtalhos)
+    .OnLoggin(Self.DoLoggin)
+    .OnProcessImageLogo(Self.ProcessImageLogo)
+    .OnProcessStatus(Self.ProcessStatus);
 end;
 
 procedure TViewMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -124,25 +127,12 @@ end;
 
 procedure TViewMain.FormShow(Sender: TObject);
 begin
-   FModelSistemaMain.FormShow;
+   TModelSistemaMain.GetInstance.FormShow;
 end;
 
 procedure TViewMain.FormResize(Sender: TObject);
-var
- LTask: ITask;
 begin
-   LTask := TTask.Create(
-    procedure
-    begin
-       TThread.Synchronize(nil,
-         procedure
-         begin
-            Sleep(50);
-            Self.CriarIconesAtalhos;
-         end);
-    end
-   );
-   LTask.Start;
+   TModelSistemaMain.GetInstance.FormResize;
 end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -160,7 +150,7 @@ end;
 
 procedure TViewMain.AtualizarSistema1Click(Sender: TObject);
 begin
-   Self.ConfiguraFormulario;
+   TModelSistemaMain.GetInstance.ConfiguraFormulario;
 end;
 
 procedure TViewMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);
@@ -257,29 +247,9 @@ procedure TViewMain.Sair1Click(Sender: TObject);
 begin
    Self.Close;
 end;
-{$ENDREGION}
+{$ENDREGION'MenuEvents'}
 
 {$REGION 'Procedures'}
-procedure TViewMain.ConfiguraFormulario;
-var
- LTask: ITask;
-begin
-   LTask := TTask.Create(
-    procedure
-    begin
-       TThread.Synchronize(nil,
-         procedure
-         begin
-            Sleep(50);
-            Self.ProcessStatus;
-            Self.ProcessImageLogo;
-            Self.CriarIconesAtalhos;
-         end);
-    end
-   );
-   LTask.Start;
-end;
-
 procedure TViewMain.ProcessStatus;
 begin
    //STATUS BAR
@@ -288,13 +258,13 @@ begin
    StatusBar.Panels[2].Text := 'Servidor: localhost';
 end;
 
-procedure TViewMain.ProcessImageLogo;
+procedure TViewMain.ProcessImageLogo(AImageFile: string);
 begin
-   if(not FileExists(VG_Logo))then
+   if(not FileExists(AImageFile))then
      Exit;
 
    try
-     imgLogo.Picture.LoadFromFile(VG_Logo);
+     imgLogo.Picture.LoadFromFile(AImageFile);
    except on E: Exception do
      showErro('Não foi possível carregar a logo do sistema');
    end;
@@ -311,6 +281,17 @@ begin
    except on E: Exception do
    end;
 end;
+
+procedure TViewMain.DoLoggin;
+begin
+   if(ViewLogin = nil)then Application.CreateForm(TViewLogin, ViewLogin);
+   try
+     ViewLogin.ShowModal;
+   finally
+     FreeAndNil(ViewLogin);
+   end;
+end;
+
 {$ENDREGION 'Procedures'}
 
 end.

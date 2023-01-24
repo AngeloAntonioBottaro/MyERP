@@ -23,6 +23,8 @@ var
   VG_Logo: string;
   VG_Impressora: string;
 
+  VG_DataHoraAberturaSistema: TDateTime;
+
   //USUARIO
   VG_UsuarioLogadoId: Integer;
   VG_UsuarioLogadoNome: string;

@@ -23,6 +23,13 @@ type
 
   IModelSistemaMain = interface
    ['{1654D3E6-CB56-4575-A40C-5C71FD6E8997}']
+   function OnCriarIconesAtalhos(ACriarIconesAtalhos: TProc): IModelSistemaMain;
+   function OnFormResize(AFormResize: TProc): IModelSistemaMain;
+   function OnLoggin(ALoggin: TProc): IModelSistemaMain;
+   function OnProcessImageLogo(AProcessImageLogo: TProc<string>): IModelSistemaMain;
+   function OnProcessStatus(AProcessStatus: TProc): IModelSistemaMain;
+   function ConfiguraFormulario: IModelSistemaMain;
+   function FormResize: IModelSistemaMain;
    function FormShow: IModelSistemaMain;
   end;
 

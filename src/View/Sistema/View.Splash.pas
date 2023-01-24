@@ -29,7 +29,6 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
   private
-    FSplash: IModelSistemaSplash;
     procedure StartSystem;
     procedure ConfComponents;
     procedure WriteMessages(pMessage: String);
@@ -51,7 +50,6 @@ uses
 
 procedure TViewSplash.FormCreate(Sender: TObject);
 begin
-   FSplash := TModelSistemaSplash.New;
    RefreshVariables;
 end;
 
@@ -95,11 +93,11 @@ end;
 
 procedure TViewSplash.StartSystem;
 begin
-   FSplash
+   TModelSistemaSplash.GetInstance
     .DisplayInformation(WriteMessages)
     .StartApplication;
 
-   if(not FSplash.LoadingComplete)then
+   if(not TModelSistemaSplash.GetInstance.LoadingComplete)then
       Self.SystemTerminate;
 
    Self.Close;
