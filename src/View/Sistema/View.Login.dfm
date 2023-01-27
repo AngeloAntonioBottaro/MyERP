@@ -127,16 +127,6 @@ inherited ViewLogin: TViewLogin
     ExplicitTop = 8
     ExplicitHeight = 89
   end
-  object edtUsuarioLogin: TLabeledEdit
-    Left = 97
-    Top = 24
-    Width = 200
-    Height = 21
-    EditLabel.Width = 36
-    EditLabel.Height = 13
-    EditLabel.Caption = 'Usu'#225'rio'
-    TabOrder = 0
-  end
   object edtUsuarioSenha: TLabeledEdit
     Left = 97
     Top = 67
@@ -165,5 +155,15 @@ inherited ViewLogin: TViewLogin
     Caption = 'Cancelar'
     TabOrder = 3
     OnClick = btnCancelarClick
+  end
+  object edtUsuarioLogin: TLabeledEdit
+    Left = 97
+    Top = 24
+    Width = 200
+    Height = 21
+    EditLabel.Width = 36
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Usu'#225'rio'
+    TabOrder = 0
   end
 end

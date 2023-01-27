@@ -36,16 +36,8 @@ uses
   View.Funcionarios.Funcoes.Busca in 'src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Busca.pas' {ViewFuncionariosFuncoesBusca},
   Model.Behavior.Exceptions in 'src\Model\Behavior\Model.Behavior.Exceptions.pas',
   Model.Behavior in 'src\Model\Behavior\Model.Behavior.pas',
-  MyExceptions.Base in '..\MyExceptions\Src\MyExceptions.Base.pas',
-  MyExceptions in '..\MyExceptions\Src\MyExceptions.pas',
   Model.Sistema.Login in 'src\Model\Sistema\Model.Sistema.Login.pas',
   Model.Sistema.Imagens.DM in 'src\Model\Sistema\Model.Sistema.Imagens.DM.pas' {ModelSistemaImagensDM: TDataModule},
-  Utils.MyLibrary in '..\MyUtilsLibrary\Utils.MyLibrary.pas',
-  MyMessage.Interfaces in '..\MyMessage\src\MyMessage.Interfaces.pas',
-  MyMessage in '..\MyMessage\src\MyMessage.pas',
-  MyMessage.Types in '..\MyMessage\src\MyMessage.Types.pas',
-  MyMessage.View in '..\MyMessage\src\MyMessage.View.pas' {MyMessageView},
-  Utils.MyVclLibrary in '..\MyUtilsLibrary\Utils.MyVclLibrary.pas',
   Model.Main.Icones.Criacoes in 'src\Model\Main\Icones\Model.Main.Icones.Criacoes.pas',
   Model.Main.Icones.Fields in 'src\Model\Main\Icones\Model.Main.Icones.Fields.pas',
   Model.Main.Icones.Interfaces in 'src\Model\Main\Icones\Model.Main.Icones.Interfaces.pas',
@@ -60,11 +52,8 @@ uses
   Model.Main.Icones.Cadastros.Funcionarios in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas',
   Model.Main.Icones.Cadastros.Produtos in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas',
   Model.Main.Icones.Cadastros.Cidades in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas',
-  Utils.MyObjectDictionary in '..\MyUtilsLibrary\Utils.MyObjectDictionary.pas',
   View.Fornecedores.Cad in 'src\View\Fornecedores\View.Fornecedores.Cad.pas' {ViewFornecedoresCad},
   View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca},
-  Utils.MyConsts in '..\MyUtilsLibrary\Utils.MyConsts.pas',
-  Utils.MyTypes in '..\MyUtilsLibrary\Utils.MyTypes.pas',
   Model.Sistema.Main in 'src\Model\Sistema\Model.Sistema.Main.pas';
 
 {$R *.res}

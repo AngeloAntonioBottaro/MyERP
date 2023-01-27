@@ -72,7 +72,7 @@ end;
 procedure TModelSistemaLogin.OnError(AMessage: string = '');
 begin
    if(not AMessage.IsEmpty)then
-     showInformacao(AMessage);
+     ShowInformation(AMessage);
 
    if(Assigned(FDoError))then
      FDoError();

@@ -70,6 +70,7 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_DcuOutput>dcu\</DCC_DcuOutput>
         <DCC_ExeOutput>C:\AABSoft</DCC_ExeOutput>
+        <DCC_UnitSearchPath>..\MyMessage\src;..\MyExceptions\Src;..\MyUtilsLibrary;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;vclactnband;vclFireDAC;tethering;FireDACADSDriver;FireDACMSSQLDriver;vcltouch;vcldb;vclib;FireDACDBXDriver;vclx;RESTBackendComponents;VCLRESTComponents;vclie;bindengine;CloudService;FireDACMySQLDriver;DataSnapClient;bindcompdbx;DBXSybaseASEDriver;IndyIPServer;IndySystem;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;emshosting;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;xmlrtl;DataSnapNativeClient;soapmidas;fmxobj;rtl;emsserverresource;DbxClientDriver;DBXSybaseASADriver;appanalytics;IndyIPClient;bindcompvcl;TeeUI;VclSmp;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;FireDACMongoDBDriver;DataSnapServerMidas;RESTComponents;ZComponent;DBXInterBaseDriver;ZCore;emsclientfiredac;DataSnapFireDAC;DBXMSSQLDriver;DatasnapConnectorsFreePascal;PngComponentsD;bindcompfmx;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;DSPack_DXE2;ZipMasterR;dbexpress;IndyCore;ZParseSql;dsnap;DataSnapCommon;emsclient;FireDACCommon;DataSnapConnectors;soapserver;FireDACOracleDriver;DBXMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;inet;IndyIPCommon;vcl;FireDACDb2Driver;ZDbc;TeeDB;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;ibxpress;Tee;DataSnapServer;ibxbindings;FireDACDSDriver;vclwinx;CustomIPTransport;vcldsnap;bindcomp;ZPlain;DBXInformixDriver;dbxcds;adortl;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -190,23 +191,12 @@
         </DCCReference>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.Exceptions.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.pas"/>
-        <DCCReference Include="..\MyExceptions\Src\MyExceptions.Base.pas"/>
-        <DCCReference Include="..\MyExceptions\Src\MyExceptions.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Login.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Imagens.DM.pas">
             <Form>ModelSistemaImagensDM</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyLibrary.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.Interfaces.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.Types.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.View.pas">
-            <Form>MyMessageView</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyVclLibrary.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Criacoes.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Fields.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Interfaces.pas"/>
@@ -221,7 +211,6 @@
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyObjectDictionary.pas"/>
         <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Cad.pas">
             <Form>ViewFornecedoresCad</Form>
             <FormType>dfm</FormType>
@@ -230,8 +219,6 @@
             <Form>ViewFornecedoresBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyConsts.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyTypes.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Main.pas"/>
         <RcItem Include="Files\Images\PNG\Menus\Group.png">
             <ResourceType>RCDATA</ResourceType>

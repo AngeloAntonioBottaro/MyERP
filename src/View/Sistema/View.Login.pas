@@ -19,16 +19,15 @@ uses
 
 type
   TViewLogin = class(TViewBase)
-    edtUsuarioLogin: TLabeledEdit;
     edtUsuarioSenha: TLabeledEdit;
     btnLogar: TButton;
     btnCancelar: TButton;
     Image1: TImage;
+    edtUsuarioLogin: TLabeledEdit;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnLogarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    procedure SystemTerminate;
     procedure OnError;
   public
   end;
@@ -73,11 +72,6 @@ end;
 procedure TViewLogin.OnError;
 begin
    MyVclLibrary.SetFocusOn(edtUsuarioLogin);
-end;
-
-procedure TViewLogin.SystemTerminate;
-begin
-   Application.Terminate;
 end;
 
 end.

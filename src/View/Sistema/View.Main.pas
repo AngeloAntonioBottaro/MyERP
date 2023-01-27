@@ -8,6 +8,7 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
+  View.Base,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -15,8 +16,7 @@ uses
   Vcl.Menus,
   Vcl.ComCtrls,
   Vcl.StdCtrls,
-  Vcl.ExtCtrls,
-  View.Base;
+  Vcl.ExtCtrls;
 
 type
   TViewMain = class(TViewBase)
@@ -137,7 +137,7 @@ end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   if(not showPerguntaN('Deseja encerrar o sistema?'))then
+   if(not ShowQuestionNo('Deseja encerrar o sistema?'))then
      Abort;
 end;
 {$ENDREGION 'FormEvents'}
@@ -266,7 +266,7 @@ begin
    try
      imgLogo.Picture.LoadFromFile(AImageFile);
    except on E: Exception do
-     showErro('Não foi possível carregar a logo do sistema');
+     showError('Não foi possível carregar a logo do sistema');
    end;
 end;
 

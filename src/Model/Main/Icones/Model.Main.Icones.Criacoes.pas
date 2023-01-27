@@ -38,7 +38,7 @@ end;
 function TModelMainIconesCriacoes.Formulario: TForm;
 begin
    if(not Assigned(FFormulario))then
-     raise ExceptionMsg.Create('Formulário não informado');
+     raise ExceptionInformation.Create('Formulário não informado');
 
    Result := FFormulario;
 end;

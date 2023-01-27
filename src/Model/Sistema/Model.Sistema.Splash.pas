@@ -74,7 +74,7 @@ begin
 
      FLoadingComplete := True;
    except on E: Exception do
-     TMyMessage.New.Mensagem('Falha ao iniciar o sistema').MensagemCompleta(E.Message).MsgErro;
+    ShowError('Falha ao iniciar o sistema', E.Message);
    end;
 end;
 

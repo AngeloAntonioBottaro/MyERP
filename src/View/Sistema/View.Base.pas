@@ -11,7 +11,7 @@ uses
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
-  Vcl.Dialogs;
+  Vcl.Dialogs, Vcl.ExtCtrls;
 
 type
   TViewBase = class(TForm)
@@ -20,7 +20,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
   public
-
+    procedure SystemTerminate;
   end;
 
 var
@@ -50,6 +50,12 @@ begin
       Perform(CM_DialogKey, VK_TAB, 0);
       Key := #0;
    end;
+end;
+
+procedure TViewBase.SystemTerminate;
+begin
+   Application.Terminate;
+   Abort;
 end;
 
 end.

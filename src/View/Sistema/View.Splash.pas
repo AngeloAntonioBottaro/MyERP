@@ -119,6 +119,7 @@ end;
 procedure TViewSplash.SystemTerminate;
 begin
    Application.Terminate;
+   Abort;
 end;
 
 procedure TViewSplash.WriteMessages(pMessage: String);
