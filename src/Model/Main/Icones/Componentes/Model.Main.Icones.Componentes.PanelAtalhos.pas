@@ -81,7 +81,7 @@ begin
      begin
         FModelMainIconesFields := TModelMainIcones.GetInstance.Lista.Items[LMainIconName];
 
-        if(not FModelMainIconesFields.Visible)then
+        if(not FModelMainIconesFields.Visible())then
           Continue;
 
         Self.CriarPanelTopo;
@@ -177,6 +177,7 @@ begin
    FImage.Center         := True;
 
    FImage.OnClick        := FModelMainIconesFields.OnClickViewMain();
+   FImage.OnMouseMove    := FModelMainIconesFields.OnMouseMoveViewMain();
 
    Self.CarregarImagemIcone;
 end;
@@ -200,6 +201,7 @@ begin
    FLabel.WordWrap       := True;
 
    FLabel.OnClick        := FModelMainIconesFields.OnClickViewMain();
+   FLabel.OnMouseMove    := FModelMainIconesFields.OnMouseMoveViewMain();
 end;
 
 procedure TModelMainIconesComponentesPanelAtalhos.CarregarImagemIcone;

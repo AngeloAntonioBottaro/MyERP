@@ -63,6 +63,7 @@ type
     procedure CadastrosCidades1Cadastro1Click(Sender: TObject);
     procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure MainIconesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -128,6 +129,50 @@ end;
 procedure TViewMain.FormShow(Sender: TObject);
 begin
    TModelSistemaMain.GetInstance.FormShow;
+end;
+
+procedure TViewMain.MainIconesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  LComp: TComponent;
+  LPnTopo: TComponent;
+  LCountPanelsTopo: Integer;
+  I: Integer;
+  LName: string;
+begin
+   LCountPanelsTopo := 1;
+   while(LCountPanelsTopo > 0)do
+   begin
+      LPnTopo := Self.FindComponent('pnTopo' + LCountPanelsTopo.ToString);
+
+      if(LPnTopo = nil)then
+      begin
+         LCountPanelsTopo := 0;
+         Continue;
+      end;
+
+      for I := 0 to TPanel(LPnTopo).ControlCount -1 do
+      begin
+         LComp := Self.FindComponent(StringReplace(TPanel(LPnTopo).Controls[I].Name, 'pn', 'lb', [rfReplaceAll, rfIgnoreCase]));
+         if(Assigned(LComp))then
+           TLabel(LComp).Font.Color := clBlue;
+      end;
+      Inc(LCountPanelsTopo);
+   end;
+
+   LName := '';
+   if(Sender is TPanel)then
+     LName := StringReplace(TPanel(Sender).Name, 'pn', 'lb', [rfReplaceAll, rfIgnoreCase])
+   else if(Sender is TImage)then
+     LName := StringReplace(TImage(Sender).Name, 'img', 'lb', [rfReplaceAll, rfIgnoreCase])
+   else if(Sender is TLabel)then
+     LName := TLabel(Sender).Name;
+
+   if(LName.IsEmpty)then
+     Exit;
+
+   LComp := Self.FindComponent(LName);
+   if(Assigned(LComp))then
+     TLabel(LComp).Font.Color := clRed;
 end;
 
 procedure TViewMain.FormResize(Sender: TObject);

@@ -19,6 +19,7 @@ begin
                .ResourceName('cidades')
                .Hint('Cadastro de cidades')
                .OnClickViewMain(ViewMain.CadastrosCidades1Cadastro1Click)
+               .OnMouseMoveViewMain(ViewMain.MainIconesMouseMove)
                );
 end;
 

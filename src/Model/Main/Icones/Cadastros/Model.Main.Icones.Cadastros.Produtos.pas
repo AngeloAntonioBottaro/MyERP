@@ -19,6 +19,7 @@ begin
                .ResourceName('produtos')
                .Hint('Cadastro de produtos')
                .OnClickViewMain(ViewMain.CadastrosProdutosCadastro1Click)
+               .OnMouseMoveViewMain(ViewMain.MainIconesMouseMove)
                );
 end;
 

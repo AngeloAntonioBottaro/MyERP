@@ -19,6 +19,7 @@ begin
                .ResourceName('fornecedores')
                .Hint('Cadastro de Fornecedores')
                .OnClickViewMain(ViewMain.CadastrosFornecedoresCadastro1Click)
+               .OnMouseMoveViewMain(ViewMain.MainIconesMouseMove)
                );
 end;
 
