@@ -19,7 +19,6 @@ begin
                .ResourceName('funcionarios')
                .Hint('Cadastro de funcionários')
                .OnClickViewMain(ViewMain.CadastrosFuncionariosCadastro1Click)
-               .OnMouseMoveViewMain(ViewMain.MainIconesMouseMove)
                );
 end;
 

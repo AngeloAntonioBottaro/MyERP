@@ -3,15 +3,23 @@ unit View.Clientes.Cad;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  View.Base.Cadastros,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls;
 
 type
-  TViewClientesCad = class(TViewBase)
+  TViewClientesCad = class(TViewBaseCadastros)
   private
-    { Private declarations }
   public
-    { Public declarations }
   end;
 
 var

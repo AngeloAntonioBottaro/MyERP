@@ -6,21 +6,22 @@ uses
   System.Sysutils,
   Model.Main.Icones.Lista,
   Model.Main.Icones.Types,
-  Model.Main.Icones.Interfaces,
-  Model.Main.Icones.Componentes;
+  Model.Main.Icones.Interfaces;
 
 type
   TModelMainIcones = class
   private
     class var FInstance: TModelMainIcones;
+
     FModelMainIconesList: IModelMainIconesList;
-    FModelMainIconesComponentes: IModelMainIconesComponentes;
+
     constructor Create;
     procedure RegistrarIcones;
   public
     function Lista: TPairMainIconesFields;
-    function AtualizaVisibilidades: TModelMainIcones;
-    function Componentes: IModelMainIconesComponentes;
+    function AtualizarVisibilidades: TModelMainIcones;
+    function PanelIcones: IModelMainIconesComponentes;
+
     destructor Destroy; override;
     class function GetInstance: TModelMainIcones;
   end;
@@ -28,7 +29,8 @@ type
 implementation
 
 uses
-  Model.Main.Icones.Lista.RegistrarProc;
+  Model.Main.Icones.Lista.RegistrarProc,
+  Model.Main.Icones.Componentes.PanelIcones;
 
 class function TModelMainIcones.GetInstance: TModelMainIcones;
 begin
@@ -54,18 +56,15 @@ begin
    Result := FModelMainIconesList.Lista;
 end;
 
-function TModelMainIcones.AtualizaVisibilidades: TModelMainIcones;
+function TModelMainIcones.PanelIcones: IModelMainIconesComponentes;
 begin
-   Result := Self;
-   FModelMainIconesList.AtualizaVisibilidades;
+   Result := TModelMainIconesComponentesPanelIcones.New(Self);
 end;
 
-function TModelMainIcones.Componentes: IModelMainIconesComponentes;
+function TModelMainIcones.AtualizarVisibilidades: TModelMainIcones;
 begin
-   if(not Assigned(FModelMainIconesComponentes))then
-     FModelMainIconesComponentes := TModelMainIconesComponentes.Create;
-
-   Result := FModelMainIconesComponentes;
+   Result := Self;
+   FModelMainIconesList.AtualizarVisibilidades;
 end;
 
 procedure TModelMainIcones.RegistrarIcones;

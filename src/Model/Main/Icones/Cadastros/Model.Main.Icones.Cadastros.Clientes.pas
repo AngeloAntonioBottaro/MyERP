@@ -19,7 +19,6 @@ begin
                .ResourceName('clientes')
                .Hint('Cadastro de clientes')
                .OnClickViewMain(ViewMain.CadastrosClientesCadastro1Click)
-               .OnMouseMoveViewMain(ViewMain.MainIconesMouseMove)
                );
 end;
 

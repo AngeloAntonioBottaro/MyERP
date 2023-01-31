@@ -8,15 +8,16 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base,
+  View.Base.Cadastros,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
+  Vcl.Dialogs,
   Vcl.StdCtrls,
   Vcl.ExtCtrls;
 
 type
-  TViewCidadesCad = class(TViewBase)
+  TViewCidadesCad = class(TViewBaseCadastros)
   private
   public
   end;
@@ -27,8 +28,5 @@ var
 implementation
 
 {$R *.dfm}
-
-uses
-  View.Cidades.Busca;
 
 end.

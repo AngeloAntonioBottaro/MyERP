@@ -1,5 +1,5 @@
-inherited ViewProdutosSubGruposCad: TViewProdutosSubGruposCad
-  Caption = 'Cadastro de sub grupos de produtos'
+inherited ViewProdutosSubgruposCad: TViewProdutosSubgruposCad
+  Caption = 'Tela de cadastro de subgrupos de produtos'
   PixelsPerInch = 96
   TextHeight = 13
 end

@@ -1,5 +1,5 @@
 inherited ViewFornecedoresCad: TViewFornecedoresCad
-  Caption = 'Cadastro de fornecedores'
+  Caption = 'Tela de cadastro de fornecedores'
   PixelsPerInch = 96
   TextHeight = 13
 end

@@ -44,15 +44,18 @@ object ViewMain: TViewMain
     Panels = <
       item
         Text = 'Usu'#225'rio:'
-        Width = 250
+        Width = 200
       end
       item
         Text = 'Terminal:'
-        Width = 250
+        Width = 200
       end
       item
         Text = 'Servidor: '
-        Width = 250
+        Width = 200
+      end
+      item
+        Width = 50
       end>
   end
   object MainMenu: TMainMenu

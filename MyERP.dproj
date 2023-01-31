@@ -133,56 +133,28 @@
             <Form>MySearchComponentsView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Cidades\View.Cidades.Cad.pas">
-            <Form>ViewCidadesCad</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\View\Cidades\View.Cidades.Busca.pas">
             <Form>ViewCidadesBusca</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="src\View\Clientes\View.Clientes.Cad.pas">
-            <Form>ViewClientesCad</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Clientes\View.Clientes.Busca.pas">
             <Form>ViewClientesBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Produtos\View.Produtos.Cad.pas">
-            <Form>ViewProdutosCad</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\View\Produtos\View.Produtos.Busca.pas">
             <Form>ViewProdutosBusca</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="src\View\Produtos\Grupos\View.Produtos.Grupos.Cad.pas">
-            <Form>ViewProdutosGruposCad</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\Grupos\View.Produtos.Grupos.Busca.pas">
             <Form>ViewProdutosGruposBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Cad.pas">
-            <Form>ViewProdutosSubGruposCad</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Busca.pas">
             <Form>ViewProdutosSubGruposBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Funcionarios\View.Funcionarios.Cad.pas">
-            <Form>ViewFuncionariosCad</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\View\Funcionarios\View.Funcionarios.Busca.pas">
             <Form>ViewFuncionariosBusca</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Cad.pas">
-            <Form>ViewFuncionariosFuncoesCad</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Busca.pas">
@@ -204,22 +176,54 @@
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.RegistrarProc.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Types.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelAtalhos.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas"/>
-        <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Cad.pas">
-            <Form>ViewFornecedoresCad</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Busca.pas">
             <Form>ViewFornecedoresBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Main.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Consts.pas"/>
+        <DCCReference Include="src\View\Sistema\View.Base.Cadastros.pas">
+            <Form>ViewBaseCadastros</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Cidades\View.Cidades.Cad.pas">
+            <Form>ViewCidadesCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Clientes\View.Clientes.Cad.pas">
+            <Form>ViewClientesCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Cad.pas">
+            <Form>ViewFornecedoresCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Funcionarios\View.Funcionarios.Cad.pas">
+            <Form>ViewFuncionariosCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Cad.pas">
+            <Form>ViewFuncionariosFuncoesCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Produtos\View.Produtos.Cad.pas">
+            <Form>ViewProdutosCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Produtos\Grupos\View.Produtos.Grupos.Cad.pas">
+            <Form>ViewProdutosGruposCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Cad.pas">
+            <Form>ViewProdutosSubgruposCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas"/>
         <RcItem Include="Files\Images\PNG\Menus\Group.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>clientes</ResourceId>

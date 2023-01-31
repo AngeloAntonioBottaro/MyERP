@@ -1,5 +1,5 @@
 inherited ViewClientesCad: TViewClientesCad
-  Caption = 'Cadastro de clientes'
+  Caption = 'Tela de cadastro de clientes'
   PixelsPerInch = 96
   TextHeight = 13
 end

@@ -3,8 +3,9 @@ unit Utils.GlobalVariables;
 interface
 
 uses
-  System.StrUtils,
   System.SysUtils,
+  System.StrUtils,
+  System.UITypes,
   Utils.MyConsts,
   Utils.MyLibrary;
 

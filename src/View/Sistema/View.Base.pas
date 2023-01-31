@@ -11,7 +11,8 @@ uses
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
-  Vcl.Dialogs, Vcl.ExtCtrls;
+  Vcl.Dialogs,
+  Vcl.ExtCtrls;
 
 type
   TViewBase = class(TForm)

@@ -16,7 +16,7 @@ type
     FListaPairsIconesFields: TPairMainIconesFields;
   public
     function Lista: TPairMainIconesFields;
-    procedure AtualizaVisibilidades;
+    procedure AtualizarVisibilidades;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -42,7 +42,7 @@ begin
    Result := FListaPairsIconesFields;
 end;
 
-procedure TModelMainIconesLista.AtualizaVisibilidades;
+procedure TModelMainIconesLista.AtualizarVisibilidades;
 var
  LIndex: TMainIconName;
 begin

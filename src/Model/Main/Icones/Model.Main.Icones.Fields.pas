@@ -16,7 +16,6 @@ type
     FFontSize: Integer;
     FHint: String;
     FOnClickViewMain: TNotifyEvent;
-    FOnMouseMoveViewMain: TMouseMoveEvent;
     FPopupMenu: TPopupMenu;
     FResourceName: String;
     FTag: Integer;
@@ -32,8 +31,6 @@ type
     function Hint: String; overload;
     function OnClickViewMain(AValue: TNotifyEvent): TModelMainIconesFields; overload;
     function OnClickViewMain: TNotifyEvent; overload;
-    function OnMouseMoveViewMain(AValue: TMouseMoveEvent): TModelMainIconesFields; overload;
-    function OnMouseMoveViewMain: TMouseMoveEvent; overload;
     function PopupMenu(AValue: TPopupMenu): TModelMainIconesFields; overload;
     function PopupMenu: TPopupMenu; overload;
     function ResourceName(AValue: String): TModelMainIconesFields; overload;
@@ -117,17 +114,6 @@ end;
 function TModelMainIconesFields.OnClickViewMain: TNotifyEvent;
 begin
    Result := FOnClickViewMain;
-end;
-
-function TModelMainIconesFields.OnMouseMoveViewMain(AValue: TMouseMoveEvent): TModelMainIconesFields;
-begin
-   Result               := Self;
-   FOnMouseMoveViewMain := AValue;
-end;
-
-function TModelMainIconesFields.OnMouseMoveViewMain: TMouseMoveEvent;
-begin
-   Result := FOnMouseMoveViewMain;
 end;
 
 function TModelMainIconesFields.PopupMenu(AValue: TPopupMenu): TModelMainIconesFields;
