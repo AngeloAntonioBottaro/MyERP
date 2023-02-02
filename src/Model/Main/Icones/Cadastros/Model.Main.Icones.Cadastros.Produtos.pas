@@ -12,10 +12,10 @@ uses
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
-   AValue.Add(TMainIconName.ckProdutos,
+   AValue.Add(TMainIconName.Produtos,
               TModelMainIconesFields.Create
                .Caption('Produtos')
-               .ComponentName(TMainIconName.ckProdutos.ToString)
+               .ComponentName(TMainIconName.Produtos.ToString)
                .ResourceName('produtos')
                .Hint('Cadastro de produtos')
                .OnClickViewMain(ViewMain.CadastrosProdutosCadastro1Click)

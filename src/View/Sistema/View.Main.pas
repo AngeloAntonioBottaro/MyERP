@@ -274,10 +274,9 @@ procedure TViewMain.CriarIconesAtalhos;
 begin
    try
      TModelMainIcones.GetInstance
-      .AtualizaVisibilidades
-      .Componentes
+      .PanelIcones
        .Formulario(Self)
-       .CriarPanelIcones;
+       .CriarComponente;
    except on E: Exception do
    end;
 end;

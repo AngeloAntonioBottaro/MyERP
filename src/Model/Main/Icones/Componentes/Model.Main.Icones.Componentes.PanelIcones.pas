@@ -28,9 +28,8 @@ type
     FWidthPanelUsado: Integer;
 
     FPanelIconesMain: TScrollBox;
-    FPanelIconesTopo: TPanel;
-    FPanel: TPanel;
-    procedure LimparPanelsExistentes;
+    FPanelTopo: TPanel;
+    FPanelIcone: TPanel;
     procedure CriarPanelMain;
     procedure CriarPanelTopo;
     procedure CriarPanelIcone(AModelMainIconesFields: TModelMainIconesFields);
@@ -80,23 +79,35 @@ end;
 function TModelMainIconesComponentesPanelIcones.Formulario: TForm;
 begin
    if(not assigned(FFormulario))then
-     raise ExceptionRequiredField.Create('Formulário não informado');
+     raise ExceptionRequired.Create('Formulário não informado');
 
    Result := FFormulario;
 end;
 
+procedure TModelMainIconesComponentesPanelIcones.LimparComponente;
+var
+  LPnMain: TComponent;
+begin
+   LPnMain := Formulario.FindComponent(PANEL_MAIN_NAME);
+
+   if(not Assigned(LPnMain))then
+     Exit;
+
+   LPnMain.Free;
+end;
+
 procedure TModelMainIconesComponentesPanelIcones.CriarComponente;
 var
- LMainIconName: TMainIconName;
- LModelMainIconesFields: TModelMainIconesFields;
+  LMainIconName: TMainIconName;
+  LModelMainIconesFields: TModelMainIconesFields;
 begin
    Screen.Cursor := crHourGlass;
    try
-     Self.LimparPanelsExistentes;
+     Self.LimparComponente;
      FParent.AtualizarVisibilidades;
-     for LMainIconName in FParent.Lista.ToSortKeys do
+     for LMainIconName in FParent.ListaIcones.ToSortKeys do
      begin
-        LModelMainIconesFields := FParent.Lista.Items[LMainIconName];
+        LModelMainIconesFields := FParent.ListaIcones.Items[LMainIconName];
 
         if(not LModelMainIconesFields.Visible())then
           Continue;
@@ -112,23 +123,6 @@ begin
      if(Assigned(FPanelIconesMain))then
        FPanelIconesMain.Visible := True;
    end;
-end;
-
-procedure TModelMainIconesComponentesPanelIcones.LimparComponente;
-begin
-   Self.LimparPanelsExistentes;
-end;
-
-procedure TModelMainIconesComponentesPanelIcones.LimparPanelsExistentes;
-var
- LPnMain: TComponent;
-begin
-   LPnMain := Formulario.FindComponent(PANEL_MAIN_NAME);
-
-   if(not Assigned(LPnMain))then
-     Exit;
-
-   LPnMain.Free;
 end;
 
 procedure TModelMainIconesComponentesPanelIcones.CriarPanelMain;
@@ -161,45 +155,45 @@ begin
 
    Inc(FCountPanelsTopo);
 
-   FPanelIconesTopo             := TPanel.Create(Formulario);
-   FPanelIconesTopo.Parent      := FPanelIconesMain;
-   FPanelIconesTopo.Name        := PANEL_TOPO_NAME + FCountPanelsTopo.ToString;
+   FPanelTopo             := TPanel.Create(Formulario);
+   FPanelTopo.Parent      := FPanelIconesMain;
+   FPanelTopo.Name        := PANEL_TOPO_NAME + FCountPanelsTopo.ToString;
 
-   FPanelIconesTopo.Visible     := True;
-   FPanelIconesTopo.Align       := alBottom;
-   FPanelIconesTopo.Align       := alTop;
-   FPanelIconesTopo.AutoSize    := False;
-   FPanelIconesTopo.BevelOuter  := TBevelCut(bvNone);
-   FPanelIconesTopo.Caption     := EmptyStr;
-   FPanelIconesTopo.Height      := PANEL_TOPO_HEIGHT;
-   FPanelIconesTopo.ParentColor := False;
-   FPanelIconesTopo.ShowHint    := True;
-   FPanelIconesTopo.Top         := Screen.Height;
+   FPanelTopo.Visible     := True;
+   FPanelTopo.Align       := alBottom;
+   FPanelTopo.Align       := alTop;
+   FPanelTopo.AutoSize    := False;
+   FPanelTopo.BevelOuter  := TBevelCut(bvNone);
+   FPanelTopo.Caption     := EmptyStr;
+   FPanelTopo.Height      := PANEL_TOPO_HEIGHT;
+   FPanelTopo.ParentColor := False;
+   FPanelTopo.ShowHint    := True;
+   FPanelTopo.Top         := Screen.Height;
 
-   FWidthPanelTotal := FPanelIconesTopo.Width;
+   FWidthPanelTotal := FPanelTopo.Width;
    FWidthPanelUsado := 0;
 end;
 
 procedure TModelMainIconesComponentesPanelIcones.CriarPanelIcone(AModelMainIconesFields: TModelMainIconesFields);
 begin
-   FPanel              := TPanel.Create(Formulario);
-   FPanel.Parent       := FPanelIconesTopo;
-   FPanel.Name         := PANEL_ICONE_NAME + AModelMainIconesFields.ComponentName;
-   FPanel.Align        := alRight;
-   FPanel.Align        := alLeft;
-   FPanel.AutoSize     := False;
-   FPanel.BevelOuter   := TBevelCut(bvNone);
-   FPanel.Caption      := EmptyStr;
-   FPanel.Hint         := AModelMainIconesFields.Hint;
-   FPanel.ParentColor  := False;
-   FPanel.PopupMenu    := AModelMainIconesFields.PopupMenu;
-   FPanel.ShowHint     := True;
-   FPanel.Tag          := AModelMainIconesFields.Tag;
-   FPanel.Visible      := True;
-   FPanel.Width        := PANEL_ICONE_WIDTH;
-   FPanel.OnClick      := AModelMainIconesFields.OnClickViewMain();
-   FPanel.OnMouseEnter := Self.MouseEnter;
-   FPanel.OnMouseLeave := Self.MouseLeave;
+   FPanelIcone              := TPanel.Create(Formulario);
+   FPanelIcone.Parent       := FPanelTopo;
+   FPanelIcone.Name         := PANEL_ICONE_NAME + AModelMainIconesFields.ComponentName;
+   FPanelIcone.Align        := alRight;
+   FPanelIcone.Align        := alLeft;
+   FPanelIcone.AutoSize     := False;
+   FPanelIcone.BevelOuter   := TBevelCut(bvNone);
+   FPanelIcone.Caption      := EmptyStr;
+   FPanelIcone.Hint         := AModelMainIconesFields.Hint;
+   FPanelIcone.ParentColor  := False;
+   FPanelIcone.PopupMenu    := AModelMainIconesFields.PopupMenu;
+   FPanelIcone.ShowHint     := True;
+   FPanelIcone.Tag          := AModelMainIconesFields.Tag;
+   FPanelIcone.Visible      := True;
+   FPanelIcone.Width        := PANEL_ICONE_WIDTH;
+   FPanelIcone.OnClick      := AModelMainIconesFields.OnClickViewMain();
+   FPanelIcone.OnMouseEnter := Self.MouseEnter;
+   FPanelIcone.OnMouseLeave := Self.MouseLeave;
 end;
 
 procedure TModelMainIconesComponentesPanelIcones.CriarImageIcone(AModelMainIconesFields: TModelMainIconesFields);
@@ -213,7 +207,7 @@ begin
    LImage.Height         := IMAGE_ICONE_HEIGHT;
    LImage.Hint           := AModelMainIconesFields.Hint;
    LImage.Name           := IMAGE_ICONE_NAME + AModelMainIconesFields.ComponentName;
-   LImage.Parent         := FPanel;
+   LImage.Parent         := FPanelIcone;
    LImage.ParentShowHint := True;
    LImage.Proportional   := True;
    LImage.Visible        := True;
@@ -239,10 +233,11 @@ begin
    LLabel.Hint           := AModelMainIconesFields.Hint;
    LLabel.Layout         := tlTop;
    LLabel.Name           := LABEL_ICONE_NAME + AModelMainIconesFields.ComponentName;
-   LLabel.Parent         := FPanel;
+   LLabel.Parent         := FPanelIcone;
    LLabel.ParentShowHint := True;
    LLabel.Visible        := True;
    LLabel.WordWrap       := True;
+   LLabel.StyleElements  := [];
    LLabel.OnClick        := AModelMainIconesFields.OnClickViewMain();
    LLabel.OnMouseEnter   := Self.MouseEnter;
    LLabel.OnMouseLeave   := Self.MouseLeave;
@@ -250,7 +245,7 @@ end;
 
 procedure TModelMainIconesComponentesPanelIcones.CarregarImagemIcone(AImage: TImage; AModelMainIconesFields: TModelMainIconesFields);
 var
- LPngImage: TPngImage;
+  LPngImage: TPngImage;
 begin
    LPngImage := TPngImage.Create;
    try
@@ -273,8 +268,8 @@ end;
 
 procedure TModelMainIconesComponentesPanelIcones.TrocarCorLabel(AComponente: TObject; ACor: TColor);
 var
- I: Integer;
- LLabel: TLabel;
+  I: Integer;
+  LLabel: TLabel;
 begin
    LLabel := nil;
    if(AComponente is TPanel)then

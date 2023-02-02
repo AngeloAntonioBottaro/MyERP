@@ -16,7 +16,7 @@ type
     FListaPairsIconesFields: TPairMainIconesFields;
   public
     function Lista: TPairMainIconesFields;
-    procedure AtualizarVisibilidades;
+    procedure AtualizarVisibilidades(AListaVisibilidadeManual: IModelMainIconesListaVisibilidadeManual);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -42,15 +42,24 @@ begin
    Result := FListaPairsIconesFields;
 end;
 
-procedure TModelMainIconesLista.AtualizarVisibilidades;
+procedure TModelMainIconesLista.AtualizarVisibilidades(AListaVisibilidadeManual: IModelMainIconesListaVisibilidadeManual);
 var
  LIndex: TMainIconName;
+ LConfigurationName: string;
+ LVisible: Boolean;
 begin
    for LIndex in FListaPairsIconesFields.ToSortKeys do
    begin
-      FListaPairsIconesFields.Items[LIndex].Visible(False);
-      //if(ModelSistemaDm.TB_conf_icones.Locate('icone', FListaPairsIconesFields.Items[LIndex].ComponentName, [loCaseInsensitive]))then
-        FListaPairsIconesFields.Items[LIndex].Visible(True);
+      LConfigurationName := FListaPairsIconesFields.Items[LIndex].ComponentName;
+      LVisible := True;
+
+      if(LVisible)then
+      begin
+         if(AListaVisibilidadeManual.Lista.ContainsKey(LConfigurationName))then
+           AListaVisibilidadeManual.Lista.TryGetValue(LConfigurationName, LVisible);
+      end;
+
+      FListaPairsIconesFields.Items[LIndex].Visible(LVisible);
    end;
 end;
 

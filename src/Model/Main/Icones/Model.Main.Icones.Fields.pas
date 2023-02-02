@@ -12,8 +12,10 @@ type
   TModelMainIconesFields = class
   private
     FCaption: String;
+    FCaptionShort: String;
     FComponentName: String;
     FFontSize: Integer;
+    FGroupOwner: Integer;
     FHint: String;
     FOnClickViewMain: TNotifyEvent;
     FPopupMenu: TPopupMenu;
@@ -23,10 +25,14 @@ type
   public
     function Caption(AValue: String): TModelMainIconesFields; overload;
     function Caption: String; overload;
+    function CaptionShort(AValue: String): TModelMainIconesFields; overload;
+    function CaptionShort: String; overload;
     function ComponentName(AValue: String): TModelMainIconesFields; overload;
     function ComponentName: String; overload;
     function FontSize(AValue: Integer): TModelMainIconesFields; overload;
     function FontSize: Integer; overload;
+    function GroupOwner(AValue: Integer): TModelMainIconesFields; overload;
+    function GroupOwner: Integer; overload;
     function Hint(AValue: String): TModelMainIconesFields; overload;
     function Hint: String; overload;
     function OnClickViewMain(AValue: TNotifyEvent): TModelMainIconesFields; overload;
@@ -44,17 +50,21 @@ type
 
 implementation
 
+uses
+  Model.Main.Icones.Types;
+
 constructor TModelMainIconesFields.Create;
 begin
-   FCaption         := '';
-   FComponentName   := '';
-   FFontSize        := 9;
-   FHint            := '';
-   FOnClickViewMain := nil;
-   FPopupMenu       := nil;
-   FResourceName    := '';
-   FTag             := 0;
-   FVisible         := False;
+   FCaption             := '';
+   FComponentName       := '';
+   FFontSize            := 10;
+   FGroupOwner          := TMainIconesGroup.Outros.ToInteger;
+   FHint                := '';
+   FOnClickViewMain     := nil;
+   FPopupMenu           := nil;
+   FResourceName        := '';
+   FTag                 := 0;
+   FVisible             := False;
 end;
 
 function TModelMainIconesFields.Caption(AValue: String): TModelMainIconesFields;
@@ -66,6 +76,20 @@ end;
 function TModelMainIconesFields.Caption: String;
 begin
    Result := FCaption;
+end;
+
+function TModelMainIconesFields.CaptionShort(AValue: String): TModelMainIconesFields;
+begin
+   Result        := Self;
+   FCaptionShort := AValue.Trim;
+end;
+
+function TModelMainIconesFields.CaptionShort: String;
+begin
+   if(FCaptionShort.IsEmpty)then
+     Self.CaptionShort(Self.Caption);
+
+   Result := FCaptionShort;
 end;
 
 function TModelMainIconesFields.ComponentName(AValue: String): TModelMainIconesFields;
@@ -89,6 +113,17 @@ function TModelMainIconesFields.FontSize: Integer;
 begin
 
    Result := FFontSize;
+end;
+
+function TModelMainIconesFields.GroupOwner(AValue: Integer): TModelMainIconesFields;
+begin
+   Result      := Self;
+   FGroupOwner := AValue;
+end;
+
+function TModelMainIconesFields.GroupOwner: Integer;
+begin
+   Result := FGroupOwner;
 end;
 
 function TModelMainIconesFields.Hint(AValue: String): TModelMainIconesFields;

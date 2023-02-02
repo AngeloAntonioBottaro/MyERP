@@ -6,7 +6,8 @@ uses
   System.Sysutils,
   Model.Main.Icones.Lista,
   Model.Main.Icones.Types,
-  Model.Main.Icones.Interfaces;
+  Model.Main.Icones.Interfaces,
+  Model.Main.Icones.Lista.VisibilidadeManual;
 
 type
   TModelMainIcones = class
@@ -14,13 +15,16 @@ type
     class var FInstance: TModelMainIcones;
 
     FModelMainIconesList: IModelMainIconesList;
+    FModelMainIconesListaVisibilidadeManual: IModelMainIconesListaVisibilidadeManual;
 
     constructor Create;
     procedure RegistrarIcones;
   public
-    function Lista: TPairMainIconesFields;
+    function ListaIcones: TPairMainIconesFields;
+    function ListaVisibilidadeManual: IModelMainIconesListaVisibilidadeManual;
     function AtualizarVisibilidades: TModelMainIcones;
     function PanelIcones: IModelMainIconesComponentes;
+    function PageControlIcones: IModelMainIconesComponentes;
 
     destructor Destroy; override;
     class function GetInstance: TModelMainIcones;
@@ -30,7 +34,8 @@ implementation
 
 uses
   Model.Main.Icones.Lista.RegistrarProc,
-  Model.Main.Icones.Componentes.PanelIcones;
+  Model.Main.Icones.Componentes.PanelIcones,
+  Model.Main.Icones.Componentes.PageControlIcones;
 
 class function TModelMainIcones.GetInstance: TModelMainIcones;
 begin
@@ -42,7 +47,9 @@ end;
 
 constructor TModelMainIcones.Create;
 begin
-   FModelMainIconesList := TModelMainIconesLista.Create;
+   FModelMainIconesList                    := TModelMainIconesLista.Create;
+   FModelMainIconesListaVisibilidadeManual := TModelMainIconesListaVisibilidadeManual.New;
+
    Self.RegistrarIcones;
 end;
 
@@ -51,9 +58,14 @@ begin
    inherited;
 end;
 
-function TModelMainIcones.Lista: TPairMainIconesFields;
+function TModelMainIcones.ListaIcones: TPairMainIconesFields;
 begin
    Result := FModelMainIconesList.Lista;
+end;
+
+function TModelMainIcones.ListaVisibilidadeManual: IModelMainIconesListaVisibilidadeManual;
+begin
+   Result := FModelMainIconesListaVisibilidadeManual;
 end;
 
 function TModelMainIcones.PanelIcones: IModelMainIconesComponentes;
@@ -61,10 +73,15 @@ begin
    Result := TModelMainIconesComponentesPanelIcones.New(Self);
 end;
 
+function TModelMainIcones.PageControlIcones: IModelMainIconesComponentes;
+begin
+   Result := TModelMainIconesComponentesPageControlIcones.New(Self);
+end;
+
 function TModelMainIcones.AtualizarVisibilidades: TModelMainIcones;
 begin
    Result := Self;
-   FModelMainIconesList.AtualizarVisibilidades;
+   FModelMainIconesList.AtualizarVisibilidades(FModelMainIconesListaVisibilidadeManual);
 end;
 
 procedure TModelMainIcones.RegistrarIcones;
@@ -75,7 +92,7 @@ begin
    for I := 0 to TModelMainIconesListaRegistrarProc.GetInstance.Lista.Count -1 do
    begin
       LRegistra := TModelMainIconesListaRegistrarProc.GetInstance.Lista.Items[I];
-      LRegistra(Self.Lista);
+      LRegistra(Self.ListaIcones);
    end;
 end;
 

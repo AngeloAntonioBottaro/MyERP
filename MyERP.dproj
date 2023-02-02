@@ -169,7 +169,6 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Criacoes.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Fields.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Interfaces.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.pas"/>
@@ -224,6 +223,8 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.VisibilidadeManual.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PageControlIcones.pas"/>
         <RcItem Include="Files\Images\PNG\Menus\Group.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>clientes</ResourceId>

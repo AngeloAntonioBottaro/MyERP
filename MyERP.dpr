@@ -31,7 +31,6 @@ uses
   Model.Behavior in 'src\Model\Behavior\Model.Behavior.pas',
   Model.Sistema.Login in 'src\Model\Sistema\Model.Sistema.Login.pas',
   Model.Sistema.Imagens.DM in 'src\Model\Sistema\Model.Sistema.Imagens.DM.pas' {ModelSistemaImagensDM: TDataModule},
-  Model.Main.Icones.Criacoes in 'src\Model\Main\Icones\Model.Main.Icones.Criacoes.pas',
   Model.Main.Icones.Fields in 'src\Model\Main\Icones\Model.Main.Icones.Fields.pas',
   Model.Main.Icones.Interfaces in 'src\Model\Main\Icones\Model.Main.Icones.Interfaces.pas',
   Model.Main.Icones.Lista in 'src\Model\Main\Icones\Model.Main.Icones.Lista.pas',
@@ -55,7 +54,9 @@ uses
   View.Produtos.Cad in 'src\View\Produtos\View.Produtos.Cad.pas' {ViewProdutosCad},
   View.Produtos.Grupos.Cad in 'src\View\Produtos\Grupos\View.Produtos.Grupos.Cad.pas' {ViewProdutosGruposCad},
   View.Produtos.SubGrupos.Cad in 'src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Cad.pas' {ViewProdutosSubgruposCad},
-  Model.Main.Icones.Componentes.PanelIcones in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas';
+  Model.Main.Icones.Componentes.PanelIcones in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas',
+  Model.Main.Icones.Lista.VisibilidadeManual in 'src\Model\Main\Icones\Model.Main.Icones.Lista.VisibilidadeManual.pas',
+  Model.Main.Icones.Componentes.PageControlIcones in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PageControlIcones.pas';
 
 {$R *.res}
 

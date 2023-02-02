@@ -6,17 +6,27 @@ uses
   System.UITypes;
 
 const
-  PANEL_MAIN_NAME        = 'pnMain';
-  PREFIX_PANEL_TOP_NAME  = 'pnTop';
-  PANEL_TOP_HEIGHT       = 75;
-  PREFIX_PANEL_ICON_NAME = 'pn';
-  PANEL_ICON_WIDTH       = 130;
-  PREFIX_IMAGE_ICON_NAME = 'img';
-  IMAGE_ICON_HEIGHT      = 40;
-  PREFIX_LABEL_ICON_NAME = 'lb';
-  LABEL_COLOR_MAIN       = TColors.DarkBlue;
-  LABEL_COLOR_SELECTED   = TColors.Orangered;
+  COLOR_MAIN         = TColors.DarkBlue;
+  COLOR_SELECTED     = TColors.Orangered;
+  PANEL_MAIN_NAME    = 'pnMainIcones';
+  PANEL_TOPO_NAME    = 'pnTopo';
+  PANEL_TOPO_HEIGHT  = 75;
+  PANEL_ICONE_NAME   = 'pn';
+  PANEL_ICONE_WIDTH  = 130;
+  IMAGE_ICONE_NAME   = 'img';
+  IMAGE_ICONE_HEIGHT = 40;
+  LABEL_ICONE_NAME   = 'lb';
 
+  PAGECONTROL_NAME    = 'pgControlMainIcones';
+  TABSHEET_NAME       = 'TabSheet';
+  PANEL_TABSHEET_NAME = 'pnTabSheet';
+  PANEL_SHEET_HEIGHT  = 50;
+  PANEL_SHEET_WIDTH   = 200;
+  IMAGE_ICONE_WIDTH   = 40;
+  CHECKBOX_NAME       = 'ck';
+  CHECKBOX_HEIGHT     = 18;
+  CHECKBOX_MARGEM     = 28;
+  PIXEL_POR_LETRA     = 5;
 
 implementation
 
