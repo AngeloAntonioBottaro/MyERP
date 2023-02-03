@@ -1,5 +1,5 @@
 inherited ViewProdutosCad: TViewProdutosCad
-  Caption = 'Tela de cadastro de produtos'
+  Caption = 'Cadastro de produtos'
   PixelsPerInch = 96
   TextHeight = 13
 end

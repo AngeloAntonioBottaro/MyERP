@@ -133,7 +133,6 @@ begin
    FPanelIconesMain             := TScrollBox.Create(Formulario);
    FPanelIconesMain.Parent      := Formulario;
    FPanelIconesMain.Name        := PANEL_MAIN_NAME;
-
    FPanelIconesMain.Align       := alTop;
    FPanelIconesMain.AutoSize    := True;
    FPanelIconesMain.BevelOuter  := TBevelCut(bvNone);
@@ -145,9 +144,9 @@ end;
 
 procedure TModelMainIconesComponentesPanelIcones.CriarPanelTopo;
 begin
-   FWidthPanelUsado := FWidthPanelUsado + PANEL_ICONE_WIDTH;
+   FWidthPanelUsado := FWidthPanelUsado + PANEL_ICON_WIDTH;
 
-   if((FWidthPanelUsado + PANEL_ICONE_WIDTH) >= FWidthPanelTotal)then
+   if((FWidthPanelUsado + PANEL_ICON_WIDTH) >= FWidthPanelTotal)then
      FWidthPanelTotal := 0;
 
    if(FWidthPanelTotal <> 0)then
@@ -157,7 +156,7 @@ begin
 
    FPanelTopo             := TPanel.Create(Formulario);
    FPanelTopo.Parent      := FPanelIconesMain;
-   FPanelTopo.Name        := PANEL_TOPO_NAME + FCountPanelsTopo.ToString;
+   FPanelTopo.Name        := PANEL_TOP_NAME + FCountPanelsTopo.ToString;
 
    FPanelTopo.Visible     := True;
    FPanelTopo.Align       := alBottom;
@@ -165,7 +164,7 @@ begin
    FPanelTopo.AutoSize    := False;
    FPanelTopo.BevelOuter  := TBevelCut(bvNone);
    FPanelTopo.Caption     := EmptyStr;
-   FPanelTopo.Height      := PANEL_TOPO_HEIGHT;
+   FPanelTopo.Height      := PANEL_TOP_HEIGHT;
    FPanelTopo.ParentColor := False;
    FPanelTopo.ShowHint    := True;
    FPanelTopo.Top         := Screen.Height;
@@ -178,7 +177,7 @@ procedure TModelMainIconesComponentesPanelIcones.CriarPanelIcone(AModelMainIcone
 begin
    FPanelIcone              := TPanel.Create(Formulario);
    FPanelIcone.Parent       := FPanelTopo;
-   FPanelIcone.Name         := PANEL_ICONE_NAME + AModelMainIconesFields.ComponentName;
+   FPanelIcone.Name         := PREFIX_PANEL_NAME + AModelMainIconesFields.ComponentName;
    FPanelIcone.Align        := alRight;
    FPanelIcone.Align        := alLeft;
    FPanelIcone.AutoSize     := False;
@@ -190,7 +189,7 @@ begin
    FPanelIcone.ShowHint     := True;
    FPanelIcone.Tag          := AModelMainIconesFields.Tag;
    FPanelIcone.Visible      := True;
-   FPanelIcone.Width        := PANEL_ICONE_WIDTH;
+   FPanelIcone.Width        := PANEL_ICON_WIDTH;
    FPanelIcone.OnClick      := AModelMainIconesFields.OnClickViewMain();
    FPanelIcone.OnMouseEnter := Self.MouseEnter;
    FPanelIcone.OnMouseLeave := Self.MouseLeave;
@@ -204,9 +203,9 @@ begin
    LImage.Align          := alTop;
    LImage.Center         := True;
    LImage.Cursor         := crHandPoint;
-   LImage.Height         := IMAGE_ICONE_HEIGHT;
+   LImage.Height         := IMAGE_ICON_HEIGHT;
    LImage.Hint           := AModelMainIconesFields.Hint;
-   LImage.Name           := IMAGE_ICONE_NAME + AModelMainIconesFields.ComponentName;
+   LImage.Name           := PREFIX_IMAGE_ICON_NAME + AModelMainIconesFields.ComponentName;
    LImage.Parent         := FPanelIcone;
    LImage.ParentShowHint := True;
    LImage.Proportional   := True;
@@ -226,13 +225,13 @@ begin
    LLabel.Alignment      := taCenter;
    LLabel.Caption        := AModelMainIconesFields.Caption;
    LLabel.Cursor         := crHandPoint;
-   LLabel.Font.Color     := COLOR_MAIN;
+   LLabel.Font.Color     := LABEL_COLOR_MAIN;
    LLabel.Font.Name      := 'Arial';
    LLabel.Font.Size      := AModelMainIconesFields.FontSize;
    LLabel.Font.Style     := [fsBold];
    LLabel.Hint           := AModelMainIconesFields.Hint;
    LLabel.Layout         := tlTop;
-   LLabel.Name           := LABEL_ICONE_NAME + AModelMainIconesFields.ComponentName;
+   LLabel.Name           := PREFIX_LABEL_ICON_NAME + AModelMainIconesFields.ComponentName;
    LLabel.Parent         := FPanelIcone;
    LLabel.ParentShowHint := True;
    LLabel.Visible        := True;
@@ -258,12 +257,12 @@ end;
 
 procedure TModelMainIconesComponentesPanelIcones.MouseEnter(Sender: TObject);
 begin
-   Self.TrocarCorLabel(Sender, COLOR_SELECTED);
+   Self.TrocarCorLabel(Sender, LABEL_COLOR_SELECTED);
 end;
 
 procedure TModelMainIconesComponentesPanelIcones.MouseLeave(Sender: TObject);
 begin
-   Self.TrocarCorLabel(Sender, COLOR_MAIN);
+   Self.TrocarCorLabel(Sender, LABEL_COLOR_MAIN);
 end;
 
 procedure TModelMainIconesComponentesPanelIcones.TrocarCorLabel(AComponente: TObject; ACor: TColor);

@@ -576,10 +576,9 @@ object ViewMain: TViewMain
       Caption = 'Atualizar '#237'cones de atalhos'
       OnClick = AtualizarIconesDeAtalhos1Click
     end
-    object AtualizarSistema1: TMenuItem
-      Caption = 'Atualizar sistema'
-      ShortCut = 116
-      OnClick = AtualizarSistema1Click
+    object OcultarIcones1: TMenuItem
+      Caption = 'Ocultar icones'
+      OnClick = OcultarIcones1Click
     end
   end
 end

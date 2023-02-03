@@ -1,5 +1,5 @@
 inherited ViewCidadesCad: TViewCidadesCad
-  Caption = 'Tela de cadastro de cidades'
+  Caption = 'Cadastro de cidades'
   ClientHeight = 292
   ClientWidth = 624
   ExplicitWidth = 640
@@ -9,5 +9,7 @@ inherited ViewCidadesCad: TViewCidadesCad
   inherited pnButtons: TPanel
     Top = 251
     Width = 624
+    ExplicitTop = 251
+    ExplicitWidth = 624
   end
 end

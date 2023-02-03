@@ -42,7 +42,7 @@ type
     CadastrosFornecedores1: TMenuItem;
     CadastrosFornecedoresCadastro1: TMenuItem;
     CadastrosClientesCadastro1: TMenuItem;
-    AtualizarSistema1: TMenuItem;
+    OcultarIcones1: TMenuItem;
     CadastrosCidades1Cadastro1: TMenuItem;
     Suporte1: TMenuItem;
     SuporteSobreSistema1: TMenuItem;
@@ -58,7 +58,7 @@ type
     procedure AtualizarIconesDeAtalhos1Click(Sender: TObject);
     procedure CadastrosClientesCadastro1Click(Sender: TObject);
     procedure CadastrosFornecedoresCadastro1Click(Sender: TObject);
-    procedure AtualizarSistema1Click(Sender: TObject);
+    procedure OcultarIcones1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure CadastrosCidades1Cadastro1Click(Sender: TObject);
     procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
@@ -148,9 +148,12 @@ begin
    Self.CriarIconesAtalhos;
 end;
 
-procedure TViewMain.AtualizarSistema1Click(Sender: TObject);
+procedure TViewMain.OcultarIcones1Click(Sender: TObject);
 begin
-   TModelSistemaMain.GetInstance.ConfiguraFormulario;
+   TModelMainIcones.GetInstance
+    .PanelIcones
+     .Formulario(Self)
+     .LimparComponente;
 end;
 
 procedure TViewMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);

@@ -143,10 +143,9 @@ end;
 
 procedure TModelMainIconesComponentesPageControlIcones.CriarPanelTabSheet(ATabSheet: TTabSheet);
 begin
-   FPanelTabSheet             := TPanel.Create(Formulario);
-   FPanelTabSheet.Parent      := ATabSheet;
-   FPanelTabSheet.Name        := PANEL_TABSHEET_NAME + FCountPanelsTopo.ToString;
-
+   FPanelTabSheet                  := TPanel.Create(Formulario);
+   FPanelTabSheet.Parent           := ATabSheet;
+   FPanelTabSheet.Name             := TABSHEET_PANEL_NAME + FCountPanelsTopo.ToString;
    FPanelTabSheet.Visible          := True;
    FPanelTabSheet.Align            := alClient;
    FPanelTabSheet.AlignWithMargins := True;
@@ -180,9 +179,9 @@ end;
 
 procedure TModelMainIconesComponentesPageControlIcones.CriarPanelTopo;
 begin
-   FWidthPanelUsado := FWidthPanelUsado + PANEL_SHEET_WIDTH;
+   FWidthPanelUsado := FWidthPanelUsado + TABSHEET_PANEL_ICON_WIDTH;
 
-   if((FWidthPanelUsado + PANEL_SHEET_WIDTH) >= FWidthPanelTotal)then
+   if((FWidthPanelUsado + TABSHEET_PANEL_ICON_WIDTH) >= FWidthPanelTotal)then
      FWidthPanelTotal := 0;
 
    if(FWidthPanelTotal <> 0)then
@@ -192,14 +191,14 @@ begin
 
    FPanelTopo             := TPanel.Create(Formulario);
    FPanelTopo.Parent      := FPanelTabSheet;
-   FPanelTopo.Name        := PANEL_TOPO_NAME + FCountPanelsTopo.ToString;
+   FPanelTopo.Name        := PANEL_TOP_NAME + FCountPanelsTopo.ToString;
    FPanelTopo.Visible     := True;
    FPanelTopo.Align       := alBottom;
    FPanelTopo.Align       := alTop;
    FPanelTopo.AutoSize    := False;
    FPanelTopo.BevelOuter  := TBevelCut(bvNone);
    FPanelTopo.Caption     := EmptyStr;
-   FPanelTopo.Height      := PANEL_SHEET_HEIGHT;
+   FPanelTopo.Height      := TABSHEET_PANEL_TOP_HEIGHT;
    FPanelTopo.ParentColor := False;
    FPanelTopo.ShowHint    := True;
    FPanelTopo.Top         := Screen.Height;
@@ -212,7 +211,7 @@ procedure TModelMainIconesComponentesPageControlIcones.CriarPanelIcone(AModelMai
 begin
    FPanelIcone             := TPanel.Create(Formulario);
    FPanelIcone.Parent      := FPanelTopo;
-   FPanelIcone.Name        := PANEL_ICONE_NAME + AModelMainIconesFields.ComponentName;
+   FPanelIcone.Name        := PREFIX_PANEL_NAME + AModelMainIconesFields.ComponentName;
    FPanelIcone.Align       := alRight;
    FPanelIcone.Align       := alLeft;
    FPanelIcone.AutoSize    := False;
@@ -222,7 +221,7 @@ begin
    FPanelIcone.ShowHint    := True;
    FPanelIcone.Tag         := AModelMainIconesFields.Tag;
    FPanelIcone.Visible     := True;
-   FPanelIcone.Width       := PANEL_SHEET_WIDTH;
+   FPanelIcone.Width       := TABSHEET_PANEL_ICON_WIDTH;
 end;
 
 procedure TModelMainIconesComponentesPageControlIcones.CriarImageIcone(AModelMainIconesFields: TModelMainIconesFields);
@@ -234,12 +233,12 @@ begin
    LImage.Center           := True;
    LImage.Cursor           := crHandPoint;
    LImage.Hint             := AModelMainIconesFields.Hint;
-   LImage.Name             := IMAGE_ICONE_NAME + AModelMainIconesFields.ComponentName;
+   LImage.Name             := PREFIX_IMAGE_ICON_NAME + AModelMainIconesFields.ComponentName;
    LImage.Parent           := FPanelIcone;
    LImage.ParentShowHint   := True;
    LImage.Proportional     := True;
    LImage.Visible          := True;
-   LImage.Width            := IMAGE_ICONE_WIDTH;
+   LImage.Width            := IMAGE_ICON_WIDTH;
    LImage.AlignWithMargins := True;
    LImage.Margins.Left     := 10;
 
@@ -261,7 +260,7 @@ end;
 
 procedure TModelMainIconesComponentesPageControlIcones.CriarCheckBoxIcone(AModelMainIconesFields: TModelMainIconesFields);
 const
-  ESPACO_ENTRE_IMAGEM_CHECKBOX = 18;
+  SPACE_BETWEN_IMAGE_CHECKBOX = 18;
   MARGIN_PANEL = 5;
 var
   LCheckBox: TCheckBox;
@@ -274,14 +273,14 @@ begin
    LCheckBox.Cursor         := crHandPoint;
    LCheckBox.Font.Name      := 'Arial';
    LCheckBox.Hint           := AModelMainIconesFields.Hint;
-   LCheckBox.Name           := CHECKBOX_NAME + AModelMainIconesFields.ComponentName;
+   LCheckBox.Name           := PREFIX_CHECKBOX_NAME + AModelMainIconesFields.ComponentName;
    LCheckBox.Parent         := FPanelIcone;
    LCheckBox.ParentShowHint := True;
    LCheckBox.Visible        := True;
    LCheckBox.WordWrap       := True;
 
-   LCheckBoxWidthMax := PANEL_SHEET_WIDTH - IMAGE_ICONE_WIDTH - ESPACO_ENTRE_IMAGEM_CHECKBOX - MARGIN_PANEL;
-   LCheckBoxWidth    := CHECKBOX_MARGEM + (Length(LCheckBox.Caption) * PIXEL_POR_LETRA);
+   LCheckBoxWidthMax := TABSHEET_PANEL_ICON_WIDTH - IMAGE_ICON_WIDTH - SPACE_BETWEN_IMAGE_CHECKBOX - MARGIN_PANEL;
+   LCheckBoxWidth    := CHECKBOX_MARGEM + (Length(LCheckBox.Caption) * PIXEL_FOR_LETTER);
 
    LCheckBoxHeight := CHECKBOX_HEIGHT;
    if(LCheckBoxWidth > LCheckBoxWidthMax)then
@@ -292,8 +291,8 @@ begin
 
    LCheckBox.Height := LCheckBoxHeight;
    LCheckBox.Width  := LCheckBoxWidth;
-   LCheckBox.Left   := IMAGE_ICONE_WIDTH + ESPACO_ENTRE_IMAGEM_CHECKBOX;
-   LCheckBox.Top    := ((PANEL_SHEET_HEIGHT - LCheckBoxHeight) div 2);
+   LCheckBox.Left   := IMAGE_ICON_WIDTH + SPACE_BETWEN_IMAGE_CHECKBOX;
+   LCheckBox.Top    := ((TABSHEET_PANEL_TOP_HEIGHT - LCheckBoxHeight) div 2);
 end;
 
 end.
