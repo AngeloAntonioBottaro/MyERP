@@ -164,7 +164,7 @@
         <DCCReference Include="src\Model\Behavior\Model.Behavior.Exceptions.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Login.pas"/>
-        <DCCReference Include="src\Model\Sistema\Model.Sistema.Imagens.DM.pas">
+        <DCCReference Include="src\Model\Sistema\DM\Model.Sistema.Imagens.DM.pas">
             <Form>ModelSistemaImagensDM</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
@@ -184,7 +184,6 @@
             <Form>ViewFornecedoresBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\Model\Sistema\Model.Sistema.Main.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Consts.pas"/>
         <DCCReference Include="src\View\Sistema\View.Base.Cadastros.pas">
             <Form>ViewBaseCadastros</Form>

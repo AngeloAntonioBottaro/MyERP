@@ -57,6 +57,7 @@ object ViewMain: TViewMain
       item
         Width = 50
       end>
+    OnClick = StatusBarClick
   end
   object MainMenu: TMainMenu
     Images = ModelSistemaImagensDM.imgListMenus
@@ -570,8 +571,8 @@ object ViewMain: TViewMain
     end
   end
   object pMenuMain: TPopupMenu
-    Left = 112
-    Top = 64
+    Left = 88
+    Top = 24
     object AtualizarIconesDeAtalhos1: TMenuItem
       Caption = 'Atualizar '#237'cones de atalhos'
       OnClick = AtualizarIconesDeAtalhos1Click
@@ -580,5 +581,12 @@ object ViewMain: TViewMain
       Caption = 'Ocultar icones'
       OnClick = OcultarIcones1Click
     end
+  end
+  object TimerFormResize: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = TimerFormResizeTimer
+    Left = 32
+    Top = 120
   end
 end
