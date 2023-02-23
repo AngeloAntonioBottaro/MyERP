@@ -38,10 +38,10 @@ implementation
 procedure RefreshVariables;
 begin
    //PASTAS
-   VG_PastaPadrao     := PASTA_PADRAO + '\ERP';
+   VG_PastaPadrao     := PASTA_PADRAO + 'ERP\';
    VG_PastaArquivos   := VG_PastaPadrao + PASTA_ARQUIVO;
    VG_PastaBackups    := VG_PastaPadrao + PASTA_BACKUP;
-   VG_PastaImagens    := VG_PastaPadrao + PASTA_IMAGEM;
+   VG_PastaImagens    := VG_PastaArquivos + PASTA_IMAGEM;
    VG_PastaRelatorios := VG_PastaPadrao + PASTA_RELATORIO;
    VG_PastaTemporaria := PASTA_TEMP;
    VG_PastaAppData    := TMyLibrary.GetPathAppDataLocal;
