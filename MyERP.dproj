@@ -59,18 +59,18 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>MyERP</SanitizedProjectName>
         <Custom_Styles>&quot;Amethyst Kamri|VCLSTYLE|$(BDSCOMMONDIR)\Styles\AmethystKamri.vsf&quot;</Custom_Styles>
+        <VerInfo_Locale>1046</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;vclactnband;vclFireDAC;tethering;FireDACADSDriver;ACBr_BPeDabpeESCPOS;ACBr_BPe;JvPluginSystem;FireDACMSSQLDriver;vcltouch;ACBr_NFe;ACBr_NFeDanfeFR;vcldb;JvBands;svn;JvJans;ACBr_NFeDanfeESCPOS;JvDotNetCtrls;vclib;frxTee26;FireDACDBXDriver;ACBr_NFSeDanfseFR;vclx;RESTBackendComponents;ACBr_Reinf;VCLRESTComponents;fsTee26;vclie;bindengine;CloudService;ACBr_PAF;FireDACMySQLDriver;JvHMI;fsIBX26;ACBr_SATECFVirtual;frx26;DataSnapClient;bindcompdbx;ACBr_CTeDacteRL;ACBr_TCP;DBXSybaseASEDriver;IndyIPServer;ACBr_CTe;IndySystem;frxDBX26;fsADO26;dsnapcon;ACBre_Social;VirtualTreesR;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;ACBr_SPEDImportar;Jcl;bsfd103Rio;mydacvcl260;ACBr_SPED;ACBr_MDFe;emshosting;ACBr_BoletoRL;ACBr_LFD;DBXOdbcDriver;FireDACTDataDriver;FMXTee;crcontrols260;soaprtl;DbxCommonDriver;ACBr_CIOT;ACBr_NFSeDanfseRL;JvManagedThreads;xmlrtl;DataSnapNativeClient;soapmidas;fmxobj;JvTimeFramework;rtl;emsserverresource;DbxClientDriver;DBXSybaseASADriver;JvSystem;JvStdCtrls;ACBr_Convenio115;appanalytics;IndyIPClient;bindcompvcl;TeeUI;JvDocking;JvPascalInterpreter;VclSmp;FireDACODBCDriver;RtmRxDB260;mydacfmx260;JclVcl;DataSnapIndy10ServerTransport;ACBr_Boleto;DataSnapProviderClient;ACBr_SEF2;FireDACMongoDBDriver;JvControls;JvPrintPreview;ACBr_MDFeDamdfeFR;ACBr_NFSe;DataSnapServerMidas;RESTComponents;ZComponent;DBXInterBaseDriver;ACBr_NF3e;ACBr_TEFD;ZCore;emsclientfiredac;dacfmx260;DataSnapFireDAC;svnui;ACBr_SATWS;JvGlobus;DBXMSSQLDriver;JvMM;ACBr_MDFeDamdfeRL;DatasnapConnectorsFreePascal;ACBr_EDI;ACBr_ONE;PngComponentsD;bindcompfmx;JvNet;DBXOracleDriver;inetdb;JvAppFrm;ACBr_Diversos;FmxTeeUI;emsedge;ACBr_LCDPR;FireDACIBDriver;fmx;fmxdae;DSPack_DXE2;ACBr_CTeDacteFR;MSNPopUp_D104;ZipMasterR;JvWizards;dacvcl260;ACBr_Ponto;fs26;dbexpress;IndyCore;frxIntIO26;ZParseSql;JvPageComps;dsnap;DataSnapCommon;emsclient;FireDACCommon;JvDB;frxcs26;DataSnapConnectors;ACBR_DeSTDA;soapserver;ACBr_SAT;JclDeveloperTools;FireDACOracleDriver;DBXMySQLDriver;JvCmp;DBXFirebirdDriver;ACBr_Sintegra;FireDACCommonODBC;FireDACCommonDriver;ACBr_ADRCST;frxIntIOIndy26;inet;IndyIPCommon;JvCustom;vcl;ACBr_NFeDanfeRL;ACBr_SATExtratoESCPOS;frxDB26;JvXPCtrls;FireDACDb2Driver;ACBr_Integrador;fsDB26;ZDbc;TeeDB;FireDAC;mydac260;JvCore;ACBr_Comum;frxe26;JvCrypt;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;frxIBX26;JvDlgs;JvRuntimeDesign;VDOPrint;ibxpress;Tee;DataSnapServer;ibxbindings;BossExperts;dac260;FireDACDSDriver;vclwinx;mysqlmon260;ACBr_OpenSSL;frxADO26;CustomIPTransport;vcldsnap;bindcomp;ZPlain;ACBr_Serial;DBXInformixDriver;frce;ACBr_BlocoX;RtmRxCtl260;dbxcds;ACBr_NFCeECFVirtual;adortl;ACBr_BoletoFR;ACBr_ANe;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;JclContainers;ACBr_NF3eDANF3eESCPOS;ACBr_MTER;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_DcuOutput>dcu\</DCC_DcuOutput>
         <DCC_ExeOutput>C:\AABSoft</DCC_ExeOutput>
-        <DCC_UnitSearchPath>..\MyMessage\src;..\MyExceptions\Src;..\MyUtilsLibrary;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;vclactnband;vclFireDAC;tethering;FireDACADSDriver;FireDACMSSQLDriver;vcltouch;vcldb;vclib;FireDACDBXDriver;vclx;RESTBackendComponents;VCLRESTComponents;vclie;bindengine;CloudService;FireDACMySQLDriver;DataSnapClient;bindcompdbx;DBXSybaseASEDriver;IndyIPServer;IndySystem;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;emshosting;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;xmlrtl;DataSnapNativeClient;soapmidas;fmxobj;rtl;emsserverresource;DbxClientDriver;DBXSybaseASADriver;appanalytics;IndyIPClient;bindcompvcl;TeeUI;VclSmp;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;FireDACMongoDBDriver;DataSnapServerMidas;RESTComponents;ZComponent;DBXInterBaseDriver;ZCore;emsclientfiredac;DataSnapFireDAC;DBXMSSQLDriver;DatasnapConnectorsFreePascal;PngComponentsD;bindcompfmx;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;DSPack_DXE2;ZipMasterR;dbexpress;IndyCore;ZParseSql;dsnap;DataSnapCommon;emsclient;FireDACCommon;DataSnapConnectors;soapserver;FireDACOracleDriver;DBXMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;inet;IndyIPCommon;vcl;FireDACDb2Driver;ZDbc;TeeDB;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;ibxpress;Tee;DataSnapServer;ibxbindings;FireDACDSDriver;vclwinx;CustomIPTransport;vcldsnap;bindcomp;ZPlain;DBXInformixDriver;dbxcds;adortl;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -89,7 +89,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>Files\Images\Icone.ico</Icon_MainIcon>
+        <Icon_MainIcon>resources\Images\Icone.ico</Icon_MainIcon>
         <DCC_ExeOutput>C:\AABSoft\ERP</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -106,19 +106,19 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="src\View\Sistema\View.Main.pas">
-            <Form>ViewMain</Form>
+        <DCCReference Include="src\View\Sistema\View.Sistema.Main.pas">
+            <Form>ViewSistemaMain</Form>
         </DCCReference>
-        <DCCReference Include="src\View\Sistema\View.Splash.pas">
-            <Form>ViewSplash</Form>
+        <DCCReference Include="src\View\Sistema\View.Sistema.Splash.pas">
+            <Form>ViewSistemaSplash</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Sistema\View.Base.pas">
             <Form>ViewBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Sistema\View.Login.pas">
-            <Form>ViewLogin</Form>
+        <DCCReference Include="src\View\Sistema\View.Sistema.Login.pas">
+            <Form>ViewSistemaLogin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Utils\Utils.Versao.pas"/>
@@ -175,11 +175,11 @@
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.RegistrarProc.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Types.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Clientes.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Fornecedores.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Funcionarios.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Produtos.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Cidades.pas"/>
         <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Busca.pas">
             <Form>ViewFornecedoresBusca</Form>
             <FormType>dfm</FormType>
@@ -224,29 +224,54 @@
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.VisibilidadeManual.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PageControlIcones.pas"/>
-        <RcItem Include="Files\Images\PNG\Menus\Group.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>clientes</ResourceId>
-        </RcItem>
-        <RcItem Include="Files\Images\PNG\Menus\Product.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>produtos</ResourceId>
-        </RcItem>
-        <RcItem Include="Files\Images\PNG\Menus\User.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>funcionarios</ResourceId>
-        </RcItem>
-        <RcItem Include="Files\Images\PNG\Menus\ClientManagement.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>fornecedores</ResourceId>
-        </RcItem>
-        <RcItem Include="Files\Images\PNG\Menus\CityBuildings.png">
+        <DCCReference Include="src\View\Sistema\View.Sistema.Sobre.pas">
+            <Form>ViewSistemaSobre</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyConsts.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyVclLibrary.pas"/>
+        <DCCReference Include="..\MyExceptions\Src\MyExceptions.Base.pas"/>
+        <DCCReference Include="..\MyExceptions\Src\MyExceptions.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyObjectDictionary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyTypes.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.Consts.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.Helpers.TMemo.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.Interfaces.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.Types.pas"/>
+        <DCCReference Include="..\MyMessage\src\MyMessage.View.pas">
+            <Form>MyMessageView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Sistema\View.Sistema.IconesConf.pas">
+            <Form>ViewSistemaIconesConf</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyFormLibrary.pas"/>
+        <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>
         </RcItem>
-        <RcItem Include="Files\Images\PNG\Menus\ProductSearch.png">
+        <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>fornecedores</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\Group.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>clientes</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\Product.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>produtos</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\ProductSearch.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>consulta_produtos</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\User.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>funcionarios</ResourceId>
         </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -274,37 +299,25 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Files\Images\PNG\Menus\User.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\Group.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Files\Images\PNG\Menus\ClientManagement.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\Product.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Files\Images\PNG\Menus\Group.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\CityBuildings.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Files\Images\PNG\Menus\ProductSearch.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Files\Images\PNG\Menus\Product.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Files\Images\PNG\Menus\CityBuildings.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\ClientManagement.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -313,6 +326,18 @@
                 <DeployFile LocalName="C:\AABSoft\ERP\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MyERP.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\User.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\ProductSearch.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -32,16 +32,16 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyVclLibrary;
+  Utils.MyFormLibrary;
 
 procedure TViewBase.FormCreate(Sender: TObject);
 begin
-   TMyVclLibrary.New.ConfForm(Self);
+   TMyFormLibrary.New.ConfForm(Self);
 end;
 
 procedure TViewBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-   TMyVclLibrary.New.DefaultKeyDown(Self, Key, Shift);
+   TMyFormLibrary.New.DefaultKeyDown(Self, Key, Shift);
 end;
 
 procedure TViewBase.FormKeyPress(Sender: TObject; var Key: Char);

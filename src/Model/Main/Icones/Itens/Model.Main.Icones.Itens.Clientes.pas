@@ -1,4 +1,4 @@
-unit Model.Main.Icones.Cadastros.Clientes;
+unit Model.Main.Icones.Itens.Clientes;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Model.Main.Icones.Fields,
   Model.Main.Icones.Types,
   Model.Main.Icones.Lista.RegistrarProc,
-  View.Main;
+  View.Sistema.Main;
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
@@ -18,7 +18,8 @@ begin
                .ComponentName(TMainIconName.Clientes.ToString)
                .ResourceName('clientes')
                .Hint('Cadastro de clientes')
-               .OnClickViewMain(ViewMain.CadastrosClientesCadastro1Click)
+               .OnClickViewMain(ViewSistemaMain.CadastrosClientesCadastro1Click)
+               .GroupOwner(TMainIconesGroup.Cadastros.ToInteger)
                );
 end;
 

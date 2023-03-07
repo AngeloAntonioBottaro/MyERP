@@ -1,8 +1,8 @@
-object ViewMain: TViewMain
+object ViewSistemaMain: TViewSistemaMain
   Tag = 20
   Left = 0
   Top = 0
-  Caption = 'ViewMain'
+  Caption = 'ViewSistemaMain'
   ClientHeight = 299
   ClientWidth = 635
   Color = clBtnFace
@@ -563,6 +563,7 @@ object ViewMain: TViewMain
       Caption = 'Suporte'
       object SuporteSobreSistema1: TMenuItem
         Caption = 'Sobre o sistema'
+        OnClick = SuporteSobreSistema1Click
       end
     end
     object Sair1: TMenuItem
@@ -578,8 +579,15 @@ object ViewMain: TViewMain
       OnClick = AtualizarIconesDeAtalhos1Click
     end
     object OcultarIcones1: TMenuItem
-      Caption = 'Ocultar icones'
+      Caption = 'Ocultar '#237'cones'
       OnClick = OcultarIcones1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Configurarcones1: TMenuItem
+      Caption = 'Configurar '#237'cones'
+      OnClick = Configurarcones1Click
     end
   end
   object TimerFormResize: TTimer

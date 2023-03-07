@@ -1,8 +1,8 @@
-object ViewSplash: TViewSplash
+object ViewSistemaSplash: TViewSistemaSplash
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'ViewSplash'
+  Caption = 'ViewSistemaSplash'
   ClientHeight = 241
   ClientWidth = 468
   Color = clBtnFace

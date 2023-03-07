@@ -1,4 +1,4 @@
-unit Model.Main.Icones.Cadastros.Funcionarios;
+unit Model.Main.Icones.Itens.Funcionarios;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Model.Main.Icones.Fields,
   Model.Main.Icones.Types,
   Model.Main.Icones.Lista.RegistrarProc,
-  View.Main;
+  View.Sistema.Main;
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
@@ -18,7 +18,8 @@ begin
                .ComponentName(TMainIconName.Funcionarios.ToString)
                .ResourceName('funcionarios')
                .Hint('Cadastro de funcionários')
-               .OnClickViewMain(ViewMain.CadastrosFuncionariosCadastro1Click)
+               .OnClickViewMain(ViewSistemaMain.CadastrosFuncionariosCadastro1Click)
+               .GroupOwner(TMainIconesGroup.Movimentacoes.ToInteger)
                );
 end;
 

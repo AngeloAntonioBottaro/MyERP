@@ -25,6 +25,7 @@ var
   VG_Impressora: string;
 
   VG_DataHoraAberturaSistema: TDateTime;
+  VG_IdEmpresaLog: Integer;
 
   //USUARIO
   VG_UsuarioLogadoId: Integer;

@@ -1,4 +1,4 @@
-inherited ViewLogin: TViewLogin
+inherited ViewSistemaLogin: TViewSistemaLogin
   Caption = 'Login'
   ClientHeight = 132
   ClientWidth = 310

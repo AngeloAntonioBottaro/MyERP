@@ -1,4 +1,4 @@
-unit View.Splash;
+unit View.Sistema.Splash;
 
 interface
 
@@ -18,7 +18,7 @@ uses
   Model.Sistema.Interfaces;
 
 type
-  TViewSplash = class(TForm)
+  TViewSistemaSplash = class(TForm)
     lbInformacoes: TLabel;
     TimerShow: TTimer;
     imgBack: TImage;
@@ -37,30 +37,32 @@ type
   end;
 
 var
-  ViewSplash: TViewSplash;
+  ViewSistemaSplash: TViewSistemaSplash;
 
 implementation
 
 {$R *.dfm}
 
 uses
-  View.Main,
+  View.Sistema.Main,
+  Utils.MyConsts,
   Utils.GlobalVariables,
   Model.Sistema.Splash;
 
-procedure TViewSplash.FormCreate(Sender: TObject);
+procedure TViewSistemaSplash.FormCreate(Sender: TObject);
 begin
+   Application.Title := EMPRESA_DESENVOLVEDOR + ' - ERP Simples';
    RefreshVariables;
 end;
 
-procedure TViewSplash.FormShow(Sender: TObject);
+procedure TViewSistemaSplash.FormShow(Sender: TObject);
 begin
    Self.Repaint;
    Self.Visible := True;
    Self.ConfComponents;
 end;
 
-procedure TViewSplash.ConfComponents;
+procedure TViewSistemaSplash.ConfComponents;
 begin
    lbDireitosAutorais.Caption       := VG_Direitos;
    lbDireitosAutorais.Top           := Self.Top + 15;
@@ -85,13 +87,13 @@ begin
    TimerShow.Enabled := True;
 end;
 
-procedure TViewSplash.TimerShowTimer(Sender: TObject);
+procedure TViewSistemaSplash.TimerShowTimer(Sender: TObject);
 begin
    TimerShow.Enabled := False;
    Self.StartSystem;
 end;
 
-procedure TViewSplash.StartSystem;
+procedure TViewSistemaSplash.StartSystem;
 begin
    TModelSistemaSplash.GetInstance
     .DisplayInformation(WriteMessages)
@@ -103,26 +105,26 @@ begin
    Self.Close;
 end;
 
-procedure TViewSplash.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TViewSistemaSplash.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
    CanClose := not TimerShow.Enabled;
 end;
 
-procedure TViewSplash.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TViewSistemaSplash.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   Application.CreateForm(TViewMain, ViewMain);
+   Application.CreateForm(TViewSistemaMain, ViewSistemaMain);
    Self.Visible := False;
    Self.Hide;
    Self.Refresh;
 end;
 
-procedure TViewSplash.SystemTerminate;
+procedure TViewSistemaSplash.SystemTerminate;
 begin
    Application.Terminate;
    Abort;
 end;
 
-procedure TViewSplash.WriteMessages(pMessage: String);
+procedure TViewSistemaSplash.WriteMessages(pMessage: String);
 begin
    lbInformacoes.Caption := pMessage;
    Application.ProcessMessages;

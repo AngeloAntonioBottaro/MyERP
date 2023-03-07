@@ -1,4 +1,4 @@
-unit View.Main;
+unit View.Sistema.Main;
 
 interface
 
@@ -21,7 +21,7 @@ uses
   Vcl.ExtCtrls;
 
 type
-  TViewMain = class(TViewBase)
+  TViewSistemaMain = class(TViewBase)
     MainMenu: TMainMenu;
     Cadastros1: TMenuItem;
     CadastrosClientes1: TMenuItem;
@@ -49,6 +49,8 @@ type
     Suporte1: TMenuItem;
     SuporteSobreSistema1: TMenuItem;
     TimerFormResize: TTimer;
+    N1: TMenuItem;
+    Configurarcones1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -68,6 +70,8 @@ type
     procedure FormResize(Sender: TObject);
     procedure StatusBarClick(Sender: TObject);
     procedure TimerFormResizeTimer(Sender: TObject);
+    procedure SuporteSobreSistema1Click(Sender: TObject);
+    procedure Configurarcones1Click(Sender: TObject);
   private
     FCount: Integer;
     procedure DoLoggin;
@@ -78,7 +82,7 @@ type
   end;
 
 var
-  ViewMain: TViewMain;
+  ViewSistemaMain: TViewSistemaMain;
 
 implementation
 
@@ -87,13 +91,16 @@ implementation
 uses
   Utils.MyVclLibrary,
   Utils.MyLibrary,
+  Utils.MyFormLibrary,
   Utils.Versao,
   Utils.GlobalVariables,
   MyMessage,
   MyExceptions,
   Model.Sistema.Imagens.DM,
   Model.Main.Icones,
-  View.Login,
+  View.Sistema.Login,
+  View.Sistema.IconesConf,
+  View.Sistema.Sobre,
   View.Cidades.Cad,
   View.Clientes.Cad,
   View.Produtos.Cad,
@@ -105,16 +112,16 @@ uses
   View.Produtos.Busca;
 
 {$REGION 'FormEvents'}
-procedure TViewMain.FormCreate(Sender: TObject);
+procedure TViewSistemaMain.FormCreate(Sender: TObject);
 begin
    Self.Caption := Application.Title + TUtilsVersao.CompleteVersion;
 
-   TMyVclLibrary.New
+   TMyFormLibrary.New
     .FormMaximized
     .ConfForm(Self);
 end;
 
-procedure TViewMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TViewSistemaMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    case(Key)of
     VK_ESCAPE: if(Shift = [])then Sair1.Click;
@@ -123,7 +130,7 @@ begin
    inherited;
 end;
 
-procedure TViewMain.FormShow(Sender: TObject);
+procedure TViewSistemaMain.FormShow(Sender: TObject);
 var
  LTask: ITask;
 begin
@@ -143,13 +150,13 @@ begin
    LTask.Start;
 end;
 
-procedure TViewMain.FormResize(Sender: TObject);
+procedure TViewSistemaMain.FormResize(Sender: TObject);
 begin
    TimerFormResize.Enabled := False;
    TimerFormResize.Enabled := True;
 end;
 
-procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TViewSistemaMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    if(not ShowQuestionNo('Deseja encerrar o sistema?'))then
      Abort;
@@ -157,12 +164,12 @@ end;
 {$ENDREGION 'FormEvents'}
 
 {$REGION 'MenuEvents'}
-procedure TViewMain.AtualizarIconesDeAtalhos1Click(Sender: TObject);
+procedure TViewSistemaMain.AtualizarIconesDeAtalhos1Click(Sender: TObject);
 begin
    Self.CreateShortcutIcons;
 end;
 
-procedure TViewMain.OcultarIcones1Click(Sender: TObject);
+procedure TViewSistemaMain.OcultarIcones1Click(Sender: TObject);
 begin
    TModelMainIcones.GetInstance
     .PanelIcones
@@ -170,7 +177,7 @@ begin
      .LimparComponente;
 end;
 
-procedure TViewMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);
+procedure TViewSistemaMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);
 begin
    if(ViewProdutosBusca = nil)then Application.CreateForm(TViewProdutosBusca, ViewProdutosBusca);
    try
@@ -180,7 +187,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosCidades1Cadastro1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosCidades1Cadastro1Click(Sender: TObject);
 begin
    if(ViewCidadesCad = nil)then Application.CreateForm(TViewCidadesCad, ViewCidadesCad);
    try
@@ -190,7 +197,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosClientesCadastro1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosClientesCadastro1Click(Sender: TObject);
 begin
    if(ViewClientesCad = nil)then Application.CreateForm(TViewClientesCad, ViewClientesCad);
    try
@@ -200,7 +207,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosFornecedoresCadastro1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosFornecedoresCadastro1Click(Sender: TObject);
 begin
    if(ViewFornecedoresCad = nil)then Application.CreateForm(TViewFornecedoresCad, ViewFornecedoresCad);
    try
@@ -210,7 +217,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosFuncionariosCadastro1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosFuncionariosCadastro1Click(Sender: TObject);
 begin
    if(ViewFuncionariosCad = nil)then Application.CreateForm(TViewFuncionariosCad, ViewFuncionariosCad);
    try
@@ -220,7 +227,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosFuncionariosFuncoes1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosFuncionariosFuncoes1Click(Sender: TObject);
 begin
    if(ViewFuncionariosFuncoesCad = nil)then Application.CreateForm(TViewFuncionariosFuncoesCad, ViewFuncionariosFuncoesCad);
    try
@@ -230,7 +237,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosGruposProdutos1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosGruposProdutos1Click(Sender: TObject);
 begin
    if(ViewProdutosGruposCad = nil)then Application.CreateForm(TViewProdutosGruposCad, ViewProdutosGruposCad);
    try
@@ -240,7 +247,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosProdutosCadastro1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosProdutosCadastro1Click(Sender: TObject);
 begin
    if(ViewProdutosCad = nil)then Application.CreateForm(TViewProdutosCad, ViewProdutosCad);
    try
@@ -250,7 +257,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CadastrosSubgruposProdutos1Click(Sender: TObject);
+procedure TViewSistemaMain.CadastrosSubgruposProdutos1Click(Sender: TObject);
 begin
    if(ViewProdutosSubGruposCad = nil)then Application.CreateForm(TViewProdutosSubGruposCad, ViewProdutosSubGruposCad);
    try
@@ -260,17 +267,37 @@ begin
    end;
 end;
 
-procedure TViewMain.Sair1Click(Sender: TObject);
+procedure TViewSistemaMain.Configurarcones1Click(Sender: TObject);
+begin
+   if(ViewSistemaIconesConf = nil)then Application.CreateForm(TViewSistemaIconesConf, ViewSistemaIconesConf);
+   try
+     ViewSistemaIconesConf.ShowModal;
+   finally
+     FreeAndNil(ViewSistemaIconesConf);
+   end;
+end;
+
+procedure TViewSistemaMain.SuporteSobreSistema1Click(Sender: TObject);
+begin
+   if(ViewSistemaSobre = nil)then Application.CreateForm(TViewSistemaSobre, ViewSistemaSobre);
+   try
+     ViewSistemaSobre.ShowModal;
+   finally
+     FreeAndNil(ViewSistemaSobre);
+   end;
+end;
+
+procedure TViewSistemaMain.Sair1Click(Sender: TObject);
 begin
    Self.Close;
 end;
-procedure TViewMain.StatusBarClick(Sender: TObject);
+procedure TViewSistemaMain.StatusBarClick(Sender: TObject);
 begin
    inherited;
    FCount := 0;
 end;
 
-procedure TViewMain.TimerFormResizeTimer(Sender: TObject);
+procedure TViewSistemaMain.TimerFormResizeTimer(Sender: TObject);
 begin
    TimerFormResize.Enabled := False;
    Inc(FCount);
@@ -281,7 +308,7 @@ end;
 {$ENDREGION'MenuEvents'}
 
 {$REGION 'Procedures'}
-procedure TViewMain.ProcessStatus;
+procedure TViewSistemaMain.ProcessStatus;
 begin
    //STATUS BAR
    StatusBar.Panels[0].Text := 'Usuário: ' + VG_UsuarioLogadoId.ToString + ' - ' + VG_UsuarioLogadoNome;
@@ -289,7 +316,7 @@ begin
    StatusBar.Panels[2].Text := 'Servidor: localhost';
 end;
 
-procedure TViewMain.ProcessImageLogo(AImageFile: string);
+procedure TViewSistemaMain.ProcessImageLogo(AImageFile: string);
 begin
    if(not FileExists(AImageFile))then
      Exit;
@@ -301,7 +328,7 @@ begin
    end;
 end;
 
-procedure TViewMain.CreateShortcutIcons;
+procedure TViewSistemaMain.CreateShortcutIcons;
 var
   LTask: ITask;
 begin
@@ -325,13 +352,13 @@ begin
    LTask.Start;
 end;
 
-procedure TViewMain.DoLoggin;
+procedure TViewSistemaMain.DoLoggin;
 begin
-   if(ViewLogin = nil)then Application.CreateForm(TViewLogin, ViewLogin);
+   if(ViewSistemaLogin = nil)then Application.CreateForm(TViewSistemaLogin, ViewSistemaLogin);
    try
-     ViewLogin.ShowModal;
+     ViewSistemaLogin.ShowModal;
    finally
-     FreeAndNil(ViewLogin);
+     FreeAndNil(ViewSistemaLogin);
    end;
 end;
 

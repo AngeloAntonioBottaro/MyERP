@@ -1,5 +1,7 @@
 program MyERP;
 
+
+
 {$R *.dres}
 
 uses
@@ -7,10 +9,10 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   System.SysUtils,
-  View.Main in 'src\View\Sistema\View.Main.pas' {ViewMain},
-  View.Splash in 'src\View\Sistema\View.Splash.pas' {ViewSplash},
+  View.Sistema.Main in 'src\View\Sistema\View.Sistema.Main.pas' {ViewSistemaMain},
+  View.Sistema.Splash in 'src\View\Sistema\View.Sistema.Splash.pas' {ViewSistemaSplash},
   View.Base in 'src\View\Sistema\View.Base.pas' {ViewBase},
-  View.Login in 'src\View\Sistema\View.Login.pas' {ViewLogin},
+  View.Sistema.Login in 'src\View\Sistema\View.Sistema.Login.pas' {ViewSistemaLogin},
   Utils.Versao in 'src\Utils\Utils.Versao.pas',
   Utils.GlobalVariables in 'src\Utils\Utils.GlobalVariables.pas',
   Model.Sistema.Interfaces in 'src\Model\Sistema\Model.Sistema.Interfaces.pas',
@@ -37,11 +39,11 @@ uses
   Model.Main.Icones.Lista.RegistrarProc in 'src\Model\Main\Icones\Model.Main.Icones.Lista.RegistrarProc.pas',
   Model.Main.Icones in 'src\Model\Main\Icones\Model.Main.Icones.pas',
   Model.Main.Icones.Types in 'src\Model\Main\Icones\Model.Main.Icones.Types.pas',
-  Model.Main.Icones.Cadastros.Clientes in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Clientes.pas',
-  Model.Main.Icones.Cadastros.Fornecedores in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Fornecedores.pas',
-  Model.Main.Icones.Cadastros.Funcionarios in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Funcionarios.pas',
-  Model.Main.Icones.Cadastros.Produtos in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Produtos.pas',
-  Model.Main.Icones.Cadastros.Cidades in 'src\Model\Main\Icones\Cadastros\Model.Main.Icones.Cadastros.Cidades.pas',
+  Model.Main.Icones.Itens.Clientes in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Clientes.pas',
+  Model.Main.Icones.Itens.Fornecedores in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Fornecedores.pas',
+  Model.Main.Icones.Itens.Funcionarios in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Funcionarios.pas',
+  Model.Main.Icones.Itens.Produtos in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Produtos.pas',
+  Model.Main.Icones.Itens.Cidades in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Cidades.pas',
   View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca},
   Model.Main.Icones.Consts in 'src\Model\Main\Icones\Model.Main.Icones.Consts.pas',
   View.Base.Cadastros in 'src\View\Sistema\View.Base.Cadastros.pas' {ViewBaseCadastros},
@@ -55,25 +57,40 @@ uses
   View.Produtos.SubGrupos.Cad in 'src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Cad.pas' {ViewProdutosSubgruposCad},
   Model.Main.Icones.Componentes.PanelIcones in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas',
   Model.Main.Icones.Lista.VisibilidadeManual in 'src\Model\Main\Icones\Model.Main.Icones.Lista.VisibilidadeManual.pas',
-  Model.Main.Icones.Componentes.PageControlIcones in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PageControlIcones.pas';
+  Model.Main.Icones.Componentes.PageControlIcones in 'src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PageControlIcones.pas',
+  View.Sistema.Sobre in 'src\View\Sistema\View.Sistema.Sobre.pas' {ViewSistemaSobre},
+  Utils.MyConsts in '..\MyUtilsLibrary\Utils.MyConsts.pas',
+  Utils.MyLibrary in '..\MyUtilsLibrary\Utils.MyLibrary.pas',
+  Utils.MyVclLibrary in '..\MyUtilsLibrary\Utils.MyVclLibrary.pas',
+  MyExceptions.Base in '..\MyExceptions\Src\MyExceptions.Base.pas',
+  MyExceptions in '..\MyExceptions\Src\MyExceptions.pas',
+  Utils.MyObjectDictionary in '..\MyUtilsLibrary\Utils.MyObjectDictionary.pas',
+  Utils.MyTypes in '..\MyUtilsLibrary\Utils.MyTypes.pas',
+  MyMessage.Consts in '..\MyMessage\src\MyMessage.Consts.pas',
+  MyMessage.Helpers.TMemo in '..\MyMessage\src\MyMessage.Helpers.TMemo.pas',
+  MyMessage.Interfaces in '..\MyMessage\src\MyMessage.Interfaces.pas',
+  MyMessage in '..\MyMessage\src\MyMessage.pas',
+  MyMessage.Types in '..\MyMessage\src\MyMessage.Types.pas',
+  MyMessage.View in '..\MyMessage\src\MyMessage.View.pas' {MyMessageView},
+  View.Sistema.IconesConf in 'src\View\Sistema\View.Sistema.IconesConf.pas' {ViewSistemaIconesConf},
+  Utils.MyFormLibrary in '..\MyUtilsLibrary\Utils.MyFormLibrary.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   TStyleManager.TrySetStyle('Amethyst Kamri');
-  Application.Title := 'AAB Softwares - ERP Simples';
 
-  ViewSplash := TViewSplash.Create(nil);
+  ViewSistemaSplash := TViewSistemaSplash.Create(nil);
   try
-    ViewSplash.ShowModal;
-    ViewSplash.Update;
+    ViewSistemaSplash.ShowModal;
+    ViewSistemaSplash.Update;
 
     repeat
       Application.ProcessMessages;
-    until ViewSplash.CloseQuery;
+    until ViewSistemaSplash.CloseQuery;
   finally
-     FreeAndNil(ViewSplash);
+     FreeAndNil(ViewSistemaSplash);
   end;
 
   Application.Run;

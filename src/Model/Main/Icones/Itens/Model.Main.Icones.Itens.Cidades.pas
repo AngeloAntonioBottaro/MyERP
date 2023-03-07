@@ -1,4 +1,4 @@
-unit Model.Main.Icones.Cadastros.Cidades;
+unit Model.Main.Icones.Itens.Cidades;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Model.Main.Icones.Fields,
   Model.Main.Icones.Types,
   Model.Main.Icones.Lista.RegistrarProc,
-  View.Main;
+  View.Sistema.Main;
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
@@ -18,7 +18,8 @@ begin
                .ComponentName(TMainIconName.Cidades.ToString)
                .ResourceName('cidades')
                .Hint('Cadastro de cidades')
-               .OnClickViewMain(ViewMain.CadastrosCidades1Cadastro1Click)
+               .OnClickViewMain(ViewSistemaMain.CadastrosCidades1Cadastro1Click)
+               .GroupOwner(TMainIconesGroup.Cadastros.ToInteger)
                );
 end;
 

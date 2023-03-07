@@ -27,7 +27,6 @@ type
     FCountPanelsTopo: Integer;
     FWidthPanelTotal: Integer;
     FWidthPanelUsado: Integer;
-    FPageControlWidth: Integer;
 
     FPageControl: TPageControl;
     FPanelTabSheet: TPanel;
@@ -123,8 +122,7 @@ begin
    FPageControl.AlignWithMargins := True;
    FPageControl.Align            := alClient;
    FPageControl.Font.Style       := [fsBold];
-
-   FPageControlWidth := FPageControl.Width + 15;
+   FPageControl.StyleElements    := [];
 end;
 
 procedure TModelMainIconesComponentesPageControlIcones.CriarTabSheet(AMainIconesGroup: TMainIconesGroup);
@@ -145,7 +143,7 @@ procedure TModelMainIconesComponentesPageControlIcones.CriarPanelTabSheet(ATabSh
 begin
    FPanelTabSheet                  := TPanel.Create(Formulario);
    FPanelTabSheet.Parent           := ATabSheet;
-   FPanelTabSheet.Name             := TABSHEET_PANEL_NAME + FCountPanelsTopo.ToString;
+   FPanelTabSheet.Name             := TABSHEET_PANEL_NAME + ATabSheet.Name;
    FPanelTabSheet.Visible          := True;
    FPanelTabSheet.Align            := alClient;
    FPanelTabSheet.AlignWithMargins := True;
@@ -203,7 +201,7 @@ begin
    FPanelTopo.ShowHint    := True;
    FPanelTopo.Top         := Screen.Height;
 
-   FWidthPanelTotal := FPageControlWidth;
+   FWidthPanelTotal := FPageControl.Width + 15;;
    FWidthPanelUsado := 0;
 end;
 

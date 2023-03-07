@@ -1,4 +1,4 @@
-unit Model.Main.Icones.Cadastros.Fornecedores;
+unit Model.Main.Icones.Itens.Fornecedores;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Model.Main.Icones.Fields,
   Model.Main.Icones.Types,
   Model.Main.Icones.Lista.RegistrarProc,
-  View.Main;
+  View.Sistema.Main;
 
 procedure Registrar(AValue: TPairMainIconesFields);
 begin
@@ -18,7 +18,8 @@ begin
                .ComponentName(TMainIconName.Fornecedores.ToString)
                .ResourceName('fornecedores')
                .Hint('Cadastro de Fornecedores')
-               .OnClickViewMain(ViewMain.CadastrosFornecedoresCadastro1Click)
+               .OnClickViewMain(ViewSistemaMain.CadastrosFornecedoresCadastro1Click)
+               .GroupOwner(TMainIconesGroup.Movimentacoes.ToInteger)
                );
 end;
 

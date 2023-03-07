@@ -1,4 +1,4 @@
-unit View.Login;
+unit View.Sistema.Login;
 
 interface
 
@@ -18,7 +18,7 @@ uses
   View.Base;
 
 type
-  TViewLogin = class(TViewBase)
+  TViewSistemaLogin = class(TViewBase)
     edtUsuarioSenha: TLabeledEdit;
     btnLogar: TButton;
     btnCancelar: TButton;
@@ -33,7 +33,7 @@ type
   end;
 
 var
-  ViewLogin: TViewLogin;
+  ViewSistemaLogin: TViewSistemaLogin;
 
 implementation
 
@@ -44,12 +44,12 @@ uses
   Utils.GlobalVariables,
   Model.Sistema.Login;
 
-procedure TViewLogin.btnCancelarClick(Sender: TObject);
+procedure TViewSistemaLogin.btnCancelarClick(Sender: TObject);
 begin
    Self.SystemTerminate;
 end;
 
-procedure TViewLogin.btnLogarClick(Sender: TObject);
+procedure TViewSistemaLogin.btnLogarClick(Sender: TObject);
 begin
    TModelSistemaLogin.New
     .DoError(Self.OnError)
@@ -63,15 +63,15 @@ begin
    Self.Close;
 end;
 
-procedure TViewLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TViewSistemaLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    if(VG_UsuarioLogadoId = 0)then
      Self.SystemTerminate;
 end;
 
-procedure TViewLogin.OnError;
+procedure TViewSistemaLogin.OnError;
 begin
-   MyVclLibrary.SetFocusOn(edtUsuarioLogin);
+   TMyVclLibrary.SetFocusOn(edtUsuarioLogin);
 end;
 
 end.
