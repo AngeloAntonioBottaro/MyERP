@@ -249,6 +249,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\MyUtilsLibrary\Utils.MyFormLibrary.pas"/>
+        <DCCReference Include="src\Utils\Utils.GlobalConsts.pas"/>
+        <DCCReference Include="src\Model\Clientes\Model.Clientes.Factory.pas"/>
+        <DCCReference Include="src\Model\Clientes\Model.Clientes.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Clientes\Model.Clientes.Entitie.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>

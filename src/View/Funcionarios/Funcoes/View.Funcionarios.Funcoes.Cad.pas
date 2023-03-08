@@ -9,15 +9,17 @@ uses
   System.Variants,
   System.Classes,
   View.Base.Cadastros,
-  Vcl.Graphics,
-  Vcl.Controls,
-  Vcl.Forms,
-  Vcl.Dialogs,
   Vcl.StdCtrls,
+  Vcl.Controls,
   Vcl.ExtCtrls;
 
 type
   TViewFuncionariosFuncoesCad = class(TViewBaseCadastros)
+    pnTela: TPanel;
+    lbId: TLabel;
+    lbFuncao: TLabel;
+    edtId: TEdit;
+    edtFuncao: TEdit;
   private
   public
   end;

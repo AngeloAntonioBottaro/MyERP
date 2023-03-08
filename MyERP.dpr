@@ -73,7 +73,11 @@ uses
   MyMessage.Types in '..\MyMessage\src\MyMessage.Types.pas',
   MyMessage.View in '..\MyMessage\src\MyMessage.View.pas' {MyMessageView},
   View.Sistema.IconesConf in 'src\View\Sistema\View.Sistema.IconesConf.pas' {ViewSistemaIconesConf},
-  Utils.MyFormLibrary in '..\MyUtilsLibrary\Utils.MyFormLibrary.pas';
+  Utils.MyFormLibrary in '..\MyUtilsLibrary\Utils.MyFormLibrary.pas',
+  Utils.GlobalConsts in 'src\Utils\Utils.GlobalConsts.pas',
+  Model.Clientes.Factory in 'src\Model\Clientes\Model.Clientes.Factory.pas',
+  Model.Clientes.Interfaces in 'src\Model\Clientes\Model.Clientes.Interfaces.pas',
+  Model.Clientes.Entitie in 'src\Model\Clientes\Model.Clientes.Entitie.pas';
 
 {$R *.res}
 

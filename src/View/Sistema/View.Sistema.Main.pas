@@ -7,7 +7,7 @@ uses
   Winapi.Messages,
   System.SysUtils,
   System.Variants,
-  System.Classes,    
+  System.Classes,
   System.Threading,
   System.SyncObjs,
   View.Base,

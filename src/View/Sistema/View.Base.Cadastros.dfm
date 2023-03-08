@@ -1,5 +1,6 @@
 inherited ViewBaseCadastros: TViewBaseCadastros
   Caption = 'Tela de cadastro de '
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object pnButtons: TPanel
