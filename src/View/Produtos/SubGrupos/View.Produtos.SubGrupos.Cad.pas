@@ -9,6 +9,7 @@ uses
   System.Variants,
   System.Classes,
   View.Base.Cadastros,
+  Vcl.Forms,
   Vcl.StdCtrls,
   Vcl.Controls,
   Vcl.ExtCtrls;
@@ -25,6 +26,7 @@ type
     edtId: TEdit;
     edtSubGrupo: TEdit;
     procedure FormCreate(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
   private
     procedure InitialConfiguration;
   public
@@ -38,7 +40,20 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.GlobalConsts;
+  Utils.MyConsts,
+  View.Produtos.SubGrupos.Busca;
+
+procedure TViewProdutosSubgruposCad.btnBuscarClick(Sender: TObject);
+begin
+   inherited;
+   if(ViewProdutosSubGruposBusca = nil)then Application.CreateForm(TViewProdutosSubGruposBusca, ViewProdutosSubGruposBusca);
+   try
+     ViewProdutosSubGruposBusca.btnCadastro.Enabled := False;
+     ViewProdutosSubGruposBusca.ShowModal;
+   finally
+     FreeAndNil(ViewProdutosSubGruposBusca);
+   end;
+end;
 
 procedure TViewProdutosSubgruposCad.FormCreate(Sender: TObject);
 begin

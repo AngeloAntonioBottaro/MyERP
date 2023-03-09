@@ -12,10 +12,15 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base;
+  View.Base.Busca,
+  Data.DB,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls;
 
 type
-  TViewCidadesBusca = class(TViewBase)
+  TViewCidadesBusca = class(TViewBaseBusca)
   private
   public
   end;
@@ -26,7 +31,5 @@ var
 implementation
 
 {$R *.dfm}
-
-uses View.Cidades.Cad;
 
 end.

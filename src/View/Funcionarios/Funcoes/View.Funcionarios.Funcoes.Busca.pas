@@ -12,16 +12,21 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base;
+  View.Base.Busca,
+  Data.DB,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls;
 
 type
-  TViewFuncionariosFuncoesBusca = class(TViewBase)
+  TViewFuncionarioFuncoesBusca = class(TViewBaseBusca)
   private
   public
   end;
 
 var
-  ViewFuncionariosFuncoesBusca: TViewFuncionariosFuncoesBusca;
+  ViewFuncionarioFuncoesBusca: TViewFuncionarioFuncoesBusca;
 
 implementation
 

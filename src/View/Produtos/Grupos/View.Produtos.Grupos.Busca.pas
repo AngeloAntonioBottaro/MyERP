@@ -12,10 +12,15 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base;
+  View.Base.Busca,
+  Data.DB,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls;
 
 type
-  TViewProdutosGruposBusca = class(TViewBase)
+  TViewProdutosGruposBusca = class(TViewBaseBusca)
   private
   public
   end;

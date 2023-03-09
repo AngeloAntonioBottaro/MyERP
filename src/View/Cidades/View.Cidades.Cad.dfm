@@ -1,22 +1,21 @@
 inherited ViewCidadesCad: TViewCidadesCad
   Caption = 'Cadastro de cidades'
   ClientHeight = 106
-  ClientWidth = 609
-  ExplicitWidth = 625
   ExplicitHeight = 145
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 65
-    Width = 609
     ExplicitTop = 65
-    ExplicitWidth = 609
+    inherited btnBuscar: TButton
+      OnClick = btnBuscarClick
+    end
   end
   object pnTela: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 603
+    Width = 703
     Height = 59
     Align = alClient
     BevelOuter = bvNone
@@ -42,14 +41,14 @@ inherited ViewCidadesCad: TViewCidadesCad
       Caption = 'Cidade'
     end
     object lbIBGE: TLabel
-      Left = 480
+      Left = 580
       Top = 8
       Width = 23
       Height = 13
       Caption = 'IBGE'
     end
     object lbUF: TLabel
-      Left = 418
+      Left = 518
       Top = 8
       Width = 13
       Height = 13
@@ -75,48 +74,20 @@ inherited ViewCidadesCad: TViewCidadesCad
     object edtCidade: TEdit
       Left = 74
       Top = 22
-      Width = 343
+      Width = 443
       Height = 21
       TabOrder = 1
     end
     object cBoxUF: TComboBox
-      Left = 418
+      Left = 518
       Top = 22
       Width = 61
       Height = 21
       Style = csDropDownList
       TabOrder = 2
-      Items.Strings = (
-        'AC'
-        'AL'
-        'AM'
-        'AP'
-        'BA'
-        'CE'
-        'DF'
-        'ES'
-        'GO'
-        'MA'
-        'MG'
-        'MS'
-        'MT'
-        'PA'
-        'PB'
-        'PE'
-        'PI'
-        'PR'
-        'RJ'
-        'RN'
-        'RO'
-        'RR'
-        'RS'
-        'SC'
-        'SE'
-        'SP'
-        'TO')
     end
     object edtIBGE: TEdit
-      Left = 480
+      Left = 580
       Top = 22
       Width = 121
       Height = 21

@@ -1,12 +1,16 @@
 inherited ViewBaseCadastros: TViewBaseCadastros
   Caption = 'Tela de cadastro de '
+  ClientHeight = 369
+  ClientWidth = 709
   OnClose = FormClose
+  ExplicitWidth = 725
+  ExplicitHeight = 408
   PixelsPerInch = 96
   TextHeight = 13
   object pnButtons: TPanel
     Left = 0
-    Top = 620
-    Width = 984
+    Top = 328
+    Width = 709
     Height = 41
     Align = alBottom
     Padding.Left = 3
@@ -22,6 +26,7 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Align = alLeft
       Caption = 'Novo'
       TabOrder = 0
+      OnClick = btnNovoClick
     end
     object btnGravar: TButton
       Left = 104
@@ -40,9 +45,10 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Align = alLeft
       Caption = 'Cancelar'
       TabOrder = 2
+      OnClick = btnCancelarClick
     end
     object btnExcluir: TButton
-      Left = 304
+      Left = 404
       Top = 4
       Width = 100
       Height = 33
@@ -51,7 +57,7 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       TabOrder = 3
     end
     object btnBuscar: TButton
-      Left = 404
+      Left = 504
       Top = 4
       Width = 100
       Height = 33
@@ -60,7 +66,7 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       TabOrder = 4
     end
     object btnFechar: TButton
-      Left = 504
+      Left = 604
       Top = 4
       Width = 100
       Height = 33
@@ -68,6 +74,15 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Caption = 'Fechar'
       TabOrder = 5
       OnClick = btnFecharClick
+    end
+    object btnAlterar: TButton
+      Left = 304
+      Top = 4
+      Width = 100
+      Height = 33
+      Align = alLeft
+      Caption = 'Alterar'
+      TabOrder = 6
     end
   end
 end

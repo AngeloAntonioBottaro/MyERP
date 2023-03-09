@@ -20,25 +20,26 @@ type
     FParent: IModelClientesFactory<TModelClientesEntitie>;
 
     FBairro: string;
-    FCelular: Integer;
+    FCelular: string;
     FCep: Integer;
+    FCidade: Integer;
     FCnpj: string;
     FCpf: string;
     FDataCadastro: TDateTime;
     FDataNascimento: TDateTime;
     FEmail: string;
     FEndereco: string;
-    FFax: Integer;
+    FFax: string;
     FId: Integer;
-    FIE: Integer;
+    FIE: string;
     FNomeFantasia: string;
     FNumero: string;
     FRazaoSocial: string;
-    FRG: Integer;
+    FRG: string;
     FRgOrgaoExpedidor: string;
     FStatusCliente: string;
-    FTelefone: Integer;
-    FTelefone2: Integer;
+    FTelefone: string;
+    FTelefone2: string;
     FTipoJuridico: string;
   public
     constructor Create(AParent: IModelClientesFactory<TModelClientesEntitie>);
@@ -48,11 +49,13 @@ type
     function Bairro(AValue: string): TModelClientesEntitie; overload;
     function Bairro: string; overload;
     function Celular(AValue: string): TModelClientesEntitie; overload;
-    function Celular(AValue: Integer): TModelClientesEntitie; overload;
-    function Celular: Integer; overload;
+    function Celular: string; overload;
     function Cep(AValue: string): TModelClientesEntitie; overload;
     function Cep(AValue: Integer): TModelClientesEntitie; overload;
-    function Cep: Integer; overload;
+    function Cep: Integer; overload;   
+    function Cidade(AValue: string): TModelClientesEntitie; overload;
+    function Cidade(AValue: Integer): TModelClientesEntitie; overload;
+    function Cidade: Integer; overload;
     function Cnpj(AValue: string): TModelClientesEntitie; overload;
     function Cnpj: string; overload;
     function Cpf(AValue: string): TModelClientesEntitie; overload;
@@ -68,14 +71,12 @@ type
     function Endereco(AValue: string): TModelClientesEntitie; overload;
     function Endereco: string; overload;
     function Fax(AValue: string): TModelClientesEntitie; overload;
-    function Fax(AValue: Integer): TModelClientesEntitie; overload;
-    function Fax: Integer; overload;
+    function Fax: string; overload;
     function Id(AValue: string): TModelClientesEntitie; overload;
     function Id(AValue: Integer): TModelClientesEntitie; overload;
     function Id: Integer; overload;
     function IE(AValue: string): TModelClientesEntitie; overload;
-    function IE(AValue: Integer): TModelClientesEntitie; overload;
-    function IE: Integer; overload;
+    function IE: string; overload;
     function NomeFantasia(AValue: string): TModelClientesEntitie; overload;
     function NomeFantasia: string; overload;
     function Numero(AValue: string): TModelClientesEntitie; overload;
@@ -83,18 +84,15 @@ type
     function RazaoSocial(AValue: string): TModelClientesEntitie; overload;
     function RazaoSocial: string; overload;
     function RG(AValue: string): TModelClientesEntitie; overload;
-    function RG(AValue: Integer): TModelClientesEntitie; overload;
-    function RG: Integer; overload;
+    function RG: string; overload;
     function RgOrgaoExpedidor(AValue: string): TModelClientesEntitie; overload;
     function RgOrgaoExpedidor: string; overload;
     function StatusCliente(AValue: string): TModelClientesEntitie; overload;
     function StatusCliente: string; overload;
     function Telefone(AValue: string): TModelClientesEntitie; overload;
-    function Telefone(AValue: Integer): TModelClientesEntitie; overload;
-    function Telefone: Integer; overload;
+    function Telefone: string; overload;
     function Telefone2(AValue: string): TModelClientesEntitie; overload;
-    function Telefone2(AValue: Integer): TModelClientesEntitie; overload;
-    function Telefone2: Integer; overload;
+    function Telefone2: string; overload;
     function TipoJuridico(AValue: string): TModelClientesEntitie; overload;
     function TipoJuridico: string; overload;
   end;
@@ -131,17 +129,11 @@ end;
 
 function TModelClientesEntitie.Celular(AValue: string): TModelClientesEntitie;
 begin
-   Result := Self;
-   Self.Celular(StrToInt(AValue.Trim));
-end;
-
-function TModelClientesEntitie.Celular(AValue: Integer): TModelClientesEntitie;
-begin
    Result   := Self;
-   FCelular := AValue;
+   FCelular := AValue.Trim;
 end;
 
-function TModelClientesEntitie.Celular: Integer;
+function TModelClientesEntitie.Celular: string;
 begin
    Result := FCelular;
 end;
@@ -161,6 +153,23 @@ end;
 function TModelClientesEntitie.Cep: Integer;
 begin
    Result := FCep;
+end;
+
+function TModelClientesEntitie.Cidade(AValue: string): TModelClientesEntitie;
+begin
+   Result := Self;
+   Self.Cidade(StrToInt(AValue.Trim));
+end;
+
+function TModelClientesEntitie.Cidade(AValue: Integer): TModelClientesEntitie;
+begin
+   Result  := Self;
+   FCidade := AValue;
+end;
+
+function TModelClientesEntitie.Cidade: Integer;
+begin
+   Result := FCidade;
 end;
 
 function TModelClientesEntitie.Cnpj(AValue: string): TModelClientesEntitie;
@@ -244,16 +253,10 @@ end;
 function TModelClientesEntitie.Fax(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.Fax(StrToInt(AValue.Trim));
+   FFax   := AValue.Trim;
 end;
 
-function TModelClientesEntitie.Fax(AValue: Integer): TModelClientesEntitie;
-begin
-   Result := Self;
-   FFax   := AValue;
-end;
-
-function TModelClientesEntitie.Fax: Integer;
+function TModelClientesEntitie.Fax: string;
 begin
    Result := FFax;
 end;
@@ -278,16 +281,10 @@ end;
 function TModelClientesEntitie.IE(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.IE(StrToInt(AValue.Trim));
+   FIE    := AValue.Trim;
 end;
 
-function TModelClientesEntitie.IE(AValue: Integer): TModelClientesEntitie;
-begin
-   Result := Self;
-   FIE    := AValue;
-end;
-
-function TModelClientesEntitie.IE: Integer;
+function TModelClientesEntitie.IE: string;
 begin
    Result := FIE;
 end;
@@ -328,16 +325,10 @@ end;
 function TModelClientesEntitie.RG(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.RG(StrToInt(AValue.Trim));
+   FRG    := AValue.Trim;
 end;
 
-function TModelClientesEntitie.RG(AValue: Integer): TModelClientesEntitie;
-begin
-   Result := Self;
-   FRG    := AValue;
-end;
-
-function TModelClientesEntitie.RG: Integer;
+function TModelClientesEntitie.RG: string;
 begin
    Result := FRG;
 end;
@@ -366,34 +357,22 @@ end;
 
 function TModelClientesEntitie.Telefone(AValue: string): TModelClientesEntitie;
 begin
-   Result := Self;
-   Self.Telefone(StrToInt(AValue.Trim));
-end;
-
-function TModelClientesEntitie.Telefone(AValue: Integer): TModelClientesEntitie;
-begin
    Result    := Self;
-   FTelefone := AValue;
+   FTelefone := AValue.Trim;
 end;
 
-function TModelClientesEntitie.Telefone: Integer;
+function TModelClientesEntitie.Telefone: string;
 begin
    Result := FTelefone;
 end;
 
 function TModelClientesEntitie.Telefone2(AValue: string): TModelClientesEntitie;
 begin
-   Result := Self;
-   Self.Telefone2(StrToInt(AValue.Trim));
-end;
-
-function TModelClientesEntitie.Telefone2(AValue: Integer): TModelClientesEntitie;
-begin
    Result     := Self;
-   FTelefone2 := AValue;
+   FTelefone2 := AValue.Trim;
 end;
 
-function TModelClientesEntitie.Telefone2: Integer;
+function TModelClientesEntitie.Telefone2: string;
 begin
    Result := FTelefone2;
 end;

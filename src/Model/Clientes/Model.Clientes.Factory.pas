@@ -28,6 +28,18 @@ begin
    Result := Self.Create;
 end;
 
+constructor TModelClientesFactory.Create;
+begin
+   FEntitie := TModelClientesEntitie.Create(Self);
+end;
+
+destructor TModelClientesFactory.Destroy;
+begin
+   if(Assigned(FEntitie))then
+     FEntitie.Free;
+   inherited;
+end;
+
 function TModelClientesFactory.ValidarCPF: Boolean;
 begin
    Result := True;
@@ -39,18 +51,6 @@ begin
      Exit;
 
    Result := False;
-end;
-
-constructor TModelClientesFactory.Create;
-begin
-   FEntitie := TModelClientesEntitie.Create(Self);
-end;
-
-destructor TModelClientesFactory.Destroy;
-begin
-   if(Assigned(FEntitie))then
-     FEntitie.Free;
-   inherited;
 end;
 
 function TModelClientesFactory.Entitie: TModelClientesEntitie;

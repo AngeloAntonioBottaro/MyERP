@@ -1,7 +1,5 @@
 program MyERP;
 
-
-
 {$R *.dres}
 
 uses
@@ -22,13 +20,6 @@ uses
   MySearchComponents.Search in '..\MySearchScreen\Src\MySearchComponents.Search.pas',
   MySearchComponents.Utils in '..\MySearchScreen\Src\MySearchComponents.Utils.pas',
   MySearchComponents.View in '..\MySearchScreen\Src\MySearchComponents.View.pas' {MySearchComponentsView},
-  View.Cidades.Busca in 'src\View\Cidades\View.Cidades.Busca.pas' {ViewCidadesBusca},
-  View.Clientes.Busca in 'src\View\Clientes\View.Clientes.Busca.pas' {ViewClientesBusca},
-  View.Produtos.Busca in 'src\View\Produtos\View.Produtos.Busca.pas' {ViewProdutosBusca},
-  View.Produtos.Grupos.Busca in 'src\View\Produtos\Grupos\View.Produtos.Grupos.Busca.pas' {ViewProdutosGruposBusca},
-  View.Produtos.SubGrupos.Busca in 'src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Busca.pas' {ViewProdutosSubGruposBusca},
-  View.Funcionarios.Busca in 'src\View\Funcionarios\View.Funcionarios.Busca.pas' {ViewFuncionariosBusca},
-  View.Funcionarios.Funcoes.Busca in 'src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Busca.pas' {ViewFuncionariosFuncoesBusca},
   Model.Behavior.Exceptions in 'src\Model\Behavior\Model.Behavior.Exceptions.pas',
   Model.Behavior in 'src\Model\Behavior\Model.Behavior.pas',
   Model.Sistema.Login in 'src\Model\Sistema\Model.Sistema.Login.pas',
@@ -44,7 +35,6 @@ uses
   Model.Main.Icones.Itens.Funcionarios in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Funcionarios.pas',
   Model.Main.Icones.Itens.Produtos in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Produtos.pas',
   Model.Main.Icones.Itens.Cidades in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Cidades.pas',
-  View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca},
   Model.Main.Icones.Consts in 'src\Model\Main\Icones\Model.Main.Icones.Consts.pas',
   View.Base.Cadastros in 'src\View\Sistema\View.Base.Cadastros.pas' {ViewBaseCadastros},
   View.Cidades.Cad in 'src\View\Cidades\View.Cidades.Cad.pas' {ViewCidadesCad},
@@ -74,10 +64,18 @@ uses
   MyMessage.View in '..\MyMessage\src\MyMessage.View.pas' {MyMessageView},
   View.Sistema.IconesConf in 'src\View\Sistema\View.Sistema.IconesConf.pas' {ViewSistemaIconesConf},
   Utils.MyFormLibrary in '..\MyUtilsLibrary\Utils.MyFormLibrary.pas',
-  Utils.GlobalConsts in 'src\Utils\Utils.GlobalConsts.pas',
   Model.Clientes.Factory in 'src\Model\Clientes\Model.Clientes.Factory.pas',
   Model.Clientes.Interfaces in 'src\Model\Clientes\Model.Clientes.Interfaces.pas',
-  Model.Clientes.Entitie in 'src\Model\Clientes\Model.Clientes.Entitie.pas';
+  Model.Clientes.Entitie in 'src\Model\Clientes\Model.Clientes.Entitie.pas',
+  View.Base.Busca in 'src\View\Sistema\View.Base.Busca.pas' {ViewBaseBusca},
+  View.Cidades.Busca in 'src\View\Cidades\View.Cidades.Busca.pas' {ViewCidadesBusca},
+  View.Clientes.Busca in 'src\View\Clientes\View.Clientes.Busca.pas' {ViewClientesBusca},
+  View.Fornecedores.Busca in 'src\View\Fornecedores\View.Fornecedores.Busca.pas' {ViewFornecedoresBusca},
+  View.Funcionarios.Busca in 'src\View\Funcionarios\View.Funcionarios.Busca.pas' {ViewFuncionariosBusca},
+  View.Funcionarios.Funcoes.Busca in 'src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Busca.pas' {ViewFuncionarioFuncoesBusca},
+  View.Produtos.Busca in 'src\View\Produtos\View.Produtos.Busca.pas' {ViewProdutosBusca},
+  View.Produtos.Grupos.Busca in 'src\View\Produtos\Grupos\View.Produtos.Grupos.Busca.pas' {ViewProdutosGruposBusca},
+  View.Produtos.SubGrupos.Busca in 'src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Busca.pas' {ViewProdutosSubGruposBusca};
 
 {$R *.res}
 

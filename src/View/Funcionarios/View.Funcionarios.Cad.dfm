@@ -1,26 +1,42 @@
 inherited ViewFuncionariosCad: TViewFuncionariosCad
   Caption = 'Cadastro de funcion'#225'rios'
   ClientHeight = 300
-  ClientWidth = 609
-  ExplicitWidth = 625
   ExplicitHeight = 339
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 259
-    Width = 609
     ExplicitTop = 259
-    ExplicitWidth = 609
+    inherited btnGravar: TButton
+      OnClick = btnGravarClick
+    end
+    inherited btnBuscar: TButton
+      OnClick = btnBuscarClick
+    end
   end
   object pnTela: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 603
+    Width = 703
     Height = 253
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    object lbIdFuncao: TLabel
+      Left = 8
+      Top = 213
+      Width = 33
+      Height = 13
+      Caption = 'C'#243'digo'
+    end
+    object lbFuncao: TLabel
+      Left = 74
+      Top = 213
+      Width = 35
+      Height = 13
+      Caption = 'Fun'#231#227'o'
+    end
     object lbId: TLabel
       Left = 8
       Top = 8
@@ -42,7 +58,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'Raz'#227'o social'
     end
     object lbNomeFantasia: TLabel
-      Left = 362
+      Left = 434
       Top = 8
       Width = 69
       Height = 13
@@ -77,35 +93,35 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'Bairro'
     end
     object lbCEP: TLabel
-      Left = 8
-      Top = 90
+      Left = 602
+      Top = 49
       Width = 19
       Height = 13
       Caption = 'CEP'
     end
     object lbIdCidade: TLabel
-      Left = 74
+      Left = 8
       Top = 90
       Width = 33
       Height = 13
       Caption = 'C'#243'digo'
     end
-    object Label1: TLabel
-      Left = 330
+    object lbUF: TLabel
+      Left = 422
       Top = 90
       Width = 13
       Height = 13
       Caption = 'UF'
     end
     object lbCPF: TLabel
-      Left = 343
+      Left = 360
       Top = 172
       Width = 19
       Height = 13
       Caption = 'CPF'
     end
     object lbRG: TLabel
-      Left = 441
+      Left = 481
       Top = 172
       Width = 14
       Height = 13
@@ -119,7 +135,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'Tipo jur'#237'dico'
     end
     object lbNomeCidade: TLabel
-      Left = 140
+      Left = 74
       Top = 90
       Width = 33
       Height = 13
@@ -133,7 +149,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'CNPJ'
     end
     object lbIE: TLabel
-      Left = 232
+      Left = 239
       Top = 172
       Width = 87
       Height = 13
@@ -147,18 +163,18 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'N'#250'mero'
     end
     object lbDataNascimento: TLabel
-      Left = 387
+      Left = 479
       Top = 90
       Width = 80
       Height = 13
       Caption = 'Data nascimento'
     end
     object lbIdade: TLabel
-      Left = 489
+      Left = 589
       Top = 90
-      Width = 80
+      Width = 28
       Height = 13
-      Caption = 'Data nascimento'
+      Caption = 'Idade'
     end
     object lbCelular: TLabel
       Left = 204
@@ -181,26 +197,36 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Height = 13
       Caption = 'E-mail'
     end
-    object Label2: TLabel
-      Left = 529
+    object lbRgOrgaoExpedidor: TLabel
+      Left = 602
       Top = 172
-      Width = 69
+      Width = 81
       Height = 13
-      Caption = 'Org'#227'o emissor'
+      Caption = 'Org'#227'o expedidor'
     end
-    object lbIdFuncao: TLabel
+    object lbSalario: TLabel
+      Left = 342
+      Top = 212
+      Width = 32
+      Height = 13
+      Caption = 'Sal'#225'rio'
+    end
+    object edtIdFuncao: TEdit
       Left = 8
-      Top = 213
-      Width = 33
-      Height = 13
-      Caption = 'C'#243'digo'
+      Top = 227
+      Width = 65
+      Height = 21
+      TabOrder = 0
     end
-    object lbFuncao: TLabel
+    object edtFuncao: TEdit
       Left = 74
-      Top = 213
-      Width = 35
-      Height = 13
-      Caption = 'Fun'#231#227'o'
+      Top = 227
+      Width = 267
+      Height = 21
+      TabStop = False
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 1
     end
     object cBoxTipoJuridico: TComboBox
       Left = 8
@@ -208,7 +234,8 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 109
       Height = 21
       Style = csDropDownList
-      TabOrder = 17
+      TabOrder = 2
+      OnChange = ConfComponents
       Items.Strings = (
         'Pessoa f'#237'sica'
         'Pessoa Jur'#237'dica')
@@ -228,182 +255,173 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Font.Style = [fsBold]
       ParentFont = False
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 3
     end
     object edtRazaoSocial: TEdit
       Left = 74
       Top = 22
-      Width = 287
+      Width = 359
       Height = 21
-      TabOrder = 1
+      TabOrder = 4
     end
     object edtNomeFantasia: TEdit
-      Left = 362
+      Left = 434
       Top = 22
-      Width = 239
+      Width = 267
       Height = 21
-      TabOrder = 2
+      TabOrder = 5
     end
     object edtEndereco: TEdit
       Left = 8
       Top = 63
       Width = 295
       Height = 21
-      TabOrder = 3
+      TabOrder = 6
     end
     object edtBairro: TEdit
       Left = 387
       Top = 63
       Width = 214
       Height = 21
-      TabOrder = 5
+      TabOrder = 7
     end
     object edtNumero: TEdit
       Left = 304
       Top = 63
       Width = 82
       Height = 21
-      TabOrder = 4
-    end
-    object edtCep: TEdit
-      Left = 8
-      Top = 104
-      Width = 65
-      Height = 21
-      TabOrder = 6
-    end
-    object edtIdCidade: TEdit
-      Left = 74
-      Top = 104
-      Width = 65
-      Height = 21
-      TabOrder = 7
-    end
-    object edtCidade: TEdit
-      Left = 140
-      Top = 104
-      Width = 189
-      Height = 21
-      TabStop = False
-      Color = clBtnFace
-      ReadOnly = True
       TabOrder = 8
     end
-    object edtUF: TEdit
-      Left = 330
-      Top = 104
-      Width = 56
+    object edtCep: TEdit
+      Left = 602
+      Top = 63
+      Width = 99
       Height = 21
-      TabStop = False
-      Color = clBtnFace
-      ReadOnly = True
       TabOrder = 9
     end
-    object edtTelefone: TEdit
+    object edtIdCidade: TEdit
       Left = 8
-      Top = 145
-      Width = 97
-      Height = 21
-      TabOrder = 12
-    end
-    object edtTelefone2: TEdit
-      Left = 106
-      Top = 145
-      Width = 97
-      Height = 21
-      TabOrder = 13
-    end
-    object dtpDataNascimento: TDateTimePicker
-      Left = 387
       Top = 104
-      Width = 101
+      Width = 65
       Height = 21
-      Date = 44993.000000000000000000
-      Time = 0.445778391200292400
+      NumbersOnly = True
       TabOrder = 10
     end
-    object edtIdade: TEdit
-      Left = 489
+    object edtCidade: TEdit
+      Left = 74
       Top = 104
-      Width = 112
+      Width = 347
       Height = 21
       TabStop = False
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 11
     end
+    object edtUF: TEdit
+      Left = 422
+      Top = 104
+      Width = 56
+      Height = 21
+      TabStop = False
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 12
+    end
+    object edtTelefone: TEdit
+      Left = 8
+      Top = 145
+      Width = 97
+      Height = 21
+      TabOrder = 13
+    end
+    object edtTelefone2: TEdit
+      Left = 106
+      Top = 145
+      Width = 97
+      Height = 21
+      TabOrder = 14
+    end
+    object dtpDataNascimento: TDateTimePicker
+      Left = 479
+      Top = 104
+      Width = 109
+      Height = 21
+      Date = 44993.000000000000000000
+      Time = 0.445778391200292400
+      TabOrder = 15
+    end
+    object edtIdade: TEdit
+      Left = 589
+      Top = 104
+      Width = 112
+      Height = 21
+      TabStop = False
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 16
+    end
     object edtCelular: TEdit
       Left = 204
       Top = 145
       Width = 97
       Height = 21
-      TabOrder = 14
+      TabOrder = 17
     end
     object edtFax: TEdit
       Left = 302
       Top = 145
       Width = 97
       Height = 21
-      TabOrder = 15
+      TabOrder = 18
     end
     object edtEmail: TEdit
       Left = 400
       Top = 145
-      Width = 201
+      Width = 301
       Height = 21
-      TabOrder = 16
+      TabOrder = 19
     end
     object edtCPF: TEdit
-      Left = 343
+      Left = 360
       Top = 186
-      Width = 97
+      Width = 120
       Height = 21
       TabOrder = 20
     end
     object edtRG: TEdit
-      Left = 441
+      Left = 481
       Top = 186
-      Width = 87
+      Width = 120
       Height = 21
       TabOrder = 21
     end
     object edtCNPJ: TEdit
       Left = 118
       Top = 186
-      Width = 113
-      Height = 21
-      TabOrder = 18
-    end
-    object edtIE: TEdit
-      Left = 232
-      Top = 186
-      Width = 110
-      Height = 21
-      TabOrder = 19
-    end
-    object Edit1: TEdit
-      Left = 529
-      Top = 186
-      Width = 72
+      Width = 120
       Height = 21
       TabOrder = 22
     end
-    object edtIdFuncao: TEdit
-      Left = 8
-      Top = 227
-      Width = 65
+    object edtIE: TEdit
+      Left = 239
+      Top = 186
+      Width = 120
       Height = 21
       TabOrder = 23
     end
-    object edtFuncao: TEdit
-      Left = 74
-      Top = 227
-      Width = 267
+    object edtRGOrgaoExpedidor: TEdit
+      Left = 602
+      Top = 186
+      Width = 99
       Height = 21
-      TabStop = False
-      Color = clBtnFace
-      ReadOnly = True
       TabOrder = 24
+    end
+    object edtSalario: TEdit
+      Left = 342
+      Top = 227
+      Width = 138
+      Height = 21
+      TabOrder = 25
     end
   end
 end

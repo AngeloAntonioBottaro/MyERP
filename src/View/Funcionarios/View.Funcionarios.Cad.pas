@@ -22,6 +22,10 @@ uses
 type
   TViewFuncionariosCad = class(TViewBaseCadastros)
     pnTela: TPanel;
+    lbIdFuncao: TLabel;
+    edtIdFuncao: TEdit;
+    edtFuncao: TEdit;
+    lbFuncao: TLabel;
     lbId: TLabel;
     lbRazaoSocial: TLabel;
     lbNomeFantasia: TLabel;
@@ -31,7 +35,7 @@ type
     lbBairro: TLabel;
     lbCEP: TLabel;
     lbIdCidade: TLabel;
-    Label1: TLabel;
+    lbUF: TLabel;
     lbCPF: TLabel;
     lbRG: TLabel;
     lbTipoJuridico: TLabel;
@@ -44,7 +48,7 @@ type
     lbCelular: TLabel;
     lbFax: TLabel;
     lbEmail: TLabel;
-    Label2: TLabel;
+    lbRgOrgaoExpedidor: TLabel;
     cBoxTipoJuridico: TComboBox;
     edtId: TEdit;
     edtRazaoSocial: TEdit;
@@ -67,14 +71,16 @@ type
     edtRG: TEdit;
     edtCNPJ: TEdit;
     edtIE: TEdit;
-    Edit1: TEdit;
-    lbIdFuncao: TLabel;
-    edtIdFuncao: TEdit;
-    edtFuncao: TEdit;
-    lbFuncao: TLabel;
+    edtRGOrgaoExpedidor: TEdit;
+    edtSalario: TEdit;
+    lbSalario: TLabel;
+    procedure ConfComponents(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
   private
     procedure InitialConfiguration;
+    procedure FillFields;
   public
   end;
 
@@ -86,7 +92,88 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.GlobalConsts;
+  Utils.MyConsts,
+  View.Funcionarios.Busca;
+
+procedure TViewFuncionariosCad.btnBuscarClick(Sender: TObject);
+begin
+   inherited;
+   if(ViewFuncionariosBusca = nil)then Application.CreateForm(TViewFuncionariosBusca, ViewFuncionariosBusca);
+   try
+     ViewFuncionariosBusca.btnCadastro.Enabled := False;
+     ViewFuncionariosBusca.ShowModal;
+   finally
+     FreeAndNil(ViewFuncionariosBusca);
+   end;
+   Self.FillFields;
+end;
+
+procedure TViewFuncionariosCad.btnGravarClick(Sender: TObject);
+begin
+   inherited;
+   {FFuncionario
+    .Entitie
+     .Id(edtId.Text)
+     .RazaoSocial(edtRazaoSocial.Text)
+     .NomeFantasia(edtNomeFantasia.Text)
+     .Endereco(edtEndereco.Text)
+     .Numero(edtNumero.Text)
+     .Bairro(edtBairro.Text)
+     .Cep(edtCep.Text)
+     .Cidade(edtIdCidade.Text)
+     .DataNascimento(dtpDataNascimento.Date)
+     .Telefone(edtTelefone.Text)
+     .Telefone2(edtTelefone2.Text)
+     .Celular(edtCelular.Text)
+     .Fax(edtFax.Text)
+     .Email(edtEmail.Text)
+     .TipoJuridico(cBoxTipoJuridico.Text)
+     .Cnpj(edtCNPJ.Text)
+     .IE(edtIE.Text)
+     .Cpf(edtCPF.Text)
+     .RG(edtRG.Text)
+     .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
+     .Funcao(edtIdFuncao.Text)
+     .Salario(edtSalario.Text)
+     .End_Entitie;}
+end;
+
+procedure TViewFuncionariosCad.ConfComponents(Sender: TObject);
+begin
+   //
+end;
+
+procedure TViewFuncionariosCad.FillFields;
+begin
+   {if(not Assigned(FFuncionario))then
+     Exit;
+
+   edtId.Text               := FFuncionario.Entitie.Id.ToString;
+   edtRazaoSocial.Text      := FFuncionario.Entitie.RazaoSocial;
+   edtNomeFantasia.Text     := FFuncionario.Entitie.NomeFantasia;
+   edtEndereco.Text         := FFuncionario.Entitie.Endereco;
+   edtNumero.Text           := FFuncionario.Entitie.Numero;
+   edtBairro.Text           := FFuncionario.Entitie.Bairro;
+   edtCep.Text              := FFuncionario.Entitie.Cep.ToString;
+   edtIdCidade.Text         := FFuncionario.Entitie.Cidade.ToString;
+   dtpDataNascimento.Date   := FFuncionario.Entitie.DataNascimento;
+   edtTelefone.Text         := FFuncionario.Entitie.Telefone;
+   edtTelefone2.Text        := FFuncionario.Entitie.Telefone2;
+   edtCelular.Text          := FFuncionario.Entitie.Celular;
+   edtFax.Text              := FFuncionario.Entitie.Fax;
+   edtEmail.Text            := FFuncionario.Entitie.Email;
+   edtCNPJ.Text             := FFuncionario.Entitie.Cnpj;
+   edtIE.Text               := FFuncionario.Entitie.IE;
+   edtCPF.Text              := FFuncionario.Entitie.Cpf;
+   edtRG.Text               := FFuncionario.Entitie.RG;
+   edtRGOrgaoExpedidor.Text := FFuncionario.Entitie.RgOrgaoExpedidor;
+   edtIdFuncao.Text         := FFuncionario.Entitie.Funcao.ToString;
+   edtSalario.Text          := FFuncionario.Entitie.Salario.ToString;
+
+   cBoxTipoJuridico.ItemIndex := 0;
+   if(FFuncionario.Entitie.TipoJuridico.Equals(PESSOA_JURIDICA))then
+     cBoxTipoJuridico.ItemIndex := 1;}
+end;
 
 procedure TViewFuncionariosCad.FormCreate(Sender: TObject);
 begin
@@ -100,6 +187,12 @@ begin
    edtIdCidade.Hint     := HINT_ATALHO_CONSULTA;
    edtIdFuncao.ShowHint := True;
    edtIdFuncao.Hint     := HINT_ATALHO_CONSULTA;
+
+   cBoxTipoJuridico.Items.Clear;
+   //cBoxTipoJuridico.Items.Add(PESSOA_FISICA);
+   //cBoxTipoJuridico.Items.Add(PESSOA_JURIDICA);
+
+   Self.ConfComponents(nil);
 end;
 
 end.

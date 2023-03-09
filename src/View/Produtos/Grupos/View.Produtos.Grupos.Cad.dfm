@@ -1,22 +1,21 @@
 inherited ViewProdutosGruposCad: TViewProdutosGruposCad
   Caption = 'Cadastro de grupos de produtos'
   ClientHeight = 106
-  ClientWidth = 609
-  ExplicitWidth = 625
   ExplicitHeight = 145
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 65
-    Width = 609
     ExplicitTop = 65
-    ExplicitWidth = 609
+    inherited btnBuscar: TButton
+      OnClick = btnBuscarClick
+    end
   end
   object pnTela: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 603
+    Width = 703
     Height = 59
     Align = alClient
     BevelOuter = bvNone
@@ -61,7 +60,7 @@ inherited ViewProdutosGruposCad: TViewProdutosGruposCad
     object edtGrupo: TEdit
       Left = 74
       Top = 22
-      Width = 527
+      Width = 627
       Height = 21
       TabOrder = 1
     end
