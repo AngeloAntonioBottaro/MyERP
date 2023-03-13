@@ -7,12 +7,6 @@ uses
   System.StrUtils,
   Model.Clientes.Interfaces;
 
-const
-  TABELA          = 'Clientes';
-  PESSOA_FISICA   = 'Pessoa Física';
-  PESSOA_JURIDICA = 'Pessoa Jurídica';
-  STATUS_PADRAO   = 'Ativo';
-
 type
   TModelClientesEntitie = class
   private
@@ -99,9 +93,12 @@ type
 
 implementation
 
+uses
+  Utils.GlobalConsts;
+
 constructor TModelClientesEntitie.Create(AParent: IModelClientesFactory<TModelClientesEntitie>);
 begin
-   FParent := AParent;
+   FParent        := AParent;
    FStatusCliente := STATUS_PADRAO;
    FTipoJuridico  := PESSOA_FISICA;
 end;

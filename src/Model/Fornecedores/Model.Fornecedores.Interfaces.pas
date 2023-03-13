@@ -1,10 +1,10 @@
-unit Model.Clientes.Interfaces;
+unit Model.Fornecedores.Interfaces;
 
 interface
 
 type
-  IModelClientesFactory<T> = interface
-   ['{3B0CCCF4-95AA-45E7-9A56-AD293200C9AC}']
+  IModelFornecedoresFactory<T> = interface
+   ['{84FA9028-8BE8-406F-9952-DE90F0FCDC93}']
    function Entitie: T;
    function ValidarCPF: Boolean;
    function ValidarCNPJ: Boolean;

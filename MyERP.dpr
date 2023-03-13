@@ -75,7 +75,28 @@ uses
   View.Funcionarios.Funcoes.Busca in 'src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Busca.pas' {ViewFuncionarioFuncoesBusca},
   View.Produtos.Busca in 'src\View\Produtos\View.Produtos.Busca.pas' {ViewProdutosBusca},
   View.Produtos.Grupos.Busca in 'src\View\Produtos\Grupos\View.Produtos.Grupos.Busca.pas' {ViewProdutosGruposBusca},
-  View.Produtos.SubGrupos.Busca in 'src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Busca.pas' {ViewProdutosSubGruposBusca};
+  View.Produtos.SubGrupos.Busca in 'src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Busca.pas' {ViewProdutosSubGruposBusca},
+  Model.Fornecedores.Interfaces in 'src\Model\Fornecedores\Model.Fornecedores.Interfaces.pas',
+  Model.Funcionarios.Interfaces in 'src\Model\Funcionarios\Model.Funcionarios.Interfaces.pas',
+  Model.Fornecedores.Entitie in 'src\Model\Fornecedores\Model.Fornecedores.Entitie.pas',
+  Utils.GlobalConsts in 'src\Utils\Utils.GlobalConsts.pas',
+  Model.Fornecedores.Factory in 'src\Model\Fornecedores\Model.Fornecedores.Factory.pas',
+  Model.Funcionarios.Entitie in 'src\Model\Funcionarios\Model.Funcionarios.Entitie.pas',
+  Model.Funcionarios.Factory in 'src\Model\Funcionarios\Model.Funcionarios.Factory.pas',
+  Model.Funcionarios.Funcoes.Interfaces in 'src\Model\Funcionarios\Funcoes\Model.Funcionarios.Funcoes.Interfaces.pas',
+  Model.Funcionarios.Funcoes.Entitie in 'src\Model\Funcionarios\Funcoes\Model.Funcionarios.Funcoes.Entitie.pas',
+  Model.Funcionarios.Funcoes.Factory in 'src\Model\Funcionarios\Funcoes\Model.Funcionarios.Funcoes.Factory.pas',
+  Model.Cidades.Interfaces in 'src\Model\Cidades\Model.Cidades.Interfaces.pas',
+  Model.Cidades.Entitie in 'src\Model\Cidades\Model.Cidades.Entitie.pas',
+  Model.Cidades.Factory in 'src\Model\Cidades\Model.Cidades.Factory.pas',
+  Model.Produtos.Grupos.Interfaces in 'src\Model\Produtos\Grupos\Model.Produtos.Grupos.Interfaces.pas',
+  Model.Produtos.Grupos.Entitie in 'src\Model\Produtos\Grupos\Model.Produtos.Grupos.Entitie.pas',
+  Model.Produtos.Grupos.Factory in 'src\Model\Produtos\Grupos\Model.Produtos.Grupos.Factory.pas',
+  Model.Produtos.SubGrupos.Interfaces in 'src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Interfaces.pas',
+  Model.Produtos.SubGrupos.Entitie in 'src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Entitie.pas',
+  Model.Produtos.SubGrupos.Factory in 'src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Factory.pas',
+  Model.Sistema.DataBaseConnectionFile in 'src\Model\Sistema\Model.Sistema.DataBaseConnectionFile.pas',
+  Utils.MyIniLibrary in '..\MyUtilsLibrary\Utils.MyIniLibrary.pas';
 
 {$R *.res}
 

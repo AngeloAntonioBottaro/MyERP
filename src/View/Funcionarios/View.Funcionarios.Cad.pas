@@ -17,7 +17,9 @@ uses
   Vcl.ExtCtrls,
   Vcl.Mask,
   Vcl.DBCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls,
+  Model.Funcionarios.Interfaces,
+  Model.Funcionarios.Entitie;
 
 type
   TViewFuncionariosCad = class(TViewBaseCadastros)
@@ -74,13 +76,22 @@ type
     edtRGOrgaoExpedidor: TEdit;
     edtSalario: TEdit;
     lbSalario: TLabel;
+    lbLogin: TLabel;
+    lbSenha: TLabel;
+    edtLogin: TEdit;
+    edtSenha: TEdit;
     procedure ConfComponents(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure edtCPFExit(Sender: TObject);
+    procedure edtCNPJExit(Sender: TObject);
   private
+    FFuncionario: IModelFuncionariosFactory<TModelFuncionariosEntitie>;
     procedure InitialConfiguration;
     procedure FillFields;
+    procedure NewEntitie;
   public
   end;
 
@@ -92,7 +103,11 @@ implementation
 {$R *.dfm}
 
 uses
+  MyExceptions,
   Utils.MyConsts,
+  Utils.MyVclLibrary,
+  Utils.GlobalConsts,
+  Model.Funcionarios.Factory,
   View.Funcionarios.Busca;
 
 procedure TViewFuncionariosCad.btnBuscarClick(Sender: TObject);
@@ -111,7 +126,7 @@ end;
 procedure TViewFuncionariosCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
-   {FFuncionario
+   FFuncionario
     .Entitie
      .Id(edtId.Text)
      .RazaoSocial(edtRazaoSocial.Text)
@@ -135,7 +150,17 @@ begin
      .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
      .Funcao(edtIdFuncao.Text)
      .Salario(edtSalario.Text)
-     .End_Entitie;}
+     .Login(edtLogin.Text)
+     .Senha(edtSenha.Text)
+     .End_Entitie;
+end;
+
+procedure TViewFuncionariosCad.btnNovoClick(Sender: TObject);
+begin
+   inherited;
+   Self.NewEntitie;
+
+   TMyVclLibrary.SetFocusOn(edtRazaoSocial);
 end;
 
 procedure TViewFuncionariosCad.ConfComponents(Sender: TObject);
@@ -143,9 +168,33 @@ begin
    //
 end;
 
+procedure TViewFuncionariosCad.edtCNPJExit(Sender: TObject);
+begin
+   if(not Assigned(FFuncionario))then
+     Exit;
+
+   if(FFuncionario.Entitie.Cnpj(edtCNPJ.Text).End_Entitie.ValidarCNPJ)then
+     Exit;
+
+   edtCPF.SetFocus;
+   raise ExceptionInformation.Create('CNPJ inválido');
+end;
+
+procedure TViewFuncionariosCad.edtCPFExit(Sender: TObject);
+begin
+   if(not Assigned(FFuncionario))then
+     Exit;
+
+   if(FFuncionario.Entitie.Cpf(edtCPF.Text).End_Entitie.ValidarCPF)then
+     Exit;
+
+   edtCPF.SetFocus;
+   raise ExceptionInformation.Create('CPF inválido');
+end;
+
 procedure TViewFuncionariosCad.FillFields;
 begin
-   {if(not Assigned(FFuncionario))then
+   if(not Assigned(FFuncionario))then
      Exit;
 
    edtId.Text               := FFuncionario.Entitie.Id.ToString;
@@ -169,10 +218,12 @@ begin
    edtRGOrgaoExpedidor.Text := FFuncionario.Entitie.RgOrgaoExpedidor;
    edtIdFuncao.Text         := FFuncionario.Entitie.Funcao.ToString;
    edtSalario.Text          := FFuncionario.Entitie.Salario.ToString;
+   edtLogin.Text            := FFuncionario.Entitie.Login;
+   edtSenha.Text            := FFuncionario.Entitie.Senha;
 
    cBoxTipoJuridico.ItemIndex := 0;
    if(FFuncionario.Entitie.TipoJuridico.Equals(PESSOA_JURIDICA))then
-     cBoxTipoJuridico.ItemIndex := 1;}
+     cBoxTipoJuridico.ItemIndex := 1;
 end;
 
 procedure TViewFuncionariosCad.FormCreate(Sender: TObject);
@@ -189,10 +240,15 @@ begin
    edtIdFuncao.Hint     := HINT_ATALHO_CONSULTA;
 
    cBoxTipoJuridico.Items.Clear;
-   //cBoxTipoJuridico.Items.Add(PESSOA_FISICA);
-   //cBoxTipoJuridico.Items.Add(PESSOA_JURIDICA);
+   cBoxTipoJuridico.Items.Add(PESSOA_FISICA);
+   cBoxTipoJuridico.Items.Add(PESSOA_JURIDICA);
 
    Self.ConfComponents(nil);
+end;
+
+procedure TViewFuncionariosCad.NewEntitie;
+begin
+   FFuncionario := TModelFuncionariosFactory.New;
 end;
 
 end.

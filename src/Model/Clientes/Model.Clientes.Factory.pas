@@ -15,6 +15,7 @@ type
   protected
     function Entitie: TModelClientesEntitie;
     function ValidarCPF: Boolean;
+    function ValidarCNPJ: Boolean;
   public
     class function New: IModelClientesFactory<TModelClientesEntitie>;
     constructor Create;
@@ -38,6 +39,19 @@ begin
    if(Assigned(FEntitie))then
      FEntitie.Free;
    inherited;
+end;
+
+function TModelClientesFactory.ValidarCNPJ: Boolean;
+begin
+   Result := True;
+
+   if(FEntitie.Cnpj = EmptyStr)then
+     Exit;
+
+   if(Length(FEntitie.Cnpj) = 14)then
+     Exit;
+
+   Result := False;
 end;
 
 function TModelClientesFactory.ValidarCPF: Boolean;

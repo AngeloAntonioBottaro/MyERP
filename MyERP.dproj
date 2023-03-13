@@ -256,6 +256,27 @@
             <Form>ViewProdutosSubGruposBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\Model\Fornecedores\Model.Fornecedores.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Model.Funcionarios.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Fornecedores\Model.Fornecedores.Entitie.pas"/>
+        <DCCReference Include="src\Utils\Utils.GlobalConsts.pas"/>
+        <DCCReference Include="src\Model\Fornecedores\Model.Fornecedores.Factory.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Model.Funcionarios.Entitie.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Model.Funcionarios.Factory.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Funcoes\Model.Funcionarios.Funcoes.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Funcoes\Model.Funcionarios.Funcoes.Entitie.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Funcoes\Model.Funcionarios.Funcoes.Factory.pas"/>
+        <DCCReference Include="src\Model\Cidades\Model.Cidades.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Cidades\Model.Cidades.Entitie.pas"/>
+        <DCCReference Include="src\Model\Cidades\Model.Cidades.Factory.pas"/>
+        <DCCReference Include="src\Model\Produtos\Grupos\Model.Produtos.Grupos.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Produtos\Grupos\Model.Produtos.Grupos.Entitie.pas"/>
+        <DCCReference Include="src\Model\Produtos\Grupos\Model.Produtos.Grupos.Factory.pas"/>
+        <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Entitie.pas"/>
+        <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Factory.pas"/>
+        <DCCReference Include="src\Model\Sistema\Model.Sistema.DataBaseConnectionFile.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyIniLibrary.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>

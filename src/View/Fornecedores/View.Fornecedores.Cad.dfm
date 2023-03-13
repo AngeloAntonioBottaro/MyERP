@@ -349,6 +349,7 @@ inherited ViewFornecedoresCad: TViewFornecedoresCad
       Width = 120
       Height = 21
       TabOrder = 20
+      OnExit = edtCPFExit
     end
     object edtRG: TEdit
       Left = 481
@@ -363,6 +364,7 @@ inherited ViewFornecedoresCad: TViewFornecedoresCad
       Width = 120
       Height = 21
       TabOrder = 18
+      OnExit = edtCNPJExit
     end
     object edtIE: TEdit
       Left = 239

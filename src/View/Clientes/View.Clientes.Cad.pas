@@ -77,10 +77,11 @@ type
     procedure edtCPFExit(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure edtCNPJExit(Sender: TObject);
   private
     FCliente: IModelClientesFactory<TModelClientesEntitie>;
     procedure InitialConfiguration;
-    procedure NewClient;
+    procedure NewEntitie;
     procedure FillFields;
   public
   end;
@@ -96,6 +97,7 @@ uses
   MyExceptions,
   Utils.MyConsts,
   Utils.MyVclLibrary,
+  Utils.GlobalConsts,
   Model.Clientes.Factory,
   View.Clientes.Busca;
 
@@ -156,9 +158,21 @@ end;
 procedure TViewClientesCad.btnNovoClick(Sender: TObject);
 begin
    inherited;
-   Self.NewClient;
+   Self.NewEntitie;
 
    TMyVclLibrary.SetFocusOn(edtRazaoSocial);
+end;
+
+procedure TViewClientesCad.edtCNPJExit(Sender: TObject);
+begin
+   if(not Assigned(FCliente))then
+     Exit;
+
+   if(FCliente.Entitie.Cnpj(edtCNPJ.Text).End_Entitie.ValidarCNPJ)then
+     Exit;
+
+   edtCPF.SetFocus;
+   raise ExceptionInformation.Create('CNPJ inválido');
 end;
 
 procedure TViewClientesCad.edtCPFExit(Sender: TObject);
@@ -215,7 +229,7 @@ begin
    Self.ConfComponents(nil);
 end;
 
-procedure TViewClientesCad.NewClient;
+procedure TViewClientesCad.NewEntitie;
 begin
    FCliente := TModelClientesFactory.New;
 end;

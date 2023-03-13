@@ -7,6 +7,9 @@ inherited ViewProdutosSubgruposCad: TViewProdutosSubgruposCad
   inherited pnButtons: TPanel
     Top = 65
     ExplicitTop = 65
+    inherited btnGravar: TButton
+      OnClick = btnGravarClick
+    end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
     end

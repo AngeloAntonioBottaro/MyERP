@@ -367,6 +367,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 120
       Height = 21
       TabOrder = 18
+      OnExit = edtCNPJExit
     end
     object edtIE: TEdit
       Left = 239

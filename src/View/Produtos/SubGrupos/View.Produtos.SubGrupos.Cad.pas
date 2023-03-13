@@ -12,7 +12,9 @@ uses
   Vcl.Forms,
   Vcl.StdCtrls,
   Vcl.Controls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls,
+  Model.Produtos.SubGrupos.Interfaces,
+  Model.Produtos.SubGrupos.Entitie;
 
 type
   TViewProdutosSubgruposCad = class(TViewBaseCadastros)
@@ -27,8 +29,13 @@ type
     edtSubGrupo: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
   private
+    FSubGrupo: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
     procedure InitialConfiguration;
+    procedure NewEntitie;
+    procedure FillFields;
   public
   end;
 
@@ -41,6 +48,7 @@ implementation
 
 uses
   Utils.MyConsts,
+  Model.Produtos.SubGrupos.Factory,
   View.Produtos.SubGrupos.Busca;
 
 procedure TViewProdutosSubgruposCad.btnBuscarClick(Sender: TObject);
@@ -53,6 +61,34 @@ begin
    finally
      FreeAndNil(ViewProdutosSubGruposBusca);
    end;
+   Self.FillFields;
+end;
+
+procedure TViewProdutosSubgruposCad.btnGravarClick(Sender: TObject);
+begin
+   inherited;
+   FSubGrupo
+    .Entitie
+     .Id(edtId.Text)
+     .Nome(edtGrupo.Text)
+     .Grupo(edtIdGrupo.Text)
+     .End_Entitie;
+end;
+
+procedure TViewProdutosSubgruposCad.btnNovoClick(Sender: TObject);
+begin
+   inherited;
+   Self.NewEntitie;
+end;
+
+procedure TViewProdutosSubgruposCad.FillFields;
+begin
+   if(not Assigned(FSubGrupo))then
+     Exit;
+
+   edtId.Text       := FSubGrupo.Entitie.Id.ToString;
+   edtSubGrupo.Text := FSubGrupo.Entitie.Nome;
+   edtIdGrupo.Text  := FSubGrupo.Entitie.Grupo.ToString;
 end;
 
 procedure TViewProdutosSubgruposCad.FormCreate(Sender: TObject);
@@ -65,6 +101,11 @@ procedure TViewProdutosSubgruposCad.InitialConfiguration;
 begin
    edtIdGrupo.ShowHint := True;
    edtIdGrupo.Hint     := HINT_ATALHO_CONSULTA;
+end;
+
+procedure TViewProdutosSubgruposCad.NewEntitie;
+begin
+   FSubGrupo := TModelProdutosSubGruposFactory.New;
 end;
 
 end.

@@ -211,6 +211,20 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Height = 13
       Caption = 'Sal'#225'rio'
     end
+    object lbLogin: TLabel
+      Left = 481
+      Top = 213
+      Width = 25
+      Height = 13
+      Caption = 'Login'
+    end
+    object lbSenha: TLabel
+      Left = 602
+      Top = 213
+      Width = 30
+      Height = 13
+      Caption = 'Senha'
+    end
     object edtIdFuncao: TEdit
       Left = 8
       Top = 227
@@ -387,6 +401,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 120
       Height = 21
       TabOrder = 20
+      OnExit = edtCPFExit
     end
     object edtRG: TEdit
       Left = 481
@@ -401,6 +416,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 120
       Height = 21
       TabOrder = 22
+      OnExit = edtCNPJExit
     end
     object edtIE: TEdit
       Left = 239
@@ -422,6 +438,20 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 138
       Height = 21
       TabOrder = 25
+    end
+    object edtLogin: TEdit
+      Left = 481
+      Top = 227
+      Width = 120
+      Height = 21
+      TabOrder = 26
+    end
+    object edtSenha: TEdit
+      Left = 596
+      Top = 227
+      Width = 99
+      Height = 21
+      TabOrder = 27
     end
   end
 end

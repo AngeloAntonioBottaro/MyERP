@@ -12,7 +12,9 @@ uses
   Vcl.Forms,
   Vcl.Controls,
   Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls,
+  Model.Cidades.Interfaces,
+  Model.Cidades.Entitie;
 
 type
   TViewCidadesCad = class(TViewBaseCadastros)
@@ -27,8 +29,13 @@ type
     edtIBGE: TEdit;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
   private
+    FCidade: IModelCidadesFactory<TModelCidadesEntitie>;
     procedure InitialConfiguration;
+    procedure NewEntitie;
+    procedure FillFields;
   public
   end;
 
@@ -41,6 +48,7 @@ implementation
 
 uses
   View.Cidades.Busca,
+  Model.Cidades.Factory,
   Utils.MyConsts;
 
 procedure TViewCidadesCad.btnBuscarClick(Sender: TObject);
@@ -53,6 +61,34 @@ begin
    finally
      FreeAndNil(ViewCidadesBusca);
    end;
+   Self.FillFields;
+end;
+
+procedure TViewCidadesCad.btnGravarClick(Sender: TObject);
+begin
+   inherited;
+   FCidade
+    .Entitie
+     .Id(edtId.Text)
+     .Nome(edtCidade.Text)
+     .IBGE(edtIBGE.Text)
+     .End_Entitie;
+end;
+
+procedure TViewCidadesCad.btnNovoClick(Sender: TObject);
+begin
+   inherited;
+   Self.NewEntitie;
+end;
+
+procedure TViewCidadesCad.FillFields;
+begin
+   if(not Assigned(FCidade))then
+     Exit;
+
+   edtId.Text     := FCidade.Entitie.Id.ToString;
+   edtCidade.Text := FCidade.Entitie.Nome;
+   edtIBGE.Text   := FCidade.Entitie.IBGE.ToString;
 end;
 
 procedure TViewCidadesCad.FormCreate(Sender: TObject);
@@ -70,6 +106,11 @@ begin
      cBoxUF.Items.Add(ESTADOS[I]);
 
    cBoxUF.ItemIndex := -1;
+end;
+
+procedure TViewCidadesCad.NewEntitie;
+begin
+   FCidade := TModelCidadesFactory.New;
 end;
 
 end.

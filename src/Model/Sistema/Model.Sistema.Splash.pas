@@ -20,6 +20,7 @@ type
 
     procedure WriteInformation(AValue: String);
     procedure CriarPastasSistema;
+    procedure ConnectToDatabase;
     procedure CriarDataModules;
 
     procedure CriarDM(InstanceClass: TComponentClass; var Reference; AMensagem: string);
@@ -35,7 +36,9 @@ implementation
 
 uses
   MyMessage,
+  MyExceptions,
   Utils.GlobalVariables,
+  Model.Sistema.DatabaseConnectionFile,
   Model.Sistema.Imagens.DM;
 
 class function TModelSistemaSplash.GetInstance: IModelSistemaSplash;
@@ -69,7 +72,7 @@ begin
 
    try
      Self.CriarPastasSistema;
-
+     Self.ConnectToDatabase;
      Self.CriarDataModules;
 
      FLoadingComplete := True;
@@ -82,6 +85,24 @@ procedure TModelSistemaSplash.CriarPastasSistema;
 begin
    Self.WriteInformation('Criando pastas do sistema');
    CreateAppDirectories;
+end;
+
+procedure TModelSistemaSplash.ConnectToDatabase;
+var
+  FDBCon: TModelSistemaDataBaseConnectionFile;
+begin
+   FDBCon := TModelSistemaDataBaseConnectionFile.Create;
+   try
+     if(not FDBCon.Mensage.IsEmpty)then
+     begin
+        Application.Terminate;
+        raise ExceptionRequired.Create('Conexão com o banco não pode ser realizada', FDBCon.Mensage);
+     end;
+
+     //TODO: CONNECTION
+   finally
+     FDBCon.Free;
+   end;
 end;
 
 procedure TModelSistemaSplash.CriarDataModules;

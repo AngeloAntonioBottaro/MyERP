@@ -17,7 +17,9 @@ uses
   Vcl.ExtCtrls,
   Vcl.Mask,
   Vcl.DBCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls,
+  Model.Fornecedores.Interfaces,
+  Model.Fornecedores.Entitie;
 
 type
   TViewFornecedoresCad = class(TViewBaseCadastros)
@@ -72,9 +74,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure edtCPFExit(Sender: TObject);
+    procedure edtCNPJExit(Sender: TObject);
   private
+    FFornecedor: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
     procedure InitialConfiguration;
     procedure FillFields;
+    procedure NewEntitie;
   public
   end;
 
@@ -86,7 +93,11 @@ implementation
 {$R *.dfm}
 
 uses
+  MyExceptions,
   Utils.MyConsts,
+  Utils.MyVclLibrary,
+  Utils.GlobalConsts,
+  Model.Fornecedores.Factory,
   View.Fornecedores.Busca;
 
 procedure TViewFornecedoresCad.btnBuscarClick(Sender: TObject);
@@ -105,7 +116,7 @@ end;
 procedure TViewFornecedoresCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
-   {FFornecedor
+   FFornecedor
     .Entitie
      .Id(edtId.Text)
      .RazaoSocial(edtRazaoSocial.Text)
@@ -127,7 +138,15 @@ begin
      .Cpf(edtCPF.Text)
      .RG(edtRG.Text)
      .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
-     .End_Entitie;}
+     .End_Entitie;
+end;
+
+procedure TViewFornecedoresCad.btnNovoClick(Sender: TObject);
+begin
+   inherited;
+   Self.NewEntitie;
+
+   TMyVclLibrary.SetFocusOn(edtRazaoSocial);
 end;
 
 procedure TViewFornecedoresCad.ConfComponents(Sender: TObject);
@@ -135,9 +154,33 @@ begin
    //
 end;
 
+procedure TViewFornecedoresCad.edtCNPJExit(Sender: TObject);
+begin
+   if(not Assigned(FFornecedor))then
+     Exit;
+
+   if(FFornecedor.Entitie.Cnpj(edtCNPJ.Text).End_Entitie.ValidarCNPJ)then
+     Exit;
+
+   edtCPF.SetFocus;
+   raise ExceptionInformation.Create('CNPJ inválido');
+end;
+
+procedure TViewFornecedoresCad.edtCPFExit(Sender: TObject);
+begin
+   if(not Assigned(FFornecedor))then
+     Exit;
+
+   if(FFornecedor.Entitie.Cpf(edtCPF.Text).End_Entitie.ValidarCPF)then
+     Exit;
+
+   edtCPF.SetFocus;
+   raise ExceptionInformation.Create('CPF inválido');
+end;
+
 procedure TViewFornecedoresCad.FillFields;
 begin
-   {if(not Assigned(FFornecedor))then
+   if(not Assigned(FFornecedor))then
      Exit;
 
    edtId.Text               := FFornecedor.Entitie.Id.ToString;
@@ -162,7 +205,7 @@ begin
 
    cBoxTipoJuridico.ItemIndex := 0;
    if(FFornecedor.Entitie.TipoJuridico.Equals(PESSOA_JURIDICA))then
-     cBoxTipoJuridico.ItemIndex := 1;}
+     cBoxTipoJuridico.ItemIndex := 1;
 end;
 
 procedure TViewFornecedoresCad.FormCreate(Sender: TObject);
@@ -177,10 +220,15 @@ begin
    edtIdCidade.Hint     := HINT_ATALHO_CONSULTA;
 
    cBoxTipoJuridico.Items.Clear;
-   //cBoxTipoJuridico.Items.Add(PESSOA_FISICA);
-   //cBoxTipoJuridico.Items.Add(PESSOA_JURIDICA);
+   cBoxTipoJuridico.Items.Add(PESSOA_FISICA);
+   cBoxTipoJuridico.Items.Add(PESSOA_JURIDICA);
 
    Self.ConfComponents(nil);
+end;
+
+procedure TViewFornecedoresCad.NewEntitie;
+begin
+   FFornecedor := TModelFornecedoresFactory.New;
 end;
 
 end.
