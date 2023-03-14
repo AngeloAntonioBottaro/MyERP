@@ -37,6 +37,7 @@ implementation
 uses
   MyMessage,
   MyExceptions,
+  MyConnection,
   Utils.GlobalVariables,
   Model.Sistema.DatabaseConnectionFile,
   Model.Sistema.Imagens.DM;
@@ -91,15 +92,26 @@ procedure TModelSistemaSplash.ConnectToDatabase;
 var
   FDBCon: TModelSistemaDataBaseConnectionFile;
 begin
+   Self.WriteInformation('Acessando arquivo de configurações de conexão');
    FDBCon := TModelSistemaDataBaseConnectionFile.Create;
    try
      if(not FDBCon.Mensage.IsEmpty)then
-     begin
-        Application.Terminate;
-        raise ExceptionRequired.Create('Conexão com o banco não pode ser realizada', FDBCon.Mensage);
-     end;
+       raise Exception.Create('Leitura do arquivo de configurações não realizada: ' + FDBCon.Mensage);
 
-     //TODO: CONNECTION
+     Self.WriteInformation('Realizando conexão com o banco de dados');
+     MyConn
+      .Configuration
+       .ClearConfiguration
+       .DriverID('FB')
+       .Host(FDBCon.Host)
+       .UserName('sysdba')
+       .Database(FDBCon.Database)
+       .Password(FDBCon.Password)
+       .Port(FDBCon.Port)
+       .ComponentTypeFireDac
+       .ConnectionSingletonOn;
+
+      MyConn.Connection.TestConnection;
    finally
      FDBCon.Free;
    end;
@@ -118,6 +130,7 @@ end;
 
 procedure TModelSistemaSplash.WriteInformation(AValue: String);
 begin
+   Sleep(1000);
    if(Assigned(FDisplayInformation))then
      FDisplayInformation(Trim(AValue));
 end;
