@@ -28,9 +28,9 @@ type
     procedure btnNovoClick(Sender: TObject);
   private
     FGrupo: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
-    procedure NewEntitie;
-    procedure FillFields;
   public
+    procedure NewEntitie; override;
+    procedure FillFields; override;
   end;
 
 var

@@ -92,10 +92,10 @@ type
     procedure btnAlterarClick(Sender: TObject);
   private
     FFuncionario: IModelFuncionariosFactory<TModelFuncionariosEntitie>;
+  public
     procedure InitialConfiguration; override;
     procedure FillFields; override;
     procedure NewEntitie; override;
-  public
   end;
 
 var

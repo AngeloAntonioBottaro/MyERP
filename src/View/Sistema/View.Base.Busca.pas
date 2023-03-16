@@ -36,6 +36,8 @@ type
     Atualizar1: TMenuItem;
     gBoxTipoConsulta: TGroupBox;
     ckBuscarInativos: TCheckBox;
+    pnOptions: TPanel;
+    lbTotalRegistros: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);
@@ -44,10 +46,12 @@ type
     procedure Atualizar1Click(Sender: TObject);
     procedure edtBuscaKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
-    procedure Buscar; virtual;
+    procedure GetTotalRegistros;
   public
     FOnBusca: TProc<Integer>;
+    procedure Buscar; virtual;
   end;
 
 var
@@ -59,6 +63,7 @@ implementation
 
 uses
   MyExceptions,
+  Utils.MyLibrary,
   Utils.MyConsts;
 
 procedure TViewBaseBusca.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -73,6 +78,11 @@ procedure TViewBaseBusca.FormCreate(Sender: TObject);
 begin
    inherited;
    TimerBuscar.Enabled := False;
+end;
+
+procedure TViewBaseBusca.FormShow(Sender: TObject);
+begin
+   Self.GetTotalRegistros;
 end;
 
 procedure TViewBaseBusca.Atualizar1Click(Sender: TObject);
@@ -106,13 +116,23 @@ end;
 
 procedure TViewBaseBusca.Buscar;
 begin
-   raise ExceptionWarning.Create('Buscar não implementado')
+   Self.GetTotalRegistros;
 end;
 
 procedure TViewBaseBusca.edtBuscaKeyPress(Sender: TObject; var Key: Char);
 begin
    TimerBuscar.Enabled := False;
    TimerBuscar.Enabled := True;
+end;
+
+procedure TViewBaseBusca.GetTotalRegistros;
+begin
+   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TOTAL_REGISTROS_DEFAULT;
+
+   if(DS_Busca.DataSet = nil)then
+     Exit;
+
+   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_Busca.DataSet.RecordCount.ToString, '0', 6);
 end;
 
 procedure TViewBaseBusca.GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);

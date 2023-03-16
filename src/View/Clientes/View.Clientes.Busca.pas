@@ -24,6 +24,7 @@ type
     procedure btnCadastroClick(Sender: TObject);
   private
   public
+    procedure Buscar; override;
   end;
 
 var
@@ -34,6 +35,7 @@ implementation
 {$R *.dfm}
 
 uses
+  MyConnection,
   MyExceptions,
   Utils.MyConsts,
   View.Clientes.Cad;
@@ -51,6 +53,20 @@ begin
    finally
      FreeAndNil(ViewClientesCad);
    end;
+end;
+
+procedure TViewClientesBusca.Buscar;
+begin
+   MyQueryNew
+    .DataSource(DS_Busca)
+    .Add('select * from clientes where');
+
+   MyQuery
+    .Add('(razao_social like :condicao)')
+    .AddParam('condicao', '%'+edtBusca.Text+'%')
+    .Open;
+
+   inherited;
 end;
 
 end.

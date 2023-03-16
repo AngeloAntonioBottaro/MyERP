@@ -1,10 +1,11 @@
 inherited ViewBaseBusca: TViewBaseBusca
   Caption = 'ViewBaseBusca'
-  ClientHeight = 373
+  ClientHeight = 408
   ClientWidth = 755
   OnClose = FormClose
+  OnShow = FormShow
   ExplicitWidth = 771
-  ExplicitHeight = 412
+  ExplicitHeight = 447
   PixelsPerInch = 96
   TextHeight = 13
   object pnTop: TPanel
@@ -41,17 +42,17 @@ inherited ViewBaseBusca: TViewBaseBusca
   end
   object pnBotton: TPanel
     Left = 0
-    Top = 286
+    Top = 288
     Width = 755
-    Height = 87
+    Height = 120
     Align = alBottom
     TabOrder = 1
     DesignSize = (
       755
-      87)
+      120)
     object pnButtons: TPanel
       Left = 440
-      Top = 36
+      Top = 69
       Width = 310
       Height = 46
       Anchors = [akRight, akBottom]
@@ -61,6 +62,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Padding.Right = 5
       Padding.Bottom = 5
       TabOrder = 0
+      ExplicitTop = 36
       object btnCadastro: TButton
         Left = 5
         Top = 5
@@ -94,21 +96,48 @@ inherited ViewBaseBusca: TViewBaseBusca
     object gBoxTipoConsulta: TGroupBox
       AlignWithMargins = True
       Left = 4
-      Top = 4
+      Top = 20
       Width = 435
-      Height = 79
+      Height = 96
       Align = alLeft
       Caption = '  Buscar  '
       TabOrder = 1
+      ExplicitTop = 4
+      ExplicitHeight = 79
+    end
+    object pnOptions: TPanel
+      Left = 1
+      Top = 1
+      Width = 753
+      Height = 16
+      Align = alTop
+      BevelOuter = bvLowered
+      TabOrder = 2
+      object lbTotalRegistros: TLabel
+        AlignWithMargins = True
+        Left = 670
+        Top = 1
+        Width = 77
+        Height = 14
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 5
+        Margins.Bottom = 0
+        Align = alRight
+        Caption = 'lbTotalRegistros'
+        ExplicitLeft = 721
+        ExplicitHeight = 13
+      end
     end
   end
   object GridBusca: TDBGrid
     Left = 0
     Top = 49
     Width = 755
-    Height = 237
+    Height = 239
     Align = alClient
     DataSource = DS_Busca
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     PopupMenu = PopupMenu
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
