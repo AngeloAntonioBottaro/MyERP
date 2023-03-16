@@ -20,11 +20,12 @@ var
   VG_PastaAppData: string;
 
   //SISTEMA
+  VG_DataHoraAberturaSistema: TDateTime;
+  VG_Host: string;
+  VG_Database: string;
   VG_Direitos: string;
   VG_Logo: string;
   VG_Impressora: string;
-
-  VG_DataHoraAberturaSistema: TDateTime;
   VG_IdEmpresaLog: Integer;
 
   //USUARIO

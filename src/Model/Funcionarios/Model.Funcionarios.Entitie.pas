@@ -103,6 +103,7 @@ type
     function Telefone2: string; overload;
     function TipoJuridico(AValue: string): TModelFuncionariosEntitie; overload;
     function TipoJuridico: string; overload;
+    function TipoJuridicoComboBox: Integer;
   end;
 
 implementation
@@ -113,7 +114,7 @@ uses
 constructor TModelFuncionariosEntitie.Create(AParent: IModelFuncionariosFactory<TModelFuncionariosEntitie>);
 begin
    FParent        := AParent;
-   FStatusCliente := STATUS_PADRAO;
+   FStatusCliente := STATUS_ATIVO;
    FTipoJuridico  := PESSOA_FISICA;
 end;
 
@@ -445,14 +446,33 @@ begin
 end;
 
 function TModelFuncionariosEntitie.TipoJuridico(AValue: string): TModelFuncionariosEntitie;
+var
+  LTipo: string;
 begin
-   Result        := Self;
-   FTipoJuridico := AValue.Trim;
+   Result := Self;
+
+   LTipo := UpperCase(AValue.Trim);
+
+   FTipoJuridico := PESSOA_FISICA_DATABASE;
+   if(LTipo.Equals(PESSOA_JURIDICA))then
+     FTipoJuridico := PESSOA_JURIDICA_DATABASE;
+
+   if(LTipo.Equals(PESSOA_FISICA_DATABASE) or LTipo.Equals(PESSOA_JURIDICA_DATABASE))then
+     FTipoJuridico := LTipo;
 end;
 
 function TModelFuncionariosEntitie.TipoJuridico: string;
 begin
    Result := FTipoJuridico;
+end;
+
+function TModelFuncionariosEntitie.TipoJuridicoComboBox: Integer;
+begin
+   Result := -1;
+   if(Self.TipoJuridico.Equals(PESSOA_FISICA_DATABASE))then
+     Result := 0
+   else if(Self.TipoJuridico.Equals(PESSOA_JURIDICA_DATABASE))then
+     Result := 1;
 end;
 
 end.

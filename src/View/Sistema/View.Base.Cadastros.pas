@@ -37,6 +37,11 @@ type
     procedure StartOperations;
     procedure EndOperations;
     procedure EmptyFields;
+
+    procedure InitialConfiguration; virtual;
+    procedure NewEntitie; virtual;
+    procedure FillFields; virtual;
+    procedure OnBusca(AId: Integer); virtual;
   end;
 
 var
@@ -45,6 +50,9 @@ var
 implementation
 
 {$R *.dfm}
+
+uses
+  MyExceptions;
 
 procedure TViewBaseCadastros.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -62,6 +70,7 @@ procedure TViewBaseCadastros.btnNovoClick(Sender: TObject);
 begin
    Self.EmptyFields;
    Self.StartOperations;
+   Self.NewEntitie;
 end;
 
 procedure TViewBaseCadastros.btnCancelarClick(Sender: TObject);
@@ -85,6 +94,16 @@ begin
    btnFechar.Enabled   := False;
 end;
 
+procedure TViewBaseCadastros.EndOperations;
+begin
+   btnNovo.Enabled     := True;
+   btnGravar.Enabled   := False;
+   btnCancelar.Enabled := False;
+   btnExcluir.Enabled  := True;
+   btnAlterar.Enabled  := True;
+   btnFechar.Enabled   := True;
+end;
+
 procedure TViewBaseCadastros.EmptyFields;
 var
   I: Integer;
@@ -100,14 +119,24 @@ begin
    end;
 end;
 
-procedure TViewBaseCadastros.EndOperations;
+procedure TViewBaseCadastros.InitialConfiguration;
 begin
-   btnNovo.Enabled     := True;
-   btnGravar.Enabled   := False;
-   btnCancelar.Enabled := False;
-   btnExcluir.Enabled  := True;
-   btnAlterar.Enabled  := True;
-   btnFechar.Enabled   := True;
+   raise ExceptionWarning.Create('InitialConfiguration não implementado');
+end;
+
+procedure TViewBaseCadastros.NewEntitie;
+begin
+   raise ExceptionWarning.Create('NewEntitie não implementado');
+end;
+
+procedure TViewBaseCadastros.FillFields;
+begin
+   raise ExceptionWarning.Create('FillFields não implementado');
+end;
+
+procedure TViewBaseCadastros.OnBusca(AId: Integer);
+begin
+   raise ExceptionWarning.Create('OnBusca não implementado');
 end;
 
 end.

@@ -57,7 +57,6 @@ object ViewSistemaMain: TViewSistemaMain
       item
         Width = 50
       end>
-    OnClick = StatusBarClick
   end
   object MainMenu: TMainMenu
     Images = ModelSistemaImagensDM.imgListMenus

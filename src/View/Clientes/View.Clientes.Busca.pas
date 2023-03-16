@@ -17,10 +17,11 @@ uses
   Vcl.Grids,
   Vcl.DBGrids,
   Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.Menus;
 
 type
   TViewClientesBusca = class(TViewBaseBusca)
+    procedure btnCadastroClick(Sender: TObject);
   private
   public
   end;
@@ -31,5 +32,25 @@ var
 implementation
 
 {$R *.dfm}
+
+uses
+  MyExceptions,
+  Utils.MyConsts,
+  View.Clientes.Cad;
+
+procedure TViewClientesBusca.btnCadastroClick(Sender: TObject);
+begin
+   inherited;
+   if(ViewClientesCad = nil)then Application.CreateForm(TViewClientesCad, ViewClientesCad);
+
+   if(ViewClientesBusca.Showing)then
+       raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
+
+   try
+     ViewClientesCad.ShowModal;
+   finally
+     FreeAndNil(ViewClientesCad);
+   end;
+end;
 
 end.

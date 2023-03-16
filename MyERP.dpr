@@ -102,7 +102,8 @@ uses
   MyConnection.FireDAC.Query in '..\MyConnection\src\MyConnection.FireDAC.Query.pas',
   MyConnection.Interfaces in '..\MyConnection\src\MyConnection.Interfaces.pas',
   MyConnection in '..\MyConnection\src\MyConnection.pas',
-  MyConnection.Types in '..\MyConnection\src\MyConnection.Types.pas';
+  MyConnection.Types in '..\MyConnection\src\MyConnection.Types.pas',
+  Utils.LibrarySistema in 'src\Utils\Utils.LibrarySistema.pas';
 
 {$R *.res}
 

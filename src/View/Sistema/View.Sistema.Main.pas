@@ -68,12 +68,10 @@ type
     procedure CadastrosCidades1Cadastro1Click(Sender: TObject);
     procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure StatusBarClick(Sender: TObject);
     procedure TimerFormResizeTimer(Sender: TObject);
     procedure SuporteSobreSistema1Click(Sender: TObject);
     procedure Configurarcones1Click(Sender: TObject);
   private
-    FCount: Integer;
     procedure DoLoggin;
     procedure ProcessStatus;
     procedure ProcessImageLogo(AImageFile: string);
@@ -291,17 +289,9 @@ procedure TViewSistemaMain.Sair1Click(Sender: TObject);
 begin
    Self.Close;
 end;
-procedure TViewSistemaMain.StatusBarClick(Sender: TObject);
-begin
-   inherited;
-   FCount := 0;
-end;
-
 procedure TViewSistemaMain.TimerFormResizeTimer(Sender: TObject);
 begin
    TimerFormResize.Enabled := False;
-   Inc(FCount);
-                         StatusBar.Panels[3].Text := FCount.ToString;
    Self.CreateShortcutIcons;
 end;
 
@@ -311,9 +301,10 @@ end;
 procedure TViewSistemaMain.ProcessStatus;
 begin
    //STATUS BAR
-   StatusBar.Panels[0].Text := 'Usuário: ' + VG_UsuarioLogadoId.ToString + ' - ' + VG_UsuarioLogadoNome;
+   StatusBar.Panels[0].Text := 'Usuário: '  + VG_UsuarioLogadoId.ToString + ' - ' + VG_UsuarioLogadoNome;
    StatusBar.Panels[1].Text := 'Terminal: ' + TMyLibrary.GetNetUserName;
-   StatusBar.Panels[2].Text := 'Servidor: localhost';
+   StatusBar.Panels[2].Text := 'Servidor: ' + VG_Host;
+   StatusBar.Panels[3].Text := 'Dados: '    + VG_Database;
 end;
 
 procedure TViewSistemaMain.ProcessImageLogo(AImageFile: string);

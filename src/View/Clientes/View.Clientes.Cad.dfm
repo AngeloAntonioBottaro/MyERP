@@ -16,6 +16,9 @@ inherited ViewClientesCad: TViewClientesCad
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
     end
+    inherited btnAlterar: TButton
+      OnClick = btnAlterarClick
+    end
   end
   object pnTela: TPanel
     AlignWithMargins = True

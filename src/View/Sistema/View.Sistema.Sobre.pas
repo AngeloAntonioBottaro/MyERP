@@ -39,6 +39,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure lbGithubMouseEnter(Sender: TObject);
     procedure lbGithubMouseLeave(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
   public
   end;
@@ -53,6 +54,12 @@ implementation
 uses
   Utils.MyVclLibrary,
   Utils.Myconsts;
+
+procedure TViewSistemaSobre.FormCreate(Sender: TObject);
+begin
+   inherited;
+   Self.BorderIcons := [biSystemMenu];
+end;
 
 procedure TViewSistemaSobre.FormShow(Sender: TObject);
 begin

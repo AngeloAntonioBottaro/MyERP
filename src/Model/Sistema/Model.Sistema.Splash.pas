@@ -99,13 +99,17 @@ begin
        raise Exception.Create('Leitura do arquivo de configurações não realizada: ' + FDBCon.Mensage);
 
      Self.WriteInformation('Realizando conexão com o banco de dados');
+
+     VG_Host     := FDBCon.Host;
+     VG_Database := FDBCon.Database;
+
      MyConn
       .Configuration
        .ClearConfiguration
        .DriverID('FB')
-       .Host(FDBCon.Host)
+       .Host(VG_Host)
        .UserName('sysdba')
-       .Database(FDBCon.Database)
+       .Database(VG_Database)
        .Password(FDBCon.Password)
        .Port(FDBCon.Port)
        .ComponentTypeFireDac

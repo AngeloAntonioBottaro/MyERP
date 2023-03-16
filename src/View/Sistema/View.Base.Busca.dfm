@@ -11,13 +11,10 @@ inherited ViewBaseBusca: TViewBaseBusca
     Left = 0
     Top = 0
     Width = 755
-    Height = 65
+    Height = 49
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitLeft = 24
-    ExplicitTop = -6
-    ExplicitWidth = 836
     object lbBusca: TLabel
       Left = 8
       Top = 8
@@ -28,9 +25,18 @@ inherited ViewBaseBusca: TViewBaseBusca
     object edtBusca: TEdit
       Left = 8
       Top = 22
-      Width = 297
+      Width = 321
       Height = 21
       TabOrder = 0
+      OnKeyPress = edtBuscaKeyPress
+    end
+    object ckBuscarInativos: TCheckBox
+      Left = 335
+      Top = 26
+      Width = 65
+      Height = 17
+      Caption = 'Inativos'
+      TabOrder = 1
     end
   end
   object pnBotton: TPanel
@@ -40,15 +46,13 @@ inherited ViewBaseBusca: TViewBaseBusca
     Height = 87
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 336
-    ExplicitWidth = 836
     DesignSize = (
       755
       87)
     object pnButtons: TPanel
-      Left = 541
+      Left = 440
       Top = 36
-      Width = 209
+      Width = 310
       Height = 46
       Anchors = [akRight, akBottom]
       BevelOuter = bvNone
@@ -57,39 +61,55 @@ inherited ViewBaseBusca: TViewBaseBusca
       Padding.Right = 5
       Padding.Bottom = 5
       TabOrder = 0
-      ExplicitLeft = 626
       object btnCadastro: TButton
-        Left = 4
+        Left = 5
         Top = 5
         Width = 100
         Height = 36
         Align = alRight
         Caption = 'Cadastrar'
         TabOrder = 0
-        ExplicitLeft = 85
-        ExplicitTop = 4
-        ExplicitHeight = 33
       end
       object btnVincular: TButton
-        Left = 104
+        Left = 105
         Top = 5
         Width = 100
         Height = 36
         Align = alRight
         Caption = 'Vincular'
         TabOrder = 1
-        ExplicitLeft = 85
-        ExplicitTop = 8
-        ExplicitHeight = 33
+        OnClick = btnVincularClick
       end
+      object btnFechar: TButton
+        Left = 205
+        Top = 5
+        Width = 100
+        Height = 36
+        Align = alRight
+        Caption = 'Fechar'
+        TabOrder = 2
+        OnClick = btnFecharClick
+      end
+    end
+    object gBoxTipoConsulta: TGroupBox
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 435
+      Height = 79
+      Align = alLeft
+      Caption = '  Buscar  '
+      TabOrder = 1
     end
   end
   object GridBusca: TDBGrid
     Left = 0
-    Top = 65
+    Top = 49
     Width = 755
-    Height = 221
+    Height = 237
     Align = alClient
+    DataSource = DS_Busca
+    PopupMenu = PopupMenu
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -97,5 +117,24 @@ inherited ViewBaseBusca: TViewBaseBusca
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     OnDrawColumnCell = GridBuscaDrawColumnCell
+  end
+  object DS_Busca: TDataSource
+    Left = 48
+    Top = 112
+  end
+  object TimerBuscar: TTimer
+    Enabled = False
+    Interval = 400
+    OnTimer = TimerBuscarTimer
+    Left = 704
+    Top = 8
+  end
+  object PopupMenu: TPopupMenu
+    Left = 616
+    Top = 8
+    object Atualizar1: TMenuItem
+      Caption = 'Atualizar - F5'
+      OnClick = Atualizar1Click
+    end
   end
 end

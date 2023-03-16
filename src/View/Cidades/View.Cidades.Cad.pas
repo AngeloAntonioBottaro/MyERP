@@ -33,10 +33,10 @@ type
     procedure btnNovoClick(Sender: TObject);
   private
     FCidade: IModelCidadesFactory<TModelCidadesEntitie>;
-    procedure InitialConfiguration;
-    procedure NewEntitie;
-    procedure FillFields;
   public
+    procedure InitialConfiguration; override;
+    procedure NewEntitie; override;
+    procedure FillFields; override;
   end;
 
 var

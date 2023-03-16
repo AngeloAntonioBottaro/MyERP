@@ -27,6 +27,7 @@ implementation
 
 uses
   MyMessage,
+  Myconnection,
   Utils.GlobalVariables;
 
 class function TModelSistemaLogin.New: IModelSistemaLogin;
@@ -62,11 +63,17 @@ begin
    if(FUsuarioSenha.IsEmpty)then
      Self.OnError('Senha do usuário não informada');
 
-   if(FUsuarioLogin <> '1')or(FUsuarioSenha <> '1')then
-     Self.OnError('Usuário não encontrado');
+   MyQueryNew
+    .Add('select id, razao_social from funcionarios where(login = :login)and(senha = :senha);')
+    .AddParam('login', FUsuarioLogin)
+    .AddParam('senha', FUsuarioSenha)
+    .Open;
 
-   VG_UsuarioLogadoId   := 1;
-   VG_UsuarioLogadoNome := 'Master';
+   if(MyQuery.IsEmpty)then
+     Self.OnError('Usuário/senha não encontrados');
+
+   VG_UsuarioLogadoId   := MyQuery.FieldByName('id').AsInteger;
+   VG_UsuarioLogadoNome := MyQuery.FieldByName('razao_social').AsString;
 end;
 
 procedure TModelSistemaLogin.OnError(AMessage: string = '');

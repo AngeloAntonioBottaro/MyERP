@@ -50,7 +50,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         AlignWithMargins = True
         Left = 23
         Top = 3
-        Width = 297
+        Width = 420
         Height = 19
         Align = alClient
         Caption = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
@@ -67,6 +67,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         OnClick = pnGithubClick
         OnMouseEnter = lbGithubMouseEnter
         OnMouseLeave = lbGithubMouseLeave
+        ExplicitWidth = 297
       end
       object imgGithub: TImage
         Left = 0
@@ -162,7 +163,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         AlignWithMargins = True
         Left = 23
         Top = 3
-        Width = 353
+        Width = 420
         Height = 19
         Align = alClient
         Caption = 'Sistema desenvolvido por Angelo Antonio Bottaro'
@@ -176,6 +177,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         ShowHint = True
         Layout = tlCenter
         WordWrap = True
+        ExplicitWidth = 353
       end
       object Image3: TImage
         Left = 0
@@ -218,7 +220,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         AlignWithMargins = True
         Left = 23
         Top = 3
-        Width = 297
+        Width = 420
         Height = 19
         Hint = 'Copiar E-mail'
         Align = alClient
@@ -233,6 +235,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         ShowHint = True
         Layout = tlCenter
         WordWrap = True
+        ExplicitWidth = 297
       end
       object imgEmail: TImage
         Left = 0
@@ -293,7 +296,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         AlignWithMargins = True
         Left = 23
         Top = 3
-        Width = 297
+        Width = 420
         Height = 19
         Align = alClient
         Caption = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
@@ -307,6 +310,7 @@ inherited ViewSistemaSobre: TViewSistemaSobre
         ShowHint = True
         Layout = tlCenter
         WordWrap = True
+        ExplicitWidth = 297
       end
       object imgTelefone: TImage
         Left = 0

@@ -77,12 +77,15 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure edtCPFExit(Sender: TObject);
     procedure edtCNPJExit(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
   private
     FFornecedor: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
-    procedure InitialConfiguration;
-    procedure FillFields;
-    procedure NewEntitie;
   public
+    procedure InitialConfiguration; override;
+    procedure FillFields; override;
+    procedure NewEntitie; override;
   end;
 
 var
@@ -93,12 +96,26 @@ implementation
 {$R *.dfm}
 
 uses
+  MyMessage,
   MyExceptions,
   Utils.MyConsts,
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
+  Utils.LibrarySistema,
   Model.Fornecedores.Factory,
   View.Fornecedores.Busca;
+
+procedure TViewFornecedoresCad.btnAlterarClick(Sender: TObject);
+begin
+   inherited;
+   if(not Assigned(FFornecedor))then
+     Exit;
+
+   if(not (FFornecedor.Entitie.Id > 0))then
+     Exit;
+
+   Self.StartOperations;
+end;
 
 procedure TViewFornecedoresCad.btnBuscarClick(Sender: TObject);
 begin
@@ -113,45 +130,70 @@ begin
    Self.FillFields;
 end;
 
+procedure TViewFornecedoresCad.btnCancelarClick(Sender: TObject);
+begin
+   inherited;
+   Self.ConfComponents(nil);
+end;
+
+procedure TViewFornecedoresCad.btnExcluirClick(Sender: TObject);
+begin
+   inherited;
+   if(edtId.Text = EmptyStr)then
+     Exit;
+end;
+
 procedure TViewFornecedoresCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
-   FFornecedor
-    .Entitie
-     .Id(edtId.Text)
-     .RazaoSocial(edtRazaoSocial.Text)
-     .NomeFantasia(edtNomeFantasia.Text)
-     .Endereco(edtEndereco.Text)
-     .Numero(edtNumero.Text)
-     .Bairro(edtBairro.Text)
-     .Cep(edtCep.Text)
-     .Cidade(edtIdCidade.Text)
-     .DataNascimento(dtpDataNascimento.Date)
-     .Telefone(edtTelefone.Text)
-     .Telefone2(edtTelefone2.Text)
-     .Celular(edtCelular.Text)
-     .Fax(edtFax.Text)
-     .Email(edtEmail.Text)
-     .TipoJuridico(cBoxTipoJuridico.Text)
-     .Cnpj(edtCNPJ.Text)
-     .IE(edtIE.Text)
-     .Cpf(edtCPF.Text)
-     .RG(edtRG.Text)
-     .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
-     .End_Entitie;
+   try
+     FFornecedor
+      .Entitie
+       .Id(edtId.Text)
+       .RazaoSocial(edtRazaoSocial.Text)
+       .NomeFantasia(edtNomeFantasia.Text)
+       .Endereco(edtEndereco.Text)
+       .Numero(edtNumero.Text)
+       .Bairro(edtBairro.Text)
+       .Cep(edtCep.Text)
+       .Cidade(edtIdCidade.Text)
+       .DataNascimento(dtpDataNascimento.Date)
+       .Telefone(edtTelefone.Text)
+       .Telefone2(edtTelefone2.Text)
+       .Celular(edtCelular.Text)
+       .Fax(edtFax.Text)
+       .Email(edtEmail.Text)
+       .TipoJuridico(cBoxTipoJuridico.Text)
+       .Cnpj(edtCNPJ.Text)
+       .IE(edtIE.Text)
+       .Cpf(edtCPF.Text)
+       .RG(edtRG.Text)
+       .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
+       .End_Entitie;
+
+     Self.EndOperations;
+     ShowDone('Gravação realizada');
+   except on E: Exception do
+     ShowInformation(E.Message);
+   end;
 end;
 
 procedure TViewFornecedoresCad.btnNovoClick(Sender: TObject);
 begin
    inherited;
-   Self.NewEntitie;
-
+   cBoxTipoJuridico.ItemIndex := 0;
+   Self.ConfComponents(nil);
    TMyVclLibrary.SetFocusOn(edtRazaoSocial);
 end;
 
 procedure TViewFornecedoresCad.ConfComponents(Sender: TObject);
 begin
-   //
+   //*VARIOS
+   edtCNPJ.Enabled              := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
+   edtIE.Enabled                := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
+   edtCPF.Enabled               := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtRG.Enabled                := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtRGOrgaoExpedidor.Enabled  := cBoxTipoJuridico.Text = PESSOA_FISICA;
 end;
 
 procedure TViewFornecedoresCad.edtCNPJExit(Sender: TObject);
@@ -183,29 +225,26 @@ begin
    if(not Assigned(FFornecedor))then
      Exit;
 
-   edtId.Text               := FFornecedor.Entitie.Id.ToString;
-   edtRazaoSocial.Text      := FFornecedor.Entitie.RazaoSocial;
-   edtNomeFantasia.Text     := FFornecedor.Entitie.NomeFantasia;
-   edtEndereco.Text         := FFornecedor.Entitie.Endereco;
-   edtNumero.Text           := FFornecedor.Entitie.Numero;
-   edtBairro.Text           := FFornecedor.Entitie.Bairro;
-   edtCep.Text              := FFornecedor.Entitie.Cep.ToString;
-   edtIdCidade.Text         := FFornecedor.Entitie.Cidade.ToString;
-   dtpDataNascimento.Date   := FFornecedor.Entitie.DataNascimento;
-   edtTelefone.Text         := FFornecedor.Entitie.Telefone;
-   edtTelefone2.Text        := FFornecedor.Entitie.Telefone2;
-   edtCelular.Text          := FFornecedor.Entitie.Celular;
-   edtFax.Text              := FFornecedor.Entitie.Fax;
-   edtEmail.Text            := FFornecedor.Entitie.Email;
-   edtCNPJ.Text             := FFornecedor.Entitie.Cnpj;
-   edtIE.Text               := FFornecedor.Entitie.IE;
-   edtCPF.Text              := FFornecedor.Entitie.Cpf;
-   edtRG.Text               := FFornecedor.Entitie.RG;
-   edtRGOrgaoExpedidor.Text := FFornecedor.Entitie.RgOrgaoExpedidor;
-
-   cBoxTipoJuridico.ItemIndex := 0;
-   if(FFornecedor.Entitie.TipoJuridico.Equals(PESSOA_JURIDICA))then
-     cBoxTipoJuridico.ItemIndex := 1;
+   edtId.Text                 := FFornecedor.Entitie.Id.ToString;
+   edtRazaoSocial.Text        := FFornecedor.Entitie.RazaoSocial;
+   edtNomeFantasia.Text       := FFornecedor.Entitie.NomeFantasia;
+   edtEndereco.Text           := FFornecedor.Entitie.Endereco;
+   edtNumero.Text             := FFornecedor.Entitie.Numero;
+   edtBairro.Text             := FFornecedor.Entitie.Bairro;
+   edtCep.Text                := FFornecedor.Entitie.Cep.ToString;
+   edtIdCidade.Text           := FFornecedor.Entitie.Cidade.ToString;
+   dtpDataNascimento.Date     := FFornecedor.Entitie.DataNascimento;
+   edtTelefone.Text           := FFornecedor.Entitie.Telefone;
+   edtTelefone2.Text          := FFornecedor.Entitie.Telefone2;
+   edtCelular.Text            := FFornecedor.Entitie.Celular;
+   edtFax.Text                := FFornecedor.Entitie.Fax;
+   edtEmail.Text              := FFornecedor.Entitie.Email;
+   edtCNPJ.Text               := FFornecedor.Entitie.Cnpj;
+   edtIE.Text                 := FFornecedor.Entitie.IE;
+   edtCPF.Text                := FFornecedor.Entitie.Cpf;
+   edtRG.Text                 := FFornecedor.Entitie.RG;
+   edtRGOrgaoExpedidor.Text   := FFornecedor.Entitie.RgOrgaoExpedidor;
+   cBoxTipoJuridico.ItemIndex := FFornecedor.Entitie.TipoJuridicoComboBox;
 end;
 
 procedure TViewFornecedoresCad.FormCreate(Sender: TObject);
@@ -219,9 +258,7 @@ begin
    edtIdCidade.ShowHint := True;
    edtIdCidade.Hint     := HINT_ATALHO_CONSULTA;
 
-   cBoxTipoJuridico.Items.Clear;
-   cBoxTipoJuridico.Items.Add(PESSOA_FISICA);
-   cBoxTipoJuridico.Items.Add(PESSOA_JURIDICA);
+   CriarComboBoxTipoJuridico(cBoxTipoJuridico.Items);
 
    Self.ConfComponents(nil);
 end;
