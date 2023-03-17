@@ -62,7 +62,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       Padding.Right = 5
       Padding.Bottom = 5
       TabOrder = 0
-      ExplicitTop = 36
       object btnCadastro: TButton
         Left = 5
         Top = 5
@@ -102,8 +101,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       Align = alLeft
       Caption = '  Buscar  '
       TabOrder = 1
-      ExplicitTop = 4
-      ExplicitHeight = 79
     end
     object pnOptions: TPanel
       Left = 1
@@ -118,13 +115,14 @@ inherited ViewBaseBusca: TViewBaseBusca
         Left = 670
         Top = 1
         Width = 77
-        Height = 13
+        Height = 14
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 5
         Margins.Bottom = 0
         Align = alRight
         Caption = 'lbTotalRegistros'
+        ExplicitHeight = 13
       end
     end
   end
@@ -144,6 +142,7 @@ inherited ViewBaseBusca: TViewBaseBusca
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     OnDrawColumnCell = GridBuscaDrawColumnCell
+    OnDblClick = GridBuscaDblClick
   end
   object DS_Busca: TDataSource
     Left = 48

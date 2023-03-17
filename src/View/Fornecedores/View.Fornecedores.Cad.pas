@@ -231,7 +231,7 @@ begin
    edtEndereco.Text           := FFornecedor.Entitie.Endereco;
    edtNumero.Text             := FFornecedor.Entitie.Numero;
    edtBairro.Text             := FFornecedor.Entitie.Bairro;
-   edtCep.Text                := FFornecedor.Entitie.Cep.ToString;
+   edtCep.Text                := FFornecedor.Entitie.Cep;
    edtIdCidade.Text           := FFornecedor.Entitie.Cidade.ToString;
    dtpDataNascimento.Date     := FFornecedor.Entitie.DataNascimento;
    edtTelefone.Text           := FFornecedor.Entitie.Telefone;

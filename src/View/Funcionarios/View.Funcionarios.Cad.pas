@@ -245,7 +245,7 @@ begin
    edtEndereco.Text           := FFuncionario.Entitie.Endereco;
    edtNumero.Text             := FFuncionario.Entitie.Numero;
    edtBairro.Text             := FFuncionario.Entitie.Bairro;
-   edtCep.Text                := FFuncionario.Entitie.Cep.ToString;
+   edtCep.Text                := FFuncionario.Entitie.Cep;
    edtIdCidade.Text           := FFuncionario.Entitie.Cidade.ToString;
    dtpDataNascimento.Date     := FFuncionario.Entitie.DataNascimento;
    edtTelefone.Text           := FFuncionario.Entitie.Telefone;

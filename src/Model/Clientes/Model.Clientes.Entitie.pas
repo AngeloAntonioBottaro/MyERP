@@ -15,7 +15,7 @@ type
 
     FBairro: string;
     FCelular: string;
-    FCep: Integer;
+    FCep: string;
     FCidade: Integer;
     FCnpj: string;
     FCpf: string;
@@ -45,8 +45,7 @@ type
     function Celular(AValue: string): TModelClientesEntitie; overload;
     function Celular: string; overload;
     function Cep(AValue: string): TModelClientesEntitie; overload;
-    function Cep(AValue: Integer): TModelClientesEntitie; overload;
-    function Cep: Integer; overload;   
+    function Cep: string; overload;
     function Cidade(AValue: string): TModelClientesEntitie; overload;
     function Cidade(AValue: Integer): TModelClientesEntitie; overload;
     function Cidade: Integer; overload;
@@ -139,16 +138,10 @@ end;
 function TModelClientesEntitie.Cep(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.Cep(StrToInt(AValue.Trim));
-end;
-
-function TModelClientesEntitie.Cep(AValue: Integer): TModelClientesEntitie;
-begin
-   Result := Self;
    FCep   := AValue;
 end;
 
-function TModelClientesEntitie.Cep: Integer;
+function TModelClientesEntitie.Cep: string;
 begin
    Result := FCep;
 end;
@@ -262,7 +255,7 @@ end;
 function TModelClientesEntitie.Id(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.Id(StrToInt(AValue.Trim));
+   Self.Id(StrToIntDef(AValue.Trim, 0));
 end;
 
 function TModelClientesEntitie.Id(AValue: Integer): TModelClientesEntitie;

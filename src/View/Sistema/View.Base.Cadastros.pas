@@ -91,6 +91,7 @@ begin
    btnCancelar.Enabled := True;
    btnExcluir.Enabled  := False;
    btnAlterar.Enabled  := False;
+   btnBuscar.Enabled   := False;
    btnFechar.Enabled   := False;
 end;
 
@@ -101,6 +102,7 @@ begin
    btnCancelar.Enabled := False;
    btnExcluir.Enabled  := True;
    btnAlterar.Enabled  := True;
+   btnBuscar.Enabled   := True;
    btnFechar.Enabled   := True;
 end;
 

@@ -33,6 +33,7 @@ implementation
 uses
   MyConnection,
   MyExceptions,
+  Utils.LibrarySistema,
   Utils.GlobalConsts;
 
 class function TModelClientesFactory.New: IModelClientesFactory<TModelClientesEntitie>;
@@ -124,6 +125,7 @@ begin
     .AddParam('RG_ORGAO_EXPEDIDOR', FEntitie.RgOrgaoExpedidor);
 
    try
+     ShowDebug(MyQuery.SQL.Text);
      MyQuery.ExecSQL;
    except on E: Exception do
    begin
@@ -154,8 +156,9 @@ begin
     .Add('(STATUS, RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
     .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO)')
     .Add('VALUES')
-    .Add('("'+ STATUS_ATIVO +'", :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
+    .Add('(:STATUS, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
     .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)')
+    .AddParam('STATUS', STATUS_ATIVO)
     .AddParam('DATA_CADASTRO', Now);
 end;
 
@@ -172,8 +175,10 @@ begin
    MyQueryNew
     .Add('DELETE FROM CLIENTES ')
     .Add('WHERE(CLIENTES.ID = :ID)')
-    .AddParam('ID', FEntitie.Id)
-    .ExecSQL;
+    .AddParam('ID', FEntitie.Id);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.ExecSQL;
 end;
 
 end.

@@ -47,6 +47,7 @@ type
     procedure edtBuscaKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure GridBuscaDblClick(Sender: TObject);
   private
     procedure GetTotalRegistros;
   public
@@ -133,6 +134,12 @@ begin
      Exit;
 
    lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_Busca.DataSet.RecordCount.ToString, '0', 6);
+end;
+
+procedure TViewBaseBusca.GridBuscaDblClick(Sender: TObject);
+begin
+   inherited;
+   btnVincular.Click;
 end;
 
 procedure TViewBaseBusca.GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);

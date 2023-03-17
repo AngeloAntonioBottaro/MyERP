@@ -97,6 +97,7 @@ implementation
 {$R *.dfm}
 
 uses
+  MyConnection,
   MyMessage,
   MyExceptions,
   Utils.MyConsts,
@@ -122,6 +123,7 @@ begin
      Exit;
 
    Self.StartOperations;
+   Self.ConfComponents(nil);
 end;
 
 procedure TViewClientesCad.btnBuscarClick(Sender: TObject);
@@ -162,8 +164,7 @@ begin
    try
      FCliente
       .Entitie
-       //.Id(edtId.Text)
-       .Id(2)
+       .Id(edtId.Text)
        .RazaoSocial(edtRazaoSocial.Text)
        .NomeFantasia(edtNomeFantasia.Text)
        .Endereco(edtEndereco.Text)
@@ -189,7 +190,7 @@ begin
      Self.EndOperations;
      ShowDone('Gravação realizada');
    except on E: Exception do
-     ShowInformation(E.Message);
+     ShowError('Não foi possível cadastrar o cliente', E.Message);
    end;
 end;
 
@@ -242,7 +243,7 @@ begin
    edtEndereco.Text           := FCliente.Entitie.Endereco;
    edtNumero.Text             := FCliente.Entitie.Numero;
    edtBairro.Text             := FCliente.Entitie.Bairro;
-   edtCep.Text                := FCliente.Entitie.Cep.ToString;
+   edtCep.Text                := FCliente.Entitie.Cep;
    edtIdCidade.Text           := FCliente.Entitie.Cidade.ToString;
    dtpDataNascimento.Date     := FCliente.Entitie.DataNascimento;
    edtTelefone.Text           := FCliente.Entitie.Telefone;
@@ -275,8 +276,39 @@ end;
 
 procedure TViewClientesCad.OnBusca(AId: Integer);
 begin
-   ShowInformation(AId.ToString);
+   Self.NewEntitie;
+
+   MyQueryNew
+    .Add('SELECT * FROM CLIENTES WHERE(CLIENTES.ID = :ID)')
+    .AddParam('ID', AId)
+    .Open;
+
+   FCliente
+      .Entitie
+       .Id(MyQuery.FieldByName('ID').AsString)
+       .RazaoSocial(MyQuery.FieldByName('RAZAO_SOCIAL').AsString)
+       .NomeFantasia(MyQuery.FieldByName('NOME_FANTASIA').AsString)
+       .Endereco(MyQuery.FieldByName('ENDERECO').AsString)
+       .Numero(MyQuery.FieldByName('NUMERO').AsString)
+       .Bairro(MyQuery.FieldByName('BAIRRO').AsString)
+       .Cep(MyQuery.FieldByName('CEP').AsString)
+       .Cidade(MyQuery.FieldByName('CIDADE').AsString)
+       .DataNascimento(MyQuery.FieldByName('DATA_NASCIMENTO').AsDateTime)
+       .Telefone(MyQuery.FieldByName('TELEFONE').AsString)
+       .Telefone2(MyQuery.FieldByName('TELEFONE2').AsString)
+       .Celular(MyQuery.FieldByName('CELULAR').AsString)
+       .Fax(MyQuery.FieldByName('FAX').AsString)
+       .Email(MyQuery.FieldByName('EMAIL').AsString)
+       .TipoJuridico(MyQuery.FieldByName('TIPO_JURIDICO').AsString)
+       .Cnpj(MyQuery.FieldByName('CNPJ').AsString)
+       .IE(MyQuery.FieldByName('INSCRICAO_ESTADUAL').AsString)
+       .Cpf(MyQuery.FieldByName('CPF').AsString)
+       .RG(MyQuery.FieldByName('RG').AsString)
+       .RgOrgaoExpedidor(MyQuery.FieldByName('RG_ORGAO_EXPEDIDOR').AsString)
+       .End_Entitie;
+
    Self.FillFields;
+   Self.ConfComponents(nil);
 end;
 
 procedure TViewClientesCad.ConfComponents(Sender: TObject);
