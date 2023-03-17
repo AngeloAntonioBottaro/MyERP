@@ -284,6 +284,7 @@
         <DCCReference Include="..\MyConnection\src\MyConnection.pas"/>
         <DCCReference Include="..\MyConnection\src\MyConnection.Types.pas"/>
         <DCCReference Include="src\Utils\Utils.LibrarySistema.pas"/>
+        <DCCReference Include="src\Model\Clientes\Busca\Model.Clientes.Busca.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>

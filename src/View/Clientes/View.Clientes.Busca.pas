@@ -17,12 +17,19 @@ uses
   Vcl.Grids,
   Vcl.DBGrids,
   Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.Menus;
+  Vcl.ExtCtrls,
+  Vcl.Menus,
+  Utils.MyTypes;
 
 type
   TViewClientesBusca = class(TViewBaseBusca)
+    rdBuscarNome: TRadioButton;
+    rdBuscarCodigo: TRadioButton;
+    rdBuscarCPF_CNPJ: TRadioButton;
+    rdBuscarCidade: TRadioButton;
     procedure btnCadastroClick(Sender: TObject);
   private
+    function GetTipoBusca: TTipoBuscaCliente;
   public
     procedure Buscar; override;
   end;
@@ -35,10 +42,10 @@ implementation
 {$R *.dfm}
 
 uses
-  MyConnection,
   MyExceptions,
   Utils.MyConsts,
-  View.Clientes.Cad;
+  View.Clientes.Cad,
+  Model.Clientes.Busca;
 
 procedure TViewClientesBusca.btnCadastroClick(Sender: TObject);
 begin
@@ -46,7 +53,7 @@ begin
    if(ViewClientesCad = nil)then Application.CreateForm(TViewClientesCad, ViewClientesCad);
 
    if(ViewClientesBusca.Showing)then
-       raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
+     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
 
    try
      ViewClientesCad.ShowModal;
@@ -56,17 +63,34 @@ begin
 end;
 
 procedure TViewClientesBusca.Buscar;
+var
+  LBusca: TModelClientesBusca;
 begin
-   MyQueryNew
-    .DataSource(DS_Busca)
-    .Add('select * from clientes where');
-
-   MyQuery
-    .Add('(razao_social like :condicao)')
-    .AddParam('condicao', '%'+edtBusca.Text+'%')
-    .Open;
+   LBusca := TModelClientesBusca.Create;
+   try
+     LBusca
+      .DataSource(DS_Busca)
+      .ConteudoBusca(edtBusca.Text)
+      .TipoBusca(Self.GetTipoBusca)
+      .Inativos(ckBuscarInativos.Enabled and ckBuscarInativos.Checked)
+      .Buscar;
+   finally
+     LBusca.Free;
+   end;
 
    inherited;
+end;
+
+function TViewClientesBusca.GetTipoBusca: TTipoBuscaCliente;
+begin
+   Result := TTipoBuscaCliente.Nome;
+
+   if(rdBuscarCodigo.Enabled and rdBuscarCodigo.Checked)then
+     Result := TTipoBuscaCliente.Id
+   else if(rdBuscarCPF_CNPJ.Enabled and rdBuscarCPF_CNPJ.Checked)then
+     Result := TTipoBuscaCliente.CPF_CNPJ
+   else if(rdBuscarCidade.Enabled and rdBuscarCidade.Checked)then
+     Result := TTipoBuscaCliente.Cidade;
 end;
 
 end.

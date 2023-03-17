@@ -32,7 +32,10 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyFormLibrary;
+  Utils.MyLibrary,
+  Utils.MyFormLibrary,
+  Utils.GlobalVariables,
+  Utils.LibrarySistema;
 
 procedure TViewBase.FormCreate(Sender: TObject);
 begin
@@ -40,8 +43,15 @@ begin
 end;
 
 procedure TViewBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  LOldDebug: Boolean;
 begin
    TMyFormLibrary.New.DefaultKeyDown(Self, Key, Shift);
+
+   LOldDebug := VG_DEBUG;
+   VG_DEBUG := TMyFormLibrary.New.DebugSistem(Key, Shift, VG_DEBUG);
+   if(LOldDebug <> VG_DEBUG)then
+     DebugOnOFF;
 end;
 
 procedure TViewBase.FormKeyPress(Sender: TObject; var Key: Char);

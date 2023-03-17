@@ -19,6 +19,9 @@ var
   VG_PastaTemporaria: string;
   VG_PastaAppData: string;
 
+  //DEV
+  VG_DEBUG: Boolean;
+
   //SISTEMA
   VG_DataHoraAberturaSistema: TDateTime;
   VG_Host: string;
@@ -39,6 +42,9 @@ implementation
 
 procedure RefreshVariables;
 begin
+   //DEV
+   VG_DEBUG := False;
+
    //PASTAS
    VG_PastaPadrao     := PASTA_PADRAO + 'ERP\';
    VG_PastaArquivos   := VG_PastaPadrao + PASTA_ARQUIVO;
@@ -49,9 +55,10 @@ begin
    VG_PastaAppData    := TMyLibrary.GetPathAppDataLocal;
 
    //SISTEMA
-   VG_Direitos   := DIREITOS_SISTEMA;
-   VG_Logo       := IncludeTrailingPathDelimiter(VG_PastaImagens) + IMAGE_LOGO;
-   VG_Impressora := EmptyStr;
+   VG_Direitos     := DIREITOS_SISTEMA;
+   VG_Logo         := IncludeTrailingPathDelimiter(VG_PastaImagens) + IMAGE_LOGO;
+   VG_Impressora   := EmptyStr;
+   VG_IdEmpresaLog := 0;
 
    //USUARIO
    VG_UsuarioLogadoId   := 0;

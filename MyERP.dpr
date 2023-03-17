@@ -103,7 +103,8 @@ uses
   MyConnection.Interfaces in '..\MyConnection\src\MyConnection.Interfaces.pas',
   MyConnection in '..\MyConnection\src\MyConnection.pas',
   MyConnection.Types in '..\MyConnection\src\MyConnection.Types.pas',
-  Utils.LibrarySistema in 'src\Utils\Utils.LibrarySistema.pas';
+  Utils.LibrarySistema in 'src\Utils\Utils.LibrarySistema.pas',
+  Model.Clientes.Busca in 'src\Model\Clientes\Busca\Model.Clientes.Busca.pas';
 
 {$R *.res}
 
