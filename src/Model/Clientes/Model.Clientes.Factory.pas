@@ -132,7 +132,7 @@ begin
       if(MyQuery.ExceptionZeroRecordsUpdated)then
         Exit;
 
-      raise ExceptionError.Create(E.Message);
+      raise ExceptionError.Create('Não foi possível cadastrar o cliente', E.Message);
    end;
    end;
 end;

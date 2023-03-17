@@ -94,16 +94,28 @@ inherited ViewClientesCad: TViewClientesCad
     object lbIdCidade: TLabel
       Left = 8
       Top = 90
-      Width = 33
+      Width = 38
       Height = 13
       Caption = 'C'#243'digo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbUF: TLabel
       Left = 422
       Top = 90
-      Width = 13
+      Width = 14
       Height = 13
       Caption = 'UF'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbCPF: TLabel
       Left = 360
@@ -129,9 +141,15 @@ inherited ViewClientesCad: TViewClientesCad
     object lbNomeCidade: TLabel
       Left = 74
       Top = 90
-      Width = 33
+      Width = 38
       Height = 13
       Caption = 'Cidade'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbCNPJ: TLabel
       Left = 118
@@ -317,6 +335,7 @@ inherited ViewClientesCad: TViewClientesCad
       Date = 44993.000000000000000000
       Time = 0.445778391200292400
       TabOrder = 10
+      OnExit = ConfComponents
     end
     object edtIdade: TEdit
       Left = 589

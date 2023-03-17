@@ -101,6 +101,7 @@ uses
   MyMessage,
   MyExceptions,
   Utils.MyConsts,
+  Utils.MyLibrary,
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
   Utils.LibrarySistema,
@@ -132,7 +133,7 @@ begin
    if(ViewClientesBusca = nil)then Application.CreateForm(TViewClientesBusca, ViewClientesBusca);
 
    if(ViewClientesBusca.Showing)then
-       raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
+     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
 
    try
      ViewClientesBusca.btnCadastro.Enabled := False;
@@ -161,37 +162,36 @@ end;
 procedure TViewClientesCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
-   try
-     FCliente
-      .Entitie
-       .Id(edtId.Text)
-       .RazaoSocial(edtRazaoSocial.Text)
-       .NomeFantasia(edtNomeFantasia.Text)
-       .Endereco(edtEndereco.Text)
-       .Numero(edtNumero.Text)
-       .Bairro(edtBairro.Text)
-       .Cep(edtCep.Text)
-       .Cidade(edtIdCidade.Text)
-       .DataNascimento(dtpDataNascimento.Date)
-       .Telefone(edtTelefone.Text)
-       .Telefone2(edtTelefone2.Text)
-       .Celular(edtCelular.Text)
-       .Fax(edtFax.Text)
-       .Email(edtEmail.Text)
-       .TipoJuridico(cBoxTipoJuridico.Text)
-       .Cnpj(edtCNPJ.Text)
-       .IE(edtIE.Text)
-       .Cpf(edtCPF.Text)
-       .RG(edtRG.Text)
-       .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
-       .End_Entitie
-      .Gravar;
+   FCliente
+    .Entitie
+     .Id(edtId.Text)
+     .RazaoSocial(edtRazaoSocial.Text)
+     .NomeFantasia(edtNomeFantasia.Text)
+     .Endereco(edtEndereco.Text)
+     .Numero(edtNumero.Text)
+     .Bairro(edtBairro.Text)
+     .Cep(edtCep.Text)
+     .Cidade(edtIdCidade.Text)
+     .DataNascimento(dtpDataNascimento.Date)
+     .Telefone(edtTelefone.Text)
+     .Telefone2(edtTelefone2.Text)
+     .Celular(edtCelular.Text)
+     .Fax(edtFax.Text)
+     .Email(edtEmail.Text)
+     .TipoJuridico(cBoxTipoJuridico.Text)
+     .Cnpj(edtCNPJ.Text)
+     .IE(edtIE.Text)
+     .Cpf(edtCPF.Text)
+     .RG(edtRG.Text)
+     .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
+     .End_Entitie
+    .Gravar;
 
-     Self.EndOperations;
-     ShowDone('Gravação realizada');
-   except on E: Exception do
-     ShowError('Não foi possível cadastrar o cliente', E.Message);
-   end;
+   Self.EndOperations;
+   if(Trim(edtId.Text).IsEmpty)then
+     Self.EmptyFields;
+
+   ShowDone('Gravação realizada');
 end;
 
 procedure TViewClientesCad.btnNovoClick(Sender: TObject);
@@ -261,8 +261,9 @@ end;
 
 procedure TViewClientesCad.InitialConfiguration;
 begin
-   edtIdCidade.ShowHint := True;
-   edtIdCidade.Hint     := HINT_ATALHO_CONSULTA;
+   dtpDataNascimento.Date := Now;
+   edtIdCidade.ShowHint   := True;
+   edtIdCidade.Hint       := HINT_ATALHO_CONSULTA;
 
    CriarComboBoxTipoJuridico(cBoxTipoJuridico.Items);
 
@@ -319,6 +320,8 @@ begin
    edtCPF.Enabled               := cBoxTipoJuridico.Text = PESSOA_FISICA;
    edtRG.Enabled                := cBoxTipoJuridico.Text = PESSOA_FISICA;
    edtRGOrgaoExpedidor.Enabled  := cBoxTipoJuridico.Text = PESSOA_FISICA;
+
+   edtIdade.Text := TMyLibrary.CalculateAge(dtpDataNascimento.Date).ToString + ' anos';
 end;
 
 end.

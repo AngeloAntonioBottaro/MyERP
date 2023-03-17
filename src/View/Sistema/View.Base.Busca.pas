@@ -17,7 +17,7 @@ uses
   Vcl.ExtCtrls,
   Vcl.Grids,
   Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.Menus;
+  Vcl.StdCtrls, Vcl.Menus, Vcl.ComCtrls;
 
 type
   TViewBaseBusca = class(TViewBase)
@@ -27,17 +27,23 @@ type
     pnButtons: TPanel;
     btnCadastro: TButton;
     btnVincular: TButton;
-    lbBusca: TLabel;
-    edtBusca: TEdit;
     DS_Busca: TDataSource;
     btnFechar: TButton;
     TimerBuscar: TTimer;
     PopupMenu: TPopupMenu;
     Atualizar1: TMenuItem;
     gBoxTipoConsulta: TGroupBox;
-    ckBuscarInativos: TCheckBox;
     pnOptions: TPanel;
     lbTotalRegistros: TLabel;
+    pnBuscarPeriodo: TPanel;
+    pnBuscarConteudo: TPanel;
+    lbBusca: TLabel;
+    edtBusca: TEdit;
+    ckBuscarInativos: TCheckBox;
+    lbBuscaPeriodo: TLabel;
+    dtpPeriodoInicial: TDateTimePicker;
+    Label1: TLabel;
+    dtpPeriodoFinal: TDateTimePicker;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);
@@ -48,6 +54,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GridBuscaDblClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     procedure GetTotalRegistros;
   public
@@ -78,7 +85,17 @@ end;
 procedure TViewBaseBusca.FormCreate(Sender: TObject);
 begin
    inherited;
-   TimerBuscar.Enabled := False;
+   TimerBuscar.Enabled    := False;
+   dtpPeriodoInicial.Date := Now;
+   dtpPeriodoFinal.Date   := Now;
+end;
+
+procedure TViewBaseBusca.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   inherited;
+   case(Key)of
+    VK_F5: if(Shift = [])then Self.Buscar;
+   end;
 end;
 
 procedure TViewBaseBusca.FormShow(Sender: TObject);

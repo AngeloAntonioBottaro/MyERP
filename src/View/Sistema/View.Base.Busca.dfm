@@ -13,31 +13,115 @@ inherited ViewBaseBusca: TViewBaseBusca
     Top = 0
     Width = 755
     Height = 49
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
-    object lbBusca: TLabel
-      Left = 8
-      Top = 8
-      Width = 187
-      Height = 13
-      Caption = 'Entre com o conte'#250'do a ser consultado'
-    end
-    object edtBusca: TEdit
-      Left = 8
-      Top = 22
-      Width = 321
-      Height = 21
+    ExplicitLeft = 32
+    ExplicitTop = -6
+    object pnBuscarPeriodo: TPanel
+      AlignWithMargins = True
+      Left = 397
+      Top = 1
+      Width = 230
+      Height = 47
+      Margins.Left = 5
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      BevelOuter = bvNone
       TabOrder = 0
-      OnKeyPress = edtBuscaKeyPress
+      Visible = False
+      ExplicitLeft = 387
+      object lbBuscaPeriodo: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 224
+        Height = 13
+        Align = alTop
+        Caption = 'Entre com o per'#237'odo a ser consultado'
+        ExplicitWidth = 178
+      end
+      object Label1: TLabel
+        AlignWithMargins = True
+        Left = 90
+        Top = 22
+        Width = 12
+        Height = 22
+        Align = alLeft
+        Caption = ' '#224' '
+        Layout = tlCenter
+        ExplicitHeight = 13
+      end
+      object dtpPeriodoInicial: TDateTimePicker
+        AlignWithMargins = True
+        Left = 3
+        Top = 22
+        Width = 81
+        Height = 22
+        Align = alLeft
+        Date = 45002.000000000000000000
+        Time = 0.743960381943907100
+        TabOrder = 0
+        ExplicitLeft = 6
+      end
+      object dtpPeriodoFinal: TDateTimePicker
+        AlignWithMargins = True
+        Left = 108
+        Top = 22
+        Width = 81
+        Height = 22
+        Align = alLeft
+        Date = 45002.000000000000000000
+        Time = 0.743960381943907100
+        TabOrder = 1
+        ExplicitLeft = 195
+      end
     end
-    object ckBuscarInativos: TCheckBox
-      Left = 335
-      Top = 26
-      Width = 65
-      Height = 17
-      Caption = 'Inativos'
+    object pnBuscarConteudo: TPanel
+      AlignWithMargins = True
+      Left = 6
+      Top = 1
+      Width = 386
+      Height = 47
+      Margins.Left = 5
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      BevelOuter = bvNone
       TabOrder = 1
+      ExplicitLeft = -72
+      ExplicitTop = -4
+      object lbBusca: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 380
+        Height = 13
+        Align = alTop
+        Caption = 'Entre com o conte'#250'do a ser consultado'
+        ExplicitLeft = -20
+        ExplicitTop = 6
+        ExplicitWidth = 378
+      end
+      object edtBusca: TEdit
+        AlignWithMargins = True
+        Left = 3
+        Top = 22
+        Width = 380
+        Height = 21
+        Align = alTop
+        TabOrder = 0
+        OnKeyPress = edtBuscaKeyPress
+        ExplicitLeft = 8
+        ExplicitWidth = 321
+      end
     end
   end
   object pnBotton: TPanel
@@ -46,7 +130,9 @@ inherited ViewBaseBusca: TViewBaseBusca
     Width = 755
     Height = 120
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
+    ExplicitLeft = 40
+    ExplicitTop = 294
     DesignSize = (
       755
       120)
@@ -69,7 +155,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Height = 36
         Align = alRight
         Caption = 'Cadastrar'
-        TabOrder = 0
+        TabOrder = 1
       end
       object btnVincular: TButton
         Left = 105
@@ -78,7 +164,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Height = 36
         Align = alRight
         Caption = 'Vincular'
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnVincularClick
       end
       object btnFechar: TButton
@@ -125,6 +211,14 @@ inherited ViewBaseBusca: TViewBaseBusca
         ExplicitHeight = 13
       end
     end
+    object ckBuscarInativos: TCheckBox
+      Left = 445
+      Top = 31
+      Width = 60
+      Height = 17
+      Caption = 'Inativos'
+      TabOrder = 3
+    end
   end
   object GridBusca: TDBGrid
     Left = 0
@@ -135,7 +229,7 @@ inherited ViewBaseBusca: TViewBaseBusca
     DataSource = DS_Busca
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     PopupMenu = PopupMenu
-    TabOrder = 2
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11

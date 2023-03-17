@@ -163,7 +163,7 @@ end;
 function TModelFuncionariosEntitie.Cidade(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   Self.Cidade(StrToInt(AValue.Trim));
+   Self.Cidade(StrToIntDef(AValue.Trim, 0));
 end;
 
 function TModelFuncionariosEntitie.Cidade(AValue: Integer): TModelFuncionariosEntitie;

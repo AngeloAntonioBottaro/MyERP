@@ -19,7 +19,7 @@ uses
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
   Vcl.Menus,
-  Utils.MyTypes;
+  Utils.MyTypes, Vcl.ComCtrls;
 
 type
   TViewClientesBusca = class(TViewBaseBusca)
@@ -28,6 +28,7 @@ type
     rdBuscarCPF_CNPJ: TRadioButton;
     rdBuscarCidade: TRadioButton;
     procedure btnCadastroClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     function GetTipoBusca: TTipoBuscaCliente;
   public
@@ -79,6 +80,17 @@ begin
    end;
 
    inherited;
+end;
+
+procedure TViewClientesBusca.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   inherited;
+   case(Key)of
+    VK_F2: if(Shift = [])then rdBuscarCodigo.Checked   := True;
+    VK_F3: if(Shift = [])then rdBuscarNome.Checked     := True;
+    VK_F4: if(Shift = [])then rdBuscarCPF_CNPJ.Checked := True;
+    VK_F6: if(Shift = [])then rdBuscarCidade.Checked   := True;
+   end;
 end;
 
 function TViewClientesBusca.GetTipoBusca: TTipoBuscaCliente;

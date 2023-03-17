@@ -10,11 +10,11 @@ inherited ViewClientesBusca: TViewClientesBusca
     end
     inherited gBoxTipoConsulta: TGroupBox
       object rdBuscarNome: TRadioButton
-        Left = 94
+        Left = 109
         Top = 20
-        Width = 50
+        Width = 75
         Height = 17
-        Caption = 'Nome'
+        Caption = 'Nome (F3)'
         Checked = True
         TabOrder = 0
         TabStop = True
@@ -22,31 +22,26 @@ inherited ViewClientesBusca: TViewClientesBusca
       object rdBuscarCodigo: TRadioButton
         Left = 10
         Top = 20
-        Width = 61
+        Width = 78
         Height = 17
-        Caption = 'C'#243'digo'
+        Caption = 'C'#243'digo (F2)'
         TabOrder = 1
       end
       object rdBuscarCPF_CNPJ: TRadioButton
-        Left = 158
+        Left = 198
         Top = 20
-        Width = 80
+        Width = 96
         Height = 17
-        Caption = 'CPF / CNPJ'
+        Caption = 'CPF / CNPJ (F4)'
         TabOrder = 2
       end
       object rdBuscarCidade: TRadioButton
-        Left = 252
+        Left = 308
         Top = 20
-        Width = 53
+        Width = 77
         Height = 17
-        Caption = 'Cidade'
+        Caption = 'Cidade (F6)'
         TabOrder = 3
-      end
-    end
-    inherited pnOptions: TPanel
-      inherited lbTotalRegistros: TLabel
-        Height = 14
       end
     end
   end
