@@ -102,4 +102,13 @@ inherited ViewClientesBusca: TViewClientesBusca
         Visible = True
       end>
   end
+  inherited PopupMenu: TPopupMenu
+    inherited AtivarInativar1: TMenuItem
+      Visible = True
+    end
+    inherited Excluir1: TMenuItem
+      Visible = True
+      OnClick = Excluir1Click
+    end
+  end
 end

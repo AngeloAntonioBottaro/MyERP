@@ -32,6 +32,7 @@ implementation
 
 uses
   MyConnection,
+  MyMessage,
   MyExceptions,
   Utils.LibrarySistema,
   Utils.GlobalConsts;
@@ -129,12 +130,12 @@ begin
      MyQuery.ExecSQL;
    except on E: Exception do
    begin
-      if(MyQuery.ExceptionZeroRecordsUpdated)then
-        Exit;
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível cadastrar o cliente', E.Message);
+   end;
+   end;
 
-      raise ExceptionError.Create('Não foi possível cadastrar o cliente', E.Message);
-   end;
-   end;
+   ShowDone('Gravação realizada');
 end;
 
 procedure TModelClientesFactory.UpdateClient;
@@ -179,6 +180,8 @@ begin
 
    ShowDebug(MyQuery.SQL.Text);
    MyQuery.ExecSQL;
+
+   ShowDone('Exclusão realizada');
 end;
 
 end.

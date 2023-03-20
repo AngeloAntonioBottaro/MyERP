@@ -7,7 +7,8 @@ uses
   System.StrUtils,
   System.UITypes,
   Utils.MyConsts,
-  Utils.MyLibrary;
+  Utils.MyLibrary,
+  Utils.MyVCLLibrary;
 
 var
   //PASTAS
@@ -17,6 +18,7 @@ var
   VG_PastaImagens: string;
   VG_PastaRelatorios: string;
   VG_PastaTemporaria: string;
+  VG_PastaBancoDados: string;
   VG_PastaAppData: string;
 
   //DEV
@@ -46,12 +48,13 @@ begin
    VG_DEBUG := False;
 
    //PASTAS
-   VG_PastaPadrao     := PASTA_PADRAO + 'ERP\';
-   VG_PastaArquivos   := VG_PastaPadrao + PASTA_ARQUIVO;
-   VG_PastaBackups    := VG_PastaPadrao + PASTA_BACKUP;
-   VG_PastaImagens    := VG_PastaArquivos + PASTA_IMAGEM;
-   VG_PastaRelatorios := VG_PastaPadrao + PASTA_RELATORIO;
-   VG_PastaTemporaria := PASTA_TEMP;
+   VG_PastaPadrao     := TMyVclLibrary.GetAppPath + 'ERP\';
+   VG_PastaArquivos   := VG_PastaPadrao + FOULDER_ARQUIVO;
+   VG_PastaBackups    := VG_PastaPadrao + FOULDER_BACKUP;
+   VG_PastaImagens    := VG_PastaArquivos + FOULDER_IMAGEM;
+   VG_PastaRelatorios := VG_PastaPadrao + FOULDER_RELATORIO;
+   VG_PastaBancoDados := VG_PastaPadrao + FOULDER_DATABASE;
+   VG_PastaTemporaria := FOULDER_TEMP;
    VG_PastaAppData    := TMyLibrary.GetPathAppDataLocal;
 
    //SISTEMA
@@ -81,6 +84,9 @@ begin
 
    if(not DirectoryExists(VG_PastaRelatorios))then
      ForceDirectories(VG_PastaRelatorios);
+
+   if(not DirectoryExists(VG_PastaBancoDados))then
+     ForceDirectories(VG_PastaBancoDados);
 
    if(not DirectoryExists(VG_PastaTemporaria))then
      ForceDirectories(VG_PastaTemporaria);

@@ -44,6 +44,10 @@ type
     dtpPeriodoInicial: TDateTimePicker;
     Label1: TLabel;
     dtpPeriodoFinal: TDateTimePicker;
+    N1: TMenuItem;
+    Excluir1: TMenuItem;
+    N2: TMenuItem;
+    AtivarInativar1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);
@@ -55,7 +59,10 @@ type
     procedure FormShow(Sender: TObject);
     procedure GridBuscaDblClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Excluir1Click(Sender: TObject);
+    procedure AtivarInativar1Click(Sender: TObject);
   private
+    procedure ValidacoesBasicas;
     procedure GetTotalRegistros;
   public
     FOnBusca: TProc<Integer>;
@@ -103,6 +110,12 @@ begin
    Self.GetTotalRegistros;
 end;
 
+procedure TViewBaseBusca.AtivarInativar1Click(Sender: TObject);
+begin
+   inherited;
+   Self.ValidacoesBasicas;
+end;
+
 procedure TViewBaseBusca.Atualizar1Click(Sender: TObject);
 begin
    Self.Buscar;
@@ -118,14 +131,10 @@ end;
 procedure TViewBaseBusca.btnVincularClick(Sender: TObject);
 begin
    inherited;
+   Self.ValidacoesBasicas;
+
    if(not Assigned(FOnBusca))then
      raise ExceptionRequired.Create('Procedimento para vínculo não informado');
-
-   if(DS_Busca.DataSet = nil)then
-     raise ExceptionRequired.Create('Query de busca não informada');
-
-   if(DS_Busca.DataSet.IsEmpty)then
-     raise ExceptionRequired.Create('Nenhum registro encontrado para vínculo');
 
    FOnBusca(DS_Busca.DataSet.FieldByName('ID').AsInteger);
    Self.Close;
@@ -141,6 +150,12 @@ procedure TViewBaseBusca.edtBuscaKeyPress(Sender: TObject; var Key: Char);
 begin
    TimerBuscar.Enabled := False;
    TimerBuscar.Enabled := True;
+end;
+
+procedure TViewBaseBusca.Excluir1Click(Sender: TObject);
+begin
+   inherited;
+   Self.ValidacoesBasicas;
 end;
 
 procedure TViewBaseBusca.GetTotalRegistros;
@@ -176,6 +191,18 @@ procedure TViewBaseBusca.TimerBuscarTimer(Sender: TObject);
 begin
    TimerBuscar.Enabled := False;
    Self.Buscar;
+end;
+
+procedure TViewBaseBusca.ValidacoesBasicas;
+var
+  LMsg: string;
+begin
+   LMsg := 'Ação não pode ser realizada. Nenhum registro encontrado';
+   if(DS_Busca.DataSet = nil)then
+     raise ExceptionRequired.Create(LMsg, 'Query de busca não informada');
+
+   if(DS_Busca.DataSet.IsEmpty)then
+     raise ExceptionRequired.Create(LMsg);
 end;
 
 end.

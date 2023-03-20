@@ -95,7 +95,7 @@ uses
   Model.Produtos.SubGrupos.Interfaces in 'src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Interfaces.pas',
   Model.Produtos.SubGrupos.Entitie in 'src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Entitie.pas',
   Model.Produtos.SubGrupos.Factory in 'src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Factory.pas',
-  Model.Sistema.DataBaseConnectionFile in 'src\Model\Sistema\Model.Sistema.DataBaseConnectionFile.pas',
+  MyDatabaseConnectionFile in '..\MyDatabaseConnectionFile\src\MyDatabaseConnectionFile.pas',
   Utils.MyIniLibrary in '..\MyUtilsLibrary\Utils.MyIniLibrary.pas',
   MyConnection.Configuration in '..\MyConnection\src\MyConnection.Configuration.pas',
   MyConnection.FireDAC.ComponentConnection in '..\MyConnection\src\MyConnection.FireDAC.ComponentConnection.pas',
@@ -104,7 +104,12 @@ uses
   MyConnection in '..\MyConnection\src\MyConnection.pas',
   MyConnection.Types in '..\MyConnection\src\MyConnection.Types.pas',
   Utils.LibrarySistema in 'src\Utils\Utils.LibrarySistema.pas',
-  Model.Clientes.Busca in 'src\Model\Clientes\Busca\Model.Clientes.Busca.pas';
+  Model.Clientes.Busca in 'src\Model\Clientes\Busca\Model.Clientes.Busca.pas',
+  MyDataBaseConnectionFile.View.SelecionarConexao in '..\MyDatabaseConnectionFile\src\MyDataBaseConnectionFile.View.SelecionarConexao.pas' {ViewSelecionarConexao},
+  MyDatabaseConnectionFile.Consts in '..\MyDatabaseConnectionFile\src\MyDatabaseConnectionFile.Consts.pas',
+  MyDataBaseConnectionFile.View.Lista in '..\MyDatabaseConnectionFile\src\MyDataBaseConnectionFile.View.Lista.pas' {ViewLista},
+  MyDataBaseConnectionFile.View.Manutencao in '..\MyDatabaseConnectionFile\src\MyDataBaseConnectionFile.View.Manutencao.pas' {ViewManutencao},
+  MyDatabaseConnectionFile.Ini in '..\MyDatabaseConnectionFile\src\MyDatabaseConnectionFile.Ini.pas';
 
 {$R *.res}
 

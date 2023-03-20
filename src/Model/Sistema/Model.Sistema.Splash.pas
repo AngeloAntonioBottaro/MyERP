@@ -38,8 +38,8 @@ uses
   MyMessage,
   MyExceptions,
   MyConnection,
+  MyDatabaseConnectionFile,
   Utils.GlobalVariables,
-  Model.Sistema.DatabaseConnectionFile,
   Model.Sistema.Imagens.DM;
 
 class function TModelSistemaSplash.GetInstance: IModelSistemaSplash;
@@ -90,13 +90,16 @@ end;
 
 procedure TModelSistemaSplash.ConnectToDatabase;
 var
-  FDBCon: TModelSistemaDataBaseConnectionFile;
+  FDBCon: TMyDataBaseConnectionFile;
 begin
    Self.WriteInformation('Acessando arquivo de configurações de conexão');
-   FDBCon := TModelSistemaDataBaseConnectionFile.Create;
+   FDBCon := TMyDataBaseConnectionFile.Create;
    try
-     if(not FDBCon.Mensage.IsEmpty)then
-       raise Exception.Create('Leitura do arquivo de configurações não realizada: ' + FDBCon.Mensage);
+     if(FDBCon.Cancel)then
+     begin
+        Application.Terminate;
+        Abort;
+     end;
 
      Self.WriteInformation('Realizando conexão com o banco de dados');
 
@@ -114,11 +117,11 @@ begin
        .Port(FDBCon.Port)
        .ComponentTypeFireDac
        .ConnectionSingletonOn;
-
-      MyConn.Connection.TestConnection;
    finally
      FDBCon.Free;
    end;
+
+   MyConn.Connection.TestConnection;
 end;
 
 procedure TModelSistemaSplash.CriarDataModules;

@@ -29,6 +29,7 @@ type
     rdBuscarCidade: TRadioButton;
     procedure btnCadastroClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Excluir1Click(Sender: TObject);
   private
     function GetTipoBusca: TTipoBuscaCliente;
   public
@@ -46,6 +47,7 @@ uses
   MyExceptions,
   Utils.MyConsts,
   View.Clientes.Cad,
+  Model.Clientes.Factory,
   Model.Clientes.Busca;
 
 procedure TViewClientesBusca.btnCadastroClick(Sender: TObject);
@@ -80,6 +82,16 @@ begin
    end;
 
    inherited;
+end;
+
+procedure TViewClientesBusca.Excluir1Click(Sender: TObject);
+begin
+   inherited;
+   TModelClientesFactory.New
+    .Entitie
+     .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
+     .End_Entitie
+    .Deletar;
 end;
 
 procedure TViewClientesBusca.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

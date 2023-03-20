@@ -157,6 +157,8 @@ begin
      Exit;
 
    FCliente.Deletar;
+   Self.EndOperations;
+   Self.EmptyFields;
 end;
 
 procedure TViewClientesCad.btnGravarClick(Sender: TObject);
@@ -190,8 +192,6 @@ begin
    Self.EndOperations;
    if(Trim(edtId.Text).IsEmpty)then
      Self.EmptyFields;
-
-   ShowDone('Gravação realizada');
 end;
 
 procedure TViewClientesCad.btnNovoClick(Sender: TObject);

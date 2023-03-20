@@ -20,8 +20,6 @@ inherited ViewBaseBusca: TViewBaseBusca
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitLeft = 32
-    ExplicitTop = -6
     object pnBuscarPeriodo: TPanel
       AlignWithMargins = True
       Left = 397
@@ -36,7 +34,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       BevelOuter = bvNone
       TabOrder = 0
       Visible = False
-      ExplicitLeft = 387
       object lbBuscaPeriodo: TLabel
         AlignWithMargins = True
         Left = 3
@@ -68,7 +65,6 @@ inherited ViewBaseBusca: TViewBaseBusca
         Date = 45002.000000000000000000
         Time = 0.743960381943907100
         TabOrder = 0
-        ExplicitLeft = 6
       end
       object dtpPeriodoFinal: TDateTimePicker
         AlignWithMargins = True
@@ -80,7 +76,6 @@ inherited ViewBaseBusca: TViewBaseBusca
         Date = 45002.000000000000000000
         Time = 0.743960381943907100
         TabOrder = 1
-        ExplicitLeft = 195
       end
     end
     object pnBuscarConteudo: TPanel
@@ -96,8 +91,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = -72
-      ExplicitTop = -4
       object lbBusca: TLabel
         AlignWithMargins = True
         Left = 3
@@ -106,9 +99,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Height = 13
         Align = alTop
         Caption = 'Entre com o conte'#250'do a ser consultado'
-        ExplicitLeft = -20
-        ExplicitTop = 6
-        ExplicitWidth = 378
+        ExplicitWidth = 187
       end
       object edtBusca: TEdit
         AlignWithMargins = True
@@ -119,8 +110,6 @@ inherited ViewBaseBusca: TViewBaseBusca
         Align = alTop
         TabOrder = 0
         OnKeyPress = edtBuscaKeyPress
-        ExplicitLeft = 8
-        ExplicitWidth = 321
       end
     end
   end
@@ -131,8 +120,6 @@ inherited ViewBaseBusca: TViewBaseBusca
     Height = 120
     Align = alBottom
     TabOrder = 2
-    ExplicitLeft = 40
-    ExplicitTop = 294
     DesignSize = (
       755
       120)
@@ -255,6 +242,22 @@ inherited ViewBaseBusca: TViewBaseBusca
     object Atualizar1: TMenuItem
       Caption = 'Atualizar - F5'
       OnClick = Atualizar1Click
+    end
+    object AtivarInativar1: TMenuItem
+      Caption = 'Ativar/Inativar'
+      Visible = False
+      OnClick = AtivarInativar1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Excluir1: TMenuItem
+      Caption = 'Excluir'
+      Visible = False
+      OnClick = Excluir1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
     end
   end
 end
