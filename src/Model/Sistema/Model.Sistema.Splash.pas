@@ -38,7 +38,7 @@ uses
   MyMessage,
   MyExceptions,
   MyConnection,
-  MyDatabaseConnectionFile,
+  MyConnectionConfiguration,
   Utils.GlobalVariables,
   Model.Sistema.Imagens.DM;
 
@@ -78,7 +78,7 @@ begin
 
      FLoadingComplete := True;
    except on E: Exception do
-    ShowError('Falha ao iniciar o sistema', E.Message);
+     ShowError('Falha ao iniciar o sistema', E.Message);
    end;
 end;
 
@@ -90,12 +90,12 @@ end;
 
 procedure TModelSistemaSplash.ConnectToDatabase;
 var
-  FDBCon: TMyDataBaseConnectionFile;
+  LMCC: TMyConnectionConfiguration;
 begin
    Self.WriteInformation('Acessando arquivo de configurações de conexão');
-   FDBCon := TMyDataBaseConnectionFile.Create;
+   LMCC := TMyConnectionConfiguration.Create;
    try
-     if(FDBCon.Cancel)then
+     if(LMCC.LoadConfiguration.Cancel)then
      begin
         Application.Terminate;
         Abort;
@@ -103,22 +103,22 @@ begin
 
      Self.WriteInformation('Realizando conexão com o banco de dados');
 
-     VG_Host     := FDBCon.Host;
-     VG_Database := FDBCon.Database;
+     VG_Host     := LMCC.Host;
+     VG_Database := LMCC.Database;
 
      MyConn
       .Configuration
        .ClearConfiguration
-       .DriverID('FB')
        .Host(VG_Host)
        .UserName('sysdba')
        .Database(VG_Database)
-       .Password(FDBCon.Password)
-       .Port(FDBCon.Port)
+       .Password(LMCC.Password)
+       .Port(LMCC.Port)
+       .DriverFirebird
        .ComponentTypeFireDac
        .ConnectionSingletonOn;
    finally
-     FDBCon.Free;
+     LMCC.Free;
    end;
 
    MyConn.Connection.TestConnection;

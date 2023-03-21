@@ -275,7 +275,6 @@
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Interfaces.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Entitie.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Factory.pas"/>
-        <DCCReference Include="..\MyDatabaseConnectionFile\src\MyDatabaseConnectionFile.pas"/>
         <DCCReference Include="..\MyUtilsLibrary\Utils.MyIniLibrary.pas"/>
         <DCCReference Include="..\MyConnection\src\MyConnection.Configuration.pas"/>
         <DCCReference Include="..\MyConnection\src\MyConnection.FireDAC.ComponentConnection.pas"/>
@@ -285,20 +284,21 @@
         <DCCReference Include="..\MyConnection\src\MyConnection.Types.pas"/>
         <DCCReference Include="src\Utils\Utils.LibrarySistema.pas"/>
         <DCCReference Include="src\Model\Clientes\Busca\Model.Clientes.Busca.pas"/>
-        <DCCReference Include="..\MyDatabaseConnectionFile\src\MyDataBaseConnectionFile.View.SelecionarConexao.pas">
-            <Form>ViewSelecionarConexao</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\MyDatabaseConnectionFile\src\MyDatabaseConnectionFile.Consts.pas"/>
-        <DCCReference Include="..\MyDatabaseConnectionFile\src\MyDataBaseConnectionFile.View.Lista.pas">
+        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.Consts.pas"/>
+        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.Ini.pas"/>
+        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.pas"/>
+        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Lista.pas">
             <Form>ViewLista</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\MyDatabaseConnectionFile\src\MyDataBaseConnectionFile.View.Manutencao.pas">
+        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Manutencao.pas">
             <Form>ViewManutencao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\MyDatabaseConnectionFile\src\MyDatabaseConnectionFile.Ini.pas"/>
+        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.SelecionarConexao.pas">
+            <Form>ViewSelecionarConexao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>

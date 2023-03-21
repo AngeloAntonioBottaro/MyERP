@@ -24,9 +24,11 @@ type
     btnCancelar: TButton;
     Image1: TImage;
     edtUsuarioLogin: TLabeledEdit;
+    imgConf: TImage;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnLogarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure imgConfClick(Sender: TObject);
   private
     procedure OnError;
   public
@@ -42,6 +44,7 @@ implementation
 uses
   Utils.MyVclLibrary,
   Utils.GlobalVariables,
+  MyConnectionConfiguration,
   Model.Sistema.Login;
 
 procedure TViewSistemaLogin.btnCancelarClick(Sender: TObject);
@@ -67,6 +70,18 @@ procedure TViewSistemaLogin.FormClose(Sender: TObject; var Action: TCloseAction)
 begin
    if(VG_UsuarioLogadoId = 0)then
      Self.SystemTerminate;
+end;
+
+procedure TViewSistemaLogin.imgConfClick(Sender: TObject);
+var
+  LMCC: TMyConnectionConfiguration;
+begin
+   LMCC := TMyConnectionConfiguration.Create;
+   try
+     LMCC.ListConfigurations;
+   finally
+     LMCC.Free;
+   end;
 end;
 
 procedure TViewSistemaLogin.OnError;
