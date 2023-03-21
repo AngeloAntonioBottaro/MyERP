@@ -135,6 +135,7 @@ inherited ViewSistemaLogin: TViewSistemaLogin
     Cursor = crHandPoint
     Hint = 'Lista de conex'#245'es'
     Anchors = [akTop, akRight]
+    Center = True
     ParentShowHint = False
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000000300000

@@ -49,12 +49,12 @@ begin
 
    //PASTAS
    VG_PastaPadrao     := TMyVclLibrary.GetAppPath + 'ERP\';
-   VG_PastaArquivos   := VG_PastaPadrao + FOULDER_ARQUIVO;
-   VG_PastaBackups    := VG_PastaPadrao + FOULDER_BACKUP;
-   VG_PastaImagens    := VG_PastaArquivos + FOULDER_IMAGEM;
-   VG_PastaRelatorios := VG_PastaPadrao + FOULDER_RELATORIO;
-   VG_PastaBancoDados := VG_PastaPadrao + FOULDER_DATABASE;
-   VG_PastaTemporaria := FOULDER_TEMP;
+   VG_PastaArquivos   := VG_PastaPadrao + FOLDER_ARQUIVO;
+   VG_PastaBackups    := VG_PastaPadrao + FOLDER_BACKUP;
+   VG_PastaImagens    := VG_PastaArquivos + FOLDER_IMAGEM;
+   VG_PastaRelatorios := VG_PastaPadrao + FOLDER_RELATORIO;
+   VG_PastaBancoDados := VG_PastaPadrao + FOLDER_DATABASE;
+   VG_PastaTemporaria := FOLDER_TEMP;
    VG_PastaAppData    := TMyLibrary.GetPathAppDataLocal;
 
    //SISTEMA

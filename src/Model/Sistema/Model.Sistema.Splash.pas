@@ -110,7 +110,7 @@ begin
       .Configuration
        .ClearConfiguration
        .Host(VG_Host)
-       .UserName('sysdba')
+       .UserName(LMCC.Username)
        .Database(VG_Database)
        .Password(LMCC.Password)
        .Port(LMCC.Port)
