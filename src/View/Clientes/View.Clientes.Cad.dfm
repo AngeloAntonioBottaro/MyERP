@@ -284,6 +284,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 99
       Height = 21
       TabOrder = 6
+      OnExit = ConfComponents
     end
     object edtIdCidade: TEdit
       Left = 8
@@ -319,6 +320,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 97
       Height = 21
       TabOrder = 12
+      OnExit = ConfComponents
     end
     object edtTelefone2: TEdit
       Left = 106
@@ -326,6 +328,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 97
       Height = 21
       TabOrder = 13
+      OnExit = ConfComponents
     end
     object dtpDataNascimento: TDateTimePicker
       Left = 479
@@ -353,6 +356,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 97
       Height = 21
       TabOrder = 14
+      OnExit = ConfComponents
     end
     object edtFax: TEdit
       Left = 302
@@ -360,6 +364,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 97
       Height = 21
       TabOrder = 15
+      OnExit = ConfComponents
     end
     object edtEmail: TEdit
       Left = 400
@@ -367,6 +372,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 301
       Height = 21
       TabOrder = 16
+      OnExit = ConfComponents
     end
     object edtCPF: TEdit
       Left = 360
@@ -374,7 +380,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 120
       Height = 21
       TabOrder = 20
-      OnExit = edtCPFExit
+      OnExit = ConfComponents
     end
     object edtRG: TEdit
       Left = 481
@@ -389,7 +395,7 @@ inherited ViewClientesCad: TViewClientesCad
       Width = 120
       Height = 21
       TabOrder = 18
-      OnExit = edtCNPJExit
+      OnExit = ConfComponents
     end
     object edtIE: TEdit
       Left = 239

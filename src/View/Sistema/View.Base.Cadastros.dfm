@@ -25,6 +25,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Novo'
+      ImageIndex = 4
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 0
       OnClick = btnNovoClick
     end
@@ -35,6 +38,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Gravar'
+      ImageIndex = 6
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 1
     end
     object btnCancelar: TButton
@@ -44,6 +50,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Cancelar'
+      ImageIndex = 7
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 2
       OnClick = btnCancelarClick
     end
@@ -54,7 +63,11 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Excluir'
+      ImageIndex = 10
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 3
+      ExplicitLeft = 410
     end
     object btnBuscar: TButton
       Left = 504
@@ -63,6 +76,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Buscar'
+      ImageIndex = 9
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 4
     end
     object btnFechar: TButton
@@ -72,6 +88,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Fechar'
+      ImageIndex = 3
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 5
       OnClick = btnFecharClick
     end
@@ -82,6 +101,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Alterar'
+      ImageIndex = 5
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 6
     end
   end

@@ -142,6 +142,9 @@ inherited ViewBaseBusca: TViewBaseBusca
         Height = 36
         Align = alRight
         Caption = 'Cadastrar'
+        ImageIndex = 4
+        ImageMargins.Left = 10
+        Images = ModelSistemaImagensDM.imgListButtons
         TabOrder = 1
       end
       object btnVincular: TButton
@@ -151,6 +154,9 @@ inherited ViewBaseBusca: TViewBaseBusca
         Height = 36
         Align = alRight
         Caption = 'Vincular'
+        ImageIndex = 11
+        ImageMargins.Left = 10
+        Images = ModelSistemaImagensDM.imgListButtons
         TabOrder = 0
         OnClick = btnVincularClick
       end
@@ -161,6 +167,9 @@ inherited ViewBaseBusca: TViewBaseBusca
         Height = 36
         Align = alRight
         Caption = 'Fechar'
+        ImageIndex = 3
+        ImageMargins.Left = 10
+        Images = ModelSistemaImagensDM.imgListButtons
         TabOrder = 2
         OnClick = btnFecharClick
       end

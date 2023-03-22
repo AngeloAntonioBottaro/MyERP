@@ -1,10 +1,10 @@
 inherited ViewSistemaLogin: TViewSistemaLogin
   Caption = 'Login'
-  ClientHeight = 148
+  ClientHeight = 159
   ClientWidth = 309
   OnClose = FormClose
   ExplicitWidth = 325
-  ExplicitHeight = 187
+  ExplicitHeight = 198
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
@@ -12,7 +12,7 @@ inherited ViewSistemaLogin: TViewSistemaLogin
     Left = 10
     Top = 20
     Width = 81
-    Height = 108
+    Height = 119
     Margins.Left = 10
     Margins.Top = 20
     Margins.Right = 10
@@ -707,8 +707,12 @@ inherited ViewSistemaLogin: TViewSistemaLogin
     Left = 210
     Top = 112
     Width = 88
-    Height = 25
+    Height = 30
     Caption = 'Logar'
+    ImageAlignment = iaRight
+    ImageIndex = 0
+    ImageMargins.Left = 10
+    Images = ModelSistemaImagensDM.imgListButtons
     TabOrder = 2
     OnClick = btnLogarClick
   end
@@ -716,8 +720,11 @@ inherited ViewSistemaLogin: TViewSistemaLogin
     Left = 116
     Top = 112
     Width = 88
-    Height = 25
+    Height = 30
     Caption = 'Cancelar'
+    ImageIndex = 2
+    ImageMargins.Left = 10
+    Images = ModelSistemaImagensDM.imgListButtons
     TabOrder = 3
     OnClick = btnCancelarClick
   end

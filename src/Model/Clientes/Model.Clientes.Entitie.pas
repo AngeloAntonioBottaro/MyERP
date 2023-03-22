@@ -44,15 +44,19 @@ type
     function Bairro: string; overload;
     function Celular(AValue: string): TModelClientesEntitie; overload;
     function Celular: string; overload;
+    function CelularMascara: string;
     function Cep(AValue: string): TModelClientesEntitie; overload;
     function Cep: string; overload;
+    function CepMascara: string;
     function Cidade(AValue: string): TModelClientesEntitie; overload;
     function Cidade(AValue: Integer): TModelClientesEntitie; overload;
     function Cidade: Integer; overload;
     function Cnpj(AValue: string): TModelClientesEntitie; overload;
     function Cnpj: string; overload;
+    function CnpjMascara: string;
     function Cpf(AValue: string): TModelClientesEntitie; overload;
     function Cpf: string; overload;
+    function CpfMascara: string;
     function DataCadastro(AValue: string): TModelClientesEntitie; overload;
     function DataCadastro(AValue: TDateTime): TModelClientesEntitie; overload;
     function DataCadastro: TDateTime; overload;
@@ -65,6 +69,7 @@ type
     function Endereco: string; overload;
     function Fax(AValue: string): TModelClientesEntitie; overload;
     function Fax: string; overload;
+    function FaxMascara: string;
     function Id(AValue: string): TModelClientesEntitie; overload;
     function Id(AValue: Integer): TModelClientesEntitie; overload;
     function Id: Integer; overload;
@@ -84,8 +89,10 @@ type
     function StatusCliente: string; overload;
     function Telefone(AValue: string): TModelClientesEntitie; overload;
     function Telefone: string; overload;
+    function TelefoneMascara: string;
     function Telefone2(AValue: string): TModelClientesEntitie; overload;
     function Telefone2: string; overload;
+    function Telefone2Mascara: string;
     function TipoJuridico(AValue: string): TModelClientesEntitie; overload;
     function TipoJuridico: string; overload;
     function TipoJuridicoComboBox: Integer;
@@ -94,6 +101,7 @@ type
 implementation
 
 uses
+  Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelClientesEntitie.Create(AParent: IModelClientesFactory<TModelClientesEntitie>);
@@ -127,7 +135,7 @@ end;
 function TModelClientesEntitie.Celular(AValue: string): TModelClientesEntitie;
 begin
    Result   := Self;
-   FCelular := AValue.Trim;
+   FCelular := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.Celular: string;
@@ -135,10 +143,15 @@ begin
    Result := FCelular;
 end;
 
+function TModelClientesEntitie.CelularMascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Celular);
+end;
+
 function TModelClientesEntitie.Cep(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   FCep   := AValue;
+   FCep   := TMyLibrary.NumbersOnly(AValue);
 end;
 
 function TModelClientesEntitie.Cep: string;
@@ -146,10 +159,15 @@ begin
    Result := FCep;
 end;
 
+function TModelClientesEntitie.CepMascara: string;
+begin
+   Result := TMyLibrary.ArrangeCEP(Self.Cep);
+end;
+
 function TModelClientesEntitie.Cidade(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.Cidade(StrToIntDef(AValue.Trim, 0));
+   Self.Cidade(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelClientesEntitie.Cidade(AValue: Integer): TModelClientesEntitie;
@@ -166,7 +184,7 @@ end;
 function TModelClientesEntitie.Cnpj(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   FCnpj  := AValue.Trim;
+   FCnpj  := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.Cnpj: string;
@@ -174,15 +192,25 @@ begin
    Result := FCnpj;
 end;
 
+function TModelClientesEntitie.CnpjMascara: string;
+begin
+   Result := TMyLibrary.ArrangeCNPJ(Self.Cnpj);
+end;
+
 function TModelClientesEntitie.Cpf(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   FCpf   := AValue.Trim;
+   FCpf   := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.Cpf: string;
 begin
    Result := FCpf;
+end;
+
+function TModelClientesEntitie.CpfMascara: string;
+begin
+   Result := TMyLibrary.ArrangeCPF(Self.Cpf);
 end;
 
 function TModelClientesEntitie.DataCadastro(AValue: string): TModelClientesEntitie;
@@ -244,7 +272,7 @@ end;
 function TModelClientesEntitie.Fax(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   FFax   := AValue.Trim;
+   FFax   := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.Fax: string;
@@ -252,10 +280,15 @@ begin
    Result := FFax;
 end;
 
+function TModelClientesEntitie.FaxMascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Fax);
+end;
+
 function TModelClientesEntitie.Id(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   Self.Id(StrToIntDef(AValue.Trim, 0));
+   Self.Id(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelClientesEntitie.Id(AValue: Integer): TModelClientesEntitie;
@@ -272,7 +305,7 @@ end;
 function TModelClientesEntitie.IE(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   FIE    := AValue.Trim;
+   FIE    := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.IE: string;
@@ -316,7 +349,7 @@ end;
 function TModelClientesEntitie.RG(AValue: string): TModelClientesEntitie;
 begin
    Result := Self;
-   FRG    := AValue.Trim;
+   FRG    := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.RG: string;
@@ -349,7 +382,7 @@ end;
 function TModelClientesEntitie.Telefone(AValue: string): TModelClientesEntitie;
 begin
    Result    := Self;
-   FTelefone := AValue.Trim;
+   FTelefone := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.Telefone: string;
@@ -360,12 +393,22 @@ end;
 function TModelClientesEntitie.Telefone2(AValue: string): TModelClientesEntitie;
 begin
    Result     := Self;
-   FTelefone2 := AValue.Trim;
+   FTelefone2 := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelClientesEntitie.Telefone2: string;
 begin
    Result := FTelefone2;
+end;
+
+function TModelClientesEntitie.Telefone2Mascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Telefone2);
+end;
+
+function TModelClientesEntitie.TelefoneMascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Telefone);
 end;
 
 function TModelClientesEntitie.TipoJuridico(AValue: string): TModelClientesEntitie;

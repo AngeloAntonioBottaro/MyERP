@@ -12,6 +12,7 @@ uses
 type
   TModelSistemaImagensDM = class(TDataModule)
     imgListMenus: TImageList;
+    imgListButtons: TImageList;
   private
   public
   end;

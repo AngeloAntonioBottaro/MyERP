@@ -8,9 +8,11 @@ type
    function Entitie: T;
    procedure ValidarCPF;
    procedure ValidarCNPJ;
+   procedure ValidarEmail;
 
    function Gravar: IModelClientesFactory<T>;
    function Deletar: IModelClientesFactory<T>;
+   function AlterarStatus: IModelClientesFactory<T>;
   end;
 
 implementation

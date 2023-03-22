@@ -4,11 +4,13 @@ interface
 
 uses
   Data.DB,
+  MyConnection,
   Utils.MyTypes;
 
 type
   TModelClientesBusca = class
   private
+    FQueryBusca: IMyQuery;
     FTipoBusca: TTipoBuscaCliente;
     FInativos: Boolean;
     FDataSource: TDataSource;
@@ -20,6 +22,7 @@ type
     procedure GetSQLOrderBy;
     procedure ExecutarBusca;
   public
+    constructor Create;
     function TipoBusca(ATipoBusca: TTipoBuscaCliente): TModelClientesBusca;
     function Inativos(AInativos: Boolean): TModelClientesBusca;
     function DataSource(ADataSource: TDataSource): TModelClientesBusca;
@@ -30,16 +33,18 @@ type
 implementation
 
 uses
-  MyConnection,
   Utils.LibrarySistema,
   Utils.GlobalConsts;
 
+constructor TModelClientesBusca.Create;
+begin
+   FQueryBusca := MyQueryNew;
+end;
+
 procedure TModelClientesBusca.Buscar;
 begin
-   MyQueryNew;
-
    if(Assigned(FDataSource))then
-     MyQuery.DataSource(FDataSource);
+     FQueryBusca.DataSource(FDataSource);
 
    Self.GetSQLInicial;
    Self.GetSQLCondicao;
@@ -49,9 +54,10 @@ end;
 
 procedure TModelClientesBusca.GetSQLInicial;
 begin
-   MyQuery
+   FQueryBusca
+    .Clear
     .Add('SELECT ')
-    .Add('CLIENTES.ID, CLIENTES.RAZAO_SOCIAL, CLIENTES.NOME_FANTASIA, CLIENTES.TELEFONE, CLIENTES.CELULAR, CLIENTES.CPF, CLIENTES.CNPJ, ')
+    .Add('CLIENTES.ID, CLIENTES.RAZAO_SOCIAL, CLIENTES.NOME_FANTASIA, CLIENTES.TELEFONE, CLIENTES.CELULAR, CLIENTES.CPF, CLIENTES.CNPJ, CLIENTES.STATUS,')
     .Add('CIDADES.NOME AS NOME_CIDADE')
     .Add('FROM CLIENTES ')
     .Add('LEFT JOIN CIDADES ON(CIDADES.ID = CLIENTES.CIDADE)');
@@ -59,24 +65,24 @@ end;
 
 procedure TModelClientesBusca.GetSQLCondicao;
 begin
-   MyQuery
+   FQueryBusca
     .Add('WHERE');
 
    case(FTipoBusca)of
-    TTipoBuscaCliente.Id: MyQuery.Add('(CLIENTES.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
+    TTipoBuscaCliente.Id: FQueryBusca.Add('(CLIENTES.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
     TTipoBuscaCliente.Nome:
     begin
-       MyQuery
+       FQueryBusca
         .Add('((CLIENTES.RAZAO_SOCIAL CONTAINING :NOME)or(CLIENTES.NOME_FANTASIA CONTAINING :NOME))')
         .AddParam('NOME', FConteudoBusca);
     end;
     TTipoBuscaCliente.CPF_CNPJ:
     begin
-       MyQuery
+       FQueryBusca
         .Add('((CLIENTES.CPF CONTAINING :CPF_CNPJ)or(CLIENTES.CNPJ CONTAINING :CPF_CNPJ))')
         .AddParam('CPF_CNPJ', FConteudoBusca);
     end;
-    TTipoBuscaCliente.Cidade: MyQuery.Add('(CIDADES.NOME CONTAINING :NOME_CIDADE)').AddParam('NOME_CIDADE', FConteudoBusca);
+    TTipoBuscaCliente.Cidade: FQueryBusca.Add('(CIDADES.NOME CONTAINING :NOME_CIDADE)').AddParam('NOME_CIDADE', FConteudoBusca);
    end;
 
    Self.GetSQLInativos;
@@ -84,26 +90,26 @@ end;
 
 procedure TModelClientesBusca.GetSQLOrderBy;
 begin
-   MyQuery.Add('ORDER BY ');
+   FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaCliente.Nome: MyQuery.Add('RAZAO_SOCIAL, NOME_FANTASIA');
-    TTipoBuscaCliente.CPF_CNPJ: MyQuery.Add('CPF, CNPJ');
-    TTipoBuscaCliente.Cidade: MyQuery.Add('NOME_CIDADE');
+    TTipoBuscaCliente.Nome: FQueryBusca.Add('RAZAO_SOCIAL, NOME_FANTASIA');
+    TTipoBuscaCliente.CPF_CNPJ: FQueryBusca.Add('CPF, CNPJ');
+    TTipoBuscaCliente.Cidade: FQueryBusca.Add('NOME_CIDADE');
    else
-     MyQuery.Add('ID');
+     FQueryBusca.Add('ID');
    end;
 end;
 
 procedure TModelClientesBusca.GetSQLInativos;
 begin
    if(not FInativos)then
-     MyQuery.Add('AND(CLIENTES.STATUS = :STATUS)').AddParam('STATUS', STATUS_ATIVO);
+     FQueryBusca.Add('AND(CLIENTES.STATUS = :STATUS)').AddParam('STATUS', STATUS_ATIVO);
 end;
 
 procedure TModelClientesBusca.ExecutarBusca;
 begin
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.Open;
+   ShowDebug(FQueryBusca.SQL.Text);
+   FQueryBusca.Open;
 end;
 
 function TModelClientesBusca.ConteudoBusca(AConteudoBusca: string): TModelClientesBusca;

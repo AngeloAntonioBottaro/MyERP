@@ -20,8 +20,10 @@ type
     function Entitie: TModelClientesEntitie;
     procedure ValidarCPF;
     procedure ValidarCNPJ;
+    procedure ValidarEmail;
     function Gravar: IModelClientesFactory<TModelClientesEntitie>;
     function Deletar: IModelClientesFactory<TModelClientesEntitie>;
+    function AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
   public
     class function New: IModelClientesFactory<TModelClientesEntitie>;
     constructor Create;
@@ -34,6 +36,7 @@ uses
   MyConnection,
   MyMessage,
   MyExceptions,
+  Utils.MyLibrary,
   Utils.LibrarySistema,
   Utils.GlobalConsts;
 
@@ -68,8 +71,11 @@ begin
    if(FEntitie.Cnpj = EmptyStr)then
      Exit;
 
-   if(Length(FEntitie.Cnpj) = 14)then
-     Exit;
+   if(TMyLibrary.IdentifyCNPJ(FEntitie.Cnpj))then
+   begin
+      if(TMyLibrary.ValidCNPJ(FEntitie.Cnpj))then
+        Exit;
+   end;
 
    raise ExceptionWarning.Create('CNPJ inválido');
 end;
@@ -79,10 +85,24 @@ begin
    if(FEntitie.Cpf = EmptyStr)then
      Exit;
 
-   if(Length(FEntitie.Cpf) = 11)then
-     Exit;
+   if(TMyLibrary.IdentifyCPF(FEntitie.Cpf))then
+   begin
+      if(TMyLibrary.ValidCPF(FEntitie.Cpf))then
+        Exit;
+   end;
 
    raise ExceptionWarning.Create('CPF inválido');
+end;
+
+procedure TModelClientesFactory.ValidarEmail;
+begin
+   if(FEntitie.Email = EmptyStr)then
+     Exit;
+
+   if(TMyLibrary.ValidEmail(FEntitie.Email))then
+     Exit;
+
+   raise ExceptionWarning.Create('E-mail inválido/incorreto');
 end;
 
 function TModelClientesFactory.Entitie: TModelClientesEntitie;
@@ -182,6 +202,40 @@ begin
    MyQuery.ExecSQL;
 
    ShowDone('Exclusão realizada');
+end;
+
+function TModelClientesFactory.AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
+var
+  LStatusNovo: string;
+begin
+   Result := Self;
+
+   if(not (FEntitie.Id > 0))then
+     Exit;
+
+   if(FEntitie.Id = 1)then
+     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser inativado');
+
+   MyQueryNew
+    .Add('SELECT STATUS FROM CLIENTES ')
+    .Add('WHERE(CLIENTES.ID = :ID)')
+    .AddParam('ID', FEntitie.Id)
+    .Open;
+
+   LStatusNovo := STATUS_ATIVO;
+   if(MyQuery.FieldByName('STATUS').AsString.Equals(STATUS_ATIVO))then
+     LStatusNovo := STATUS_INATIVO;
+
+   MyQueryNew
+    .Add('UPDATE CLIENTES SET STATUS = :STATUS')
+    .Add('WHERE(CLIENTES.ID = :ID)')
+    .AddParam('ID', FEntitie.Id)
+    .AddParam('STATUS', LStatusNovo);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.ExecSQL;
+
+   ShowDone('Cliente Ativado/Inativado');
 end;
 
 end.

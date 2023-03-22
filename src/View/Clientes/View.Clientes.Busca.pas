@@ -19,7 +19,9 @@ uses
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
   Vcl.Menus,
-  Utils.MyTypes, Vcl.ComCtrls;
+  Utils.MyTypes,
+  Vcl.ComCtrls,
+  Model.Clientes.Busca;
 
 type
   TViewClientesBusca = class(TViewBaseBusca)
@@ -30,7 +32,12 @@ type
     procedure btnCadastroClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Excluir1Click(Sender: TObject);
+    procedure AtivarInativar1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
+    FBusca: TModelClientesBusca;
     function GetTipoBusca: TTipoBuscaCliente;
   public
     procedure Buscar; override;
@@ -47,8 +54,31 @@ uses
   MyExceptions,
   Utils.MyConsts,
   View.Clientes.Cad,
-  Model.Clientes.Factory,
-  Model.Clientes.Busca;
+  Model.Clientes.Factory, Utils.GlobalConsts;
+
+procedure TViewClientesBusca.FormCreate(Sender: TObject);
+begin
+   inherited;
+   FBusca := TModelClientesBusca.Create;
+   FBusca
+    .DataSource(DS_Busca);
+end;
+
+procedure TViewClientesBusca.FormDestroy(Sender: TObject);
+begin
+   inherited;
+   FBusca.Free;
+end;
+
+procedure TViewClientesBusca.AtivarInativar1Click(Sender: TObject);
+begin
+   inherited;
+   TModelClientesFactory.New
+    .Entitie
+     .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
+     .End_Entitie
+    .AlterarStatus;
+end;
 
 procedure TViewClientesBusca.btnCadastroClick(Sender: TObject);
 begin
@@ -66,20 +96,12 @@ begin
 end;
 
 procedure TViewClientesBusca.Buscar;
-var
-  LBusca: TModelClientesBusca;
 begin
-   LBusca := TModelClientesBusca.Create;
-   try
-     LBusca
-      .DataSource(DS_Busca)
-      .ConteudoBusca(edtBusca.Text)
-      .TipoBusca(Self.GetTipoBusca)
-      .Inativos(ckBuscarInativos.Enabled and ckBuscarInativos.Checked)
-      .Buscar;
-   finally
-     LBusca.Free;
-   end;
+   FBusca
+    .ConteudoBusca(edtBusca.Text)
+    .TipoBusca(Self.GetTipoBusca)
+    .Inativos(ckBuscarInativos.Enabled and ckBuscarInativos.Checked)
+    .Buscar;
 
    inherited;
 end;
@@ -115,6 +137,19 @@ begin
      Result := TTipoBuscaCliente.CPF_CNPJ
    else if(rdBuscarCidade.Enabled and rdBuscarCidade.Checked)then
      Result := TTipoBuscaCliente.Cidade;
+end;
+
+procedure TViewClientesBusca.GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+   inherited;
+   if(DS_Busca.DataSet.FieldByName('STATUS').AsString.Equals(STATUS_INATIVO))then
+   begin
+      if(not (gdSelected in State))then
+        TDBGrid(Sender).Canvas.Font.Color := clRed;
+
+      TDBGrid(Sender).Canvas.FillRect(Rect);
+      TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
+   end;
 end;
 
 end.

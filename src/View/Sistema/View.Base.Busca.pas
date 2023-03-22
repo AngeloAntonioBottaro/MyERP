@@ -17,7 +17,9 @@ uses
   Vcl.ExtCtrls,
   Vcl.Grids,
   Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.Menus, Vcl.ComCtrls;
+  Vcl.StdCtrls,
+  Vcl.Menus,
+  Vcl.ComCtrls;
 
 type
   TViewBaseBusca = class(TViewBase)
@@ -79,7 +81,8 @@ implementation
 uses
   MyExceptions,
   Utils.MyLibrary,
-  Utils.MyConsts;
+  Utils.MyConsts,
+  Model.Sistema.Imagens.DM;
 
 procedure TViewBaseBusca.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

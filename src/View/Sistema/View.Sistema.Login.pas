@@ -44,6 +44,7 @@ implementation
 uses
   Utils.MyVclLibrary,
   Utils.GlobalVariables,
+  Model.Sistema.Imagens.DM,
   MyConnectionConfiguration,
   Model.Sistema.Login;
 

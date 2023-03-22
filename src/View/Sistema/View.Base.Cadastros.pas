@@ -52,7 +52,8 @@ implementation
 {$R *.dfm}
 
 uses
-  MyExceptions;
+  MyExceptions,
+  Model.Sistema.Imagens.DM;
 
 procedure TViewBaseCadastros.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

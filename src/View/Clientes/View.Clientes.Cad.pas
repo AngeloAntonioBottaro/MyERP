@@ -74,14 +74,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
-    procedure edtCPFExit(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure edtCNPJExit(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
   private
     FCliente: IModelClientesFactory<TModelClientesEntitie>;
+    procedure FillEntitie;
   public
     procedure InitialConfiguration; override;
     procedure NewEntitie; override;
@@ -164,6 +163,25 @@ end;
 procedure TViewClientesCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
+   Self.FillEntitie;
+   FCliente
+    .Gravar;
+
+   Self.EndOperations;
+   if(Trim(edtId.Text).IsEmpty)then
+     Self.EmptyFields;
+end;
+
+procedure TViewClientesCad.btnNovoClick(Sender: TObject);
+begin
+   inherited;
+   cBoxTipoJuridico.ItemIndex := 0;
+   Self.ConfComponents(nil);
+   TMyVclLibrary.SetFocusOn(edtRazaoSocial);
+end;
+
+procedure TViewClientesCad.FillEntitie;
+begin
    FCliente
     .Entitie
      .Id(edtId.Text)
@@ -187,49 +205,6 @@ begin
      .RG(edtRG.Text)
      .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
      .End_Entitie
-    .Gravar;
-
-   Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
-end;
-
-procedure TViewClientesCad.btnNovoClick(Sender: TObject);
-begin
-   inherited;
-   cBoxTipoJuridico.ItemIndex := 0;
-   Self.ConfComponents(nil);
-   TMyVclLibrary.SetFocusOn(edtRazaoSocial);
-end;
-
-procedure TViewClientesCad.edtCNPJExit(Sender: TObject);
-begin
-   if(not Assigned(FCliente))then
-     Exit;
-
-   try
-     FCliente.Entitie.Cpf(edtCNPJ.Text).End_Entitie.ValidarCNPJ;
-   except on E: Exception do
-   begin
-      TMyVclLibrary.SetFocusOn(edtCNPJ);
-      ShowWarning(E.Message)
-   end;
-   end;
-end;
-
-procedure TViewClientesCad.edtCPFExit(Sender: TObject);
-begin
-   if(not Assigned(FCliente))then
-     Exit;
-
-   try
-     FCliente.Entitie.Cpf(edtCPF.Text).End_Entitie.ValidarCPF;
-   except on E: Exception do
-   begin
-      TMyVclLibrary.SetFocusOn(edtCPF);
-      ShowWarning(E.Message)
-   end;
-   end;
 end;
 
 procedure TViewClientesCad.FillFields;
@@ -243,17 +218,17 @@ begin
    edtEndereco.Text           := FCliente.Entitie.Endereco;
    edtNumero.Text             := FCliente.Entitie.Numero;
    edtBairro.Text             := FCliente.Entitie.Bairro;
-   edtCep.Text                := FCliente.Entitie.Cep;
+   edtCep.Text                := FCliente.Entitie.CepMascara;
    edtIdCidade.Text           := FCliente.Entitie.Cidade.ToString;
    dtpDataNascimento.Date     := FCliente.Entitie.DataNascimento;
-   edtTelefone.Text           := FCliente.Entitie.Telefone;
-   edtTelefone2.Text          := FCliente.Entitie.Telefone2;
-   edtCelular.Text            := FCliente.Entitie.Celular;
-   edtFax.Text                := FCliente.Entitie.Fax;
+   edtTelefone.Text           := FCliente.Entitie.TelefoneMascara;
+   edtTelefone2.Text          := FCliente.Entitie.Telefone2Mascara;
+   edtCelular.Text            := FCliente.Entitie.CelularMascara;
+   edtFax.Text                := FCliente.Entitie.FaxMascara;
    edtEmail.Text              := FCliente.Entitie.Email;
-   edtCNPJ.Text               := FCliente.Entitie.Cnpj;
+   edtCNPJ.Text               := FCliente.Entitie.CnpjMascara;
    edtIE.Text                 := FCliente.Entitie.IE;
-   edtCPF.Text                := FCliente.Entitie.Cpf;
+   edtCPF.Text                := FCliente.Entitie.CpfMascara;
    edtRG.Text                 := FCliente.Entitie.RG;
    edtRGOrgaoExpedidor.Text   := FCliente.Entitie.RgOrgaoExpedidor;
    cBoxTipoJuridico.ItemIndex := FCliente.Entitie.TipoJuridicoComboBox;
@@ -322,6 +297,46 @@ begin
    edtRGOrgaoExpedidor.Enabled  := cBoxTipoJuridico.Text = PESSOA_FISICA;
 
    edtIdade.Text := TMyLibrary.CalculateAge(dtpDataNascimento.Date).ToString + ' anos';
+
+   if(not Assigned(FCliente))then
+     Self.NewEntitie;
+
+   Self.FillEntitie;
+
+   edtCep.Text       := FCliente.Entitie.CepMascara;
+   edtTelefone.Text  := FCliente.Entitie.TelefoneMascara;
+   edtTelefone2.Text := FCliente.Entitie.Telefone2Mascara;
+   edtCelular.Text   := FCliente.Entitie.CelularMascara;
+   edtFax.Text       := FCliente.Entitie.FaxMascara;
+   edtCNPJ.Text      := FCliente.Entitie.CnpjMascara;
+   edtCPF.Text       := FCliente.Entitie.CpfMascara;
+
+   try
+     FCliente.ValidarCNPJ;
+   except on E: Exception do
+   begin
+      TMyVclLibrary.SetFocusOn(edtCNPJ);
+      ShowWarning(E.Message)
+   end;
+   end;
+
+   try
+     FCliente.ValidarCPF;
+   except on E: Exception do
+   begin
+      TMyVclLibrary.SetFocusOn(edtCPF);
+      ShowWarning(E.Message)
+   end;
+   end;
+
+   try
+     FCliente.ValidarEmail;
+   except on E: Exception do
+   begin
+      TMyVclLibrary.SetFocusOn(edtEmail);
+      ShowWarning(E.Message)
+   end;
+   end;
 end;
 
 end.
