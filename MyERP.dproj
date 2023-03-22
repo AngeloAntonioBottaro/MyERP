@@ -299,6 +299,13 @@
             <Form>ViewSelecionarConexao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\Utils\Utils.EditsKeyDownExit.pas"/>
+        <DCCReference Include="src\Model\Cidades\Busca\Model.Cidades.Busca.pas"/>
+        <DCCReference Include="src\Model\Fornecedores\Busca\Model.Fornecedores.Busca.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Busca\Model.Funcionarios.Busca.pas"/>
+        <DCCReference Include="src\Model\Funcionarios\Funcoes\Busca\Model.Funcionarios.Funcoes.Busca.pas"/>
+        <DCCReference Include="src\Model\Produtos\Grupos\Busca\Model.Produtos.Grupos.Busca.pas"/>
+        <DCCReference Include="src\Model\Produtos\SubGrupos\Busca\Model.Produtos.SubGrupos.Busca.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>

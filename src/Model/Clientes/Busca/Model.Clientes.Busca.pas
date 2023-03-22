@@ -88,22 +88,22 @@ begin
    Self.GetSQLInativos;
 end;
 
+procedure TModelClientesBusca.GetSQLInativos;
+begin
+   if(not FInativos)then
+     FQueryBusca.Add('AND(CLIENTES.STATUS = :STATUS)').AddParam('STATUS', STATUS_ATIVO);
+end;
+
 procedure TModelClientesBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaCliente.Nome: FQueryBusca.Add('RAZAO_SOCIAL, NOME_FANTASIA');
+    TTipoBuscaCliente.Nome: FQueryBusca.Add('RAZAO_SOCIAL, NOME_FANTASIA, ID');
     TTipoBuscaCliente.CPF_CNPJ: FQueryBusca.Add('CPF, CNPJ');
     TTipoBuscaCliente.Cidade: FQueryBusca.Add('NOME_CIDADE');
    else
      FQueryBusca.Add('ID');
    end;
-end;
-
-procedure TModelClientesBusca.GetSQLInativos;
-begin
-   if(not FInativos)then
-     FQueryBusca.Add('AND(CLIENTES.STATUS = :STATUS)').AddParam('STATUS', STATUS_ATIVO);
 end;
 
 procedure TModelClientesBusca.ExecutarBusca;

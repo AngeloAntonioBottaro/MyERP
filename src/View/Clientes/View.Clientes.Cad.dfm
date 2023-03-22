@@ -293,6 +293,8 @@ inherited ViewClientesCad: TViewClientesCad
       Height = 21
       NumbersOnly = True
       TabOrder = 7
+      OnExit = edtIdCidadeExit
+      OnKeyDown = edtIdCidadeKeyDown
     end
     object edtCidade: TEdit
       Left = 74

@@ -78,6 +78,8 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure edtIdCidadeExit(Sender: TObject);
+    procedure edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     FCliente: IModelClientesFactory<TModelClientesEntitie>;
     procedure FillEntitie;
@@ -104,6 +106,7 @@ uses
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
   Utils.LibrarySistema,
+  Utils.EditsKeyDownExit,
   Model.Clientes.Factory,
   View.Clientes.Busca;
 
@@ -212,14 +215,14 @@ begin
    if(not Assigned(FCliente))then
      Exit;
 
-   edtId.Text                 := FCliente.Entitie.Id.ToString;
+   edtId.Text                 := FCliente.Entitie.IdMascara;
    edtRazaoSocial.Text        := FCliente.Entitie.RazaoSocial;
    edtNomeFantasia.Text       := FCliente.Entitie.NomeFantasia;
    edtEndereco.Text           := FCliente.Entitie.Endereco;
    edtNumero.Text             := FCliente.Entitie.Numero;
    edtBairro.Text             := FCliente.Entitie.Bairro;
    edtCep.Text                := FCliente.Entitie.CepMascara;
-   edtIdCidade.Text           := FCliente.Entitie.Cidade.ToString;
+   edtIdCidade.Text           := FCliente.Entitie.CidadeMascara;
    dtpDataNascimento.Date     := FCliente.Entitie.DataNascimento;
    edtTelefone.Text           := FCliente.Entitie.TelefoneMascara;
    edtTelefone2.Text          := FCliente.Entitie.Telefone2Mascara;
@@ -285,6 +288,7 @@ begin
 
    Self.FillFields;
    Self.ConfComponents(nil);
+   edtIdCidadeExit(edtIdCidade);
 end;
 
 procedure TViewClientesCad.ConfComponents(Sender: TObject);
@@ -303,7 +307,9 @@ begin
 
    Self.FillEntitie;
 
+   edtId.Text        := FCliente.Entitie.IdMascara;
    edtCep.Text       := FCliente.Entitie.CepMascara;
+   edtIdCidade.Text  := FCliente.Entitie.CidadeMascara;
    edtTelefone.Text  := FCliente.Entitie.TelefoneMascara;
    edtTelefone2.Text := FCliente.Entitie.Telefone2Mascara;
    edtCelular.Text   := FCliente.Entitie.CelularMascara;
@@ -337,6 +343,16 @@ begin
       ShowWarning(E.Message)
    end;
    end;
+end;
+
+procedure TViewClientesCad.edtIdCidadeExit(Sender: TObject);
+begin
+   IdCidadeExit(edtIdCidade, edtCidade, edtUF);
+end;
+
+procedure TViewClientesCad.edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   IdCidadeKeyDown(edtIdCidade, Key, Shift);
 end;
 
 end.

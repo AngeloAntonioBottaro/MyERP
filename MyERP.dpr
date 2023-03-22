@@ -109,7 +109,14 @@ uses
   MyConnectionConfiguration in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.pas',
   MyConnectionConfiguration.View.Lista in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Lista.pas' {ViewLista},
   MyConnectionConfiguration.View.Manutencao in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Manutencao.pas' {ViewManutencao},
-  MyConnectionConfiguration.View.SelecionarConexao in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.SelecionarConexao.pas' {ViewSelecionarConexao};
+  MyConnectionConfiguration.View.SelecionarConexao in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.SelecionarConexao.pas' {ViewSelecionarConexao},
+  Utils.EditsKeyDownExit in 'src\Utils\Utils.EditsKeyDownExit.pas',
+  Model.Cidades.Busca in 'src\Model\Cidades\Busca\Model.Cidades.Busca.pas',
+  Model.Fornecedores.Busca in 'src\Model\Fornecedores\Busca\Model.Fornecedores.Busca.pas',
+  Model.Funcionarios.Busca in 'src\Model\Funcionarios\Busca\Model.Funcionarios.Busca.pas',
+  Model.Funcionarios.Funcoes.Busca in 'src\Model\Funcionarios\Funcoes\Busca\Model.Funcionarios.Funcoes.Busca.pas',
+  Model.Produtos.Grupos.Busca in 'src\Model\Produtos\Grupos\Busca\Model.Produtos.Grupos.Busca.pas',
+  Model.Produtos.SubGrupos.Busca in 'src\Model\Produtos\SubGrupos\Busca\Model.Produtos.SubGrupos.Busca.pas';
 
 {$R *.res}
 

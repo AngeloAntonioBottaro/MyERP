@@ -51,6 +51,7 @@ type
     function Cidade(AValue: string): TModelClientesEntitie; overload;
     function Cidade(AValue: Integer): TModelClientesEntitie; overload;
     function Cidade: Integer; overload;
+    function CidadeMascara: string;
     function Cnpj(AValue: string): TModelClientesEntitie; overload;
     function Cnpj: string; overload;
     function CnpjMascara: string;
@@ -73,6 +74,7 @@ type
     function Id(AValue: string): TModelClientesEntitie; overload;
     function Id(AValue: Integer): TModelClientesEntitie; overload;
     function Id: Integer; overload;
+    function IdMascara: string;
     function IE(AValue: string): TModelClientesEntitie; overload;
     function IE: string; overload;
     function NomeFantasia(AValue: string): TModelClientesEntitie; overload;
@@ -179,6 +181,13 @@ end;
 function TModelClientesEntitie.Cidade: Integer;
 begin
    Result := FCidade;
+end;
+
+function TModelClientesEntitie.CidadeMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Cidade > 0)then
+     Result := TMyLibrary.CompLeft(Self.Cidade);
 end;
 
 function TModelClientesEntitie.Cnpj(AValue: string): TModelClientesEntitie;
@@ -300,6 +309,13 @@ end;
 function TModelClientesEntitie.Id: Integer;
 begin
    Result := FId;
+end;
+
+function TModelClientesEntitie.IdMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Id > 0)then
+     Result := TMyLibrary.CompLeft(Self.Id);
 end;
 
 function TModelClientesEntitie.IE(AValue: string): TModelClientesEntitie;
