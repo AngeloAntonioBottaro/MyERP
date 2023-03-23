@@ -23,14 +23,19 @@ type
     function Id(AValue: string): TModelProdutosGruposEntitie; overload;
     function Id(AValue: Integer): TModelProdutosGruposEntitie; overload;
     function Id: Integer; overload;
+    function IdMascara: string;
     function Nome(AValue: string): TModelProdutosGruposEntitie; overload;
     function Nome: string; overload;
   end;
 
 implementation
 
+uses
+  Utils.MyLibrary;
+
 constructor TModelProdutosGruposEntitie.Create(AParent: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>);
 begin
+   FParent := AParent;
 end;
 
 destructor TModelProdutosGruposEntitie.Destroy;
@@ -46,7 +51,7 @@ end;
 function TModelProdutosGruposEntitie.Id(AValue: string): TModelProdutosGruposEntitie;
 begin
    Result := Self;
-   Self.Id(StrToInt(AValue.Trim));
+   Self.Id(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelProdutosGruposEntitie.Id(AValue: Integer): TModelProdutosGruposEntitie;
@@ -58,6 +63,13 @@ end;
 function TModelProdutosGruposEntitie.Id: Integer;
 begin
    Result := FId;
+end;
+
+function TModelProdutosGruposEntitie.IdMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Id > 0)then
+     Result := TMyLibrary.CompLeft(Self.Id);
 end;
 
 function TModelProdutosGruposEntitie.Nome(AValue: string): TModelProdutosGruposEntitie;

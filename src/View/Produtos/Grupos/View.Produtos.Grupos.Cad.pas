@@ -26,11 +26,17 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     FGrupo: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
+    procedure FillEntitie;
   public
+    procedure InitialConfiguration; override;
     procedure NewEntitie; override;
     procedure FillFields; override;
+    procedure OnBusca(AId: Integer); override;
   end;
 
 var
@@ -41,25 +47,79 @@ implementation
 {$R *.dfm}
 
 uses
+  MyExceptions,
+  MyConnection,
+  Utils.MyConsts,
+  Utils.MyVclLibrary,
   Model.Produtos.Grupos.Factory,
   View.Produtos.Grupos.Busca;
+
+procedure TViewProdutosGruposCad.FormCreate(Sender: TObject);
+begin
+   inherited;
+   Self.InitialConfiguration;
+end;
+
+procedure TViewProdutosGruposCad.btnAlterarClick(Sender: TObject);
+begin
+   inherited;
+   if(not Assigned(FGrupo))then
+     Exit;
+
+   if(not (FGrupo.Entitie.Id > 0))then
+     Exit;
+
+   Self.StartOperations;
+end;
 
 procedure TViewProdutosGruposCad.btnBuscarClick(Sender: TObject);
 begin
    inherited;
    if(ViewProdutosGruposBusca = nil)then Application.CreateForm(TViewProdutosGruposBusca, ViewProdutosGruposBusca);
+
+   if(ViewProdutosGruposBusca.Showing)then
+     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
+
    try
      ViewProdutosGruposBusca.btnCadastro.Enabled := False;
+     ViewProdutosGruposBusca.FOnBusca            := Self.OnBusca;
      ViewProdutosGruposBusca.ShowModal;
    finally
      FreeAndNil(ViewProdutosGruposBusca);
    end;
-   Self.FillFields;
+end;
+
+procedure TViewProdutosGruposCad.btnExcluirClick(Sender: TObject);
+begin
+   inherited;
+   if(edtId.Text = EmptyStr)then
+     Exit;
+
+   FGrupo.Deletar;
+   Self.EndOperations;
+   Self.EmptyFields;
 end;
 
 procedure TViewProdutosGruposCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
+   Self.FillEntitie;
+   FGrupo
+    .Gravar;
+
+   Self.EndOperations;
+   if(Trim(edtId.Text).IsEmpty)then
+     Self.EmptyFields;
+end;
+
+procedure TViewProdutosGruposCad.btnNovoClick(Sender: TObject);
+begin
+   inherited;
+   TMyVclLibrary.SetFocusOn(edtGrupo);
+end;
+
+procedure TViewProdutosGruposCad.FillEntitie;
+begin
    FGrupo
     .Entitie
      .Id(edtId.Text)
@@ -67,24 +127,41 @@ begin
      .End_Entitie;
 end;
 
-procedure TViewProdutosGruposCad.btnNovoClick(Sender: TObject);
-begin
-   inherited;
-   Self.NewEntitie;
-end;
-
 procedure TViewProdutosGruposCad.FillFields;
 begin
    if(not Assigned(FGrupo))then
      Exit;
 
-   edtId.Text    := FGrupo.Entitie.Id.ToString;
+   edtId.Text    := FGrupo.Entitie.IdMascara;
    edtGrupo.Text := FGrupo.Entitie.Nome;
+end;
+
+procedure TViewProdutosGruposCad.InitialConfiguration;
+begin
+   //
 end;
 
 procedure TViewProdutosGruposCad.NewEntitie;
 begin
    FGrupo := TModelProdutosGruposFactory.New;
+end;
+
+procedure TViewProdutosGruposCad.OnBusca(AId: Integer);
+begin
+   Self.NewEntitie;
+
+   MyQueryNew
+    .Add('SELECT * FROM PRODUTOS_GRUPOS WHERE(PRODUTOS_GRUPOS.ID = :ID)')
+    .AddParam('ID', AId)
+    .Open;
+
+   FGrupo
+    .Entitie
+     .Id(MyQuery.FieldByName('ID').AsString)
+     .Nome(MyQuery.FieldByName('GRUPO').AsString)
+     .End_Entitie;
+
+   Self.FillFields;
 end;
 
 end.

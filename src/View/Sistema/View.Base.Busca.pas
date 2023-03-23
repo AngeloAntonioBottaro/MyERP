@@ -105,6 +105,7 @@ begin
    inherited;
    case(Key)of
     VK_F5: if(Shift = [])then Self.Buscar;
+    VK_UP, VK_DOWN: if(ActiveControl <> GridBusca)then GridBusca.SetFocus;
    end;
 end;
 

@@ -10,9 +10,9 @@ type
    procedure ValidarCNPJ;
    procedure ValidarEmail;
 
-   function Gravar: IModelClientesFactory<T>;
-   function Deletar: IModelClientesFactory<T>;
    function AlterarStatus: IModelClientesFactory<T>;
+   function Deletar: IModelClientesFactory<T>;
+   function Gravar: IModelClientesFactory<T>;
   end;
 
 implementation

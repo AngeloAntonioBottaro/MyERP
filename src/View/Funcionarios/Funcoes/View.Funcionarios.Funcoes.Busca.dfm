@@ -24,7 +24,7 @@ inherited ViewFuncionarioFuncoesBusca: TViewFuncionarioFuncoesBusca
         Height = 17
         Caption = 'Nome (F3)'
         Checked = True
-        TabOrder = 0
+        TabOrder = 1
         TabStop = True
         OnClick = ConfComponents
       end
@@ -34,7 +34,7 @@ inherited ViewFuncionarioFuncoesBusca: TViewFuncionarioFuncoesBusca
         Width = 78
         Height = 17
         Caption = 'C'#243'digo (F2)'
-        TabOrder = 1
+        TabOrder = 0
         OnClick = ConfComponents
       end
     end

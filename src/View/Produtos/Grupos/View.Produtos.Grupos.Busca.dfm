@@ -3,6 +3,13 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
+  inherited pnTop: TPanel
+    inherited pnBuscarConteudo: TPanel
+      inherited lbBusca: TLabel
+        Width = 380
+      end
+    end
+  end
   inherited pnBotton: TPanel
     inherited pnButtons: TPanel
       inherited btnCadastro: TButton
@@ -17,7 +24,7 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
         Height = 17
         Caption = 'Nome (F3)'
         Checked = True
-        TabOrder = 0
+        TabOrder = 1
         TabStop = True
         OnClick = ConfComponents
       end
@@ -27,8 +34,13 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
         Width = 78
         Height = 17
         Caption = 'C'#243'digo (F2)'
-        TabOrder = 1
+        TabOrder = 0
         OnClick = ConfComponents
+      end
+    end
+    inherited pnOptions: TPanel
+      inherited lbTotalRegistros: TLabel
+        Height = 14
       end
     end
   end

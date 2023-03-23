@@ -10,8 +10,14 @@ inherited ViewCidadesCad: TViewCidadesCad
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
+    inherited btnExcluir: TButton
+      OnClick = btnExcluirClick
+    end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
+    end
+    inherited btnAlterar: TButton
+      OnClick = btnAlterarClick
     end
   end
   object pnTela: TPanel

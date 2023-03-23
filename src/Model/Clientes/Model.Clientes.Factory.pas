@@ -12,18 +12,19 @@ type
   TModelClientesFactory = class(TInterfacedObject, IModelClientesFactory<TModelClientesEntitie>)
   private
     FEntitie: TModelClientesEntitie;
-    procedure UpdateClient;
-    procedure InsertClient;
-
+    procedure InsertCliente;
+    procedure UpdateCliente;
     procedure ValidarCampos;
   protected
     function Entitie: TModelClientesEntitie;
+
     procedure ValidarCPF;
     procedure ValidarCNPJ;
     procedure ValidarEmail;
-    function Gravar: IModelClientesFactory<TModelClientesEntitie>;
-    function Deletar: IModelClientesFactory<TModelClientesEntitie>;
+
     function AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
+    function Deletar: IModelClientesFactory<TModelClientesEntitie>;
+    function Gravar: IModelClientesFactory<TModelClientesEntitie>;
   public
     class function New: IModelClientesFactory<TModelClientesEntitie>;
     constructor Create;
@@ -55,6 +56,11 @@ begin
    if(Assigned(FEntitie))then
      FEntitie.Free;
    inherited;
+end;
+
+function TModelClientesFactory.Entitie: TModelClientesEntitie;
+begin
+   Result := FEntitie;
 end;
 
 procedure TModelClientesFactory.ValidarCampos;
@@ -105,9 +111,59 @@ begin
    raise ExceptionWarning.Create('E-mail inválido/incorreto');
 end;
 
-function TModelClientesFactory.Entitie: TModelClientesEntitie;
+function TModelClientesFactory.AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
+var
+  LStatusNovo: string;
 begin
-   Result := FEntitie;
+   Result := Self;
+
+   if(not (FEntitie.Id > 0))then
+     Exit;
+
+   if(FEntitie.Id = 1)then
+     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser inativado');
+
+   MyQueryNew
+    .Add('SELECT STATUS FROM CLIENTES ')
+    .Add('WHERE(CLIENTES.ID = :ID)')
+    .AddParam('ID', FEntitie.Id)
+    .Open;
+
+   LStatusNovo := STATUS_ATIVO;
+   if(MyQuery.FieldByName('STATUS').AsString.Equals(STATUS_ATIVO))then
+     LStatusNovo := STATUS_INATIVO;
+
+   MyQueryNew
+    .Add('UPDATE CLIENTES SET STATUS = :STATUS')
+    .Add('WHERE(CLIENTES.ID = :ID)')
+    .AddParam('ID', FEntitie.Id)
+    .AddParam('STATUS', LStatusNovo);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.ExecSQL;
+
+   ShowDone('Cliente Ativado/Inativado');
+end;
+
+function TModelClientesFactory.Deletar: IModelClientesFactory<TModelClientesEntitie>;
+begin
+   Result := Self;
+
+   if(not (FEntitie.Id > 0))then
+     Exit;
+
+   if(FEntitie.Id = 1)then
+     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser excluído');
+
+   MyQueryNew
+    .Add('DELETE FROM CLIENTES ')
+    .Add('WHERE(CLIENTES.ID = :ID)')
+    .AddParam('ID', FEntitie.Id);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.ExecSQL;
+
+   ShowDone('Exclusão realizada');
 end;
 
 function TModelClientesFactory.Gravar: IModelClientesFactory<TModelClientesEntitie>;
@@ -120,9 +176,9 @@ begin
    Self.ValidarCampos;
 
    if(FEntitie.Id > 0)then
-     Self.UpdateClient
+     Self.UpdateCliente
    else
-     Self.InsertClient;
+     Self.InsertCliente;
 
    MyQuery
     .AddParam('RAZAO_SOCIAL', FEntitie.RazaoSocial)
@@ -158,19 +214,7 @@ begin
    ShowDone('Gravação realizada');
 end;
 
-procedure TModelClientesFactory.UpdateClient;
-begin
-   MyQueryNew
-    .Add('UPDATE CLIENTES SET')
-    .Add('RAZAO_SOCIAL = :RAZAO_SOCIAL, NOME_FANTASIA = :NOME_FANTASIA, ENDERECO = :ENDERECO, NUMERO = :NUMERO, BAIRRO = :BAIRRO, ')
-    .Add('CEP = :CEP, CIDADE = :CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
-    .Add('CELULAR = :CELULAR, FAX = :FAX, EMAIL = :EMAIL, TIPO_JURIDICO = :TIPO_JURIDICO, CNPJ = :CNPJ, INSCRICAO_ESTADUAL = :INSCRICAO_ESTADUAL, ')
-    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR')
-    .Add('WHERE(CLIENTES.ID = :ID)')
-    .AddParam('ID', FEntitie.Id);
-end;
-
-procedure TModelClientesFactory.InsertClient;
+procedure TModelClientesFactory.InsertCliente;
 begin
    MyQueryNew
     .Add('INSERT INTO CLIENTES ')
@@ -183,59 +227,16 @@ begin
     .AddParam('DATA_CADASTRO', Now);
 end;
 
-function TModelClientesFactory.Deletar: IModelClientesFactory<TModelClientesEntitie>;
+procedure TModelClientesFactory.UpdateCliente;
 begin
-   Result := Self;
-
-   if(not (FEntitie.Id > 0))then
-     Exit;
-
-   if(FEntitie.Id = 1)then
-     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser excluído');
-
    MyQueryNew
-    .Add('DELETE FROM CLIENTES ')
+    .Add('UPDATE CLIENTES SET')
+    .Add('RAZAO_SOCIAL = :RAZAO_SOCIAL, NOME_FANTASIA = :NOME_FANTASIA, ENDERECO = :ENDERECO, NUMERO = :NUMERO, BAIRRO = :BAIRRO, ')
+    .Add('CEP = :CEP, CIDADE = :CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
+    .Add('CELULAR = :CELULAR, FAX = :FAX, EMAIL = :EMAIL, TIPO_JURIDICO = :TIPO_JURIDICO, CNPJ = :CNPJ, INSCRICAO_ESTADUAL = :INSCRICAO_ESTADUAL, ')
+    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR')
     .Add('WHERE(CLIENTES.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
-
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.ExecSQL;
-
-   ShowDone('Exclusão realizada');
-end;
-
-function TModelClientesFactory.AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
-var
-  LStatusNovo: string;
-begin
-   Result := Self;
-
-   if(not (FEntitie.Id > 0))then
-     Exit;
-
-   if(FEntitie.Id = 1)then
-     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser inativado');
-
-   MyQueryNew
-    .Add('SELECT STATUS FROM CLIENTES ')
-    .Add('WHERE(CLIENTES.ID = :ID)')
-    .AddParam('ID', FEntitie.Id)
-    .Open;
-
-   LStatusNovo := STATUS_ATIVO;
-   if(MyQuery.FieldByName('STATUS').AsString.Equals(STATUS_ATIVO))then
-     LStatusNovo := STATUS_INATIVO;
-
-   MyQueryNew
-    .Add('UPDATE CLIENTES SET STATUS = :STATUS')
-    .Add('WHERE(CLIENTES.ID = :ID)')
-    .AddParam('ID', FEntitie.Id)
-    .AddParam('STATUS', LStatusNovo);
-
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.ExecSQL;
-
-   ShowDone('Cliente Ativado/Inativado');
 end;
 
 end.
