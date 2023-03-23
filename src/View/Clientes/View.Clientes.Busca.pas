@@ -12,15 +12,15 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base.Busca,
-  Data.DB,
   Vcl.Grids,
   Vcl.DBGrids,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
   Vcl.Menus,
-  Utils.MyTypes,
   Vcl.ComCtrls,
+  View.Base.Busca,
+  Data.DB,
+  Utils.MyTypes,
   Model.Clientes.Busca;
 
 type
@@ -29,6 +29,7 @@ type
     rdBuscarCodigo: TRadioButton;
     rdBuscarCPF_CNPJ: TRadioButton;
     rdBuscarCidade: TRadioButton;
+    procedure ConfComponents(Sender: TObject);
     procedure btnCadastroClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Excluir1Click(Sender: TObject);
@@ -53,8 +54,10 @@ implementation
 uses
   MyExceptions,
   Utils.MyConsts,
+  Utils.MyVclLibrary,
+  Utils.GlobalConsts,
   View.Clientes.Cad,
-  Model.Clientes.Factory, Utils.GlobalConsts;
+  Model.Clientes.Factory;
 
 procedure TViewClientesBusca.FormCreate(Sender: TObject);
 begin
@@ -85,7 +88,7 @@ begin
    inherited;
    if(ViewClientesCad = nil)then Application.CreateForm(TViewClientesCad, ViewClientesCad);
 
-   if(ViewClientesBusca.Showing)then
+   if(ViewClientesCad.Showing)then
      raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
 
    try
@@ -102,7 +105,6 @@ begin
     .TipoBusca(Self.GetTipoBusca)
     .Inativos(ckBuscarInativos.Enabled and ckBuscarInativos.Checked)
     .Buscar;
-
    inherited;
 end;
 
@@ -146,10 +148,15 @@ begin
    begin
       if(not (gdSelected in State))then
         TDBGrid(Sender).Canvas.Font.Color := clRed;
-
       TDBGrid(Sender).Canvas.FillRect(Rect);
       TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
    end;
+end;
+
+procedure TViewClientesBusca.ConfComponents(Sender: TObject);
+begin
+   edtBusca.Clear;
+   TMyVclLibrary.SetFocusOn(edtBusca);
 end;
 
 end.

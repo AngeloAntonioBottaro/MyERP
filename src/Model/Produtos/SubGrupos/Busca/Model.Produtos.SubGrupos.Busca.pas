@@ -3,6 +3,7 @@ unit Model.Produtos.SubGrupos.Busca;
 interface
 
 uses
+  System.SysUtils,
   Data.DB,
   MyConnection,
   Utils.MyTypes;
@@ -33,8 +34,7 @@ type
 implementation
 
 uses
-  Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.LibrarySistema;
 
 constructor TModelProdutosSubGruposBusca.Create;
 begin
@@ -57,9 +57,9 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.SUBGRUPO, PRODUTOS_SUBGRUPOS.GRUPO')
+    .Add('PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.SUBGRUPO, PRODUTOS_SUBGRUPOS.GRUPO,')
     .Add('PRODUTOS_GRUPOS.GRUPO AS NOME_GRUPO')
-    .Add('FROM PRODUTOS_GRUPOS ')
+    .Add('FROM PRODUTOS_SUBGRUPOS ')
     .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)');
 end;
 
@@ -70,9 +70,23 @@ begin
 
    case(FTipoBusca)of
     TTipoBuscaProdutoSubGrupo.Id: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
-    TTipoBuscaProdutoSubGrupo.Nome: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.SUBGRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
-    TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.GRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
-    TTipoBuscaProdutoSubGrupo.GrupoNome: FQueryBusca.Add('(PRODUTOS_GRUPOS.GRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    TTipoBuscaProdutoSubGrupo.Nome:
+    begin
+       if(Length(FConteudoBusca) > 50)then
+         Abort;
+
+       FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.SUBGRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    end;
+    TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.GRUPO CONTAINING :GRUPO)').AddParam('GRUPO', FConteudoBusca);
+    TTipoBuscaProdutoSubGrupo.GrupoNome:
+    begin
+       if(Length(FConteudoBusca) > 50)then
+         Abort;
+
+       FQueryBusca.Add('(PRODUTOS_GRUPOS.GRUPO CONTAINING :GRUPO)').AddParam('GRUPO', FConteudoBusca);
+    end
+   else
+    Abort;
    end;
 
    Self.GetSQLInativos;
@@ -80,8 +94,7 @@ end;
 
 procedure TModelProdutosSubGruposBusca.GetSQLInativos;
 begin
-   if(not FInativos)then
-     FQueryBusca.Add('AND(PRODUTOS_SUBGRUPOS.STATUS = :STATUS)').AddParam('STATUS', STATUS_ATIVO);
+   //
 end;
 
 procedure TModelProdutosSubGruposBusca.GetSQLOrderBy;

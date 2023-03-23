@@ -214,6 +214,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Height = 17
       Caption = 'Inativos'
       TabOrder = 3
+      Visible = False
     end
   end
   object GridBusca: TDBGrid

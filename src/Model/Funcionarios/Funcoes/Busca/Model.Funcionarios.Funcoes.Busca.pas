@@ -3,6 +3,7 @@ unit Model.Funcionarios.Funcoes.Busca;
 interface
 
 uses
+  System.SysUtils,
   Data.DB,
   MyConnection,
   Utils.MyTypes;
@@ -33,8 +34,7 @@ type
 implementation
 
 uses
-  Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.LibrarySistema;
 
 constructor TModelFuncionariosFuncoesBusca.Create;
 begin
@@ -68,7 +68,15 @@ begin
 
    case(FTipoBusca)of
     TTipoBuscaFuncionarioFuncao.Id: FQueryBusca.Add('(FUNCIONARIOS_FUNCOES.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
-    TTipoBuscaFuncionarioFuncao.Nome: FQueryBusca.Add('(FUNCIONARIOS_FUNCOES.FUNCAO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    TTipoBuscaFuncionarioFuncao.Nome:
+    begin
+       if(Length(FConteudoBusca) > 60)then
+         Abort;
+
+       FQueryBusca.Add('(FUNCIONARIOS_FUNCOES.FUNCAO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    end;
+   else
+    Abort;
    end;
 
    Self.GetSQLInativos;

@@ -174,7 +174,8 @@ end;
 procedure TViewBaseBusca.GridBuscaDblClick(Sender: TObject);
 begin
    inherited;
-   btnVincular.Click;
+   if(btnVincular.Visible)and(btnVincular.Enabled)then
+     btnVincular.Click;
 end;
 
 procedure TViewBaseBusca.GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);

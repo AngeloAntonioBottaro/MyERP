@@ -3,6 +3,7 @@ unit Model.Cidades.Busca;
 interface
 
 uses
+  System.SysUtils,
   Data.DB,
   MyConnection,
   Utils.MyTypes;
@@ -33,8 +34,7 @@ type
 implementation
 
 uses
-  Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.LibrarySistema;
 
 constructor TModelCidadesBusca.Create;
 begin
@@ -57,7 +57,7 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('CIDADES.NOME, CIDADES.UF, CIDADES.IBGE')
+    .Add('CIDADES.ID, CIDADES.NOME, CIDADES.UF, CIDADES.IBGE')
     .Add('FROM CIDADES ');
 end;
 
@@ -68,10 +68,26 @@ begin
 
    case(FTipoBusca)of
     TTipoBuscaCidade.Id: FQueryBusca.Add('(CIDADES.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
-    TTipoBuscaCidade.Nome: FQueryBusca.Add('(CIDADES.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
-    TTipoBuscaCidade.UF: FQueryBusca.Add('(CIDADES.UF CONTAINING :UF)').AddParam('UF', FConteudoBusca);
+    TTipoBuscaCidade.Nome:
+    begin
+       if(Length(FConteudoBusca) > 60)then
+         Abort;
+
+       FQueryBusca.Add('(CIDADES.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    end;
+    TTipoBuscaCidade.UF:
+    begin
+       if(Length(FConteudoBusca) > 2)then
+         Abort;
+
+       FQueryBusca.Add('(CIDADES.UF CONTAINING :UF)').AddParam('UF', FConteudoBusca);
+    end;
     TTipoBuscaCidade.IBGE: FQueryBusca.Add('(CIDADES.IBGE CONTAINING :IBGE)').AddParam('IBGE', FConteudoBusca);
+   else
+     Abort;
    end;
+
+   Self.GetSQLInativos;
 end;
 
 procedure TModelCidadesBusca.GetSQLInativos;
@@ -83,9 +99,9 @@ procedure TModelCidadesBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaCliente.Nome: FQueryBusca.Add('NOME');
-    TTipoBuscaCliente.CPF_CNPJ: FQueryBusca.Add('UF, NOME');
-    TTipoBuscaCliente.Cidade: FQueryBusca.Add('IBGE');
+    TTipoBuscaCidade.Nome: FQueryBusca.Add('NOME');
+    TTipoBuscaCidade.UF: FQueryBusca.Add('UF, NOME');
+    TTipoBuscaCidade.IBGE: FQueryBusca.Add('IBGE');
    else
      FQueryBusca.Add('ID');
    end;

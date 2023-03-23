@@ -3,6 +3,7 @@ unit Model.Produtos.Grupos.Busca;
 interface
 
 uses
+  System.SysUtils,
   Data.DB,
   MyConnection,
   Utils.MyTypes;
@@ -33,8 +34,7 @@ type
 implementation
 
 uses
-  Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.LibrarySistema;
 
 constructor TModelProdutosGruposBusca.Create;
 begin
@@ -67,8 +67,16 @@ begin
     .Add('WHERE');
 
    case(FTipoBusca)of
-    TTipoBuscaFuncionarioFuncao.Id: FQueryBusca.Add('(PRODUTOS_GRUPOS.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
-    TTipoBuscaFuncionarioFuncao.Nome: FQueryBusca.Add('(PRODUTOS_GRUPOS.GRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    TTipoBuscaProdutoGrupo.Id: FQueryBusca.Add('(PRODUTOS_GRUPOS.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
+    TTipoBuscaProdutoGrupo.Nome:
+    begin
+       if(Length(FConteudoBusca) > 50)then
+         Abort;
+
+       FQueryBusca.Add('(PRODUTOS_GRUPOS.GRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+    end
+   else
+    Abort;
    end;
 
    Self.GetSQLInativos;
@@ -76,8 +84,7 @@ end;
 
 procedure TModelProdutosGruposBusca.GetSQLInativos;
 begin
-   if(not FInativos)then
-     FQueryBusca.Add('AND(PRODUTOS_GRUPOS.STATUS = :STATUS)').AddParam('STATUS', STATUS_ATIVO);
+   //
 end;
 
 procedure TModelProdutosGruposBusca.GetSQLOrderBy;

@@ -3,6 +3,7 @@ unit Model.Funcionarios.Busca;
 interface
 
 uses
+  System.SysUtils,
   Data.DB,
   MyConnection,
   Utils.MyTypes;
@@ -33,6 +34,7 @@ type
 implementation
 
 uses
+  Utils.MyLibrary,
   Utils.LibrarySistema,
   Utils.GlobalConsts;
 
@@ -64,6 +66,8 @@ begin
 end;
 
 procedure TModelFuncionariosBusca.GetSQLCondicao;
+var
+  LValorBusca: string;
 begin
    FQueryBusca
     .Add('WHERE');
@@ -72,17 +76,40 @@ begin
     TTipoBuscaFuncionario.Id: FQueryBusca.Add('(FUNCIONARIOS.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
     TTipoBuscaFuncionario.Nome:
     begin
+       if(Length(FConteudoBusca) > 100)then
+         Abort;
+
        FQueryBusca
         .Add('((FUNCIONARIOS.RAZAO_SOCIAL CONTAINING :NOME)or(FUNCIONARIOS.NOME_FANTASIA CONTAINING :NOME))')
         .AddParam('NOME', FConteudoBusca);
     end;
     TTipoBuscaFuncionario.CPF_CNPJ:
     begin
+       LValorBusca := TMyLibrary.NumbersOnly(FConteudoBusca);
+
+       if(Length(LValorBusca) > 14)then
+         Abort;
+
        FQueryBusca
-        .Add('((FUNCIONARIOS.CPF CONTAINING :CPF_CNPJ)or(FUNCIONARIOS.CNPJ CONTAINING :CPF_CNPJ))')
-        .AddParam('CPF_CNPJ', FConteudoBusca);
+        .Add('((FUNCIONARIOS.CNPJ CONTAINING :CNPJ)')
+        .AddParam('CNPJ', LValorBusca);
+
+       if(Length(LValorBusca) <= 11)then
+         FQueryBusca
+          .Add('or(FUNCIONARIOS.CPF CONTAINING :CPF)')
+          .AddParam('CPF', LValorBusca);
+
+       FQueryBusca.Add(')');
     end;
-    TTipoBuscaFuncionario.Cidade: FQueryBusca.Add('(CIDADES.NOME CONTAINING :NOME_CIDADE)').AddParam('NOME_CIDADE', FConteudoBusca);
+    TTipoBuscaFuncionario.Cidade:
+    begin
+       if(Length(FConteudoBusca) > 60)then
+         Abort;
+
+       FQueryBusca.Add('(CIDADES.NOME CONTAINING :NOME_CIDADE)').AddParam('NOME_CIDADE', FConteudoBusca);
+    end;
+   else
+     Abort;
    end;
 
    Self.GetSQLInativos;

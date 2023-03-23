@@ -26,6 +26,7 @@ inherited ViewClientesBusca: TViewClientesBusca
         Checked = True
         TabOrder = 0
         TabStop = True
+        OnClick = ConfComponents
       end
       object rdBuscarCodigo: TRadioButton
         Left = 10
@@ -34,6 +35,7 @@ inherited ViewClientesBusca: TViewClientesBusca
         Height = 17
         Caption = 'C'#243'digo (F2)'
         TabOrder = 1
+        OnClick = ConfComponents
       end
       object rdBuscarCPF_CNPJ: TRadioButton
         Left = 198
@@ -42,6 +44,7 @@ inherited ViewClientesBusca: TViewClientesBusca
         Height = 17
         Caption = 'CPF / CNPJ (F4)'
         TabOrder = 2
+        OnClick = ConfComponents
       end
       object rdBuscarCidade: TRadioButton
         Left = 308
@@ -50,12 +53,16 @@ inherited ViewClientesBusca: TViewClientesBusca
         Height = 17
         Caption = 'Cidade (F6)'
         TabOrder = 3
+        OnClick = ConfComponents
       end
     end
     inherited pnOptions: TPanel
       inherited lbTotalRegistros: TLabel
         Height = 14
       end
+    end
+    inherited ckBuscarInativos: TCheckBox
+      Visible = True
     end
   end
   inherited GridBusca: TDBGrid
@@ -111,7 +118,7 @@ inherited ViewClientesBusca: TViewClientesBusca
         Expanded = False
         FieldName = 'NOME_CIDADE'
         Title.Caption = 'Cidade'
-        Width = 100
+        Width = 150
         Visible = True
       end>
   end
