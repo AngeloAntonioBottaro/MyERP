@@ -113,7 +113,7 @@
             <Form>ViewSistemaSplash</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Sistema\View.Base.pas">
+        <DCCReference Include="src\View\Sistema\Base\View.Base.pas">
             <Form>ViewBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -153,7 +153,7 @@
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Produtos.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Cidades.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Consts.pas"/>
-        <DCCReference Include="src\View\Sistema\View.Base.Cadastros.pas">
+        <DCCReference Include="src\View\Sistema\Base\View.Base.Cadastros.pas">
             <Form>ViewBaseCadastros</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -220,7 +220,7 @@
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Factory.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Interfaces.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Entitie.pas"/>
-        <DCCReference Include="src\View\Sistema\View.Base.Busca.pas">
+        <DCCReference Include="src\View\Sistema\Base\View.Base.Busca.pas">
             <Form>ViewBaseBusca</Form>
             <FormType>dfm</FormType>
         </DCCReference>

@@ -28,6 +28,7 @@ type
     function Inativos(AInativos: Boolean): TModelProdutosSubGruposBusca;
     function DataSource(ADataSource: TDataSource): TModelProdutosSubGruposBusca;
     function ConteudoBusca(AConteudoBusca: string): TModelProdutosSubGruposBusca;
+    function IndexFieldNames(AIndex: string): TModelProdutosSubGruposBusca;
     procedure Buscar;
   end;
 
@@ -57,8 +58,8 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.SUBGRUPO, PRODUTOS_SUBGRUPOS.GRUPO,')
-    .Add('PRODUTOS_GRUPOS.GRUPO AS NOME_GRUPO')
+    .Add('PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.NOME, PRODUTOS_SUBGRUPOS.GRUPO,')
+    .Add('PRODUTOS_GRUPOS.NOME AS NOME_GRUPO')
     .Add('FROM PRODUTOS_SUBGRUPOS ')
     .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)');
 end;
@@ -75,7 +76,7 @@ begin
        if(Length(FConteudoBusca) > 50)then
          Abort;
 
-       FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.SUBGRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+       FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
     end;
     TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.GRUPO CONTAINING :GRUPO)').AddParam('GRUPO', FConteudoBusca);
     TTipoBuscaProdutoSubGrupo.GrupoNome:
@@ -83,7 +84,7 @@ begin
        if(Length(FConteudoBusca) > 50)then
          Abort;
 
-       FQueryBusca.Add('(PRODUTOS_GRUPOS.GRUPO CONTAINING :GRUPO)').AddParam('GRUPO', FConteudoBusca);
+       FQueryBusca.Add('(PRODUTOS_GRUPOS.NOME CONTAINING :GRUPO)').AddParam('GRUPO', FConteudoBusca);
     end
    else
     Abort;
@@ -101,7 +102,7 @@ procedure TModelProdutosSubGruposBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaProdutoSubGrupo.Nome: FQueryBusca.Add('SUBGRUPO');
+    TTipoBuscaProdutoSubGrupo.Nome: FQueryBusca.Add('NOME');
     TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('GRUPO');
     TTipoBuscaProdutoSubGrupo.GrupoNome: FQueryBusca.Add('NOME_GRUPO');
    else
@@ -137,6 +138,13 @@ function TModelProdutosSubGruposBusca.TipoBusca(ATipoBusca: TTipoBuscaProdutoSub
 begin
    Result     := Self;
    FTipoBusca := ATipoBusca;
+end;
+
+function TModelProdutosSubGruposBusca.IndexFieldNames(AIndex: string): TModelProdutosSubGruposBusca;
+begin
+   Result := Self;
+   FQueryBusca.IndexFieldNames(AIndex);
+   Self.Buscar;
 end;
 
 end.

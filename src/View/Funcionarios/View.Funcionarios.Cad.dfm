@@ -12,6 +12,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
     end
     inherited btnExcluir: TButton
       OnClick = btnExcluirClick
+      ExplicitLeft = 404
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
@@ -32,16 +33,28 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
     object lbIdFuncao: TLabel
       Left = 8
       Top = 213
-      Width = 33
+      Width = 38
       Height = 13
       Caption = 'C'#243'digo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbFuncao: TLabel
       Left = 74
       Top = 213
-      Width = 35
+      Width = 40
       Height = 13
       Caption = 'Fun'#231#227'o'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbId: TLabel
       Left = 8
@@ -254,7 +267,9 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Top = 227
       Width = 65
       Height = 21
-      TabOrder = 0
+      TabOrder = 23
+      OnExit = edtIdFuncaoExit
+      OnKeyDown = edtIdFuncaoKeyDown
     end
     object edtFuncao: TEdit
       Left = 74
@@ -264,7 +279,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       TabStop = False
       Color = clBtnFace
       ReadOnly = True
-      TabOrder = 1
+      TabOrder = 24
     end
     object cBoxTipoJuridico: TComboBox
       Left = 8
@@ -272,7 +287,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 109
       Height = 21
       Style = csDropDownList
-      TabOrder = 2
+      TabOrder = 17
       OnChange = ConfComponents
       Items.Strings = (
         'Pessoa f'#237'sica'
@@ -293,49 +308,50 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Font.Style = [fsBold]
       ParentFont = False
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 0
     end
     object edtRazaoSocial: TEdit
       Left = 74
       Top = 22
       Width = 359
       Height = 21
-      TabOrder = 4
+      TabOrder = 1
     end
     object edtNomeFantasia: TEdit
       Left = 434
       Top = 22
       Width = 267
       Height = 21
-      TabOrder = 5
+      TabOrder = 2
     end
     object edtEndereco: TEdit
       Left = 8
       Top = 63
       Width = 295
       Height = 21
-      TabOrder = 6
+      TabOrder = 3
     end
     object edtBairro: TEdit
       Left = 387
       Top = 63
       Width = 214
       Height = 21
-      TabOrder = 7
+      TabOrder = 5
     end
     object edtNumero: TEdit
       Left = 304
       Top = 63
       Width = 82
       Height = 21
-      TabOrder = 8
+      TabOrder = 4
     end
     object edtCep: TEdit
       Left = 602
       Top = 63
       Width = 99
       Height = 21
-      TabOrder = 9
+      TabOrder = 6
+      OnExit = ConfComponents
     end
     object edtIdCidade: TEdit
       Left = 8
@@ -343,7 +359,9 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 65
       Height = 21
       NumbersOnly = True
-      TabOrder = 10
+      TabOrder = 7
+      OnExit = edtIdCidadeExit
+      OnKeyDown = edtIdCidadeKeyDown
     end
     object edtCidade: TEdit
       Left = 74
@@ -353,7 +371,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       TabStop = False
       Color = clBtnFace
       ReadOnly = True
-      TabOrder = 11
+      TabOrder = 8
     end
     object edtUF: TEdit
       Left = 422
@@ -363,21 +381,23 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       TabStop = False
       Color = clBtnFace
       ReadOnly = True
-      TabOrder = 12
+      TabOrder = 9
     end
     object edtTelefone: TEdit
       Left = 8
       Top = 145
       Width = 97
       Height = 21
-      TabOrder = 13
+      TabOrder = 12
+      OnExit = ConfComponents
     end
     object edtTelefone2: TEdit
       Left = 106
       Top = 145
       Width = 97
       Height = 21
-      TabOrder = 14
+      TabOrder = 13
+      OnExit = ConfComponents
     end
     object dtpDataNascimento: TDateTimePicker
       Left = 479
@@ -386,7 +406,8 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Height = 21
       Date = 44993.000000000000000000
       Time = 0.445778391200292400
-      TabOrder = 15
+      TabOrder = 10
+      OnExit = ConfComponents
     end
     object edtIdade: TEdit
       Left = 589
@@ -396,28 +417,31 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       TabStop = False
       Color = clBtnFace
       ReadOnly = True
-      TabOrder = 16
+      TabOrder = 11
     end
     object edtCelular: TEdit
       Left = 204
       Top = 145
       Width = 97
       Height = 21
-      TabOrder = 17
+      TabOrder = 14
+      OnExit = ConfComponents
     end
     object edtFax: TEdit
       Left = 302
       Top = 145
       Width = 97
       Height = 21
-      TabOrder = 18
+      TabOrder = 15
+      OnExit = ConfComponents
     end
     object edtEmail: TEdit
       Left = 400
       Top = 145
       Width = 301
       Height = 21
-      TabOrder = 19
+      TabOrder = 16
+      OnExit = ConfComponents
     end
     object edtCPF: TEdit
       Left = 360
@@ -425,7 +449,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Width = 120
       Height = 21
       TabOrder = 20
-      OnExit = edtCPFExit
+      OnExit = ConfComponents
     end
     object edtRG: TEdit
       Left = 481
@@ -439,22 +463,22 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Top = 186
       Width = 120
       Height = 21
-      TabOrder = 22
-      OnExit = edtCNPJExit
+      TabOrder = 18
+      OnExit = ConfComponents
     end
     object edtIE: TEdit
       Left = 239
       Top = 186
       Width = 120
       Height = 21
-      TabOrder = 23
+      TabOrder = 19
     end
     object edtRGOrgaoExpedidor: TEdit
       Left = 602
       Top = 186
       Width = 99
       Height = 21
-      TabOrder = 24
+      TabOrder = 22
     end
     object edtSalario: TEdit
       Left = 342
@@ -471,10 +495,11 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       TabOrder = 26
     end
     object edtSenha: TEdit
-      Left = 596
+      Left = 602
       Top = 227
       Width = 99
       Height = 21
+      PasswordChar = '#'
       TabOrder = 27
     end
   end

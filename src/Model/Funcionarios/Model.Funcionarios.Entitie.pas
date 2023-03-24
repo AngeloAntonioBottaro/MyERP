@@ -35,7 +35,7 @@ type
     FRgOrgaoExpedidor: string;
     FSalario: Double;
     FSenha: string;
-    FStatusCliente: string;
+    FStatus: string;
     FTelefone: string;
     FTelefone2: string;
     FTipoJuridico: string;
@@ -48,15 +48,20 @@ type
     function Bairro: string; overload;
     function Celular(AValue: string): TModelFuncionariosEntitie; overload;
     function Celular: string; overload;
+    function CelularMascara: string;
     function Cep(AValue: string): TModelFuncionariosEntitie; overload;
     function Cep: string; overload;
+    function CepMascara: string;
     function Cidade(AValue: string): TModelFuncionariosEntitie; overload;
     function Cidade(AValue: Integer): TModelFuncionariosEntitie; overload;
     function Cidade: Integer; overload;
+    function CidadeMascara: string;
     function Cnpj(AValue: string): TModelFuncionariosEntitie; overload;
     function Cnpj: string; overload;
+    function CnpjMascara: string;
     function Cpf(AValue: string): TModelFuncionariosEntitie; overload;
     function Cpf: string; overload;
+    function CpfMascara: string;
     function DataCadastro(AValue: string): TModelFuncionariosEntitie; overload;
     function DataCadastro(AValue: TDateTime): TModelFuncionariosEntitie; overload;
     function DataCadastro: TDateTime; overload;
@@ -69,12 +74,15 @@ type
     function Endereco: string; overload;
     function Fax(AValue: string): TModelFuncionariosEntitie; overload;
     function Fax: string; overload;
+    function FaxMascara: string;
     function Funcao(AValue: string): TModelFuncionariosEntitie; overload;
     function Funcao(AValue: Integer): TModelFuncionariosEntitie; overload;
     function Funcao: Integer; overload;
+    function FuncaoMascara: string;
     function Id(AValue: string): TModelFuncionariosEntitie; overload;
     function Id(AValue: Integer): TModelFuncionariosEntitie; overload;
     function Id: Integer; overload;
+    function IdMascara: string;
     function IE(AValue: string): TModelFuncionariosEntitie; overload;
     function IE: string; overload;
     function Login(AValue: string): TModelFuncionariosEntitie; overload;
@@ -94,12 +102,14 @@ type
     function Salario: Double; overload;
     function Senha(AValue: string): TModelFuncionariosEntitie; overload;
     function Senha: string; overload;
-    function StatusCliente(AValue: string): TModelFuncionariosEntitie; overload;
-    function StatusCliente: string; overload;
+    function Status(AValue: string): TModelFuncionariosEntitie; overload;
+    function Status: string; overload;
     function Telefone(AValue: string): TModelFuncionariosEntitie; overload;
     function Telefone: string; overload;
+    function TelefoneMascara: string;
     function Telefone2(AValue: string): TModelFuncionariosEntitie; overload;
     function Telefone2: string; overload;
+    function Telefone2Mascara: string;
     function TipoJuridico(AValue: string): TModelFuncionariosEntitie; overload;
     function TipoJuridico: string; overload;
     function TipoJuridicoComboBox: Integer;
@@ -108,13 +118,14 @@ type
 implementation
 
 uses
+  Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelFuncionariosEntitie.Create(AParent: IModelFuncionariosFactory<TModelFuncionariosEntitie>);
 begin
-   FParent        := AParent;
-   FStatusCliente := STATUS_ATIVO;
-   FTipoJuridico  := PESSOA_FISICA;
+   FParent       := AParent;
+   FStatus       := STATUS_ATIVO;
+   FTipoJuridico := PESSOA_FISICA;
 end;
 
 destructor TModelFuncionariosEntitie.Destroy;
@@ -141,7 +152,7 @@ end;
 function TModelFuncionariosEntitie.Celular(AValue: string): TModelFuncionariosEntitie;
 begin
    Result   := Self;
-   FCelular := AValue.Trim;
+   FCelular := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Celular: string;
@@ -149,10 +160,15 @@ begin
    Result := FCelular;
 end;
 
+function TModelFuncionariosEntitie.CelularMascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Celular);
+end;
+
 function TModelFuncionariosEntitie.Cep(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   FCep   := AValue;
+   FCep   := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Cep: string;
@@ -160,10 +176,15 @@ begin
    Result := FCep;
 end;
 
+function TModelFuncionariosEntitie.CepMascara: string;
+begin
+   Result := TMyLibrary.ArrangeCEP(Self.Cep);
+end;
+
 function TModelFuncionariosEntitie.Cidade(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   Self.Cidade(StrToIntDef(AValue.Trim, 0));
+   Self.Cidade(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelFuncionariosEntitie.Cidade(AValue: Integer): TModelFuncionariosEntitie;
@@ -177,10 +198,17 @@ begin
    Result := FCidade;
 end;
 
+function TModelFuncionariosEntitie.CidadeMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Cidade > 0)then
+     Result := TMyLibrary.CompLeft(Self.Cidade);
+end;
+
 function TModelFuncionariosEntitie.Cnpj(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   FCnpj  := AValue.Trim;
+   FCnpj  := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Cnpj: string;
@@ -188,15 +216,25 @@ begin
    Result := FCnpj;
 end;
 
+function TModelFuncionariosEntitie.CnpjMascara: string;
+begin
+   Result := TMyLibrary.ArrangeCNPJ(Self.Cnpj);
+end;
+
 function TModelFuncionariosEntitie.Cpf(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   FCpf   := AValue.Trim;
+   FCpf   := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Cpf: string;
 begin
    Result := FCpf;
+end;
+
+function TModelFuncionariosEntitie.CpfMascara: string;
+begin
+   Result := TMyLibrary.ArrangeCPF(Self.Cpf);
 end;
 
 function TModelFuncionariosEntitie.DataCadastro(AValue: string): TModelFuncionariosEntitie;
@@ -258,7 +296,7 @@ end;
 function TModelFuncionariosEntitie.Fax(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   FFax   := AValue.Trim;
+   FFax   := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Fax: string;
@@ -266,10 +304,15 @@ begin
    Result := FFax;
 end;
 
+function TModelFuncionariosEntitie.FaxMascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Fax);
+end;
+
 function TModelFuncionariosEntitie.Funcao(AValue: string): TModelFuncionariosEntitie;
 begin
    Result  := Self;
-   Self.Funcao(StrToInt(AValue.Trim));
+   Self.Funcao(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelFuncionariosEntitie.Funcao(AValue: Integer): TModelFuncionariosEntitie;
@@ -283,10 +326,17 @@ begin
    Result := FFuncao;
 end;
 
+function TModelFuncionariosEntitie.FuncaoMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Id > 0)then
+     Result := TMyLibrary.CompLeft(Self.Funcao);
+end;
+
 function TModelFuncionariosEntitie.Id(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   Self.Id(StrToIntDef(AValue.Trim, 0));
+   Self.Id(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelFuncionariosEntitie.Id(AValue: Integer): TModelFuncionariosEntitie;
@@ -300,10 +350,17 @@ begin
    Result := FId;
 end;
 
+function TModelFuncionariosEntitie.IdMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Id > 0)then
+     Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
 function TModelFuncionariosEntitie.IE(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   FIE    := AValue.Trim;
+   FIE    := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.IE: string;
@@ -358,7 +415,7 @@ end;
 function TModelFuncionariosEntitie.RG(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   FRG    := AValue.Trim;
+   FRG    := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.RG: string;
@@ -377,16 +434,10 @@ begin
    Result := FRgOrgaoExpedidor;
 end;
 
-function TModelFuncionariosEntitie.StatusCliente(AValue: string): TModelFuncionariosEntitie;
-begin
-   Result         := Self;
-   FStatusCliente := AValue.Trim;
-end;
-
 function TModelFuncionariosEntitie.Salario(AValue: string): TModelFuncionariosEntitie;
 begin
    Result := Self;
-   Self.Salario(StrToFloat(AValue.Trim));
+   Self.Salario(TMyLibrary.StrToFloatDef(AValue.Trim));
 end;
 
 function TModelFuncionariosEntitie.Salario(AValue: Double): TModelFuncionariosEntitie;
@@ -411,15 +462,21 @@ begin
    Result := FSenha;
 end;
 
-function TModelFuncionariosEntitie.StatusCliente: string;
+function TModelFuncionariosEntitie.Status(AValue: string): TModelFuncionariosEntitie;
 begin
-   Result := FStatusCliente;
+   Result  := Self;
+   FStatus := AValue.Trim;
+end;
+
+function TModelFuncionariosEntitie.Status: string;
+begin
+   Result := FStatus;
 end;
 
 function TModelFuncionariosEntitie.Telefone(AValue: string): TModelFuncionariosEntitie;
 begin
    Result    := Self;
-   FTelefone := AValue.Trim;
+   FTelefone := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Telefone: string;
@@ -427,15 +484,25 @@ begin
    Result := FTelefone;
 end;
 
+function TModelFuncionariosEntitie.TelefoneMascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Telefone);
+end;
+
 function TModelFuncionariosEntitie.Telefone2(AValue: string): TModelFuncionariosEntitie;
 begin
    Result     := Self;
-   FTelefone2 := AValue.Trim;
+   FTelefone2 := TMyLibrary.NumbersOnly(AValue.Trim);
 end;
 
 function TModelFuncionariosEntitie.Telefone2: string;
 begin
    Result := FTelefone2;
+end;
+
+function TModelFuncionariosEntitie.Telefone2Mascara: string;
+begin
+   Result := TMyLibrary.ArrangeFone(Self.Telefone2);
 end;
 
 function TModelFuncionariosEntitie.TipoJuridico(AValue: string): TModelFuncionariosEntitie;

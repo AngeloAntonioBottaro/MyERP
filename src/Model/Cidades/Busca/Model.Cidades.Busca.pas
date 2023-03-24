@@ -28,6 +28,7 @@ type
     function Inativos(AInativos: Boolean): TModelCidadesBusca;
     function DataSource(ADataSource: TDataSource): TModelCidadesBusca;
     function ConteudoBusca(AConteudoBusca: string): TModelCidadesBusca;
+    function IndexFieldNames(AIndex: string): TModelCidadesBusca;
     procedure Buscar;
   end;
 
@@ -135,6 +136,13 @@ function TModelCidadesBusca.TipoBusca(ATipoBusca: TTipoBuscaCidade): TModelCidad
 begin
    Result     := Self;
    FTipoBusca := ATipoBusca;
+end;
+
+function TModelCidadesBusca.IndexFieldNames(AIndex: string): TModelCidadesBusca;
+begin
+   Result := Self;
+   FQueryBusca.IndexFieldNames(AIndex);
+   Self.Buscar;
 end;
 
 end.

@@ -8,12 +8,16 @@ uses
   Model.Clientes.Interfaces,
   Model.Clientes.Entitie;
 
+const
+  THIS   = 'Cliente';
+  TABELA = 'CLIENTES';
+
 type
   TModelClientesFactory = class(TInterfacedObject, IModelClientesFactory<TModelClientesEntitie>)
   private
     FEntitie: TModelClientesEntitie;
-    procedure InsertCliente;
-    procedure UpdateCliente;
+    procedure SQLInsert;
+    procedure SQLUpdate;
     procedure ValidarCampos;
   protected
     function Entitie: TModelClientesEntitie;
@@ -23,6 +27,7 @@ type
     procedure ValidarEmail;
 
     function AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
+    function ConsultarEntitie: IModelClientesFactory<TModelClientesEntitie>;
     function Deletar: IModelClientesFactory<TModelClientesEntitie>;
     function Gravar: IModelClientesFactory<TModelClientesEntitie>;
   public
@@ -118,14 +123,14 @@ begin
    Result := Self;
 
    if(not (FEntitie.Id > 0))then
-     Exit;
+     ExceptionMsgRegistroNaoInformadoAlteracaoStatus(THIS);
 
    if(FEntitie.Id = 1)then
      raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser inativado');
 
    MyQueryNew
-    .Add('SELECT STATUS FROM CLIENTES ')
-    .Add('WHERE(CLIENTES.ID = :ID)')
+    .Add('SELECT STATUS FROM '+TABELA)
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id)
     .Open;
 
@@ -134,15 +139,69 @@ begin
      LStatusNovo := STATUS_INATIVO;
 
    MyQueryNew
-    .Add('UPDATE CLIENTES SET STATUS = :STATUS')
-    .Add('WHERE(CLIENTES.ID = :ID)')
+    .Add('UPDATE '+TABELA+' SET STATUS = :STATUS')
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id)
     .AddParam('STATUS', LStatusNovo);
 
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.ExecSQL;
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.ExecSQL;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível alterar o status do cliente',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
 
-   ShowDone('Cliente Ativado/Inativado');
+   ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
+end;
+
+function TModelClientesFactory.ConsultarEntitie: IModelClientesFactory<TModelClientesEntitie>;
+begin
+   if(not (FEntitie.Id > 0))then
+     ExceptionMsgRegistroNaoInformadoConsulta(THIS);
+
+   MyQueryNew
+    .Add('SELECT * FROM '+TABELA+' WHERE('+TABELA+'.ID = :ID)')
+    .AddParam('ID', FEntitie.Id);
+
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.Open;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível consultar o cliente',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
+
+   FEntitie
+    .Id(MyQuery.FieldByName('ID').AsString)
+    .RazaoSocial(MyQuery.FieldByName('RAZAO_SOCIAL').AsString)
+    .NomeFantasia(MyQuery.FieldByName('NOME_FANTASIA').AsString)
+    .Endereco(MyQuery.FieldByName('ENDERECO').AsString)
+    .Numero(MyQuery.FieldByName('NUMERO').AsString)
+    .Bairro(MyQuery.FieldByName('BAIRRO').AsString)
+    .Cep(MyQuery.FieldByName('CEP').AsString)
+    .Cidade(MyQuery.FieldByName('CIDADE').AsString)
+    .DataNascimento(MyQuery.FieldByName('DATA_NASCIMENTO').AsDateTime)
+    .Telefone(MyQuery.FieldByName('TELEFONE').AsString)
+    .Telefone2(MyQuery.FieldByName('TELEFONE2').AsString)
+    .Celular(MyQuery.FieldByName('CELULAR').AsString)
+    .Fax(MyQuery.FieldByName('FAX').AsString)
+    .Email(MyQuery.FieldByName('EMAIL').AsString)
+    .TipoJuridico(MyQuery.FieldByName('TIPO_JURIDICO').AsString)
+    .Cnpj(MyQuery.FieldByName('CNPJ').AsString)
+    .IE(MyQuery.FieldByName('INSCRICAO_ESTADUAL').AsString)
+    .Cpf(MyQuery.FieldByName('CPF').AsString)
+    .RG(MyQuery.FieldByName('RG').AsString)
+    .RgOrgaoExpedidor(MyQuery.FieldByName('RG_ORGAO_EXPEDIDOR').AsString)
+    .End_Entitie;
 end;
 
 function TModelClientesFactory.Deletar: IModelClientesFactory<TModelClientesEntitie>;
@@ -150,18 +209,28 @@ begin
    Result := Self;
 
    if(not (FEntitie.Id > 0))then
-     Exit;
+     ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
    if(FEntitie.Id = 1)then
      raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser excluído');
 
    MyQueryNew
-    .Add('DELETE FROM CLIENTES ')
-    .Add('WHERE(CLIENTES.ID = :ID)')
+    .Add('DELETE FROM '+TABELA)
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.ExecSQL;
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.ExecSQL;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível deletar o cliente',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;
@@ -176,9 +245,9 @@ begin
    Self.ValidarCampos;
 
    if(FEntitie.Id > 0)then
-     Self.UpdateCliente
+     Self.SQLUpdate
    else
-     Self.InsertCliente;
+     Self.SQLInsert;
 
    MyQuery
     .AddParam('RAZAO_SOCIAL', FEntitie.RazaoSocial)
@@ -207,17 +276,18 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível cadastrar o cliente', E.Message);
+        raise ExceptionError.Create('Não foi possível gravar o cliente',
+                                    'Mensagem: ' + E.Message);
    end;
    end;
 
    ShowDone('Gravação realizada');
 end;
 
-procedure TModelClientesFactory.InsertCliente;
+procedure TModelClientesFactory.SQLInsert;
 begin
    MyQueryNew
-    .Add('INSERT INTO CLIENTES ')
+    .Add('INSERT INTO '+TABELA)
     .Add('(STATUS, RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
     .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO)')
     .Add('VALUES')
@@ -227,15 +297,15 @@ begin
     .AddParam('DATA_CADASTRO', Now);
 end;
 
-procedure TModelClientesFactory.UpdateCliente;
+procedure TModelClientesFactory.SQLUpdate;
 begin
    MyQueryNew
-    .Add('UPDATE CLIENTES SET')
+    .Add('UPDATE '+TABELA+' SET')
     .Add('RAZAO_SOCIAL = :RAZAO_SOCIAL, NOME_FANTASIA = :NOME_FANTASIA, ENDERECO = :ENDERECO, NUMERO = :NUMERO, BAIRRO = :BAIRRO, ')
     .Add('CEP = :CEP, CIDADE = :CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
     .Add('CELULAR = :CELULAR, FAX = :FAX, EMAIL = :EMAIL, TIPO_JURIDICO = :TIPO_JURIDICO, CNPJ = :CNPJ, INSCRICAO_ESTADUAL = :INSCRICAO_ESTADUAL, ')
     .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR')
-    .Add('WHERE(CLIENTES.ID = :ID)')
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;
 

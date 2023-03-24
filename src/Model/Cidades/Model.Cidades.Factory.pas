@@ -8,6 +8,10 @@ uses
   Model.Cidades.Interfaces,
   Model.Cidades.Entitie;
 
+const
+  THIS   = 'Cidade';
+  TABELA = 'CIDADES';
+
 type
   TModelCidadesFactory = class(TInterfacedObject, IModelCidadesFactory<TModelCidadesEntitie>)
   private
@@ -17,6 +21,7 @@ type
   protected
     function Entitie: TModelCidadesEntitie;
 
+    function ConsultarEntitie: IModelCidadesFactory<TModelCidadesEntitie>;
     function Deletar: IModelCidadesFactory<TModelCidadesEntitie>;
     function Gravar: IModelCidadesFactory<TModelCidadesEntitie>;
   public
@@ -56,20 +61,59 @@ begin
    Result := FEntitie;
 end;
 
+function TModelCidadesFactory.ConsultarEntitie: IModelCidadesFactory<TModelCidadesEntitie>;
+begin
+   if(not (FEntitie.Id > 0))then
+     ExceptionMsgRegistroNaoInformadoConsulta(THIS);
+
+   MyQueryNew
+    .Add('SELECT * FROM '+TABELA+' WHERE('+TABELA+'.ID = :ID)')
+    .AddParam('ID', FEntitie.Id);
+
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.Open;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível consultar a cidade',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
+
+   FEntitie
+    .Id(MyQuery.FieldByName('ID').AsString)
+    .Nome(MyQuery.FieldByName('NOME').AsString)
+    .UF(MyQuery.FieldByName('UF').AsString)
+    .IBGE(MyQuery.FieldByName('IBGE').AsString)
+    .End_Entitie;
+end;
+
 function TModelCidadesFactory.Deletar: IModelCidadesFactory<TModelCidadesEntitie>;
 begin
    Result := Self;
 
    if(not (FEntitie.Id > 0))then
-     Exit;
+     ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
    MyQueryNew
-    .Add('DELETE FROM CIDADES ')
-    .Add('WHERE(CIDADES.ID = :ID)')
+    .Add('DELETE FROM '+TABELA)
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.ExecSQL;
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.ExecSQL;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível deletar a cidade',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;
@@ -94,7 +138,8 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível cadastrar a cidade', E.Message);
+        raise ExceptionError.Create('Não foi possível gravar a cidade',
+                                    'Mensagem: ' + E.Message);
    end;
    end;
 
@@ -104,7 +149,7 @@ end;
 procedure TModelCidadesFactory.InsertCidade;
 begin
    MyQueryNew
-    .Add('INSERT INTO CIDADES ')
+    .Add('INSERT INTO '+TABELA)
     .Add('(NOME, UF, IBGE)')
     .Add('VALUES')
     .Add('(:NOME, :UF, :IBGE)');
@@ -113,9 +158,9 @@ end;
 procedure TModelCidadesFactory.UpdateCidade;
 begin
    MyQueryNew
-    .Add('UPDATE CIDADES SET')
+    .Add('UPDATE '+TABELA+' SET')
     .Add('NOME = :NOME, UF = :UF, IBGE = :IBGE')
-    .Add('WHERE(CIDADES.ID = :ID)')
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;
 

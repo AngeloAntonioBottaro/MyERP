@@ -35,6 +35,7 @@ type
     procedure btnCadastroClick(Sender: TObject);
     procedure Excluir1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure GridBuscaTitleClick(Column: TColumn);
   private
     FBusca: TModelProdutosSubGruposBusca;
     function GetTipoBusca: TTipoBuscaProdutoSubGrupo;
@@ -116,11 +117,11 @@ end;
 procedure TViewProdutosSubGruposBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   {TModelProdutosSubGruposFactory.New
+   TModelProdutosSubGruposFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .Deletar;}
+    .Deletar;
 end;
 
 function TViewProdutosSubGruposBusca.GetTipoBusca: TTipoBuscaProdutoSubGrupo;
@@ -133,6 +134,12 @@ begin
      Result := TTipoBuscaProdutoSubGrupo.GrupoId
    else if(rdBuscarNomeGrupo.Enabled and rdBuscarNomeGrupo.Checked)then
      Result := TTipoBuscaProdutoSubGrupo.GrupoNome;
+end;
+
+procedure TViewProdutosSubGruposBusca.GridBuscaTitleClick(Column: TColumn);
+begin
+   inherited;
+   FBusca.IndexFieldNames(Column.FieldName);
 end;
 
 end.

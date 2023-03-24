@@ -24,17 +24,23 @@ type
     function Grupo(AValue: string): TModelProdutosSubGruposEntitie; overload;
     function Grupo(AValue: Integer): TModelProdutosSubGruposEntitie; overload;
     function Grupo: Integer; overload;
+    function GrupoMascara: string;
     function Id(AValue: string): TModelProdutosSubGruposEntitie; overload;
     function Id(AValue: Integer): TModelProdutosSubGruposEntitie; overload;
     function Id: Integer; overload;
+    function IdMascara: string;
     function Nome(AValue: string): TModelProdutosSubGruposEntitie; overload;
     function Nome: string; overload;
   end;
 
 implementation
 
+uses
+  Utils.MyLibrary;
+
 constructor TModelProdutosSubGruposEntitie.Create(AParent: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>);
 begin
+   FParent := AParent;
 end;
 
 destructor TModelProdutosSubGruposEntitie.Destroy;
@@ -50,7 +56,7 @@ end;
 function TModelProdutosSubGruposEntitie.Grupo(AValue: string): TModelProdutosSubGruposEntitie;
 begin
    Result := Self;
-   Self.Grupo(StrToInt(AValue.Trim));
+   Self.Grupo(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelProdutosSubGruposEntitie.Grupo(AValue: Integer): TModelProdutosSubGruposEntitie;
@@ -64,10 +70,17 @@ begin
    Result := FGrupo;
 end;
 
+function TModelProdutosSubGruposEntitie.GrupoMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Id > 0)then
+     Result := TMyLibrary.CompLeft(Self.Grupo);
+end;
+
 function TModelProdutosSubGruposEntitie.Id(AValue: string): TModelProdutosSubGruposEntitie;
 begin
    Result := Self;
-   Self.Id(StrToInt(AValue.Trim));
+   Self.Id(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
 function TModelProdutosSubGruposEntitie.Id(AValue: Integer): TModelProdutosSubGruposEntitie;
@@ -79,6 +92,13 @@ end;
 function TModelProdutosSubGruposEntitie.Id: Integer;
 begin
    Result := FId;
+end;
+
+function TModelProdutosSubGruposEntitie.IdMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.Id > 0)then
+     Result := TMyLibrary.CompLeft(Self.Id);
 end;
 
 function TModelProdutosSubGruposEntitie.Nome(AValue: string): TModelProdutosSubGruposEntitie;

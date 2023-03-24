@@ -18,7 +18,7 @@ uses
   Vcl.DBCtrls,
   Vcl.ComCtrls,
   Data.DB,
-  Datasnap.DBClient;
+  Datasnap.DBClient, Vcl.Imaging.pngimage;
 
 type
   TViewSistemaIconesConf = class(TViewBase)
@@ -27,14 +27,19 @@ type
     lbFuncionario: TLabel;
     edtFuncionario: TEdit;
     edtIdFuncionario: TEdit;
-    btnGravar: TButton;
     btnMarcarTodos: TButton;
     btnDesmarcarTodos: TButton;
+    btnFechar: TButton;
+    btnGravar: TButton;
+    imgOptions: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtIdFuncionarioExit(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnMarcarTodosClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure imgOptionsClick(Sender: TObject);
   private
     FFuncionarioKeyValueAtual: Integer;
     procedure CreatePageControlIcons;
@@ -57,17 +62,23 @@ implementation
 {$R *.dfm}
 
 uses
+  MyConnection,
   MyExceptions,
   MyMessage,
+  Utils.MyConsts,
+  Utils.GlobalVariables,
+  Utils.EditsKeyDownExit,
   Model.Main.Icones,
   Model.Main.Icones.Types,
   Model.Main.Icones.Consts,
-  Utils.GlobalVariables;
+  Model.Sistema.Imagens.DM, Utils.LibrarySistema;
 
 procedure TViewSistemaIconesConf.FormCreate(Sender: TObject);
 begin
    inherited;
-   self.CreatePageControlIcons;
+   Self.CreatePageControlIcons;
+   edtIdFuncionario.ShowHint := True;
+   edtIdFuncionario.Hint := HINT_ATALHO_CONSULTA;
 end;
 
 procedure TViewSistemaIconesConf.FormShow(Sender: TObject);
@@ -94,6 +105,13 @@ begin
    Result := StrToIntDef(edtIdFuncionario.Text, -1);
 end;
 
+procedure TViewSistemaIconesConf.imgOptionsClick(Sender: TObject);
+begin
+   inherited;
+   Self.MarcarCheckBoxEspecifico('ckClientes');
+   Self.MarcarCheckBoxEspecifico('ckProdutos');
+end;
+
 procedure TViewSistemaIconesConf.CreatePageControlIcons;
 begin
    TModelMainIcones
@@ -108,19 +126,34 @@ begin
    btnDesmarcarTodos.Click;
 end;
 
+procedure TViewSistemaIconesConf.btnFecharClick(Sender: TObject);
+begin
+   Self.Close;
+end;
+
 procedure TViewSistemaIconesConf.btnGravarClick(Sender: TObject);
 begin
    if(Self.IdFuncionarioSelecionado < 0)then
      raise ExceptionInformation.Create('Para continuar selecione um funcionário');
 
    if(Self.IdFuncionarioSelecionado = 0)then
-     if(not ShowQuestionYes('Ao lançar a permissão para "Todos", todas as demais permissões de negação dos usuários seram desconsideradas. Deseja continuar mesmo assim?'))then
+     if(not ShowQuestionYes('Deseja lançar a configuração de icones para TODOS ?'))then
        Exit;
 
-   {Cons_Q_Universal('delete from conf_icones '+
-                    'where (id_funcionario = "' + edtIdFuncionario.Text + '")';
+   MyQueryNew
+    .Add('DELETE FROM CONFIGURACOES_ICONES WHERE(FUNCIONARIO = :ID)')
+    .AddParam('ID', edtIdFuncionario.Text)
+    .ExecSQL;
 
-   cons_Q_universal('insert into conf_icones (id_empresa, icone, id_funcionario)values ' + Self.RetornaListaIconesMarcadosParaInsert);}
+   MyQueryNew
+    .Add('INSERT INTO CONFIGURACOES_ICONES (ICONE, FUNCIONARIO) VALUES ' + Self.RetornaListaIconesMarcadosParaInsert);
+
+  try
+    ShowDebug(MyQuery.SQL.Text);
+    MyQuery.ExecSQL;
+  except on E: Exception do
+    ShowError('Não foi possível cadastrar os ícones', 'Mensagem: ' + E.Message);
+  end;
 end;
 
 procedure TViewSistemaIconesConf.btnMarcarTodosClick(Sender: TObject);
@@ -159,30 +192,30 @@ end;
 
 procedure TViewSistemaIconesConf.MarcarConformeConfigurado;
 var
- LNomeCheckBox: String;
- LCheckBox: TCheckBox;
+  LNomeCheckBox: String;
+  LCheckBox: TCheckBox;
 begin
-   {if(not cons_TB_conf_icones('where(id_funcionario = "' + IntToStr(DBLookupFuncionario.KeyValue) + '" or id_funcionario = "0")'+
-                              'and(id_empresa = "'+ V_IdEmpresaLog +'") '+
-                              'order by id_funcionario desc'))
-   then
-     Exit;
+   MyQueryNew
+    .Add('SELECT * FROM CONFIGURACOES_ICONES WHERE (FUNCIONARIO = :ID)OR(FUNCIONARIO = 0)')
+    .Add('ORDER BY FUNCIONARIO DESC')
+    .AddParam('ID', edtIdFuncionario.Text)
+    .Open;
 
-   ModelSistemaDm.TB_conf_icones.First;
-   while(not ModelSistemaDm.TB_conf_icones.Eof)do
+   MyQuery.DataSet.First;
+   while(not MyQuery.DataSet.Eof)do
    begin
-      LNomeCheckBox := PREFIX_CHECKBOX_NAME + ModelSistemaDm.TB_conf_iconesicone.AsString;
+      LNomeCheckBox := PREFIX_CHECKBOX_NAME + MyQuery.FieldByName('ICONE').AsString;
 
       LCheckBox := TCheckBox(Self.FindComponent(LNomeCheckBox));
       if(Assigned(LCheckBox))then
       begin
          LCheckBox.Checked := True;
          if(Self.IdFuncionarioSelecionado <> 0)then
-           LCheckBox.Enabled := ModelSistemaDm.TB_conf_iconesid_funcionario.AsInteger <> 0;
+           LCheckBox.Enabled := MyQuery.FieldByName('FUNCIONARIO').AsInteger <> 0;
       end;
 
-      ModelSistemaDm.TB_conf_icones.Next;
-   end;}
+      MyQuery.DataSet.Next;
+   end;
 end;
 
 procedure TViewSistemaIconesConf.MostrarAbaCadastrosOnShow;
@@ -199,10 +232,10 @@ end;
 
 function TViewSistemaIconesConf.RetornaListaIconesMarcadosParaInsert: string;
 var
- I: Integer;
- LNomeIcone: string;
+  I: Integer;
+  LNomeIcone: string;
 begin
-   Result := '("' + VG_IdEmpresaLog.ToString + '","nada","' + edtIdFuncionario.Text + '")';
+   Result := '("nada","' + edtIdFuncionario.Text + '")';
 
    for I := 0 to Pred(Self.ComponentCount) do
    begin
@@ -211,7 +244,7 @@ begin
          if(TCheckBox(Self.Components[I]).Checked)and(TCheckBox(Self.Components[I]).Enabled)then
          begin
             LNomeIcone := StringReplace(TCheckBox(Self.Components[I]).Name, PREFIX_CHECKBOX_NAME, '', [rfIgnoreCase]);
-            Result := Result + ', ("' + VG_IdEmpresaLog.ToString + '","' + LNomeIcone + '", "' + edtIdFuncionario.Text + '")';
+            Result := Result + ', ("' + LNomeIcone + '", "' + edtIdFuncionario.Text + '")';
          end;
       end;
    end;
@@ -219,13 +252,29 @@ end;
 
 procedure TViewSistemaIconesConf.edtIdFuncionarioExit(Sender: TObject);
 begin
-   if(FFuncionarioKeyValueAtual = Self.IdFuncionarioSelecionado)then
+   btnGravar.Enabled := False;
+   edtFuncionario.Clear;
+   if(Self.IdFuncionarioSelecionado = 0)then
+   begin
+      edtIdFuncionario.Text := '0';
+      edtFuncionario.Text   := 'Todos';
+   end
+   else
+     IdFuncionarioExit(edtIdFuncionario, edtFuncionario);
+
+   if(Self.IdFuncionarioSelecionado < 0)then
      Exit;
 
-   FFuncionarioKeyValueAtual := Self.IdFuncionarioSelecionado;
    Self.HabilitarTodosCheckBox;
    Self.DesmarcarTodos;
    Self.MarcarConformeConfigurado;
+   pnTop.SetFocus;
+   btnGravar.Enabled := True;
+end;
+
+procedure TViewSistemaIconesConf.edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   IdFuncaoFuncionarioKeyDown(edtIdFuncionario, Key, Shift);
 end;
 
 end.

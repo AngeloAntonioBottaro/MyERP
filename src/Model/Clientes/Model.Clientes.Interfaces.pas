@@ -11,6 +11,7 @@ type
    procedure ValidarEmail;
 
    function AlterarStatus: IModelClientesFactory<T>;
+   function ConsultarEntitie: IModelClientesFactory<T>;
    function Deletar: IModelClientesFactory<T>;
    function Gravar: IModelClientesFactory<T>;
   end;

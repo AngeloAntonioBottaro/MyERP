@@ -28,6 +28,7 @@ type
     function Inativos(AInativos: Boolean): TModelProdutosGruposBusca;
     function DataSource(ADataSource: TDataSource): TModelProdutosGruposBusca;
     function ConteudoBusca(AConteudoBusca: string): TModelProdutosGruposBusca;
+    function IndexFieldNames(AIndex: string): TModelProdutosGruposBusca;
     procedure Buscar;
   end;
 
@@ -57,7 +58,7 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('PRODUTOS_GRUPOS.ID, PRODUTOS_GRUPOS.GRUPO')
+    .Add('PRODUTOS_GRUPOS.ID, PRODUTOS_GRUPOS.NOME')
     .Add('FROM PRODUTOS_GRUPOS ');
 end;
 
@@ -73,7 +74,7 @@ begin
        if(Length(FConteudoBusca) > 50)then
          Abort;
 
-       FQueryBusca.Add('(PRODUTOS_GRUPOS.GRUPO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+       FQueryBusca.Add('(PRODUTOS_GRUPOS.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
     end
    else
     Abort;
@@ -91,7 +92,7 @@ procedure TModelProdutosGruposBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaProdutoGrupo.Nome: FQueryBusca.Add('GRUPO');
+    TTipoBuscaProdutoGrupo.Nome: FQueryBusca.Add('NOME');
    else
      FQueryBusca.Add('ID');
    end;
@@ -125,6 +126,13 @@ function TModelProdutosGruposBusca.TipoBusca(ATipoBusca: TTipoBuscaProdutoGrupo)
 begin
    Result     := Self;
    FTipoBusca := ATipoBusca;
+end;
+
+function TModelProdutosGruposBusca.IndexFieldNames(AIndex: string): TModelProdutosGruposBusca;
+begin
+   Result := Self;
+   FQueryBusca.IndexFieldNames(AIndex);
+   Self.Buscar;
 end;
 
 end.

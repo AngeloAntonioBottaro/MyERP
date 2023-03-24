@@ -44,6 +44,24 @@ inherited ViewFuncionarioFuncoesBusca: TViewFuncionarioFuncoesBusca
       end
     end
   end
+  inherited GridBusca: TDBGrid
+    OnTitleClick = GridBuscaTitleClick
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
+        Title.Caption = 'C'#243'digo'
+        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Title.Caption = 'Fun'#231#227'o'
+        Width = 674
+        Visible = True
+      end>
+  end
   inherited PopupMenu: TPopupMenu
     inherited Excluir1: TMenuItem
       Visible = True

@@ -98,9 +98,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MyConnection,
   MyMessage,
-  MyExceptions,
   Utils.MyConsts,
   Utils.MyLibrary,
   Utils.MyVclLibrary,
@@ -132,11 +130,7 @@ end;
 procedure TViewClientesCad.btnBuscarClick(Sender: TObject);
 begin
    inherited;
-   if(ViewClientesBusca = nil)then Application.CreateForm(TViewClientesBusca, ViewClientesBusca);
-
-   if(ViewClientesBusca.Showing)then
-     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
-
+   CriarFormMsgJaAberto(TViewClientesBusca, ViewClientesBusca);
    try
      ViewClientesBusca.btnCadastro.Enabled := False;
      ViewClientesBusca.FOnBusca := Self.OnBusca;
@@ -167,8 +161,7 @@ procedure TViewClientesCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
    Self.FillEntitie;
-   FCliente
-    .Gravar;
+   FCliente.Gravar;
 
    Self.EndOperations;
    if(Trim(edtId.Text).IsEmpty)then
@@ -257,34 +250,11 @@ procedure TViewClientesCad.OnBusca(AId: Integer);
 begin
    Self.NewEntitie;
 
-   MyQueryNew
-    .Add('SELECT * FROM CLIENTES WHERE(CLIENTES.ID = :ID)')
-    .AddParam('ID', AId)
-    .Open;
-
    FCliente
-      .Entitie
-       .Id(MyQuery.FieldByName('ID').AsString)
-       .RazaoSocial(MyQuery.FieldByName('RAZAO_SOCIAL').AsString)
-       .NomeFantasia(MyQuery.FieldByName('NOME_FANTASIA').AsString)
-       .Endereco(MyQuery.FieldByName('ENDERECO').AsString)
-       .Numero(MyQuery.FieldByName('NUMERO').AsString)
-       .Bairro(MyQuery.FieldByName('BAIRRO').AsString)
-       .Cep(MyQuery.FieldByName('CEP').AsString)
-       .Cidade(MyQuery.FieldByName('CIDADE').AsString)
-       .DataNascimento(MyQuery.FieldByName('DATA_NASCIMENTO').AsDateTime)
-       .Telefone(MyQuery.FieldByName('TELEFONE').AsString)
-       .Telefone2(MyQuery.FieldByName('TELEFONE2').AsString)
-       .Celular(MyQuery.FieldByName('CELULAR').AsString)
-       .Fax(MyQuery.FieldByName('FAX').AsString)
-       .Email(MyQuery.FieldByName('EMAIL').AsString)
-       .TipoJuridico(MyQuery.FieldByName('TIPO_JURIDICO').AsString)
-       .Cnpj(MyQuery.FieldByName('CNPJ').AsString)
-       .IE(MyQuery.FieldByName('INSCRICAO_ESTADUAL').AsString)
-       .Cpf(MyQuery.FieldByName('CPF').AsString)
-       .RG(MyQuery.FieldByName('RG').AsString)
-       .RgOrgaoExpedidor(MyQuery.FieldByName('RG_ORGAO_EXPEDIDOR').AsString)
-       .End_Entitie;
+    .Entitie
+     .Id(AId)
+     .End_Entitie
+    .ConsultarEntitie;
 
    Self.FillFields;
    Self.ConfComponents(nil);
@@ -294,11 +264,11 @@ end;
 procedure TViewClientesCad.ConfComponents(Sender: TObject);
 begin
    //*VARIOS
-   edtCNPJ.Enabled              := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
-   edtIE.Enabled                := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
-   edtCPF.Enabled               := cBoxTipoJuridico.Text = PESSOA_FISICA;
-   edtRG.Enabled                := cBoxTipoJuridico.Text = PESSOA_FISICA;
-   edtRGOrgaoExpedidor.Enabled  := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtCNPJ.Enabled             := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
+   edtIE.Enabled               := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
+   edtCPF.Enabled              := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtRG.Enabled               := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtRGOrgaoExpedidor.Enabled := cBoxTipoJuridico.Text = PESSOA_FISICA;
 
    edtIdade.Text := TMyLibrary.CalculateAge(dtpDataNascimento.Date).ToString + ' anos';
 

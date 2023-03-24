@@ -8,17 +8,22 @@ uses
   Model.Produtos.Grupos.Interfaces,
   Model.Produtos.Grupos.Entitie;
 
+const
+  THIS   = 'Grupo';
+  TABELA = 'PRODUTOS_GRUPOS';
+
 type
   TModelProdutosGruposFactory = class(TInterfacedObject, IModelProdutosGruposFactory<TModelProdutosGruposEntitie>)
   private
     FEntitie: TModelProdutosGruposEntitie;
-    procedure UpdateGrupo;
-    procedure InsertGrupo;
+    procedure SQLInsert;
+    procedure SQLUpdate;
   protected
     function Entitie: TModelProdutosGruposEntitie;
 
-   function Deletar: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
-   function Gravar: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
+    function ConsultarEntitie: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
+    function Deletar: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
+    function Gravar: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
   public
     class function New: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
     constructor Create;
@@ -56,20 +61,57 @@ begin
    Result := FEntitie;
 end;
 
+function TModelProdutosGruposFactory.ConsultarEntitie: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
+begin
+   if(not (FEntitie.Id > 0))then
+     ExceptionMsgRegistroNaoInformadoConsulta(THIS);
+
+   MyQueryNew
+    .Add('SELECT * FROM '+TABELA+' WHERE('+TABELA+'.ID = :ID)')
+    .AddParam('ID', FEntitie.Id);
+
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.Open;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível consultar o grupo',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
+
+   Self.Entitie
+    .Id(MyQuery.FieldByName('ID').AsString)
+    .Nome(MyQuery.FieldByName('NOME').AsString)
+    .End_Entitie;
+end;
+
 function TModelProdutosGruposFactory.Deletar: IModelProdutosGruposFactory<TModelProdutosGruposEntitie>;
 begin
    Result := Self;
 
    if(not (FEntitie.Id > 0))then
-     Exit;
+     ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
    MyQueryNew
-    .Add('DELETE FROM PRODUTOS_GRUPOS ')
-    .Add('WHERE(PRODUTOS_GRUPOS.ID = :ID)')
+    .Add('DELETE FROM '+TABELA+' ')
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 
-   ShowDebug(MyQuery.SQL.Text);
-   MyQuery.ExecSQL;
+   try
+     ShowDebug(MyQuery.SQL.Text);
+     MyQuery.ExecSQL;
+   except on E: Exception do
+   begin
+      if(not MyQuery.ExceptionZeroRecordsUpdated)then
+        raise ExceptionError.Create('Não foi possível deletar o grupo',
+                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+                                    'Mensagem: ' + E.Message);
+   end;
+   end;
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;
@@ -79,12 +121,12 @@ begin
    Result := Self;
 
    if(FEntitie.Id > 0)then
-     Self.UpdateGrupo
+     Self.SQLUpdate
    else
-     Self.InsertGrupo;
+     Self.SQLInsert;
 
    MyQuery
-    .AddParam('GRUPO', FEntitie.Nome);
+    .AddParam('NOME', FEntitie.Nome);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -92,28 +134,29 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível cadastrar o grupo', E.Message);
+        raise ExceptionError.Create('Não foi possível gravar o grupo',
+                                    'Mensagem: ' + E.Message);
    end;
    end;
 
    ShowDone('Gravação realizada');
 end;
 
-procedure TModelProdutosGruposFactory.InsertGrupo;
+procedure TModelProdutosGruposFactory.SQLInsert;
 begin
    MyQueryNew
-    .Add('INSERT INTO PRODUTOS_GRUPOS ')
-    .Add('(GRUPO)')
+    .Add('INSERT INTO '+TABELA)
+    .Add('(NOME)')
     .Add('VALUES')
-    .Add('(:GRUPO)');
+    .Add('(:NOME)');
 end;
 
-procedure TModelProdutosGruposFactory.UpdateGrupo;
+procedure TModelProdutosGruposFactory.SQLUpdate;
 begin
    MyQueryNew
-    .Add('UPDATE PRODUTOS_GRUPOS SET')
-    .Add('GRUPO = :GRUPO')
-    .Add('WHERE(PRODUTOS_GRUPOS.ID = :ID)')
+    .Add('UPDATE '+TABELA+' SET')
+    .Add('NOME = :NOME')
+    .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;
 

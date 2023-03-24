@@ -37,6 +37,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GridBuscaTitleClick(Column: TColumn);
   private
     FBusca: TModelClientesBusca;
     function GetTipoBusca: TTipoBuscaCliente;
@@ -151,6 +152,12 @@ begin
       TDBGrid(Sender).Canvas.FillRect(Rect);
       TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
    end;
+end;
+
+procedure TViewClientesBusca.GridBuscaTitleClick(Column: TColumn);
+begin
+   inherited;
+   FBusca.IndexFieldNames(Column.FieldName);
 end;
 
 procedure TViewClientesBusca.ConfComponents(Sender: TObject);

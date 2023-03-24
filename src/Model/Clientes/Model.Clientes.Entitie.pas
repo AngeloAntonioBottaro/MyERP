@@ -31,7 +31,7 @@ type
     FRazaoSocial: string;
     FRG: string;
     FRgOrgaoExpedidor: string;
-    FStatusCliente: string;
+    FStatus: string;
     FTelefone: string;
     FTelefone2: string;
     FTipoJuridico: string;
@@ -87,8 +87,8 @@ type
     function RG: string; overload;
     function RgOrgaoExpedidor(AValue: string): TModelClientesEntitie; overload;
     function RgOrgaoExpedidor: string; overload;
-    function StatusCliente(AValue: string): TModelClientesEntitie; overload;
-    function StatusCliente: string; overload;
+    function Status(AValue: string): TModelClientesEntitie; overload;
+    function Status: string; overload;
     function Telefone(AValue: string): TModelClientesEntitie; overload;
     function Telefone: string; overload;
     function TelefoneMascara: string;
@@ -108,9 +108,9 @@ uses
 
 constructor TModelClientesEntitie.Create(AParent: IModelClientesFactory<TModelClientesEntitie>);
 begin
-   FParent        := AParent;
-   FStatusCliente := STATUS_ATIVO;
-   FTipoJuridico  := PESSOA_FISICA;
+   FParent       := AParent;
+   FStatus       := STATUS_ATIVO;
+   FTipoJuridico := PESSOA_FISICA;
 end;
 
 destructor TModelClientesEntitie.Destroy;
@@ -384,15 +384,15 @@ begin
    Result := FRgOrgaoExpedidor;
 end;
 
-function TModelClientesEntitie.StatusCliente(AValue: string): TModelClientesEntitie;
+function TModelClientesEntitie.Status(AValue: string): TModelClientesEntitie;
 begin
-   Result         := Self;
-   FStatusCliente := AValue.Trim;
+   Result  := Self;
+   FStatus := AValue.Trim;
 end;
 
-function TModelClientesEntitie.StatusCliente: string;
+function TModelClientesEntitie.Status: string;
 begin
-   Result := FStatusCliente;
+   Result := FStatus;
 end;
 
 function TModelClientesEntitie.Telefone(AValue: string): TModelClientesEntitie;

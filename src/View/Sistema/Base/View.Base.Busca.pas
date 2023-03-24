@@ -80,6 +80,7 @@ implementation
 
 uses
   MyExceptions,
+  MyConnection,
   Utils.MyLibrary,
   Utils.MyConsts,
   Model.Sistema.Imagens.DM;

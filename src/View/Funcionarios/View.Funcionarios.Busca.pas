@@ -37,6 +37,7 @@ type
     procedure Excluir1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GridBuscaTitleClick(Column: TColumn);
   private
     FBusca: TModelFuncionariosBusca;
     function GetTipoBusca: TTipoBuscaFuncionario;
@@ -87,11 +88,11 @@ end;
 procedure TViewFuncionariosBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   {TModelFuncionariosFactory.New
+   TModelFuncionariosFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .AlterarStatus; }
+    .AlterarStatus;
 end;
 
 procedure TViewFuncionariosBusca.btnCadastroClick(Sender: TObject);
@@ -128,11 +129,11 @@ end;
 procedure TViewFuncionariosBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   {TModelFuncionariosFactory.New
+   TModelFuncionariosFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .Deletar;}
+    .Deletar;
 end;
 
 function TViewFuncionariosBusca.GetTipoBusca: TTipoBuscaFuncionario;
@@ -157,6 +158,12 @@ begin
       TDBGrid(Sender).Canvas.FillRect(Rect);
       TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
    end;
+end;
+
+procedure TViewFuncionariosBusca.GridBuscaTitleClick(Column: TColumn);
+begin
+   inherited;
+   FBusca.IndexFieldNames(Column.FieldName);
 end;
 
 end.

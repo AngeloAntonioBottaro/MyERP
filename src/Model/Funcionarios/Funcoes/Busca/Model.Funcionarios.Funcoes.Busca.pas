@@ -28,6 +28,7 @@ type
     function Inativos(AInativos: Boolean): TModelFuncionariosFuncoesBusca;
     function DataSource(ADataSource: TDataSource): TModelFuncionariosFuncoesBusca;
     function ConteudoBusca(AConteudoBusca: string): TModelFuncionariosFuncoesBusca;
+    function IndexFieldNames(AIndex: string): TModelFuncionariosFuncoesBusca;
     procedure Buscar;
   end;
 
@@ -57,7 +58,7 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('FUNCIONARIOS_FUNCOES.ID, FUNCIONARIOS_FUNCOES.FUNCAO')
+    .Add('FUNCIONARIOS_FUNCOES.ID, FUNCIONARIOS_FUNCOES.NOME')
     .Add('FROM FUNCIONARIOS_FUNCOES ');
 end;
 
@@ -73,7 +74,7 @@ begin
        if(Length(FConteudoBusca) > 60)then
          Abort;
 
-       FQueryBusca.Add('(FUNCIONARIOS_FUNCOES.FUNCAO CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
+       FQueryBusca.Add('(FUNCIONARIOS_FUNCOES.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
     end;
    else
     Abort;
@@ -91,7 +92,7 @@ procedure TModelFuncionariosFuncoesBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaFuncionarioFuncao.Nome: FQueryBusca.Add('FUNCAO');
+    TTipoBuscaFuncionarioFuncao.Nome: FQueryBusca.Add('NOME');
    else
      FQueryBusca.Add('ID');
    end;
@@ -125,6 +126,13 @@ function TModelFuncionariosFuncoesBusca.TipoBusca(ATipoBusca: TTipoBuscaFunciona
 begin
    Result     := Self;
    FTipoBusca := ATipoBusca;
+end;
+
+function TModelFuncionariosFuncoesBusca.IndexFieldNames(AIndex: string): TModelFuncionariosFuncoesBusca;
+begin
+   Result := Self;
+   FQueryBusca.IndexFieldNames(AIndex);
+   Self.Buscar;
 end;
 
 end.

@@ -66,6 +66,7 @@ inherited ViewFuncionariosBusca: TViewFuncionariosBusca
     end
   end
   inherited GridBusca: TDBGrid
+    OnTitleClick = GridBuscaTitleClick
     Columns = <
       item
         Expanded = False

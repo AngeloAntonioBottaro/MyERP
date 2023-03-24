@@ -5,16 +5,26 @@ interface
 uses
   System.SysUtils,
   System.StrUtils,
-  System.Classes;
+  System.Classes,
+  Vcl.Forms;
 
 procedure DebugOnOFF;
-procedure ShowDebug(AMsg: string);
 procedure CriarComboBoxTipoJuridico(ALines: TStrings);
+
+procedure CriarFormMsgJaAberto(AClass: TComponentClass; var Reference);
+{$REGION 'MENSSAGES'}
+procedure ShowDebug(AMsg: string);
+procedure ExceptionMsgRegistroNaoInformadoAlteracaoStatus(AEntitie: string);
+procedure ExceptionMsgRegistroNaoInformadoConsulta(AEntitie: string);
+procedure ExceptionMsgRegistroNaoInformadoExclusao(AEntitie: string);
+{$ENDREGION 'MENSSAGES'}
+
 
 implementation
 
 uses
   MyMessage,
+  MyExceptions,
   Utils.MyConsts,
   Utils.GlobalVariables,
   Utils.GlobalConsts,
@@ -30,6 +40,21 @@ begin
      ViewSistemaMain.Caption := ViewSistemaMain.Caption + DEBUG_CAPTION;
 end;
 
+procedure CriarComboBoxTipoJuridico(ALines: TStrings);
+begin
+   ALines.Clear;
+   ALines.Add(PESSOA_FISICA);
+   ALines.Add(PESSOA_JURIDICA);
+end;
+
+procedure CriarFormMsgJaAberto(AClass: TComponentClass; var Reference);
+begin
+   if(TForm(Reference) = nil)then Application.CreateForm(AClass, Reference);
+   if(TForm(Reference).Showing)then
+     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
+end;
+
+{$REGION 'MENSSAGES'}
 procedure ShowDebug(AMsg: string);
 begin
    if(not VG_DEBUG)then
@@ -41,11 +66,25 @@ begin
      DebugOnOFF;
 end;
 
-procedure CriarComboBoxTipoJuridico(ALines: TStrings);
+procedure ExceptionMsgRegistroNaoInformado(AEntitie, AAcao: string);
 begin
-   ALines.Clear;
-   ALines.Add(PESSOA_FISICA);
-   ALines.Add(PESSOA_JURIDICA);
+   raise ExceptionRequired.Create(AEntitie + ' não selecionado(a)/informado(a) para ' + AAcao);
 end;
+
+procedure ExceptionMsgRegistroNaoInformadoAlteracaoStatus(AEntitie: string);
+begin
+   ExceptionMsgRegistroNaoInformado(AEntitie, 'alteração de status');
+end;
+
+procedure ExceptionMsgRegistroNaoInformadoConsulta(AEntitie: string);
+begin
+   ExceptionMsgRegistroNaoInformado(AEntitie, 'consulta');
+end;
+
+procedure ExceptionMsgRegistroNaoInformadoExclusao(AEntitie: string);
+begin
+   ExceptionMsgRegistroNaoInformado(AEntitie, 'exclusão');
+end;
+{$ENDREGION 'MENSSAGES'}
 
 end.

@@ -7,8 +7,17 @@ inherited ViewFuncionariosFuncoesCad: TViewFuncionariosFuncoesCad
   inherited pnButtons: TPanel
     Top = 65
     ExplicitTop = 65
+    inherited btnGravar: TButton
+      OnClick = btnGravarClick
+    end
+    inherited btnExcluir: TButton
+      OnClick = btnExcluirClick
+    end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
+    end
+    inherited btnAlterar: TButton
+      OnClick = btnAlterarClick
     end
   end
   object pnTela: TPanel

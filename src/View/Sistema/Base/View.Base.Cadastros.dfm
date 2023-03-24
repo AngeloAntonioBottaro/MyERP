@@ -67,7 +67,6 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       ImageMargins.Left = 10
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 3
-      ExplicitLeft = 410
     end
     object btnBuscar: TButton
       Left = 504

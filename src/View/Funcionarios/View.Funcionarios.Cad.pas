@@ -85,17 +85,21 @@ type
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
-    procedure edtCPFExit(Sender: TObject);
-    procedure edtCNPJExit(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure edtIdCidadeExit(Sender: TObject);
+    procedure edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtIdFuncaoExit(Sender: TObject);
+    procedure edtIdFuncaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     FFuncionario: IModelFuncionariosFactory<TModelFuncionariosEntitie>;
+    procedure FillEntitie;
   public
     procedure InitialConfiguration; override;
-    procedure FillFields; override;
     procedure NewEntitie; override;
+    procedure FillFields; override;
+    procedure OnBusca(AId: Integer); override;
   end;
 
 var
@@ -107,13 +111,20 @@ implementation
 
 uses
   MyMessage,
-  MyExceptions,
   Utils.MyConsts,
+  Utils.MyLibrary,
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
   Utils.LibrarySistema,
+  Utils.EditsKeyDownExit,
   Model.Funcionarios.Factory,
   View.Funcionarios.Busca;
+
+procedure TViewFuncionariosCad.FormCreate(Sender: TObject);
+begin
+   inherited;
+   Self.InitialConfiguration;
+end;
 
 procedure TViewFuncionariosCad.btnAlterarClick(Sender: TObject);
 begin
@@ -125,19 +136,20 @@ begin
      Exit;
 
    Self.StartOperations;
+   Self.ConfComponents(nil);
 end;
 
 procedure TViewFuncionariosCad.btnBuscarClick(Sender: TObject);
 begin
    inherited;
-   if(ViewFuncionariosBusca = nil)then Application.CreateForm(TViewFuncionariosBusca, ViewFuncionariosBusca);
+   CriarFormMsgJaAberto(TViewFuncionariosBusca, ViewFuncionariosBusca);
    try
      ViewFuncionariosBusca.btnCadastro.Enabled := False;
+     ViewFuncionariosBusca.FOnBusca := Self.OnBusca;
      ViewFuncionariosBusca.ShowModal;
    finally
      FreeAndNil(ViewFuncionariosBusca);
    end;
-   Self.FillFields;
 end;
 
 procedure TViewFuncionariosCad.btnCancelarClick(Sender: TObject);
@@ -151,45 +163,21 @@ begin
    inherited;
    if(edtId.Text = EmptyStr)then
      Exit;
+
+   FFuncionario.Deletar;
+   Self.EndOperations;
+   Self.EmptyFields;
 end;
 
 procedure TViewFuncionariosCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
-   try
-     FFuncionario
-      .Entitie
-       .Id(edtId.Text)
-       .RazaoSocial(edtRazaoSocial.Text)
-       .NomeFantasia(edtNomeFantasia.Text)
-       .Endereco(edtEndereco.Text)
-       .Numero(edtNumero.Text)
-       .Bairro(edtBairro.Text)
-       .Cep(edtCep.Text)
-       .Cidade(edtIdCidade.Text)
-       .DataNascimento(dtpDataNascimento.Date)
-       .Telefone(edtTelefone.Text)
-       .Telefone2(edtTelefone2.Text)
-       .Celular(edtCelular.Text)
-       .Fax(edtFax.Text)
-       .Email(edtEmail.Text)
-       .TipoJuridico(cBoxTipoJuridico.Text)
-       .Cnpj(edtCNPJ.Text)
-       .IE(edtIE.Text)
-       .Cpf(edtCPF.Text)
-       .RG(edtRG.Text)
-       .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
-       .Funcao(edtIdFuncao.Text)
-       .Salario(edtSalario.Text)
-       .Login(edtLogin.Text)
-       .Senha(edtSenha.Text)
-       .End_Entitie;
+   Self.FillEntitie;
+   FFuncionario.Gravar;
 
-     Self.EndOperations;
-     ShowDone('Gravação realizada');
-   except on E: Exception do
-     ShowInformation(E.Message);
-   end;
+   Self.EndOperations;
+   if(Trim(edtId.Text).IsEmpty)then
+     Self.EmptyFields;
 end;
 
 procedure TViewFuncionariosCad.btnNovoClick(Sender: TObject);
@@ -200,38 +188,35 @@ begin
    TMyVclLibrary.SetFocusOn(edtRazaoSocial);
 end;
 
-procedure TViewFuncionariosCad.ConfComponents(Sender: TObject);
+procedure TViewFuncionariosCad.FillEntitie;
 begin
-   //*VARIOS
-   edtCNPJ.Enabled              := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
-   edtIE.Enabled                := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
-   edtCPF.Enabled               := cBoxTipoJuridico.Text = PESSOA_FISICA;
-   edtRG.Enabled                := cBoxTipoJuridico.Text = PESSOA_FISICA;
-   edtRGOrgaoExpedidor.Enabled  := cBoxTipoJuridico.Text = PESSOA_FISICA;
-end;
-
-procedure TViewFuncionariosCad.edtCNPJExit(Sender: TObject);
-begin
-   if(not Assigned(FFuncionario))then
-     Exit;
-
-   if(FFuncionario.Entitie.Cnpj(edtCNPJ.Text).End_Entitie.ValidarCNPJ)then
-     Exit;
-
-   edtCPF.SetFocus;
-   raise ExceptionInformation.Create('CNPJ inválido');
-end;
-
-procedure TViewFuncionariosCad.edtCPFExit(Sender: TObject);
-begin
-   if(not Assigned(FFuncionario))then
-     Exit;
-
-   if(FFuncionario.Entitie.Cpf(edtCPF.Text).End_Entitie.ValidarCPF)then
-     Exit;
-
-   edtCPF.SetFocus;
-   raise ExceptionInformation.Create('CPF inválido');
+   FFuncionario
+    .Entitie
+     .Id(edtId.Text)
+     .RazaoSocial(edtRazaoSocial.Text)
+     .NomeFantasia(edtNomeFantasia.Text)
+     .Endereco(edtEndereco.Text)
+     .Numero(edtNumero.Text)
+     .Bairro(edtBairro.Text)
+     .Cep(edtCep.Text)
+     .Cidade(edtIdCidade.Text)
+     .DataNascimento(dtpDataNascimento.Date)
+     .Telefone(edtTelefone.Text)
+     .Telefone2(edtTelefone2.Text)
+     .Celular(edtCelular.Text)
+     .Fax(edtFax.Text)
+     .Email(edtEmail.Text)
+     .TipoJuridico(cBoxTipoJuridico.Text)
+     .Cnpj(edtCNPJ.Text)
+     .IE(edtIE.Text)
+     .Cpf(edtCPF.Text)
+     .RG(edtRG.Text)
+     .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
+     .Funcao(edtIdFuncao.Text)
+     .Salario(edtSalario.Text)
+     .Login(edtLogin.Text)
+     .Senha(edtSenha.Text)
+     .End_Entitie;
 end;
 
 procedure TViewFuncionariosCad.FillFields;
@@ -239,53 +224,137 @@ begin
    if(not Assigned(FFuncionario))then
      Exit;
 
-   edtId.Text                 := FFuncionario.Entitie.Id.ToString;
+   edtId.Text                 := FFuncionario.Entitie.IdMascara;
    edtRazaoSocial.Text        := FFuncionario.Entitie.RazaoSocial;
    edtNomeFantasia.Text       := FFuncionario.Entitie.NomeFantasia;
    edtEndereco.Text           := FFuncionario.Entitie.Endereco;
    edtNumero.Text             := FFuncionario.Entitie.Numero;
    edtBairro.Text             := FFuncionario.Entitie.Bairro;
-   edtCep.Text                := FFuncionario.Entitie.Cep;
-   edtIdCidade.Text           := FFuncionario.Entitie.Cidade.ToString;
+   edtCep.Text                := FFuncionario.Entitie.CepMascara;
+   edtIdCidade.Text           := FFuncionario.Entitie.CidadeMascara;
    dtpDataNascimento.Date     := FFuncionario.Entitie.DataNascimento;
-   edtTelefone.Text           := FFuncionario.Entitie.Telefone;
-   edtTelefone2.Text          := FFuncionario.Entitie.Telefone2;
-   edtCelular.Text            := FFuncionario.Entitie.Celular;
-   edtFax.Text                := FFuncionario.Entitie.Fax;
+   edtTelefone.Text           := FFuncionario.Entitie.TelefoneMascara;
+   edtTelefone2.Text          := FFuncionario.Entitie.Telefone2Mascara;
+   edtCelular.Text            := FFuncionario.Entitie.CelularMascara;
+   edtFax.Text                := FFuncionario.Entitie.FaxMascara;
    edtEmail.Text              := FFuncionario.Entitie.Email;
-   edtCNPJ.Text               := FFuncionario.Entitie.Cnpj;
+   edtCNPJ.Text               := FFuncionario.Entitie.CnpjMascara;
    edtIE.Text                 := FFuncionario.Entitie.IE;
-   edtCPF.Text                := FFuncionario.Entitie.Cpf;
+   edtCPF.Text                := FFuncionario.Entitie.CpfMascara;
    edtRG.Text                 := FFuncionario.Entitie.RG;
    edtRGOrgaoExpedidor.Text   := FFuncionario.Entitie.RgOrgaoExpedidor;
-   edtIdFuncao.Text           := FFuncionario.Entitie.Funcao.ToString;
+   cBoxTipoJuridico.ItemIndex := FFuncionario.Entitie.TipoJuridicoComboBox;
+   edtFuncao.Text             := FFuncionario.Entitie.FuncaoMascara;
    edtSalario.Text            := FFuncionario.Entitie.Salario.ToString;
    edtLogin.Text              := FFuncionario.Entitie.Login;
    edtSenha.Text              := FFuncionario.Entitie.Senha;
-   cBoxTipoJuridico.ItemIndex := FFuncionario.Entitie.TipoJuridicoComboBox;
-end;
-
-procedure TViewFuncionariosCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
 end;
 
 procedure TViewFuncionariosCad.InitialConfiguration;
 begin
-   edtIdCidade.ShowHint := True;
-   edtIdCidade.Hint     := HINT_ATALHO_CONSULTA;
-   edtIdFuncao.ShowHint := True;
-   edtIdFuncao.Hint     := HINT_ATALHO_CONSULTA;
+   dtpDataNascimento.Date := Now;
+   edtIdCidade.ShowHint   := True;
+   edtIdCidade.Hint       := HINT_ATALHO_CONSULTA;
+   edtIdFuncao.ShowHint   := True;
+   edtIdFuncao.Hint       := HINT_ATALHO_CONSULTA;
 
    CriarComboBoxTipoJuridico(cBoxTipoJuridico.Items);
-
    Self.ConfComponents(nil);
 end;
 
 procedure TViewFuncionariosCad.NewEntitie;
 begin
    FFuncionario := TModelFuncionariosFactory.New;
+end;
+
+procedure TViewFuncionariosCad.OnBusca(AId: Integer);
+begin
+   Self.NewEntitie;
+
+   FFuncionario
+    .Entitie
+     .Id(AId)
+     .End_Entitie
+    .ConsultarEntitie;
+
+   Self.FillFields;
+   Self.ConfComponents(nil);
+   edtIdCidadeExit(edtIdCidade);
+   edtIdFuncaoExit(edtIdFuncao);
+end;
+
+procedure TViewFuncionariosCad.ConfComponents(Sender: TObject);
+begin
+   //*VARIOS
+   edtCNPJ.Enabled             := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
+   edtIE.Enabled               := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
+   edtCPF.Enabled              := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtRG.Enabled               := cBoxTipoJuridico.Text = PESSOA_FISICA;
+   edtRGOrgaoExpedidor.Enabled := cBoxTipoJuridico.Text = PESSOA_FISICA;
+
+   edtIdade.Text := TMyLibrary.CalculateAge(dtpDataNascimento.Date).ToString + ' anos';
+
+   if(not Assigned(FFuncionario))then
+     Self.NewEntitie;
+
+   Self.FillEntitie;
+
+   edtId.Text        := FFuncionario.Entitie.IdMascara;
+   edtCep.Text       := FFuncionario.Entitie.CepMascara;
+   edtIdCidade.Text  := FFuncionario.Entitie.CidadeMascara;
+   edtTelefone.Text  := FFuncionario.Entitie.TelefoneMascara;
+   edtTelefone2.Text := FFuncionario.Entitie.Telefone2Mascara;
+   edtCelular.Text   := FFuncionario.Entitie.CelularMascara;
+   edtFax.Text       := FFuncionario.Entitie.FaxMascara;
+   edtCNPJ.Text      := FFuncionario.Entitie.CnpjMascara;
+   edtCPF.Text       := FFuncionario.Entitie.CpfMascara;
+
+   try
+     FFuncionario.ValidarCNPJ;
+   except on E: Exception do
+   begin
+      TMyVclLibrary.SetFocusOn(edtCNPJ);
+      ShowWarning(E.Message)
+   end;
+   end;
+
+   try
+     FFuncionario.ValidarCPF;
+   except on E: Exception do
+   begin
+      TMyVclLibrary.SetFocusOn(edtCPF);
+      ShowWarning(E.Message)
+   end;
+   end;
+
+   try
+     FFuncionario.ValidarEmail;
+   except on E: Exception do
+   begin
+      TMyVclLibrary.SetFocusOn(edtEmail);
+      ShowWarning(E.Message)
+   end;
+   end;
+end;
+
+procedure TViewFuncionariosCad.edtIdCidadeExit(Sender: TObject);
+begin
+   IdCidadeExit(edtIdCidade, edtCidade, edtUF);
+end;
+
+procedure TViewFuncionariosCad.edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   IdCidadeKeyDown(edtIdCidade, Key, Shift);
+end;
+
+procedure TViewFuncionariosCad.edtIdFuncaoExit(Sender: TObject);
+begin
+   IdFuncaoFuncionarioExit(edtIdFuncao, edtFuncao);
+end;
+
+procedure TViewFuncionariosCad.edtIdFuncaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   IdFuncaoFuncionarioKeyDown(edtIdFuncao, Key, Shift);
 end;
 
 end.

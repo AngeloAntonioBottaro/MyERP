@@ -47,10 +47,8 @@ implementation
 {$R *.dfm}
 
 uses
-  MyExceptions,
-  MyConnection,
-  Utils.MyConsts,
   Utils.MyVclLibrary,
+  Utils.LibrarySistema,
   Model.Produtos.Grupos.Factory,
   View.Produtos.Grupos.Busca;
 
@@ -75,11 +73,7 @@ end;
 procedure TViewProdutosGruposCad.btnBuscarClick(Sender: TObject);
 begin
    inherited;
-   if(ViewProdutosGruposBusca = nil)then Application.CreateForm(TViewProdutosGruposBusca, ViewProdutosGruposBusca);
-
-   if(ViewProdutosGruposBusca.Showing)then
-     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
-
+   CriarFormMsgJaAberto(TViewProdutosGruposBusca, ViewProdutosGruposBusca);
    try
      ViewProdutosGruposBusca.btnCadastro.Enabled := False;
      ViewProdutosGruposBusca.FOnBusca            := Self.OnBusca;
@@ -150,16 +144,11 @@ procedure TViewProdutosGruposCad.OnBusca(AId: Integer);
 begin
    Self.NewEntitie;
 
-   MyQueryNew
-    .Add('SELECT * FROM PRODUTOS_GRUPOS WHERE(PRODUTOS_GRUPOS.ID = :ID)')
-    .AddParam('ID', AId)
-    .Open;
-
    FGrupo
     .Entitie
-     .Id(MyQuery.FieldByName('ID').AsString)
-     .Nome(MyQuery.FieldByName('GRUPO').AsString)
-     .End_Entitie;
+     .Id(AId)
+     .End_Entitie
+    .ConsultarEntitie;
 
    Self.FillFields;
 end;

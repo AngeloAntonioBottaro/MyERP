@@ -28,6 +28,7 @@ type
     function Inativos(AInativos: Boolean): TModelClientesBusca;
     function DataSource(ADataSource: TDataSource): TModelClientesBusca;
     function ConteudoBusca(AConteudoBusca: string): TModelClientesBusca;
+    function IndexFieldNames(AIndex: string): TModelClientesBusca;
     procedure Buscar;
   end;
 
@@ -161,6 +162,13 @@ function TModelClientesBusca.TipoBusca(ATipoBusca: TTipoBuscaCliente): TModelCli
 begin
    Result     := Self;
    FTipoBusca := ATipoBusca;
+end;
+
+function TModelClientesBusca.IndexFieldNames(AIndex: string): TModelClientesBusca;
+begin
+   Result := Self;
+   FQueryBusca.IndexFieldNames(AIndex);
+   Self.Buscar;
 end;
 
 end.

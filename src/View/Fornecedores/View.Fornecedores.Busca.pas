@@ -37,6 +37,7 @@ type
     procedure Excluir1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GridBuscaTitleClick(Column: TColumn);
   private
     FBusca: TModelFornecedoresBusca;
     function GetTipoBusca: TTipoBuscaFornecedor;
@@ -87,11 +88,11 @@ end;
 procedure TViewFornecedoresBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   {TModelFornecedoresFactory.New
+   TModelFornecedoresFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .AlterarStatus; }
+    .AlterarStatus;
 end;
 
 procedure TViewFornecedoresBusca.btnCadastroClick(Sender: TObject);
@@ -143,6 +144,12 @@ begin
    end;
 end;
 
+procedure TViewFornecedoresBusca.GridBuscaTitleClick(Column: TColumn);
+begin
+   inherited;
+   FBusca.IndexFieldNames(Column.FieldName);
+end;
+
 procedure TViewFornecedoresBusca.ConfComponents(Sender: TObject);
 begin
    edtBusca.Clear;
@@ -152,11 +159,11 @@ end;
 procedure TViewFornecedoresBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   {TModelFornecedoresFactory.New
+   TModelFornecedoresFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .Deletar; }
+    .Deletar;
 end;
 
 end.

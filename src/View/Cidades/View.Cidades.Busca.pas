@@ -34,6 +34,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnCadastroClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure GridBuscaTitleClick(Column: TColumn);
   private
     FBusca: TModelCidadesBusca;
     function GetTipoBusca: TTipoBuscaCidade;
@@ -121,6 +122,12 @@ begin
      Result := TTipoBuscaCidade.UF
    else if(rdBuscarIBGE.Enabled and rdBuscarIBGE.Checked)then
      Result := TTipoBuscaCidade.IBGE;
+end;
+
+procedure TViewCidadesBusca.GridBuscaTitleClick(Column: TColumn);
+begin
+   inherited;
+   FBusca.IndexFieldNames(Column.FieldName);
 end;
 
 end.

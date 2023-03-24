@@ -51,12 +51,12 @@ implementation
 {$R *.dfm}
 
 uses
-  MyExceptions,
   MyConnection,
-  View.Cidades.Busca,
-  Model.Cidades.Factory,
+  Utils.LibrarySistema,
   Utils.MyConsts,
-  Utils.MyVclLibrary;
+  Utils.MyVclLibrary,
+  View.Cidades.Busca,
+  Model.Cidades.Factory;
 
 procedure TViewCidadesCad.FormCreate(Sender: TObject);
 begin
@@ -79,11 +79,7 @@ end;
 procedure TViewCidadesCad.btnBuscarClick(Sender: TObject);
 begin
    inherited;
-   if(ViewCidadesBusca = nil)then Application.CreateForm(TViewCidadesBusca, ViewCidadesBusca);
-
-   if(ViewCidadesBusca.Showing)then
-     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
-
+   CriarFormMsgJaAberto(TViewCidadesBusca, ViewCidadesBusca);
    try
      ViewCidadesBusca.btnCadastro.Enabled := False;
      ViewCidadesBusca.FOnBusca := Self.OnBusca;
@@ -108,8 +104,7 @@ procedure TViewCidadesCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
    Self.FillEntitie;
-   FCidade
-    .Gravar;
+   FCidade.Gravar;
 
    Self.EndOperations;
    if(Trim(edtId.Text).IsEmpty)then
@@ -164,20 +159,11 @@ end;
 procedure TViewCidadesCad.OnBusca(AId: Integer);
 begin
    Self.NewEntitie;
-
-   MyQueryNew
-    .Add('SELECT * FROM CIDADES WHERE(CIDADES.ID = :ID)')
-    .AddParam('ID', AId)
-    .Open;
-
    FCidade
-      .Entitie
-       .Id(MyQuery.FieldByName('ID').AsString)
-       .Nome(MyQuery.FieldByName('NOME').AsString)
-       .UF(MyQuery.FieldByName('UF').AsString)
-       .IBGE(MyQuery.FieldByName('IBGE').AsString)
-       .End_Entitie;
-
+    .Entitie
+     .Id(AId)
+     .End_Entitie
+    .ConsultarEntitie;
    Self.FillFields;
 end;
 

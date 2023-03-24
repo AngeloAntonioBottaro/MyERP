@@ -47,6 +47,9 @@ inherited ViewProdutosBusca: TViewProdutosBusca
       Visible = True
     end
   end
+  inherited GridBusca: TDBGrid
+    OnTitleClick = GridBuscaTitleClick
+  end
   inherited PopupMenu: TPopupMenu
     inherited AtivarInativar1: TMenuItem
       Visible = True

@@ -369,7 +369,7 @@ begin
    end;
 
    MyQueryNew
-    .Add('SELECT ID, FUNCAO FROM FUNCIONARIOS_FUNCOES WHERE(FUNCIONARIOS_FUNCOES.ID = :ID)')
+    .Add('SELECT ID, NOME FROM FUNCIONARIOS_FUNCOES WHERE(FUNCIONARIOS_FUNCOES.ID = :ID)')
     .AddParam('ID', LId);
 
    ShowDebug(MyQuery.SQL.Text);
@@ -378,7 +378,7 @@ begin
    AEdtId.Text := TMyLibrary.CompLeft(MyQuery.FieldByName('ID').AsInteger);
 
    if(AEdtNome <> nil)then
-     AEdtNome.Text := MyQuery.FieldByName('FUNCAO').AsString;
+     AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
 end;
 {$ENDREGION 'FUNCIONARIOS.FUNCOES'}
 
@@ -479,7 +479,7 @@ begin
    end;
 
    MyQueryNew
-    .Add('SELECT ID, GRUPO FROM PRODUTOS_GRUPOS WHERE(PRODUTOS_GRUPOS.ID = :ID)')
+    .Add('SELECT ID, NOME FROM PRODUTOS_GRUPOS WHERE(PRODUTOS_GRUPOS.ID = :ID)')
     .AddParam('ID', LId);
 
    ShowDebug(MyQuery.SQL.Text);
@@ -488,7 +488,7 @@ begin
    AEdtId.Text := TMyLibrary.CompLeft(MyQuery.FieldByName('ID').AsInteger);
 
    if(AEdtNome <> nil)then
-     AEdtNome.Text := MyQuery.FieldByName('GRUPO').AsString;
+     AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
 end;
 {$ENDREGION 'PRODUTOS.GRUPOS'}
 
@@ -534,7 +534,7 @@ begin
    end;
 
    MyQueryNew
-    .Add('SELECT ID, SUBGRUPO FROM PRODUTOS_SUBGRUPOS WHERE(PRODUTOS_SUBGRUPOS.ID = :ID)')
+    .Add('SELECT ID, NOME FROM PRODUTOS_SUBGRUPOS WHERE(PRODUTOS_SUBGRUPOS.ID = :ID)')
     .AddParam('ID', LId);
 
    ShowDebug(MyQuery.SQL.Text);
@@ -543,7 +543,7 @@ begin
    AEdtId.Text := TMyLibrary.CompLeft(MyQuery.FieldByName('ID').AsInteger);
 
    if(AEdtNome <> nil)then
-     AEdtNome.Text := MyQuery.FieldByName('SUBGRUPO').AsString;
+     AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
 end;
 {$ENDREGION 'PRODUTOS.SUBGRUPOS'}
 
