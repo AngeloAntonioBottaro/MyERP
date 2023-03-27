@@ -14,10 +14,15 @@ uses
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.ComCtrls;
 
 type
   TViewProdutosCad = class(TViewBaseCadastros)
+    pnTela: TPanel;
+    lbId: TLabel;
+    lbRazaoSocial: TLabel;
+    edtId: TEdit;
+    edtRazaoSocial: TEdit;
     procedure btnBuscarClick(Sender: TObject);
   private
   public

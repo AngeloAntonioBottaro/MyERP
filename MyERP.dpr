@@ -117,7 +117,10 @@ uses
   Model.Funcionarios.Funcoes.Busca in 'src\Model\Funcionarios\Funcoes\Busca\Model.Funcionarios.Funcoes.Busca.pas',
   Model.Produtos.Grupos.Busca in 'src\Model\Produtos\Grupos\Busca\Model.Produtos.Grupos.Busca.pas',
   Model.Produtos.SubGrupos.Busca in 'src\Model\Produtos\SubGrupos\Busca\Model.Produtos.SubGrupos.Busca.pas',
-  Model.Produtos.Busca in 'src\Model\Produtos\Busca\Model.Produtos.Busca.pas';
+  Model.Produtos.Busca in 'src\Model\Produtos\Busca\Model.Produtos.Busca.pas',
+  Model.Produtos.Factory in 'src\Model\Produtos\Model.Produtos.Factory.pas',
+  Model.Produtos.Interfaces in 'src\Model\Produtos\Model.Produtos.Interfaces.pas',
+  Model.Produtos.Entitie in 'src\Model\Produtos\Model.Produtos.Entitie.pas';
 
 {$R *.res}
 

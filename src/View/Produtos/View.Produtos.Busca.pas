@@ -55,9 +55,8 @@ uses
   Utils.MyConsts,
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
-  View.Produtos.Cad
-  //, Model.Produtos.Factory;
-  ;
+  View.Produtos.Cad,
+  Model.Produtos.Factory;
 
 procedure TViewProdutosBusca.FormCreate(Sender: TObject);
 begin
@@ -85,11 +84,11 @@ end;
 procedure TViewProdutosBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   {TModelProdutosFactory.New
+   TModelProdutosFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .AlterarStatus;}
+    .AlterarStatus;
 end;
 
 procedure TViewProdutosBusca.btnCadastroClick(Sender: TObject);
@@ -126,11 +125,11 @@ end;
 procedure TViewProdutosBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   {TModelProdutosFactory.New
+   TModelProdutosFactory.New
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
-    .Deletar;}
+    .Deletar;
 end;
 
 function TViewProdutosBusca.GetTipoBusca: TTipoBuscaProduto;

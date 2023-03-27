@@ -19,7 +19,7 @@ uses
   Vcl.DBCtrls,
   Vcl.ComCtrls,
   Model.Funcionarios.Interfaces,
-  Model.Funcionarios.Entitie;
+  Model.Funcionarios.Entitie, RxToolEdit, RxCurrEdit;
 
 type
   TViewFuncionariosCad = class(TViewBaseCadastros)
@@ -74,12 +74,12 @@ type
     edtCNPJ: TEdit;
     edtIE: TEdit;
     edtRGOrgaoExpedidor: TEdit;
-    edtSalario: TEdit;
     lbSalario: TLabel;
     lbLogin: TLabel;
     lbSenha: TLabel;
     edtLogin: TEdit;
     edtSenha: TEdit;
+    edtSalario: TCurrencyEdit;
     procedure ConfComponents(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);

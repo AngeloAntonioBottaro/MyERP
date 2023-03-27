@@ -19,7 +19,7 @@ begin
                .ResourceName('funcionarios')
                .Hint('Cadastro de funcionários')
                .OnClickViewMain(ViewSistemaMain.CadastrosFuncionariosCadastro1Click)
-               .GroupOwner(TMainIconesGroup.Movimentacoes.ToInteger)
+               .GroupOwner(TMainIconesGroup.Cadastros.ToInteger)
                );
 end;
 

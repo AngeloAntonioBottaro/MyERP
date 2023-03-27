@@ -24,7 +24,9 @@ type
 implementation
 
 uses
-  MyExceptions;
+  MyConnection,
+  MyExceptions,
+  Utils.GlobalVariables;
 
 constructor TModelMainIconesLista.Create;
 begin
@@ -48,10 +50,16 @@ var
  LConfigurationName: string;
  LVisible: Boolean;
 begin
+   MyQueryNew
+       .Add('SELECT ICONE FROM CONFIGURACOES_ICONES WHERE (FUNCIONARIO = :ID)OR(FUNCIONARIO = 0)')
+       .Add('ORDER BY FUNCIONARIO DESC')
+       .AddParam('ID', VG_UsuarioLogadoId)
+       .Open;
+
    for LIndex in FListaPairsIconesFields.ToSortKeys do
    begin
       LConfigurationName := FListaPairsIconesFields.Items[LIndex].ComponentName;
-      LVisible := True;
+      LVisible := MyQuery.DataSet.Locate('ICONE', LConfigurationName, [loCaseInsensitive]);
 
       if(LVisible)then
       begin

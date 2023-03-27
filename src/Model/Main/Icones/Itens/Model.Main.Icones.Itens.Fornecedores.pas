@@ -19,7 +19,7 @@ begin
                .ResourceName('fornecedores')
                .Hint('Cadastro de Fornecedores')
                .OnClickViewMain(ViewSistemaMain.CadastrosFornecedoresCadastro1Click)
-               .GroupOwner(TMainIconesGroup.Movimentacoes.ToInteger)
+               .GroupOwner(TMainIconesGroup.Cadastros.ToInteger)
                );
 end;
 

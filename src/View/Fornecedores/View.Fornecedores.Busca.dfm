@@ -72,7 +72,7 @@ inherited ViewFornecedoresBusca: TViewFornecedoresBusca
         Expanded = False
         FieldName = 'ID'
         Title.Caption = 'C'#243'digo'
-        Width = 40
+        Width = 50
         Visible = True
       end
       item

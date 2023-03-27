@@ -307,6 +307,9 @@
         <DCCReference Include="src\Model\Produtos\Grupos\Busca\Model.Produtos.Grupos.Busca.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Busca\Model.Produtos.SubGrupos.Busca.pas"/>
         <DCCReference Include="src\Model\Produtos\Busca\Model.Produtos.Busca.pas"/>
+        <DCCReference Include="src\Model\Produtos\Model.Produtos.Factory.pas"/>
+        <DCCReference Include="src\Model\Produtos\Model.Produtos.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Produtos\Model.Produtos.Entitie.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cidades</ResourceId>

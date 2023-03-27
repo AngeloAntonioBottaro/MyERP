@@ -12,7 +12,6 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
     end
     inherited btnExcluir: TButton
       OnClick = btnExcluirClick
-      ExplicitLeft = 404
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
@@ -242,21 +241,21 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'Org'#227'o expedidor'
     end
     object lbSalario: TLabel
-      Left = 342
+      Left = 563
       Top = 212
       Width = 32
       Height = 13
       Caption = 'Sal'#225'rio'
     end
     object lbLogin: TLabel
-      Left = 481
+      Left = 342
       Top = 213
       Width = 25
       Height = 13
       Caption = 'Login'
     end
     object lbSenha: TLabel
-      Left = 602
+      Left = 463
       Top = 213
       Width = 30
       Height = 13
@@ -480,26 +479,26 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Height = 21
       TabOrder = 22
     end
-    object edtSalario: TEdit
-      Left = 342
-      Top = 227
-      Width = 138
-      Height = 21
-      TabOrder = 25
-    end
     object edtLogin: TEdit
-      Left = 481
+      Left = 342
       Top = 227
       Width = 120
       Height = 21
-      TabOrder = 26
+      TabOrder = 25
     end
     object edtSenha: TEdit
-      Left = 602
+      Left = 463
       Top = 227
       Width = 99
       Height = 21
       PasswordChar = '#'
+      TabOrder = 26
+    end
+    object edtSalario: TCurrencyEdit
+      Left = 563
+      Top = 227
+      Width = 138
+      Height = 21
       TabOrder = 27
     end
   end

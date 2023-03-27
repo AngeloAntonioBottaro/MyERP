@@ -273,6 +273,7 @@ begin
    finally
      FreeAndNil(ViewSistemaIconesConf);
    end;
+   Self.CreateShortcutIcons;
 end;
 
 procedure TViewSistemaMain.SuporteSobreSistema1Click(Sender: TObject);
@@ -323,6 +324,9 @@ procedure TViewSistemaMain.CreateShortcutIcons;
 var
   LTask: ITask;
 begin
+   if(VG_UsuarioLogadoId = 0)then
+     Exit;
+
    LTask := TTask.Create(
               procedure
               begin

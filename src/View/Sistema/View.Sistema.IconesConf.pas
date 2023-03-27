@@ -18,7 +18,7 @@ uses
   Vcl.DBCtrls,
   Vcl.ComCtrls,
   Data.DB,
-  Datasnap.DBClient, Vcl.Imaging.pngimage;
+  Datasnap.DBClient, Vcl.Imaging.pngimage, Vcl.Menus;
 
 type
   TViewSistemaIconesConf = class(TViewBase)
@@ -32,6 +32,8 @@ type
     btnFechar: TButton;
     btnGravar: TButton;
     imgOptions: TImage;
+    pMenuOptions: TPopupMenu;
+    MarcarIconesPadroes1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtIdFuncionarioExit(Sender: TObject);
@@ -39,6 +41,7 @@ type
     procedure btnMarcarTodosClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure MarcarIconesPadroes1Click(Sender: TObject);
     procedure imgOptionsClick(Sender: TObject);
   private
     FFuncionarioKeyValueAtual: Integer;
@@ -49,7 +52,7 @@ type
     procedure DesmarcarTodos;
     procedure MarcarConformeConfigurado;
     function IdFuncionarioSelecionado: Integer;
-    function RetornaListaIconesMarcadosParaInsert: string;
+    procedure InserirIconesMarcados;
     procedure MarcarCheckBoxEspecifico(ANome: string);
   public
   end;
@@ -65,6 +68,7 @@ uses
   MyConnection,
   MyExceptions,
   MyMessage,
+  Utils.MyVclLibrary,
   Utils.MyConsts,
   Utils.GlobalVariables,
   Utils.EditsKeyDownExit,
@@ -108,8 +112,7 @@ end;
 procedure TViewSistemaIconesConf.imgOptionsClick(Sender: TObject);
 begin
    inherited;
-   Self.MarcarCheckBoxEspecifico('ckClientes');
-   Self.MarcarCheckBoxEspecifico('ckProdutos');
+   TMyVclLibrary.PopUpMenuSelfActive(imgOptions);
 end;
 
 procedure TViewSistemaIconesConf.CreatePageControlIcons;
@@ -145,15 +148,7 @@ begin
     .AddParam('ID', edtIdFuncionario.Text)
     .ExecSQL;
 
-   MyQueryNew
-    .Add('INSERT INTO CONFIGURACOES_ICONES (ICONE, FUNCIONARIO) VALUES ' + Self.RetornaListaIconesMarcadosParaInsert);
-
-  try
-    ShowDebug(MyQuery.SQL.Text);
-    MyQuery.ExecSQL;
-  except on E: Exception do
-    ShowError('Não foi possível cadastrar os ícones', 'Mensagem: ' + E.Message);
-  end;
+   Self.InserirIconesMarcados;
 end;
 
 procedure TViewSistemaIconesConf.btnMarcarTodosClick(Sender: TObject);
@@ -218,6 +213,13 @@ begin
    end;
 end;
 
+procedure TViewSistemaIconesConf.MarcarIconesPadroes1Click(Sender: TObject);
+begin
+   inherited;
+   Self.MarcarCheckBoxEspecifico('ckClientes');
+   Self.MarcarCheckBoxEspecifico('ckProdutos');
+end;
+
 procedure TViewSistemaIconesConf.MostrarAbaCadastrosOnShow;
 var
  LTabCadastro: TTabSheet;
@@ -230,23 +232,35 @@ begin
      LTabCadastro.Show;
 end;
 
-function TViewSistemaIconesConf.RetornaListaIconesMarcadosParaInsert: string;
+procedure TViewSistemaIconesConf.InserirIconesMarcados;
 var
   I: Integer;
   LNomeIcone: string;
 begin
-   Result := '("nada","' + edtIdFuncionario.Text + '")';
+   try
+     for I := 0 to Pred(Self.ComponentCount) do
+     begin
+        if(Self.Components[I].ClassType = TCheckBox)then
+        begin
+           if(TCheckBox(Self.Components[I]).Checked)and(TCheckBox(Self.Components[I]).Enabled)then
+           begin
+              LNomeIcone := StringReplace(TCheckBox(Self.Components[I]).Name, PREFIX_CHECKBOX_NAME, '', [rfIgnoreCase]);
 
-   for I := 0 to Pred(Self.ComponentCount) do
-   begin
-      if(Self.Components[I].ClassType = TCheckBox)then
-      begin
-         if(TCheckBox(Self.Components[I]).Checked)and(TCheckBox(Self.Components[I]).Enabled)then
-         begin
-            LNomeIcone := StringReplace(TCheckBox(Self.Components[I]).Name, PREFIX_CHECKBOX_NAME, '', [rfIgnoreCase]);
-            Result := Result + ', ("' + LNomeIcone + '", "' + edtIdFuncionario.Text + '")';
-         end;
-      end;
+              MyQueryNew
+               .Add('INSERT INTO CONFIGURACOES_ICONES (FUNCIONARIO, ICONE) VALUES')
+               .Add('(:FUNCIONARIO , :ICONE)')
+               .AddParam('FUNCIONARIO', edtIdFuncionario.Text)
+               .AddParam('ICONE', LNomeIcone);
+
+              ShowDebug(MyQuery.SQL.Text);
+              MyQuery.ExecSQL;
+           end;
+        end;
+     end;
+
+     ShowDone('Ícones cadastrados');
+   except on E: Exception do
+     ShowError('Não foi possível cadastrar os ícones', 'Mensagem: ' + E.Message);
    end;
 end;
 

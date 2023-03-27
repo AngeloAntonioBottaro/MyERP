@@ -22,6 +22,7 @@ type
     procedure GetSQLInativos;
     procedure GetSQLOrderBy;
     procedure ExecutarBusca;
+    procedure ConfFieldsMask;
   public
     constructor Create;
     function TipoBusca(ATipoBusca: TTipoBuscaFuncionarioFuncao): TModelFuncionariosFuncoesBusca;
@@ -35,6 +36,7 @@ type
 implementation
 
 uses
+  Utils.MyConsts,
   Utils.LibrarySistema;
 
 constructor TModelFuncionariosFuncoesBusca.Create;
@@ -102,6 +104,13 @@ procedure TModelFuncionariosFuncoesBusca.ExecutarBusca;
 begin
    ShowDebug(FQueryBusca.SQL.Text);
    FQueryBusca.Open;
+   Self.ConfFieldsMask;
+end;
+
+procedure TModelFuncionariosFuncoesBusca.ConfFieldsMask;
+begin
+   FQueryBusca
+    .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO);
 end;
 
 function TModelFuncionariosFuncoesBusca.ConteudoBusca(AConteudoBusca: string): TModelFuncionariosFuncoesBusca;

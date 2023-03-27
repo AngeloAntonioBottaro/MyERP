@@ -22,6 +22,7 @@ type
     procedure GetSQLInativos;
     procedure GetSQLOrderBy;
     procedure ExecutarBusca;
+    procedure ConfFieldsMask;
   public
     constructor Create;
     function TipoBusca(ATipoBusca: TTipoBuscaProduto): TModelProdutosBusca;
@@ -36,6 +37,7 @@ implementation
 
 uses
   Utils.MyLibrary,
+  Utils.MyConsts,
   Utils.LibrarySistema,
   Utils.GlobalConsts;
 
@@ -60,8 +62,12 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('PRODUTOS.ID, PRODUTOS.NOME, PRODUTOS.CUSTO, PRODUTOS.PRECO_VENDA_VISTA, PRODUTOS.PRECO_VENDA_PRAZO, PRODUTOS.SUBGRUPO,')
-    .Add('FROM PRODUTOS ');
+    .Add('PRODUTOS.ID, PRODUTOS.NOME, PRODUTOS.CUSTO, PRODUTOS.PRECO_VENDA_VISTA, PRODUTOS.PRECO_VENDA_PRAZO, PRODUTOS.ESTOQUE, PRODUTOS.STATUS,')
+    .Add('PRODUTOS_GRUPOS.NOME AS NOME_GRUPO,')
+    .Add('PRODUTOS_SUBGRUPOS.NOME AS NOME_SUBGRUPO')
+    .Add('FROM PRODUTOS ')
+    .Add('LEFT JOIN PRODUTOS_SUBGRUPOS ON(PRODUTOS_SUBGRUPOS.ID = PRODUTOS.SUBGRUPO)')
+    .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)');
 end;
 
 procedure TModelProdutosBusca.GetSQLCondicao;
@@ -73,7 +79,7 @@ begin
     TTipoBuscaProduto.Id: FQueryBusca.Add('(PRODUTOS.ID CONTAINING :ID)').AddParam('ID', FConteudoBusca);
     TTipoBuscaProduto.Nome:
     begin
-       if(Length(FConteudoBusca) > 50)then
+       if(Length(FConteudoBusca) > 80)then
          Abort;
 
        FQueryBusca.Add('(PRODUTOS.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
@@ -105,6 +111,17 @@ procedure TModelProdutosBusca.ExecutarBusca;
 begin
    ShowDebug(FQueryBusca.SQL.Text);
    FQueryBusca.Open;
+   Self.ConfFieldsMask;
+end;
+
+procedure TModelProdutosBusca.ConfFieldsMask;
+begin
+   FQueryBusca
+    .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO)
+    .DisplayFormat('CUSTO', DISPLAY_FORMAT_DOUBLE)
+    .DisplayFormat('PRECO_VENDA_VISTA', DISPLAY_FORMAT_DOUBLE)
+    .DisplayFormat('PRECO_VENDA_PRAZO', DISPLAY_FORMAT_DOUBLE)
+    .DisplayFormat('ESTOQUE', DISPLAY_FORMAT_DOUBLE);
 end;
 
 function TModelProdutosBusca.ConteudoBusca(AConteudoBusca: string): TModelProdutosBusca;

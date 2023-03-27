@@ -571,14 +571,17 @@ object ViewSistemaMain: TViewSistemaMain
     end
   end
   object pMenuMain: TPopupMenu
+    Images = ModelSistemaImagensDM.imgListMenus
     Left = 88
     Top = 24
     object AtualizarIconesDeAtalhos1: TMenuItem
       Caption = 'Atualizar '#237'cones de atalhos'
+      ImageIndex = 20
       OnClick = AtualizarIconesDeAtalhos1Click
     end
     object OcultarIcones1: TMenuItem
       Caption = 'Ocultar '#237'cones'
+      ImageIndex = 19
       OnClick = OcultarIcones1Click
     end
     object N1: TMenuItem
@@ -586,6 +589,7 @@ object ViewSistemaMain: TViewSistemaMain
     end
     object Configurarcones1: TMenuItem
       Caption = 'Configurar '#237'cones'
+      ImageIndex = 18
       OnClick = Configurarcones1Click
     end
   end

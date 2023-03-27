@@ -19,7 +19,7 @@ begin
                .ResourceName('produtos')
                .Hint('Cadastro de produtos')
                .OnClickViewMain(ViewSistemaMain.CadastrosProdutosCadastro1Click)
-               .GroupOwner(TMainIconesGroup.Outros.ToInteger)
+               .GroupOwner(TMainIconesGroup.Cadastros.ToInteger)
                );
 end;
 

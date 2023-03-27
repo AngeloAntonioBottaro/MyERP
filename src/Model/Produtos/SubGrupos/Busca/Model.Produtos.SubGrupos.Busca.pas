@@ -22,6 +22,7 @@ type
     procedure GetSQLInativos;
     procedure GetSQLOrderBy;
     procedure ExecutarBusca;
+    procedure ConfFieldsMask;
   public
     constructor Create;
     function TipoBusca(ATipoBusca: TTipoBuscaProdutoSubGrupo): TModelProdutosSubGruposBusca;
@@ -35,6 +36,7 @@ type
 implementation
 
 uses
+  Utils.MyConsts,
   Utils.LibrarySistema;
 
 constructor TModelProdutosSubGruposBusca.Create;
@@ -114,6 +116,14 @@ procedure TModelProdutosSubGruposBusca.ExecutarBusca;
 begin
    ShowDebug(FQueryBusca.SQL.Text);
    FQueryBusca.Open;
+   Self.ConfFieldsMask;
+end;
+
+procedure TModelProdutosSubGruposBusca.ConfFieldsMask;
+begin
+   FQueryBusca
+    .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO)
+    .DisplayFormat('GRUPO', DISPLAY_FORMAT_CODIGO);
 end;
 
 function TModelProdutosSubGruposBusca.ConteudoBusca(AConteudoBusca: string): TModelProdutosSubGruposBusca;
