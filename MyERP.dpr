@@ -32,9 +32,7 @@ uses
   Model.Main.Icones.Types in 'src\Model\Main\Icones\Model.Main.Icones.Types.pas',
   Model.Main.Icones.Itens.Clientes in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Clientes.pas',
   Model.Main.Icones.Itens.Fornecedores in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Fornecedores.pas',
-  Model.Main.Icones.Itens.Funcionarios in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Funcionarios.pas',
   Model.Main.Icones.Itens.Produtos in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Produtos.pas',
-  Model.Main.Icones.Itens.Cidades in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Cidades.pas',
   Model.Main.Icones.Consts in 'src\Model\Main\Icones\Model.Main.Icones.Consts.pas',
   View.Base.Cadastros in 'src\View\Sistema\Base\View.Base.Cadastros.pas' {ViewBaseCadastros},
   View.Cidades.Cad in 'src\View\Cidades\View.Cidades.Cad.pas' {ViewCidadesCad},
@@ -120,7 +118,27 @@ uses
   Model.Produtos.Busca in 'src\Model\Produtos\Busca\Model.Produtos.Busca.pas',
   Model.Produtos.Factory in 'src\Model\Produtos\Model.Produtos.Factory.pas',
   Model.Produtos.Interfaces in 'src\Model\Produtos\Model.Produtos.Interfaces.pas',
-  Model.Produtos.Entitie in 'src\Model\Produtos\Model.Produtos.Entitie.pas';
+  Model.Produtos.Entitie in 'src\Model\Produtos\Model.Produtos.Entitie.pas',
+  Utils.MyGridLibrary in '..\MyUtilsLibrary\Utils.MyGridLibrary.pas',
+  Model.Main.Icones.Itens.Vendas in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Vendas.pas',
+  Model.Main.Icones.Itens.Compras in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Compras.pas',
+  Model.Main.Icones.Itens.Caixa in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Caixa.pas',
+  Model.Main.Icones.Itens.ContasReceberConsulta in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasReceberConsulta.pas',
+  Model.Main.Icones.Itens.ContasReceberCadastro in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasReceberCadastro.pas',
+  Model.Main.Icones.Itens.ContasPagarConsulta in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasPagarConsulta.pas',
+  Model.Main.Icones.Itens.ContasPagarCadastro in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasPagarCadastro.pas',
+  Model.Produtos.Unidades.Interfaces in 'src\Model\Produtos\Unidades\Model.Produtos.Unidades.Interfaces.pas',
+  Model.Produtos.Unidades.Entitie in 'src\Model\Produtos\Unidades\Model.Produtos.Unidades.Entitie.pas',
+  Model.Produtos.Unidades.Factory in 'src\Model\Produtos\Unidades\Model.Produtos.Unidades.Factory.pas',
+  View.Produtos.Unidades.Busca in 'src\View\Produtos\Unidades\View.Produtos.Unidades.Busca.pas' {ViewProdutosUnidadesBusca},
+  View.Produtos.Unidades.Cad in 'src\View\Produtos\Unidades\View.Produtos.Unidades.Cad.pas' {ViewProdutosUnidadesCad},
+  Model.Produtos.Unidades.Busca in 'src\Model\Produtos\Unidades\Busca\Model.Produtos.Unidades.Busca.pas',
+  View.FormasPagamento.Cad in 'src\View\FormasPagamento\View.FormasPagamento.Cad.pas' {ViewFormasPagamentoCad},
+  View.FormasPagamento.Busca in 'src\View\FormasPagamento\View.FormasPagamento.Busca.pas' {ViewFormasPagamentoBusca},
+  Model.FormasPagamento.Interfaces in 'src\Model\FormasPagamento\Model.FormasPagamento.Interfaces.pas',
+  Model.FormasPagamento.Entitie in 'src\Model\FormasPagamento\Model.FormasPagamento.Entitie.pas',
+  Model.FormasPagamento.Factory in 'src\Model\FormasPagamento\Model.FormasPagamento.Factory.pas',
+  Model.FormasPagamento.Busca in 'src\Model\FormasPagamento\Busca\Model.FormasPagamento.Busca.pas';
 
 {$R *.res}
 

@@ -21,7 +21,7 @@ uses
   View.Base.Busca,
   Data.DB,
   Utils.MyTypes,
-  Model.Fornecedores.Busca;
+  Model.Fornecedores.Busca, Vcl.Imaging.pngimage;
 
 type
   TViewFornecedoresBusca = class(TViewBaseBusca)
@@ -62,7 +62,11 @@ uses
 
 procedure TViewFornecedoresBusca.FormCreate(Sender: TObject);
 begin
+   FGridConf := Self.GridBusca;
+   FNomeConf := Self.Name;
+
    inherited;
+
    FBusca := TModelFornecedoresBusca.Create;
    FBusca
     .DataSource(DS_Busca);

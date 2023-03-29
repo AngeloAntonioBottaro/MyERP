@@ -100,7 +100,6 @@ type
     function Salario(AValue: string): TModelFuncionariosEntitie; overload;
     function Salario(AValue: Double): TModelFuncionariosEntitie; overload;
     function Salario: Double; overload;
-    function SalarioMascara: string;
     function Senha(AValue: string): TModelFuncionariosEntitie; overload;
     function Senha: string; overload;
     function Status(AValue: string): TModelFuncionariosEntitie; overload;
@@ -331,7 +330,7 @@ end;
 function TModelFuncionariosEntitie.FuncaoMascara: string;
 begin
    Result := EmptyStr;
-   if(Self.Id > 0)then
+   if(Self.Funcao > 0)then
      Result := TMyLibrary.CompLeft(Self.Funcao);
 end;
 
@@ -451,11 +450,6 @@ end;
 function TModelFuncionariosEntitie.Salario: Double;
 begin
    Result := FSalario;
-end;
-
-function TModelFuncionariosEntitie.SalarioMascara: string;
-begin
-   Result := FormatFloat(DISPLAY_FORMAT_DOUBLE, Self.Salario);
 end;
 
 function TModelFuncionariosEntitie.Senha(AValue: string): TModelFuncionariosEntitie;

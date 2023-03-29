@@ -62,12 +62,14 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('PRODUTOS.ID, PRODUTOS.NOME, PRODUTOS.CUSTO, PRODUTOS.PRECO_VENDA_VISTA, PRODUTOS.PRECO_VENDA_PRAZO, PRODUTOS.ESTOQUE, PRODUTOS.STATUS,')
+    .Add('PRODUTOS.ID, PRODUTOS.NOME, PRODUTOS.CUSTO, PRODUTOS.PRECO_VENDA_VISTA, PRODUTOS.PRECO_VENDA_PRAZO, PRODUTOS.ESTOQUE, PRODUTOS.CODIGO_BARRAS, PRODUTOS.STATUS,')
     .Add('PRODUTOS_GRUPOS.NOME AS NOME_GRUPO,')
-    .Add('PRODUTOS_SUBGRUPOS.NOME AS NOME_SUBGRUPO')
+    .Add('PRODUTOS_SUBGRUPOS.NOME AS NOME_SUBGRUPO, ')
+    .Add('PRODUTOS_UNIDADES.SIGLA')
     .Add('FROM PRODUTOS ')
     .Add('LEFT JOIN PRODUTOS_SUBGRUPOS ON(PRODUTOS_SUBGRUPOS.ID = PRODUTOS.SUBGRUPO)')
-    .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)');
+    .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)')
+    .Add('LEFT JOIN PRODUTOS_UNIDADES ON(PRODUTOS_UNIDADES.ID = PRODUTOS.UNIDADE)');
 end;
 
 procedure TModelProdutosBusca.GetSQLCondicao;
@@ -84,6 +86,13 @@ begin
 
        FQueryBusca.Add('(PRODUTOS.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
     end;
+    TTipoBuscaProduto.CodigoBarras:
+    begin
+       if(Length(FConteudoBusca) > 30)then
+         Abort;
+
+       FQueryBusca.Add('(PRODUTOS.CODIGO_BARRAS CONTAINING :CODIGO_BARRAS)').AddParam('CODIGO_BARRAS', FConteudoBusca);
+    end
    else
     Abort;
    end;
@@ -101,7 +110,8 @@ procedure TModelProdutosBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaProduto.Nome: FQueryBusca.Add('NOME');
+    TTipoBuscaProduto.Nome: FQueryBusca.Add('NOME, ID');
+    TTipoBuscaProduto.CodigoBarras: FQueryBusca.Add('CODIGO_BARRAS, NOME, ID');
    else
      FQueryBusca.Add('ID');
    end;
@@ -118,10 +128,10 @@ procedure TModelProdutosBusca.ConfFieldsMask;
 begin
    FQueryBusca
     .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO)
-    .DisplayFormat('CUSTO', DISPLAY_FORMAT_DOUBLE)
-    .DisplayFormat('PRECO_VENDA_VISTA', DISPLAY_FORMAT_DOUBLE)
-    .DisplayFormat('PRECO_VENDA_PRAZO', DISPLAY_FORMAT_DOUBLE)
-    .DisplayFormat('ESTOQUE', DISPLAY_FORMAT_DOUBLE);
+    .DisplayFormat('CUSTO', DISPLAY_FORMAT_DECOMAIS_2)
+    .DisplayFormat('PRECO_VENDA_VISTA', DISPLAY_FORMAT_DECOMAIS_2)
+    .DisplayFormat('PRECO_VENDA_PRAZO', DISPLAY_FORMAT_DECOMAIS_2)
+    .DisplayFormat('ESTOQUE', DISPLAY_FORMAT_DECOMAIS_3);
 end;
 
 function TModelProdutosBusca.ConteudoBusca(AConteudoBusca: string): TModelProdutosBusca;

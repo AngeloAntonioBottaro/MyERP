@@ -10,6 +10,7 @@ uses
 
 procedure DebugOnOFF;
 procedure CriarComboBoxTipoJuridico(ALines: TStrings);
+procedure CriarComboBoxTipoLancamentoFinanceiro(ALines: TStrings);
 
 procedure CriarFormMsgJaAberto(AClass: TComponentClass; var Reference);
 {$REGION 'MENSSAGES'}
@@ -45,6 +46,14 @@ begin
    ALines.Clear;
    ALines.Add(PESSOA_FISICA);
    ALines.Add(PESSOA_JURIDICA);
+end;
+
+procedure CriarComboBoxTipoLancamentoFinanceiro(ALines: TStrings);
+begin
+   ALines.Clear;
+   ALines.Add(TIPO_LANCAMENTO_CAIXA);
+   ALines.Add(TIPO_LANCAMENTO_FINANCEIRO);
+   ALines.Add(TIPO_LANCAMENTO_SEMCONTROLE);
 end;
 
 procedure CriarFormMsgJaAberto(AClass: TComponentClass; var Reference);

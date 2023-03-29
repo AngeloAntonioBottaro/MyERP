@@ -21,12 +21,14 @@ uses
   View.Base.Busca,
   Data.DB,
   Utils.MyTypes,
-  Model.Produtos.Busca;
+  Model.Produtos.Busca,
+  Vcl.Imaging.pngimage;
 
 type
   TViewProdutosBusca = class(TViewBaseBusca)
     rdBuscarCodigo: TRadioButton;
     rdBuscarNome: TRadioButton;
+    rdBuscarCodBarras: TRadioButton;
     procedure ConfComponents(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -60,7 +62,11 @@ uses
 
 procedure TViewProdutosBusca.FormCreate(Sender: TObject);
 begin
+   FGridConf := Self.GridBusca;
+   FNomeConf := Self.Name;
+
    inherited;
+
    FBusca := TModelProdutosBusca.Create;
    FBusca
     .DataSource(DS_Busca);
@@ -76,8 +82,9 @@ procedure TViewProdutosBusca.FormKeyDown(Sender: TObject; var Key: Word; Shift: 
 begin
    inherited;
    case(Key)of
-    VK_F2: if(Shift = [])then rdBuscarCodigo.Checked   := True;
-    VK_F3: if(Shift = [])then rdBuscarNome.Checked     := True;
+    VK_F2: if(Shift = [])then rdBuscarCodigo.Checked    := True;
+    VK_F3: if(Shift = [])then rdBuscarNome.Checked      := True;
+    VK_F4: if(Shift = [])then rdBuscarCodBarras.Checked := True;
    end;
 end;
 
@@ -137,7 +144,9 @@ begin
    Result := TTipoBuscaProduto.Nome;
 
    if(rdBuscarCodigo.Enabled and rdBuscarCodigo.Checked)then
-     Result := TTipoBuscaProduto.Id;
+     Result := TTipoBuscaProduto.Id
+   else if(rdBuscarCodBarras.Enabled and rdBuscarCodBarras.Checked)then
+     Result := TTipoBuscaProduto.CodigoBarras;
 end;
 
 procedure TViewProdutosBusca.GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);

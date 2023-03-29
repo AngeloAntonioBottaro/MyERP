@@ -499,6 +499,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Top = 227
       Width = 138
       Height = 21
+      Alignment = taLeftJustify
       TabOrder = 27
     end
   end

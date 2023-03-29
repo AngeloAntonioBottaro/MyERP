@@ -66,7 +66,7 @@ inherited ViewProdutosGruposCad: TViewProdutosGruposCad
       ReadOnly = True
       TabOrder = 0
     end
-    object edtGrupo: TEdit
+    object edtNome: TEdit
       Left = 74
       Top = 22
       Width = 627

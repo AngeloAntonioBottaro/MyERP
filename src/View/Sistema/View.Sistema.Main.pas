@@ -51,6 +51,9 @@ type
     TimerFormResize: TTimer;
     N1: TMenuItem;
     Configurarcones1: TMenuItem;
+    CadastrosUnidadeProdutos1: TMenuItem;
+    FormaPagamento1: TMenuItem;
+    CadastroFormaPagamentoCadastro1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -66,11 +69,12 @@ type
     procedure OcultarIcones1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure CadastrosCidades1Cadastro1Click(Sender: TObject);
-    procedure CadastroProdutosConsultaProdutosClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure TimerFormResizeTimer(Sender: TObject);
     procedure SuporteSobreSistema1Click(Sender: TObject);
     procedure Configurarcones1Click(Sender: TObject);
+    procedure CadastrosUnidadeProdutos1Click(Sender: TObject);
+    procedure CadastroFormaPagamentoCadastro1Click(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -104,10 +108,11 @@ uses
   View.Produtos.Cad,
   View.Produtos.Grupos.Cad,
   View.Produtos.SubGrupos.Cad,
+  View.Produtos.Unidades.Cad,
   View.Funcionarios.Cad,
   View.Funcionarios.Funcoes.Cad,
   View.Fornecedores.Cad,
-  View.Produtos.Busca;
+  View.FormasPagamento.Cad;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -161,6 +166,14 @@ begin
 end;
 {$ENDREGION 'FormEvents'}
 
+{$REGION 'EVENTS'}
+procedure TViewSistemaMain.TimerFormResizeTimer(Sender: TObject);
+begin
+   TimerFormResize.Enabled := False;
+   Self.CreateShortcutIcons;
+end;
+{$ENDREGION 'EVENTS'}
+
 {$REGION 'MenuEvents'}
 procedure TViewSistemaMain.AtualizarIconesDeAtalhos1Click(Sender: TObject);
 begin
@@ -175,13 +188,13 @@ begin
      .LimparComponente;
 end;
 
-procedure TViewSistemaMain.CadastroProdutosConsultaProdutosClick(Sender: TObject);
+procedure TViewSistemaMain.CadastroFormaPagamentoCadastro1Click(Sender: TObject);
 begin
-   if(ViewProdutosBusca = nil)then Application.CreateForm(TViewProdutosBusca, ViewProdutosBusca);
+   if(ViewFormasPagamentoCad = nil)then Application.CreateForm(TViewFormasPagamentoCad, ViewFormasPagamentoCad);
    try
-     ViewProdutosBusca.ShowModal;
+     ViewFormasPagamentoCad.ShowModal;
    finally
-     FreeAndNil(ViewProdutosBusca);
+     FreeAndNil(ViewFormasPagamentoCad);
    end;
 end;
 
@@ -290,10 +303,15 @@ procedure TViewSistemaMain.Sair1Click(Sender: TObject);
 begin
    Self.Close;
 end;
-procedure TViewSistemaMain.TimerFormResizeTimer(Sender: TObject);
+
+procedure TViewSistemaMain.CadastrosUnidadeProdutos1Click(Sender: TObject);
 begin
-   TimerFormResize.Enabled := False;
-   Self.CreateShortcutIcons;
+   if(ViewProdutosUnidadesCad = nil)then Application.CreateForm(TViewProdutosUnidadesCad, ViewProdutosUnidadesCad);
+   try
+     ViewProdutosUnidadesCad.ShowModal;
+   finally
+     FreeAndNil(ViewProdutosUnidadesCad);
+   end;
 end;
 
 {$ENDREGION'MenuEvents'}

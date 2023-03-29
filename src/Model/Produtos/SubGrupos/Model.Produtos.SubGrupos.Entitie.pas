@@ -73,7 +73,7 @@ end;
 function TModelProdutosSubGruposEntitie.GrupoMascara: string;
 begin
    Result := EmptyStr;
-   if(Self.Id > 0)then
+   if(Self.Grupo > 0)then
      Result := TMyLibrary.CompLeft(Self.Grupo);
 end;
 

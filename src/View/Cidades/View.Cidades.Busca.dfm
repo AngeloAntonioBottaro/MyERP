@@ -1,6 +1,5 @@
 inherited ViewCidadesBusca: TViewCidadesBusca
   Caption = 'Busca de cidade'
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnTop: TPanel
@@ -62,34 +61,36 @@ inherited ViewCidadesBusca: TViewCidadesBusca
       end
     end
   end
-  inherited GridBusca: TDBGrid
-    OnTitleClick = GridBuscaTitleClick
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID'
-        Title.Caption = 'C'#243'digo'
-        Width = 50
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME'
-        Title.Caption = 'Cidade'
-        Width = 539
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'UF'
-        Title.Caption = 'Estado'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'IBGE'
-        Width = 80
-        Visible = True
-      end>
+  inherited pnGrid: TPanel
+    inherited GridBusca: TDBGrid
+      OnTitleClick = GridBuscaTitleClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Title.Caption = 'C'#243'digo'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'Cidade'
+          Width = 539
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'UF'
+          Title.Caption = 'Estado'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IBGE'
+          Width = 80
+          Visible = True
+        end>
+    end
   end
 end

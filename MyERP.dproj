@@ -149,9 +149,7 @@
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Types.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Clientes.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Fornecedores.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Funcionarios.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Produtos.pas"/>
-        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Cidades.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Consts.pas"/>
         <DCCReference Include="src\View\Sistema\Base\View.Base.Cadastros.pas">
             <Form>ViewBaseCadastros</Form>
@@ -310,10 +308,37 @@
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Factory.pas"/>
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Interfaces.pas"/>
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Entitie.pas"/>
-        <RcItem Include="resources\Images\PNG\Menus\CityBuildings.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>cidades</ResourceId>
-        </RcItem>
+        <DCCReference Include="..\MyUtilsLibrary\Utils.MyGridLibrary.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Vendas.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Compras.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Caixa.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasReceberConsulta.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasReceberCadastro.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasPagarConsulta.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.ContasPagarCadastro.pas"/>
+        <DCCReference Include="src\Model\Produtos\Unidades\Model.Produtos.Unidades.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Produtos\Unidades\Model.Produtos.Unidades.Entitie.pas"/>
+        <DCCReference Include="src\Model\Produtos\Unidades\Model.Produtos.Unidades.Factory.pas"/>
+        <DCCReference Include="src\View\Produtos\Unidades\View.Produtos.Unidades.Busca.pas">
+            <Form>ViewProdutosUnidadesBusca</Form>
+        </DCCReference>
+        <DCCReference Include="src\View\Produtos\Unidades\View.Produtos.Unidades.Cad.pas">
+            <Form>ViewProdutosUnidadesCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\Produtos\Unidades\Busca\Model.Produtos.Unidades.Busca.pas"/>
+        <DCCReference Include="src\View\FormasPagamento\View.FormasPagamento.Cad.pas">
+            <Form>ViewFormasPagamentoCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\FormasPagamento\View.FormasPagamento.Busca.pas">
+            <Form>ViewFormasPagamentoBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Interfaces.pas"/>
+        <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Entitie.pas"/>
+        <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Factory.pas"/>
+        <DCCReference Include="src\Model\FormasPagamento\Busca\Model.FormasPagamento.Busca.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>fornecedores</ResourceId>
@@ -330,9 +355,33 @@
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>consulta_produtos</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\User.png">
+        <RcItem Include="resources\Images\PNG\Menus\Sell.png">
             <ResourceType>RCDATA</ResourceType>
-            <ResourceId>funcionarios</ResourceId>
+            <ResourceId>vendas</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\Buying.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>compras</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\CashRegister.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>caixa</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\RequestMoney.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>consulta_contas_receber</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\InitiateMoneyTransfer.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>consulta_contas_pagar</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\InitiateMoneyTransferAdd.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>cadastro_contas_pagar</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\RequestMoneyAdd.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>cadastro_contas_receber</ResourceId>
         </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -366,13 +415,31 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\Sell.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\CashRegister.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="resources\Images\PNG\Menus\Product.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\CityBuildings.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\Buying.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\RequestMoneyAdd.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -384,19 +451,31 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\RequestMoney.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="C:\AABSoft\ERP\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MyERP.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\User.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\InitiateMoneyTransfer.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="resources\Images\PNG\Menus\ProductSearch.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\InitiateMoneyTransferAdd.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

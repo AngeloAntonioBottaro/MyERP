@@ -1,6 +1,5 @@
 inherited ViewProdutosSubGruposBusca: TViewProdutosSubGruposBusca
   Caption = 'Busca de sub grupo de produto'
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnTop: TPanel
@@ -62,37 +61,39 @@ inherited ViewProdutosSubGruposBusca: TViewProdutosSubGruposBusca
       end
     end
   end
-  inherited GridBusca: TDBGrid
-    OnTitleClick = GridBuscaTitleClick
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID'
-        Title.Caption = 'C'#243'digo'
-        Width = 50
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME'
-        Title.Caption = 'Sub-grupo'
-        Width = 300
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'GRUPO'
-        Title.Caption = 'C'#243'd. grupo'
-        Width = 63
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME_GRUPO'
-        Title.Caption = 'Grupo'
-        Width = 300
-        Visible = True
-      end>
+  inherited pnGrid: TPanel
+    inherited GridBusca: TDBGrid
+      OnTitleClick = GridBuscaTitleClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Title.Caption = 'C'#243'digo'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'Sub-grupo'
+          Width = 300
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GRUPO'
+          Title.Caption = 'C'#243'd. grupo'
+          Width = 63
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME_GRUPO'
+          Title.Caption = 'Grupo'
+          Width = 300
+          Visible = True
+        end>
+    end
   end
   inherited PopupMenu: TPopupMenu
     inherited Excluir1: TMenuItem

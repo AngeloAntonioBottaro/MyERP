@@ -19,7 +19,9 @@ uses
   Vcl.DBCtrls,
   Vcl.ComCtrls,
   Model.Funcionarios.Interfaces,
-  Model.Funcionarios.Entitie, RxToolEdit, RxCurrEdit;
+  Model.Funcionarios.Entitie,
+  RxToolEdit,
+  RxCurrEdit;
 
 type
   TViewFuncionariosCad = class(TViewBaseCadastros)

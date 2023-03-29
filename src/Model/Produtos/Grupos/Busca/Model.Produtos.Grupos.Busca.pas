@@ -77,7 +77,7 @@ begin
          Abort;
 
        FQueryBusca.Add('(PRODUTOS_GRUPOS.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
-    end
+    end;
    else
     Abort;
    end;

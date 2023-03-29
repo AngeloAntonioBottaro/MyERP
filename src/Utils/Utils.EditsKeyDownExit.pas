@@ -57,9 +57,22 @@ procedure IdGrupoProdutoExit(AEdtId, AEdtNome: TEdit); overload;
 {$REGION 'PRODUTOS.SUBGRUPOS'}
 procedure IdSubGrupoProdutoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
 procedure IdSubGrupoProdutoExit(AEdtId: TEdit); overload;
-procedure IdSubGrupoProdutoExit(AEdtId, AEdtNome: TEdit); overload;
+procedure IdSubGrupoProdutoExit(AEdtId, AEdtSubgrupo: TEdit); overload;
+procedure IdSubGrupoProdutoExit(AEdtId, AEdtSubgrupo, AEdtGrupo: TEdit); overload;
 {$ENDREGION 'PRODUTOS.SUBGRUPOS'}
 
+{$REGION 'PRODUTOS.UNIDADES'}
+procedure IdUnidadeProdutoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
+procedure IdUnidadeProdutoExit(AEdtId: TEdit); overload;
+procedure IdUnidadeProdutoExit(AEdtId, AEdtSigla: TEdit); overload;
+procedure IdUnidadeProdutoExit(AEdtId, AEdtSigla, AEdtNome: TEdit); overload;
+{$ENDREGION 'PRODUTOS.UNIDADES'}
+
+{$REGION 'FORMAS_PAGAMENTOS'}
+procedure IdFormaPagamentoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
+procedure IdFormaPagamentoExit(AEdtId: TEdit); overload;
+procedure IdFormaPagamentoExit(AEdtId, AEdtNome: TEdit); overload;
+{$ENDREGION 'FORMAS_PAGAMENTOS'}
 
 var
   FId: Integer;
@@ -77,7 +90,9 @@ uses
   View.Funcionarios.Funcoes.Busca,
   View.Produtos.Busca,
   View.Produtos.Grupos.Busca,
-  View.Produtos.SubGrupos.Busca;
+  View.Produtos.SubGrupos.Busca,
+  View.Produtos.Unidades.Busca,
+  View.FormasPagamento.Busca;
 
 procedure OnBuscaID(AId: Integer);
 begin
@@ -516,7 +531,145 @@ begin
    IdSubGrupoProdutoExit(AEdtId, nil);
 end;
 
-procedure IdSubGrupoProdutoExit(AEdtId, AEdtNome: TEdit); overload;
+procedure IdSubGrupoProdutoExit(AEdtId, AEdtSubgrupo: TEdit); overload;
+begin
+   IdSubGrupoProdutoExit(AEdtId, AEdtSubgrupo, nil);
+end;
+
+procedure IdSubGrupoProdutoExit(AEdtId, AEdtSubgrupo, AEdtGrupo: TEdit); overload;
+var
+  LId: Integer;
+begin
+   if(AEdtId = nil)then
+     Exit;
+
+   if(AEdtSubgrupo <> nil)then
+     AEdtSubgrupo.Clear;
+
+   if(AEdtGrupo <> nil)then
+     AEdtGrupo.Clear;
+
+   LId := StrToIntDef(AEdtId.Text, 0);
+   if(LId <= 0)then
+   begin
+      AEdtId.Clear;
+      Exit;
+   end;
+
+   MyQueryNew
+    .Add('SELECT PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.NOME, PRODUTOS_GRUPOS.NOME AS NOME_GRUPO')
+    .Add('FROM PRODUTOS_SUBGRUPOS ')
+    .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)')
+    .Add('WHERE(PRODUTOS_SUBGRUPOS.ID = :ID)')
+    .AddParam('ID', LId);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.Open;
+
+   AEdtId.Text := TMyLibrary.CompLeft(MyQuery.FieldByName('ID').AsInteger);
+
+   if(AEdtSubgrupo <> nil)then
+     AEdtSubgrupo.Text := MyQuery.FieldByName('NOME').AsString;
+
+   if(AEdtGrupo <> nil)then
+     AEdtGrupo.Text := MyQuery.FieldByName('NOME_GRUPO').AsString;
+end;
+{$ENDREGION 'PRODUTOS.SUBGRUPOS'}
+
+{$REGION 'PRODUTOS.UNIDADES'}
+procedure IdUnidadeProdutoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
+begin
+   if(not ((AKey = VK_F2)and(AShift = [])))then
+     Exit;
+
+   FId := 0;
+   if(ViewProdutosUnidadesBusca = nil)then Application.CreateForm(TViewProdutosUnidadesBusca, ViewProdutosUnidadesBusca);
+   try
+     ViewProdutosUnidadesBusca.FOnBusca := OnBuscaId;
+     ViewProdutosUnidadesBusca.ShowModal;
+   finally
+     FreeAndNil(ViewProdutosUnidadesBusca);
+   end;
+
+   if(FId > 0)then
+     ASender.Text := TMyLibrary.CompLeft(FId);
+end;
+
+procedure IdUnidadeProdutoExit(AEdtId: TEdit); overload;
+begin
+   IdUnidadeProdutoExit(AEdtId, nil);
+end;
+
+procedure IdUnidadeProdutoExit(AEdtId, AEdtSigla: TEdit); overload;
+begin
+   IdUnidadeProdutoExit(AEdtId, AEdtSigla, nil);
+end;
+
+procedure IdUnidadeProdutoExit(AEdtId, AEdtSigla, AEdtNome: TEdit); overload;
+var
+  LId: Integer;
+begin
+   if(AEdtId = nil)then
+     Exit;
+
+   if(AEdtSigla <> nil)then
+     AEdtSigla.Clear;
+
+   if(AEdtNome <> nil)then
+     AEdtNome.Clear;
+
+   LId := StrToIntDef(AEdtId.Text, 0);
+   if(LId <= 0)then
+   begin
+      AEdtId.Clear;
+      Exit;
+   end;
+
+   MyQueryNew
+    .Add('SELECT PRODUTOS_UNIDADES.ID, PRODUTOS_UNIDADES.NOME, PRODUTOS_UNIDADES.SIGLA')
+    .Add('FROM PRODUTOS_UNIDADES ')
+    .Add('WHERE(PRODUTOS_UNIDADES.ID = :ID)')
+    .AddParam('ID', LId);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.Open;
+
+   AEdtId.Text := TMyLibrary.CompLeft(MyQuery.FieldByName('ID').AsInteger);
+
+   if(AEdtSigla <> nil)then
+     AEdtSigla.Text := MyQuery.FieldByName('SIGLA').AsString;
+
+   if(AEdtNome <> nil)then
+     AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
+end;
+
+{$ENDREGION 'PRODUTOS.UNIDADES'}
+
+{$REGION 'FORMAS_PAGAMENTOS'}
+procedure IdFormaPagamentoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
+begin
+   if(not ((AKey = VK_F2)and(AShift = [])))then
+     Exit;
+
+   FId := 0;
+   if(ViewFormasPagamentoBusca = nil)then Application.CreateForm(TViewFormasPagamentoBusca, ViewFormasPagamentoBusca);
+   try
+     ViewFormasPagamentoBusca.FOnBusca := OnBuscaId;
+     ViewFormasPagamentoBusca.ShowModal;
+   finally
+     FreeAndNil(ViewFormasPagamentoBusca);
+   end;
+
+   if(FId > 0)then
+     ASender.Text := TMyLibrary.CompLeft(FId);
+end;
+
+procedure IdFormaPagamentoExit(AEdtId: TEdit); overload;
+begin
+   IdFormaPagamentoExit(AEdtId, nil);
+end;
+
+procedure IdFormaPagamentoExit(AEdtId, AEdtNome: TEdit); overload;
 var
   LId: Integer;
 begin
@@ -534,7 +687,9 @@ begin
    end;
 
    MyQueryNew
-    .Add('SELECT ID, NOME FROM PRODUTOS_SUBGRUPOS WHERE(PRODUTOS_SUBGRUPOS.ID = :ID)')
+    .Add('SELECT FORMA_PAGAMENTO.ID, FORMA_PAGAMENTO.NOME')
+    .Add('FROM FORMA_PAGAMENTO ')
+    .Add('WHERE(FORMA_PAGAMENTO.ID = :ID)')
     .AddParam('ID', LId);
 
    ShowDebug(MyQuery.SQL.Text);
@@ -545,6 +700,6 @@ begin
    if(AEdtNome <> nil)then
      AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
 end;
-{$ENDREGION 'PRODUTOS.SUBGRUPOS'}
+{$ENDREGION 'FORMAS_PAGAMENTOS'}
 
 end.

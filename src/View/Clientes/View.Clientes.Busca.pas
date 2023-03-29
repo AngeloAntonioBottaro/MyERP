@@ -18,6 +18,7 @@ uses
   Vcl.ExtCtrls,
   Vcl.Menus,
   Vcl.ComCtrls,
+  Vcl.Imaging.pngimage,
   View.Base.Busca,
   Data.DB,
   Utils.MyTypes,
@@ -62,7 +63,11 @@ uses
 
 procedure TViewClientesBusca.FormCreate(Sender: TObject);
 begin
+   FGridConf := Self.GridBusca;
+   FNomeConf := Self.Name;
+
    inherited;
+
    FBusca := TModelClientesBusca.Create;
    FBusca
     .DataSource(DS_Busca);

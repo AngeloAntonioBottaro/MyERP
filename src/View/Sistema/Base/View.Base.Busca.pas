@@ -19,13 +19,14 @@ uses
   Vcl.DBGrids,
   Vcl.StdCtrls,
   Vcl.Menus,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls,
+  Vcl.Imaging.pngimage,
+  Utils.MyGridLibrary;
 
 type
   TViewBaseBusca = class(TViewBase)
     pnTop: TPanel;
     pnBotton: TPanel;
-    GridBusca: TDBGrid;
     pnButtons: TPanel;
     btnCadastro: TButton;
     btnVincular: TButton;
@@ -50,6 +51,17 @@ type
     Excluir1: TMenuItem;
     N2: TMenuItem;
     AtivarInativar1: TMenuItem;
+    pnGrid: TPanel;
+    GridBusca: TDBGrid;
+    imgConfGrid: TImage;
+    PopupMenuConfGrid: TPopupMenu;
+    AumentarFonte1: TMenuItem;
+    DiminuirFonte1: TMenuItem;
+    DeixarNegrito1: TMenuItem;
+    TirarNegrito1: TMenuItem;
+    N3: TMenuItem;
+    GravarConfiguraes1: TMenuItem;
+    RestaurarPadres1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);
@@ -63,10 +75,22 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Excluir1Click(Sender: TObject);
     procedure AtivarInativar1Click(Sender: TObject);
+    procedure imgConfGridClick(Sender: TObject);
+    procedure AumentarFonte1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure DiminuirFonte1Click(Sender: TObject);
+    procedure DeixarNegrito1Click(Sender: TObject);
+    procedure TirarNegrito1Click(Sender: TObject);
+    procedure GravarConfiguraes1Click(Sender: TObject);
+    procedure RestaurarPadres1Click(Sender: TObject);
+    procedure GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
+    FGridLib: TMyGridLibrary;
     procedure ValidacoesBasicas;
     procedure GetTotalRegistros;
   public
+    FGridConf: TDBGrid;
+    FNomeConf: string;
     FOnBusca: TProc<Integer>;
     procedure Buscar; virtual;
   end;
@@ -82,6 +106,7 @@ uses
   MyExceptions,
   MyConnection,
   Utils.MyLibrary,
+  Utils.MyVclLibrary,
   Utils.MyConsts,
   Model.Sistema.Imagens.DM;
 
@@ -96,9 +121,18 @@ end;
 procedure TViewBaseBusca.FormCreate(Sender: TObject);
 begin
    inherited;
+   FGridLib := TMyGridLibrary.New(FGridConf, FNomeConf);
+   FGridLib.CarregarConfiguracoes;
+
    TimerBuscar.Enabled    := False;
    dtpPeriodoInicial.Date := Now;
    dtpPeriodoFinal.Date   := Now;
+end;
+
+procedure TViewBaseBusca.FormDestroy(Sender: TObject);
+begin
+   inherited;
+   FGridLib.Free;
 end;
 
 procedure TViewBaseBusca.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -193,6 +227,20 @@ begin
    TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
 end;
 
+procedure TViewBaseBusca.GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   inherited;
+   case(Key)of
+    107{+}: if(Shift = [ssCtrl])then AumentarFonte1.Click;
+    109{-}: if(Shift = [ssCtrl])then DiminuirFonte1.Click;
+   end;
+end;
+
+procedure TViewBaseBusca.imgConfGridClick(Sender: TObject);
+begin
+   TMyVclLibrary.PopUpMenuSelfActive(imgConfGrid);
+end;
+
 procedure TViewBaseBusca.TimerBuscarTimer(Sender: TObject);
 begin
    TimerBuscar.Enabled := False;
@@ -210,5 +258,37 @@ begin
    if(DS_Busca.DataSet.IsEmpty)then
      raise ExceptionRequired.Create(LMsg);
 end;
+
+{$REGION 'GRID'}
+procedure TViewBaseBusca.AumentarFonte1Click(Sender: TObject);
+begin
+   FGridLib.AumentarFonte;
+end;
+
+procedure TViewBaseBusca.DiminuirFonte1Click(Sender: TObject);
+begin
+   FGridLib.DiminuirFonte;
+end;
+
+procedure TViewBaseBusca.DeixarNegrito1Click(Sender: TObject);
+begin
+   FGridLib.DeixarNegrito;
+end;
+
+procedure TViewBaseBusca.TirarNegrito1Click(Sender: TObject);
+begin
+   FGridLib.TirarNegrito;
+end;
+
+procedure TViewBaseBusca.GravarConfiguraes1Click(Sender: TObject);
+begin
+   FGridLib.SalvarConfiguracoes;
+end;
+
+procedure TViewBaseBusca.RestaurarPadres1Click(Sender: TObject);
+begin
+   FGridLib.RestaurarPadrao;
+end;
+{$ENDREGION}
 
 end.

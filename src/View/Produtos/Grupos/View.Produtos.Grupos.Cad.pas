@@ -22,7 +22,7 @@ type
     lbId: TLabel;
     lbGrupo: TLabel;
     edtId: TEdit;
-    edtGrupo: TEdit;
+    edtNome: TEdit;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -98,8 +98,7 @@ procedure TViewProdutosGruposCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
    Self.FillEntitie;
-   FGrupo
-    .Gravar;
+   FGrupo.Gravar;
 
    Self.EndOperations;
    if(Trim(edtId.Text).IsEmpty)then
@@ -109,7 +108,7 @@ end;
 procedure TViewProdutosGruposCad.btnNovoClick(Sender: TObject);
 begin
    inherited;
-   TMyVclLibrary.SetFocusOn(edtGrupo);
+   TMyVclLibrary.SetFocusOn(edtNome);
 end;
 
 procedure TViewProdutosGruposCad.FillEntitie;
@@ -117,7 +116,7 @@ begin
    FGrupo
     .Entitie
      .Id(edtId.Text)
-     .Nome(edtGrupo.Text)
+     .Nome(edtNome.Text)
      .End_Entitie;
 end;
 
@@ -126,8 +125,8 @@ begin
    if(not Assigned(FGrupo))then
      Exit;
 
-   edtId.Text    := FGrupo.Entitie.IdMascara;
-   edtGrupo.Text := FGrupo.Entitie.Nome;
+   edtId.Text   := FGrupo.Entitie.IdMascara;
+   edtNome.Text := FGrupo.Entitie.Nome;
 end;
 
 procedure TViewProdutosGruposCad.InitialConfiguration;
