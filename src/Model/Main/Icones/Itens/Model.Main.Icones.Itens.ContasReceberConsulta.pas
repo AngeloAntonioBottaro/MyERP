@@ -19,7 +19,7 @@ begin
                .ComponentName(TMainIconName.ContasReceberConsulta.ToString)
                .ResourceName('consulta_contas_receber')
                .Hint('Consulta de contas à receber')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.FinanceiroConsultaContasReceber1Click)
                .GroupOwner(TMainIconesGroup.Financeiro.ToInteger)
                );
 end;

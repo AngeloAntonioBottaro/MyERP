@@ -6,6 +6,7 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 58
+    ExplicitTop = 58
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -28,7 +29,6 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 214
     object lbId: TLabel
       Left = 8
       Top = 8

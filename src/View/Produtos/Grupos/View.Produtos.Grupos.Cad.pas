@@ -8,11 +8,11 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Forms,
   Vcl.StdCtrls,
   Vcl.Controls,
   Vcl.ExtCtrls,
+  View.Base.Cadastros,
   Model.Produtos.Grupos.Interfaces,
   Model.Produtos.Grupos.Entitie;
 
@@ -26,7 +26,6 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
   private
@@ -51,12 +50,6 @@ uses
   Utils.LibrarySistema,
   Model.Produtos.Grupos.Factory,
   View.Produtos.Grupos.Busca;
-
-procedure TViewProdutosGruposCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewProdutosGruposCad.btnAlterarClick(Sender: TObject);
 begin

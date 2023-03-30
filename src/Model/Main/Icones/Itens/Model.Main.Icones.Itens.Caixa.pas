@@ -18,7 +18,7 @@ begin
                .ComponentName(TMainIconName.Caixa.ToString)
                .ResourceName('caixa')
                .Hint('Caixa diário')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.FinanceiroCaixadiario1Click)
                .GroupOwner(TMainIconesGroup.Financeiro.ToInteger)
                );
 end;

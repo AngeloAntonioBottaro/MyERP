@@ -8,11 +8,11 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Forms,
   Vcl.StdCtrls,
   Vcl.Controls,
   Vcl.ExtCtrls,
+  View.Base.Cadastros,
   Model.Produtos.SubGrupos.Interfaces,
   Model.Produtos.SubGrupos.Entitie;
 
@@ -27,7 +27,6 @@ type
     edtGrupo: TEdit;
     edtId: TEdit;
     edtSubGrupo: TEdit;
-    procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -59,12 +58,6 @@ uses
   Utils.EditsKeyDownExit,
   Model.Produtos.SubGrupos.Factory,
   View.Produtos.SubGrupos.Busca;
-
-procedure TViewProdutosSubgruposCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewProdutosSubgruposCad.btnAlterarClick(Sender: TObject);
 begin

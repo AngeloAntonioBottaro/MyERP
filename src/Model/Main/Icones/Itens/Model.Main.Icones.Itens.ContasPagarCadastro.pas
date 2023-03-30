@@ -18,7 +18,7 @@ begin
                .ComponentName(TMainIconName.ContasPagarCadastro.ToString)
                .ResourceName('cadastro_contas_pagar')
                .Hint('Cadastro de contas à pagar')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.FinanceiroCadastroContasPagar1Click)
                .GroupOwner(TMainIconesGroup.Financeiro.ToInteger)
                );
 end;

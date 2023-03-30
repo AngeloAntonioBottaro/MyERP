@@ -67,8 +67,6 @@ begin
 end;
 
 procedure TModelFormasPagamentoBusca.GetSQLCondicao;
-var
-  LValorBusca: string;
 begin
    FQueryBusca
     .Add('WHERE');

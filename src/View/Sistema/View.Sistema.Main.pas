@@ -54,6 +54,21 @@ type
     CadastrosUnidadeProdutos1: TMenuItem;
     FormaPagamento1: TMenuItem;
     CadastroFormaPagamentoCadastro1: TMenuItem;
+    Configuracoes1: TMenuItem;
+    ConfiguracoesEmpresa1: TMenuItem;
+    N2: TMenuItem;
+    ConfiguracoesParametrosdosistema1: TMenuItem;
+    MovimentacoesVendas1: TMenuItem;
+    MovimentacoesCompras1: TMenuItem;
+    FinanceiroCaixadiario1: TMenuItem;
+    FinanceiroContasReceber: TMenuItem;
+    FinanceiroConsultaContasReceber1: TMenuItem;
+    FinanceiroCadastroContasReceber1: TMenuItem;
+    FinanceiroContasPagar1: TMenuItem;
+    FinanceiroConsultaContasPagar1: TMenuItem;
+    FinanceiroCadastroContasPagar1: TMenuItem;
+    MovimentacoesAgenda1: TMenuItem;
+    N3: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -75,6 +90,15 @@ type
     procedure Configurarcones1Click(Sender: TObject);
     procedure CadastrosUnidadeProdutos1Click(Sender: TObject);
     procedure CadastroFormaPagamentoCadastro1Click(Sender: TObject);
+    procedure MovimentacoesVendas1Click(Sender: TObject);
+    procedure MovimentacoesCompras1Click(Sender: TObject);
+    procedure FinanceiroCaixadiario1Click(Sender: TObject);
+    procedure FinanceiroConsultaContasReceber1Click(Sender: TObject);
+    procedure FinanceiroCadastroContasReceber1Click(Sender: TObject);
+    procedure FinanceiroConsultaContasPagar1Click(Sender: TObject);
+    procedure FinanceiroCadastroContasPagar1Click(Sender: TObject);
+    procedure ConfiguracoesEmpresa1Click(Sender: TObject);
+    procedure MovimentacoesAgenda1Click(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -103,6 +127,7 @@ uses
   View.Sistema.Login,
   View.Sistema.IconesConf,
   View.Sistema.Sobre,
+  View.Sistema.Empresa.Cad,
   View.Cidades.Cad,
   View.Clientes.Cad,
   View.Produtos.Cad,
@@ -112,7 +137,8 @@ uses
   View.Funcionarios.Cad,
   View.Funcionarios.Funcoes.Cad,
   View.Fornecedores.Cad,
-  View.FormasPagamento.Cad;
+  View.FormasPagamento.Cad,
+  View.Agenda.Cad;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -186,6 +212,60 @@ begin
     .PanelIcones
      .Formulario(Self)
      .LimparComponente;
+end;
+
+procedure TViewSistemaMain.MovimentacoesCompras1Click(Sender: TObject);
+begin
+   //
+end;
+
+procedure TViewSistemaMain.MovimentacoesVendas1Click(Sender: TObject);
+begin
+   //
+end;
+
+procedure TViewSistemaMain.FinanceiroCadastroContasPagar1Click(Sender: TObject);
+begin
+   //
+end;
+
+procedure TViewSistemaMain.FinanceiroCadastroContasReceber1Click(Sender: TObject);
+begin
+   //
+end;
+
+procedure TViewSistemaMain.FinanceiroCaixadiario1Click(Sender: TObject);
+begin
+  //
+end;
+
+procedure TViewSistemaMain.FinanceiroConsultaContasPagar1Click(Sender: TObject);
+begin
+   //
+end;
+
+procedure TViewSistemaMain.FinanceiroConsultaContasReceber1Click(Sender: TObject);
+begin
+   //
+end;
+procedure TViewSistemaMain.MovimentacoesAgenda1Click(Sender: TObject);
+begin
+   if(ViewAgendaCad = nil)then Application.CreateForm(TViewAgendaCad, ViewAgendaCad);
+   try
+     ViewAgendaCad.ShowModal;
+   finally
+     FreeAndNil(ViewAgendaCad);
+   end;
+end;
+
+procedure TViewSistemaMain.ConfiguracoesEmpresa1Click(Sender: TObject);
+begin
+   if(ViewSistemaEmpresaCad = nil)then Application.CreateForm(TViewSistemaEmpresaCad, ViewSistemaEmpresaCad);
+   try
+     ViewSistemaEmpresaCad.ShowModal;
+   finally
+     FreeAndNil(ViewSistemaEmpresaCad);
+   end;
 end;
 
 procedure TViewSistemaMain.CadastroFormaPagamentoCadastro1Click(Sender: TObject);

@@ -19,7 +19,7 @@ begin
                .ComponentName(TMainIconName.ContasPagarConsulta.ToString)
                .ResourceName('consulta_contas_pagar')
                .Hint('Consulta de contas à pagar')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.FinanceiroConsultaContasPagar1Click)
                .GroupOwner(TMainIconesGroup.Financeiro.ToInteger)
                );
 end;

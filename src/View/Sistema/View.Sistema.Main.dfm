@@ -181,10 +181,10 @@ object ViewSistemaMain: TViewSistemaMain
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         Caption = 'Produtos'
-        ImageIndex = 8
+        ImageIndex = 9
         object CadastrosProdutosCadastro1: TMenuItem
           Caption = 'Cadastro'
-          ImageIndex = 9
+          ImageIndex = 10
           OnClick = CadastrosProdutosCadastro1Click
         end
         object CadastrosGruposProdutos1: TMenuItem
@@ -242,7 +242,7 @@ object ViewSistemaMain: TViewSistemaMain
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           Caption = 'Grupos'
-          ImageIndex = 10
+          ImageIndex = 11
           OnClick = CadastrosGruposProdutos1Click
         end
         object CadastrosSubgruposProdutos1: TMenuItem
@@ -300,21 +300,21 @@ object ViewSistemaMain: TViewSistemaMain
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           Caption = 'Sub-grupo'
-          ImageIndex = 11
+          ImageIndex = 12
           OnClick = CadastrosSubgruposProdutos1Click
         end
         object CadastrosUnidadeProdutos1: TMenuItem
           Caption = 'Unidade'
-          ImageIndex = 23
+          ImageIndex = 13
           OnClick = CadastrosUnidadeProdutos1Click
         end
       end
       object CadastrosFornecedores1: TMenuItem
         Caption = 'Fornecedores'
-        ImageIndex = 13
+        ImageIndex = 2
         object CadastrosFornecedoresCadastro1: TMenuItem
           Caption = 'Cadastro'
-          ImageIndex = 16
+          ImageIndex = 3
           OnClick = CadastrosFornecedoresCadastro1Click
         end
       end
@@ -373,7 +373,7 @@ object ViewSistemaMain: TViewSistemaMain
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         Caption = 'Funcion'#225'rios'
-        ImageIndex = 3
+        ImageIndex = 4
         object CadastrosFuncionariosCadastro1: TMenuItem
           Bitmap.Data = {
             76060000424D7606000000000000360000002800000014000000140000000100
@@ -429,7 +429,7 @@ object ViewSistemaMain: TViewSistemaMain
             00000069A0A60072A5FF007DB0FF007EB1FF0087BAFF008ABDFF0080AE950000
             0001000000000000000000000000000000000000000000000000}
           Caption = 'Cadastro'
-          ImageIndex = 4
+          ImageIndex = 5
           OnClick = CadastrosFuncionariosCadastro1Click
         end
         object CadastrosFuncionariosFuncoes1: TMenuItem
@@ -487,7 +487,7 @@ object ViewSistemaMain: TViewSistemaMain
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000}
           Caption = 'Fun'#231#245'es'
-          ImageIndex = 6
+          ImageIndex = 7
           OnClick = CadastrosFuncionariosFuncoes1Click
         end
       end
@@ -546,41 +546,108 @@ object ViewSistemaMain: TViewSistemaMain
           90FFF9CA90FFF9CA90FFF9CA90FFF9CA90FF0000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         Caption = 'Cidades'
-        ImageIndex = 12
+        ImageIndex = 15
         object CadastrosCidades1Cadastro1: TMenuItem
           Caption = 'Cadastro'
-          ImageIndex = 14
+          ImageIndex = 16
           OnClick = CadastrosCidades1Cadastro1Click
         end
       end
       object FormaPagamento1: TMenuItem
         Caption = 'Forma de pagamento'
-        ImageIndex = 21
+        ImageIndex = 17
         object CadastroFormaPagamentoCadastro1: TMenuItem
           Caption = 'Cadastro'
-          ImageIndex = 22
+          ImageIndex = 18
           OnClick = CadastroFormaPagamentoCadastro1Click
         end
       end
     end
     object Movimentacoes1: TMenuItem
       Caption = '&Movimenta'#231#245'es'
+      object MovimentacoesVendas1: TMenuItem
+        Caption = 'Vendas'
+        ImageIndex = 20
+        OnClick = MovimentacoesVendas1Click
+      end
+      object MovimentacoesCompras1: TMenuItem
+        Caption = 'Compras'
+        ImageIndex = 19
+        OnClick = MovimentacoesCompras1Click
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object MovimentacoesAgenda1: TMenuItem
+        Caption = 'Agenda'
+        ImageIndex = 33
+        OnClick = MovimentacoesAgenda1Click
+      end
     end
     object Financeiro1: TMenuItem
       Caption = '&Financeiro'
+      object FinanceiroCaixadiario1: TMenuItem
+        Caption = 'Caixa di'#225'rio'
+        ImageIndex = 21
+        OnClick = FinanceiroCaixadiario1Click
+      end
+      object FinanceiroContasReceber: TMenuItem
+        Caption = 'Contas  '#224' receber'
+        ImageIndex = 24
+        object FinanceiroConsultaContasReceber1: TMenuItem
+          Caption = 'Consulta de contas '#224' receber'
+          ImageIndex = 24
+          OnClick = FinanceiroConsultaContasReceber1Click
+        end
+        object FinanceiroCadastroContasReceber1: TMenuItem
+          Caption = 'Cadastro de contas '#224' receber'
+          ImageIndex = 25
+          OnClick = FinanceiroCadastroContasReceber1Click
+        end
+      end
+      object FinanceiroContasPagar1: TMenuItem
+        Caption = 'Contas '#224' pagar'
+        ImageIndex = 22
+        object FinanceiroConsultaContasPagar1: TMenuItem
+          Caption = 'Consulta de contas '#224' pagar'
+          ImageIndex = 22
+          OnClick = FinanceiroConsultaContasPagar1Click
+        end
+        object FinanceiroCadastroContasPagar1: TMenuItem
+          Caption = 'Cadastro de contas '#224' pagar'
+          ImageIndex = 23
+          OnClick = FinanceiroCadastroContasPagar1Click
+        end
+      end
     end
     object Relatorios1: TMenuItem
       Caption = '&Relat'#243'rios'
     end
+    object Configuracoes1: TMenuItem
+      Caption = '&Configura'#231#245'es'
+      object ConfiguracoesParametrosdosistema1: TMenuItem
+        Caption = 'Par'#226'metros do sistema'
+        ImageIndex = 27
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object ConfiguracoesEmpresa1: TMenuItem
+        Caption = 'Empresa'
+        ImageIndex = 26
+        OnClick = ConfiguracoesEmpresa1Click
+      end
+    end
     object Suporte1: TMenuItem
-      Caption = 'Suporte'
+      Caption = '&Suporte'
       object SuporteSobreSistema1: TMenuItem
         Caption = 'Sobre o sistema'
+        ImageIndex = 32
         OnClick = SuporteSobreSistema1Click
       end
     end
     object Sair1: TMenuItem
-      Caption = '&Sair'
+      Caption = 'S&air'
       OnClick = Sair1Click
     end
   end
@@ -590,12 +657,12 @@ object ViewSistemaMain: TViewSistemaMain
     Top = 24
     object AtualizarIconesDeAtalhos1: TMenuItem
       Caption = 'Atualizar '#237'cones de atalhos'
-      ImageIndex = 20
+      ImageIndex = 29
       OnClick = AtualizarIconesDeAtalhos1Click
     end
     object OcultarIcones1: TMenuItem
       Caption = 'Ocultar '#237'cones'
-      ImageIndex = 19
+      ImageIndex = 30
       OnClick = OcultarIcones1Click
     end
     object N1: TMenuItem
@@ -603,7 +670,7 @@ object ViewSistemaMain: TViewSistemaMain
     end
     object Configurarcones1: TMenuItem
       Caption = 'Configurar '#237'cones'
-      ImageIndex = 18
+      ImageIndex = 28
       OnClick = Configurarcones1Click
     end
   end

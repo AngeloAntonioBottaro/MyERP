@@ -71,6 +71,9 @@ end;
 
 procedure TModelFuncionariosFactory.ValidarCampos;
 begin
+   if((FEntitie.RazaoSocial = EmptyStr) and (FEntitie.NomeFantasia = EmptyStr))then
+     raise ExceptionRequired.Create('Razão social é obrigatório');
+
    Self.ValidarCNPJ;
    Self.ValidarCPF;
 

@@ -1,4 +1,4 @@
-unit View.Fornecedores.Cad;
+unit View.Sistema.Empresa.Cad;
 
 interface
 
@@ -8,21 +8,20 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
+  System.UITypes,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  Vcl.Mask,
-  Vcl.DBCtrls,
   Vcl.ComCtrls,
   View.Base.Cadastros,
-  Model.Fornecedores.Interfaces,
-  Model.Fornecedores.Entitie;
+  Model.Empresas.Interfaces,
+  Model.Empresas.Entitie;
 
 type
-  TViewFornecedoresCad = class(TViewBaseCadastros)
+  TViewSistemaEmpresaCad = class(TViewBaseCadastros)
     pnTela: TPanel;
     lbId: TLabel;
     lbRazaoSocial: TLabel;
@@ -71,16 +70,14 @@ type
     edtIE: TEdit;
     edtRGOrgaoExpedidor: TEdit;
     procedure ConfComponents(Sender: TObject);
-    procedure btnGravarClick(Sender: TObject);
-    procedure btnBuscarClick(Sender: TObject);
-    procedure btnNovoClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
     procedure edtIdCidadeExit(Sender: TObject);
     procedure edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
-    FFornecedor: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
+    FEmpresa: IModelEmpresasFactory<TModelEmpresasEntitie>;
     procedure FillEntitie;
   public
     procedure InitialConfiguration; override;
@@ -90,7 +87,7 @@ type
   end;
 
 var
-  ViewFornecedoresCad: TViewFornecedoresCad;
+  ViewSistemaEmpresaCad: TViewSistemaEmpresaCad;
 
 implementation
 
@@ -104,74 +101,48 @@ uses
   Utils.GlobalConsts,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,
-  Model.Fornecedores.Factory,
-  View.Fornecedores.Busca;
+  Model.Empresas.Factory;
 
-procedure TViewFornecedoresCad.btnAlterarClick(Sender: TObject);
+procedure TViewSistemaEmpresaCad.FormShow(Sender: TObject);
 begin
    inherited;
-   if(not Assigned(FFornecedor))then
+   Self.OnBusca(0);
+end;
+
+procedure TViewSistemaEmpresaCad.btnAlterarClick(Sender: TObject);
+begin
+   inherited;
+   if(not Assigned(FEmpresa))then
      Exit;
 
-   if(not (FFornecedor.Entitie.Id > 0))then
+   if(not (FEmpresa.Entitie.Id > 0))then
      Exit;
 
    Self.StartOperations;
    Self.ConfComponents(nil);
 end;
 
-procedure TViewFornecedoresCad.btnBuscarClick(Sender: TObject);
+procedure TViewSistemaEmpresaCad.btnCancelarClick(Sender: TObject);
 begin
    inherited;
-   CriarFormMsgJaAberto(TViewFornecedoresBusca, ViewFornecedoresBusca);
-   try
-     ViewFornecedoresBusca.btnCadastro.Enabled := False;
-     ViewFornecedoresBusca.FOnBusca := Self.OnBusca;
-     ViewFornecedoresBusca.ShowModal;
-   finally
-     FreeAndNil(ViewFornecedoresBusca);
-   end;
-end;
-
-procedure TViewFornecedoresCad.btnCancelarClick(Sender: TObject);
-begin
-   inherited;
+   Self.OnBusca(0);
    Self.ConfComponents(nil);
 end;
 
-procedure TViewFornecedoresCad.btnExcluirClick(Sender: TObject);
-begin
-   inherited;
-   if(edtId.Text = EmptyStr)then
-     Exit;
-
-   FFornecedor.Deletar;
-   Self.EndOperations;
-   Self.EmptyFields;
-end;
-
-procedure TViewFornecedoresCad.btnGravarClick(Sender: TObject);
+procedure TViewSistemaEmpresaCad.btnGravarClick(Sender: TObject);
 begin
    inherited;
    Self.FillEntitie;
-   FFornecedor.Gravar;
+   FEmpresa.Gravar;
 
    Self.EndOperations;
    if(Trim(edtId.Text).IsEmpty)then
      Self.EmptyFields;
 end;
 
-procedure TViewFornecedoresCad.btnNovoClick(Sender: TObject);
+procedure TViewSistemaEmpresaCad.FillEntitie;
 begin
-   inherited;
-   cBoxTipoJuridico.ItemIndex := 0;
-   Self.ConfComponents(nil);
-   TMyVclLibrary.SetFocusOn(edtRazaoSocial);
-end;
-
-procedure TViewFornecedoresCad.FillEntitie;
-begin
-   FFornecedor
+   FEmpresa
     .Entitie
      .Id(edtId.Text)
      .RazaoSocial(edtRazaoSocial.Text)
@@ -196,34 +167,34 @@ begin
      .End_Entitie
 end;
 
-procedure TViewFornecedoresCad.FillFields;
+procedure TViewSistemaEmpresaCad.FillFields;
 begin
-   if(not Assigned(FFornecedor))then
+   if(not Assigned(FEmpresa))then
      Exit;
 
-   edtId.Text                 := FFornecedor.Entitie.IdMascara;
-   edtRazaoSocial.Text        := FFornecedor.Entitie.RazaoSocial;
-   edtNomeFantasia.Text       := FFornecedor.Entitie.NomeFantasia;
-   edtEndereco.Text           := FFornecedor.Entitie.Endereco;
-   edtNumero.Text             := FFornecedor.Entitie.Numero;
-   edtBairro.Text             := FFornecedor.Entitie.Bairro;
-   edtCep.Text                := FFornecedor.Entitie.CepMascara;
-   edtIdCidade.Text           := FFornecedor.Entitie.CidadeMascara;
-   dtpDataNascimento.Date     := FFornecedor.Entitie.DataNascimento;
-   edtTelefone.Text           := FFornecedor.Entitie.TelefoneMascara;
-   edtTelefone2.Text          := FFornecedor.Entitie.Telefone2Mascara;
-   edtCelular.Text            := FFornecedor.Entitie.CelularMascara;
-   edtFax.Text                := FFornecedor.Entitie.FaxMascara;
-   edtEmail.Text              := FFornecedor.Entitie.Email;
-   edtCNPJ.Text               := FFornecedor.Entitie.CnpjMascara;
-   edtIE.Text                 := FFornecedor.Entitie.IE;
-   edtCPF.Text                := FFornecedor.Entitie.CpfMascara;
-   edtRG.Text                 := FFornecedor.Entitie.RG;
-   edtRGOrgaoExpedidor.Text   := FFornecedor.Entitie.RgOrgaoExpedidor;
-   cBoxTipoJuridico.ItemIndex := FFornecedor.Entitie.TipoJuridicoComboBox;
+   edtId.Text                 := FEmpresa.Entitie.IdMascara;
+   edtRazaoSocial.Text        := FEmpresa.Entitie.RazaoSocial;
+   edtNomeFantasia.Text       := FEmpresa.Entitie.NomeFantasia;
+   edtEndereco.Text           := FEmpresa.Entitie.Endereco;
+   edtNumero.Text             := FEmpresa.Entitie.Numero;
+   edtBairro.Text             := FEmpresa.Entitie.Bairro;
+   edtCep.Text                := FEmpresa.Entitie.CepMascara;
+   edtIdCidade.Text           := FEmpresa.Entitie.CidadeMascara;
+   dtpDataNascimento.Date     := FEmpresa.Entitie.DataNascimento;
+   edtTelefone.Text           := FEmpresa.Entitie.TelefoneMascara;
+   edtTelefone2.Text          := FEmpresa.Entitie.Telefone2Mascara;
+   edtCelular.Text            := FEmpresa.Entitie.CelularMascara;
+   edtFax.Text                := FEmpresa.Entitie.FaxMascara;
+   edtEmail.Text              := FEmpresa.Entitie.Email;
+   edtCNPJ.Text               := FEmpresa.Entitie.CnpjMascara;
+   edtIE.Text                 := FEmpresa.Entitie.IE;
+   edtCPF.Text                := FEmpresa.Entitie.CpfMascara;
+   edtRG.Text                 := FEmpresa.Entitie.RG;
+   edtRGOrgaoExpedidor.Text   := FEmpresa.Entitie.RgOrgaoExpedidor;
+   cBoxTipoJuridico.ItemIndex := FEmpresa.Entitie.TipoJuridicoComboBox;
 end;
 
-procedure TViewFornecedoresCad.InitialConfiguration;
+procedure TViewSistemaEmpresaCad.InitialConfiguration;
 begin
    dtpDataNascimento.Date := Now;
    edtIdCidade.ShowHint   := True;
@@ -233,27 +204,23 @@ begin
    Self.ConfComponents(nil);
 end;
 
-procedure TViewFornecedoresCad.NewEntitie;
+procedure TViewSistemaEmpresaCad.NewEntitie;
 begin
-   FFornecedor := TModelFornecedoresFactory.New;
+   FEmpresa := TModelEmpresasFactory.New;
 end;
 
-procedure TViewFornecedoresCad.OnBusca(AId: Integer);
+procedure TViewSistemaEmpresaCad.OnBusca(AId: Integer);
 begin
    Self.NewEntitie;
 
-   FFornecedor
-    .Entitie
-     .Id(AId)
-     .End_Entitie
-    .ConsultarEntitie;
+   FEmpresa.ConsultarEntitie;
 
    Self.FillFields;
    Self.ConfComponents(nil);
    edtIdCidadeExit(edtIdCidade);
 end;
 
-procedure TViewFornecedoresCad.ConfComponents(Sender: TObject);
+procedure TViewSistemaEmpresaCad.ConfComponents(Sender: TObject);
 begin
    //*VARIOS
    edtCNPJ.Enabled             := cBoxTipoJuridico.Text = PESSOA_JURIDICA;
@@ -264,23 +231,31 @@ begin
 
    edtIdade.Text := TMyLibrary.CalculateAge(dtpDataNascimento.Date).ToString + ' anos';
 
-   if(not Assigned(FFornecedor))then
+   lbCNPJ.Font.Style := lbCNPJ.Font.Style - [fsBold];
+   if(edtCNPJ.Enabled)then
+     lbCNPJ.Font.Style := lbCNPJ.Font.Style + [fsBold];
+
+   lbCPF.Font.Style := lbCPF.Font.Style - [fsBold];
+   if(edtCPF.Enabled)then
+     lbCPF.Font.Style := lbCPF.Font.Style + [fsBold];
+
+   if(not Assigned(FEmpresa))then
      Self.NewEntitie;
 
    Self.FillEntitie;
 
-   edtId.Text        := FFornecedor.Entitie.IdMascara;
-   edtCep.Text       := FFornecedor.Entitie.CepMascara;
-   edtIdCidade.Text  := FFornecedor.Entitie.CidadeMascara;
-   edtTelefone.Text  := FFornecedor.Entitie.TelefoneMascara;
-   edtTelefone2.Text := FFornecedor.Entitie.Telefone2Mascara;
-   edtCelular.Text   := FFornecedor.Entitie.CelularMascara;
-   edtFax.Text       := FFornecedor.Entitie.FaxMascara;
-   edtCNPJ.Text      := FFornecedor.Entitie.CnpjMascara;
-   edtCPF.Text       := FFornecedor.Entitie.CpfMascara;
+   edtId.Text        := FEmpresa.Entitie.IdMascara;
+   edtCep.Text       := FEmpresa.Entitie.CepMascara;
+   edtIdCidade.Text  := FEmpresa.Entitie.CidadeMascara;
+   edtTelefone.Text  := FEmpresa.Entitie.TelefoneMascara;
+   edtTelefone2.Text := FEmpresa.Entitie.Telefone2Mascara;
+   edtCelular.Text   := FEmpresa.Entitie.CelularMascara;
+   edtFax.Text       := FEmpresa.Entitie.FaxMascara;
+   edtCNPJ.Text      := FEmpresa.Entitie.CnpjMascara;
+   edtCPF.Text       := FEmpresa.Entitie.CpfMascara;
 
    try
-     FFornecedor.ValidarCNPJ;
+     FEmpresa.ValidarCNPJ;
    except on E: Exception do
    begin
       TMyVclLibrary.SetFocusOn(edtCNPJ);
@@ -289,7 +264,7 @@ begin
    end;
 
    try
-     FFornecedor.ValidarCPF;
+     FEmpresa.ValidarCPF;
    except on E: Exception do
    begin
       TMyVclLibrary.SetFocusOn(edtCPF);
@@ -298,7 +273,7 @@ begin
    end;
 
    try
-     FFornecedor.ValidarEmail;
+     FEmpresa.ValidarEmail;
    except on E: Exception do
    begin
       TMyVclLibrary.SetFocusOn(edtEmail);
@@ -307,12 +282,12 @@ begin
    end;
 end;
 
-procedure TViewFornecedoresCad.edtIdCidadeExit(Sender: TObject);
+procedure TViewSistemaEmpresaCad.edtIdCidadeExit(Sender: TObject);
 begin
    IdCidadeExit(edtIdCidade, edtCidade, edtUF);
 end;
 
-procedure TViewFornecedoresCad.edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TViewSistemaEmpresaCad.edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    IdCidadeKeyDown(edtIdCidade, Key, Shift);
 end;

@@ -6,6 +6,7 @@ inherited ViewProdutosUnidadesCad: TViewProdutosUnidadesCad
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 57
+    ExplicitTop = 57
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -28,7 +29,6 @@ inherited ViewProdutosUnidadesCad: TViewProdutosUnidadesCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 59
     object lbId: TLabel
       Left = 8
       Top = 8

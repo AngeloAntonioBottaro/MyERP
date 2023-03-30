@@ -138,7 +138,13 @@ uses
   Model.FormasPagamento.Interfaces in 'src\Model\FormasPagamento\Model.FormasPagamento.Interfaces.pas',
   Model.FormasPagamento.Entitie in 'src\Model\FormasPagamento\Model.FormasPagamento.Entitie.pas',
   Model.FormasPagamento.Factory in 'src\Model\FormasPagamento\Model.FormasPagamento.Factory.pas',
-  Model.FormasPagamento.Busca in 'src\Model\FormasPagamento\Busca\Model.FormasPagamento.Busca.pas';
+  Model.FormasPagamento.Busca in 'src\Model\FormasPagamento\Busca\Model.FormasPagamento.Busca.pas',
+  View.Sistema.Empresa.Cad in 'src\View\Sistema\View.Sistema.Empresa.Cad.pas' {ViewSistemaEmpresaCad},
+  Model.Empresas.Interfaces in 'src\Model\Empresas\Model.Empresas.Interfaces.pas',
+  Model.Empresas.Entitie in 'src\Model\Empresas\Model.Empresas.Entitie.pas',
+  Model.Empresas.Factory in 'src\Model\Empresas\Model.Empresas.Factory.pas',
+  Model.Main.Icones.Itens.Agenda in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Agenda.pas',
+  View.Agenda.Cad in 'src\View\Agenda\View.Agenda.Cad.pas' {ViewAgendaCad};
 
 {$R *.res}
 

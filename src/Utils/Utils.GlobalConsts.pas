@@ -18,6 +18,8 @@ const
   TIPO_LANCAMENTO_FINANCEIRO_DATABASE  = 'F';
   TIPO_LANCAMENTO_SEMCONTROLE_DATABASE = 'S';
 
+  AGENDA_STATUS: array[1..4] of String = ('Aberto', 'Confirmado', 'Concluido', 'Cancelado');
+
 implementation
 
 end.

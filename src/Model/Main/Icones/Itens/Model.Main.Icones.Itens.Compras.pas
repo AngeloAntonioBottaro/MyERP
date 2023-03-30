@@ -18,7 +18,7 @@ begin
                .ComponentName(TMainIconName.Compras.ToString)
                .ResourceName('compras')
                .Hint('Tela de compras')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.MovimentacoesCompras1Click)
                .GroupOwner(TMainIconesGroup.Movimentacoes.ToInteger)
                );
 end;

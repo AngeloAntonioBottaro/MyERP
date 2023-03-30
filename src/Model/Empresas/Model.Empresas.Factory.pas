@@ -1,37 +1,35 @@
-unit Model.Clientes.Factory;
+unit Model.Empresas.Factory;
 
 interface
 
 uses
   System.SysUtils,
   System.StrUtils,
-  Model.Clientes.Interfaces,
-  Model.Clientes.Entitie;
+  Model.Empresas.Interfaces,
+  Model.Empresas.Entitie;
 
 const
-  THIS   = 'Cliente';
-  TABELA = 'CLIENTES';
+  THIS   = 'Empresa';
+  TABELA = 'EMPRESAS';
 
 type
-  TModelClientesFactory = class(TInterfacedObject, IModelClientesFactory<TModelClientesEntitie>)
+  TModelEmpresasFactory = class(TInterfacedObject, IModelEmpresasFactory<TModelEmpresasEntitie>)
   private
-    FEntitie: TModelClientesEntitie;
+    FEntitie: TModelEmpresasEntitie;
     procedure SQLInsert;
     procedure SQLUpdate;
     procedure ValidarCampos;
   protected
-    function Entitie: TModelClientesEntitie;
+    function Entitie: TModelEmpresasEntitie;
 
     procedure ValidarCPF;
     procedure ValidarCNPJ;
     procedure ValidarEmail;
 
-    function AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
-    function ConsultarEntitie: IModelClientesFactory<TModelClientesEntitie>;
-    function Deletar: IModelClientesFactory<TModelClientesEntitie>;
-    function Gravar: IModelClientesFactory<TModelClientesEntitie>;
+    function ConsultarEntitie: IModelEmpresasFactory<TModelEmpresasEntitie>;
+    function Gravar: IModelEmpresasFactory<TModelEmpresasEntitie>;
   public
-    class function New: IModelClientesFactory<TModelClientesEntitie>;
+    class function New: IModelEmpresasFactory<TModelEmpresasEntitie>;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -46,32 +44,35 @@ uses
   Utils.LibrarySistema,
   Utils.GlobalConsts;
 
-class function TModelClientesFactory.New: IModelClientesFactory<TModelClientesEntitie>;
+class function TModelEmpresasFactory.New: IModelEmpresasFactory<TModelEmpresasEntitie>;
 begin
    Result := Self.Create;
 end;
 
-constructor TModelClientesFactory.Create;
+constructor TModelEmpresasFactory.Create;
 begin
-   FEntitie := TModelClientesEntitie.Create(Self);
+   FEntitie := TModelEmpresasEntitie.Create(Self);
 end;
 
-destructor TModelClientesFactory.Destroy;
+destructor TModelEmpresasFactory.Destroy;
 begin
    if(Assigned(FEntitie))then
      FEntitie.Free;
    inherited;
 end;
 
-function TModelClientesFactory.Entitie: TModelClientesEntitie;
+function TModelEmpresasFactory.Entitie: TModelEmpresasEntitie;
 begin
    Result := FEntitie;
 end;
 
-procedure TModelClientesFactory.ValidarCampos;
+procedure TModelEmpresasFactory.ValidarCampos;
 begin
    if((FEntitie.RazaoSocial = EmptyStr) and (FEntitie.NomeFantasia = EmptyStr))then
-     raise ExceptionRequired.Create('Razão social é obrigatório');
+     raise ExceptionRequired.Create('Razão social da empresa é obrigatório');
+
+   if((FEntitie.Cnpj = EmptyStr) and (FEntitie.Cpf = EmptyStr))then
+     raise ExceptionRequired.Create('CNPJ/CPF da empresa é obrigatório');
 
    Self.ValidarCNPJ;
    Self.ValidarCPF;
@@ -80,7 +81,7 @@ begin
      raise ExceptionRequired.Create('Cidade não informada');
 end;
 
-procedure TModelClientesFactory.ValidarCNPJ;
+procedure TModelEmpresasFactory.ValidarCNPJ;
 begin
    if(FEntitie.Cnpj = EmptyStr)then
      Exit;
@@ -94,7 +95,7 @@ begin
    raise ExceptionWarning.Create('CNPJ inválido');
 end;
 
-procedure TModelClientesFactory.ValidarCPF;
+procedure TModelEmpresasFactory.ValidarCPF;
 begin
    if(FEntitie.Cpf = EmptyStr)then
      Exit;
@@ -108,7 +109,7 @@ begin
    raise ExceptionWarning.Create('CPF inválido');
 end;
 
-procedure TModelClientesFactory.ValidarEmail;
+procedure TModelEmpresasFactory.ValidarEmail;
 begin
    if(FEntitie.Email = EmptyStr)then
      Exit;
@@ -119,57 +120,10 @@ begin
    raise ExceptionWarning.Create('E-mail inválido/incorreto');
 end;
 
-function TModelClientesFactory.AlterarStatus: IModelClientesFactory<TModelClientesEntitie>;
-var
-  LStatusNovo: string;
+function TModelEmpresasFactory.ConsultarEntitie: IModelEmpresasFactory<TModelEmpresasEntitie>;
 begin
-   Result := Self;
-
-   if(not (FEntitie.Id > 0))then
-     ExceptionMsgRegistroNaoInformadoAlteracaoStatus(THIS);
-
-   if(FEntitie.Id = 1)then
-     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser inativado');
-
    MyQueryNew
-    .Add('SELECT STATUS FROM '+TABELA)
-    .Add('WHERE('+TABELA+'.ID = :ID)')
-    .AddParam('ID', FEntitie.Id)
-    .Open;
-
-   LStatusNovo := STATUS_ATIVO;
-   if(MyQuery.FieldByName('STATUS').AsString.Equals(STATUS_ATIVO))then
-     LStatusNovo := STATUS_INATIVO;
-
-   MyQueryNew
-    .Add('UPDATE '+TABELA+' SET STATUS = :STATUS')
-    .Add('WHERE('+TABELA+'.ID = :ID)')
-    .AddParam('ID', FEntitie.Id)
-    .AddParam('STATUS', LStatusNovo);
-
-   try
-     ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
-   except on E: Exception do
-   begin
-      if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível alterar o status do cliente',
-                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
-                                    'Mensagem: ' + E.Message);
-   end;
-   end;
-
-   ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
-end;
-
-function TModelClientesFactory.ConsultarEntitie: IModelClientesFactory<TModelClientesEntitie>;
-begin
-   if(not (FEntitie.Id > 0))then
-     ExceptionMsgRegistroNaoInformadoConsulta(THIS);
-
-   MyQueryNew
-    .Add('SELECT * FROM '+TABELA+' WHERE('+TABELA+'.ID = :ID)')
-    .AddParam('ID', FEntitie.Id);
+    .Add('SELECT FIRST 1 * FROM ' + TABELA);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -177,8 +131,7 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível consultar o cliente',
-                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
+        raise ExceptionError.Create('Não foi possível consultar a empresa',
                                     'Mensagem: ' + E.Message);
    end;
    end;
@@ -207,43 +160,9 @@ begin
     .End_Entitie;
 end;
 
-function TModelClientesFactory.Deletar: IModelClientesFactory<TModelClientesEntitie>;
+function TModelEmpresasFactory.Gravar: IModelEmpresasFactory<TModelEmpresasEntitie>;
 begin
    Result := Self;
-
-   if(not (FEntitie.Id > 0))then
-     ExceptionMsgRegistroNaoInformadoExclusao(THIS);
-
-   if(FEntitie.Id = 1)then
-     raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser excluído');
-
-   MyQueryNew
-    .Add('DELETE FROM '+TABELA)
-    .Add('WHERE('+TABELA+'.ID = :ID)')
-    .AddParam('ID', FEntitie.Id);
-
-   try
-     ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
-   except on E: Exception do
-   begin
-      if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível deletar o cliente',
-                                    THIS + ': ' + FEntitie.IdMascara + sLineBreak +
-                                    'Mensagem: ' + E.Message);
-   end;
-   end;
-   FEntitie.Id(0);
-
-   ShowDone('Exclusão realizada');
-end;
-
-function TModelClientesFactory.Gravar: IModelClientesFactory<TModelClientesEntitie>;
-begin
-   Result := Self;
-
-   if(FEntitie.Id = 1)then
-     raise ExceptionWarning.Create('Cliente padrão do sistema bloqueado para alterações');
 
    Self.ValidarCampos;
 
@@ -279,7 +198,7 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível gravar o cliente',
+        raise ExceptionError.Create('Não foi possível gravar a empresa',
                                     'Mensagem: ' + E.Message);
    end;
    end;
@@ -287,20 +206,19 @@ begin
    ShowDone('Gravação realizada');
 end;
 
-procedure TModelClientesFactory.SQLInsert;
+procedure TModelEmpresasFactory.SQLInsert;
 begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
-    .Add('(STATUS, DATA_CADASTRO, RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
-    .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR)')
+    .Add('(RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
+    .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO)')
     .Add('VALUES')
-    .Add('(:STATUS, :DATA_CADASTRO, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
-    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR)')
-    .AddParam('STATUS', FEntitie.Status)
+    .Add('(:RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
+    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)')
     .AddParam('DATA_CADASTRO', Now);
 end;
 
-procedure TModelClientesFactory.SQLUpdate;
+procedure TModelEmpresasFactory.SQLUpdate;
 begin
    MyQueryNew
     .Add('UPDATE '+TABELA+' SET')

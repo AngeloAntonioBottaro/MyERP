@@ -339,6 +339,18 @@
         <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Entitie.pas"/>
         <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Factory.pas"/>
         <DCCReference Include="src\Model\FormasPagamento\Busca\Model.FormasPagamento.Busca.pas"/>
+        <DCCReference Include="src\View\Sistema\View.Sistema.Empresa.Cad.pas">
+            <Form>ViewSistemaEmpresaCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\Empresas\Model.Empresas.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Empresas\Model.Empresas.Entitie.pas"/>
+        <DCCReference Include="src\Model\Empresas\Model.Empresas.Factory.pas"/>
+        <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Agenda.pas"/>
+        <DCCReference Include="src\View\Agenda\View.Agenda.Cad.pas">
+            <Form>ViewAgendaCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>fornecedores</ResourceId>
@@ -383,6 +395,10 @@
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cadastro_contas_receber</ResourceId>
         </RcItem>
+        <RcItem Include="resources\Images\PNG\Menus\BookAndPencil.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>agenda</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -415,13 +431,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\Sell.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\CashRegister.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\Menus\BookAndPencil.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -457,12 +467,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="C:\AABSoft\ERP\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>MyERP.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="resources\Images\PNG\Menus\InitiateMoneyTransfer.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -478,6 +482,24 @@
                 <DeployFile LocalName="resources\Images\PNG\Menus\InitiateMoneyTransferAdd.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\Sell.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\Menus\CashRegister.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\AABSoft\ERP\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>MyERP.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

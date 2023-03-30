@@ -8,7 +8,6 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -19,6 +18,7 @@ uses
   Vcl.Mask,
   RxToolEdit,
   RxCurrEdit,
+  View.Base.Cadastros,
   Model.Produtos.Interfaces,
   Model.Produtos.Entitie;
 
@@ -61,7 +61,6 @@ type
     edtUnidadeNome: TEdit;
     edtUnidadeSigla: TEdit;
     lbUnidadeSigla: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -98,12 +97,6 @@ uses
   Utils.EditsKeyDownExit,
   Model.Produtos.Factory,
   View.Produtos.Busca;
-
-procedure TViewProdutosCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewProdutosCad.btnAlterarClick(Sender: TObject);
 begin

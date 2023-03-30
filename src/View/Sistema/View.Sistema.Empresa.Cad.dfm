@@ -1,20 +1,29 @@
-inherited ViewFornecedoresCad: TViewFornecedoresCad
-  Caption = 'Cadastro de fornecedores'
-  ClientHeight = 261
-  ExplicitHeight = 300
+inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
+  Caption = 'Informa'#231#245'es da empresa'
+  ClientHeight = 262
+  OnShow = FormShow
+  ExplicitHeight = 301
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
-    Top = 220
-    ExplicitTop = 220
+    Top = 221
+    ExplicitTop = 221
+    inherited btnNovo: TButton
+      Visible = False
+    end
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
     inherited btnExcluir: TButton
-      OnClick = btnExcluirClick
+      Visible = False
     end
     inherited btnBuscar: TButton
-      OnClick = btnBuscarClick
+      Visible = False
+    end
+    inherited btnFechar: TButton
+      Left = 605
+      Align = alRight
+      ExplicitLeft = 605
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -25,7 +34,7 @@ inherited ViewFornecedoresCad: TViewFornecedoresCad
     Left = 3
     Top = 3
     Width = 703
-    Height = 214
+    Height = 215
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1

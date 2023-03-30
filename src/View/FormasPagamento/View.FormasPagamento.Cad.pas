@@ -12,9 +12,9 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base.Cadastros,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
+  View.Base.Cadastros,
   Model.FormasPagamento.Interfaces,
   Model.FormasPagamento.Entitie;
 
@@ -27,7 +27,6 @@ type
     cBoxTipoLancamento: TComboBox;
     edtId: TEdit;
     edtNome: TEdit;
-    procedure FormCreate(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -59,12 +58,6 @@ uses
   Utils.LibrarySistema,
   Model.FormasPagamento.Factory,
   View.FormasPagamento.Busca;
-
-procedure TViewFormasPagamentoCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewFormasPagamentoCad.btnAlterarClick(Sender: TObject);
 begin

@@ -12,9 +12,9 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base.Cadastros,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
+  View.Base.Cadastros,
   Model.Produtos.Unidades.Interfaces,
   Model.Produtos.Unidades.Entitie;
 
@@ -27,7 +27,6 @@ type
     edtNome: TEdit;
     edtSigla: TEdit;
     lbSigla: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -55,12 +54,6 @@ uses
   Utils.LibrarySistema,
   Model.Produtos.Unidades.Factory,
   View.Produtos.Unidades.Busca;
-
-procedure TViewProdutosUnidadesCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewProdutosUnidadesCad.btnAlterarClick(Sender: TObject);
 begin

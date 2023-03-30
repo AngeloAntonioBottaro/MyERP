@@ -65,6 +65,7 @@ procedure TViewBaseCadastros.FormCreate(Sender: TObject);
 begin
    inherited;
    Self.EndOperations;
+   Self.InitialConfiguration;
 end;
 
 procedure TViewBaseCadastros.btnNovoClick(Sender: TObject);
@@ -118,7 +119,9 @@ begin
       else if(Self.Components[I] is TDateTimePicker)then
         TDateTimePicker(Self.Components[I]).Date := Now
       else if(Self.Components[I] is TComboBox)then
-        TComboBox(Self.Components[I]).ItemIndex := -1;
+        TComboBox(Self.Components[I]).ItemIndex := -1
+      else if(Self.Components[I] is TMemo)then
+        TMemo(Self.Components[I]).Lines.Clear;
    end;
 end;
 

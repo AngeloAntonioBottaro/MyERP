@@ -18,7 +18,7 @@ begin
                .ComponentName(TMainIconName.Vendas.ToString)
                .ResourceName('vendas')
                .Hint('Tela de vendas')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.MovimentacoesVendas1Click)
                .GroupOwner(TMainIconesGroup.Movimentacoes.ToInteger)
                );
 end;

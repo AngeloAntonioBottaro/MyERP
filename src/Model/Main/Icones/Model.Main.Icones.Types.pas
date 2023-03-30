@@ -11,7 +11,7 @@ uses
 
 type
   {$SCOPEDENUMS ON}
-  TMainIconName = (Clientes, Produtos, Fornecedores, Vendas, Compras, Caixa, ContasReceberConsulta, ContasReceberCadastro, ContasPagarConsulta, ContasPagarCadastro);
+  TMainIconName = (Clientes, Produtos, Fornecedores, Vendas, Compras, Caixa, ContasReceberConsulta, ContasReceberCadastro, ContasPagarConsulta, ContasPagarCadastro, Agenda);
   TMainIconesGroup = (Cadastros, Movimentacoes, Financeiro, Outros);
   {$SCOPEDENUMS OFF}
 

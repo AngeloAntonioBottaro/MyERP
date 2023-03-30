@@ -71,9 +71,15 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
     object lbRazaoSocial: TLabel
       Left = 74
       Top = 8
-      Width = 59
+      Width = 70
       Height = 13
       Caption = 'Raz'#227'o social'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbNomeFantasia: TLabel
       Left = 434

@@ -8,7 +8,6 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -18,10 +17,11 @@ uses
   Vcl.Mask,
   Vcl.DBCtrls,
   Vcl.ComCtrls,
-  Model.Funcionarios.Interfaces,
-  Model.Funcionarios.Entitie,
   RxToolEdit,
-  RxCurrEdit;
+  RxCurrEdit,
+  View.Base.Cadastros,
+  Model.Funcionarios.Interfaces,
+  Model.Funcionarios.Entitie;
 
 type
   TViewFuncionariosCad = class(TViewBaseCadastros)
@@ -83,7 +83,6 @@ type
     edtSenha: TEdit;
     edtSalario: TCurrencyEdit;
     procedure ConfComponents(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -121,12 +120,6 @@ uses
   Utils.EditsKeyDownExit,
   Model.Funcionarios.Factory,
   View.Funcionarios.Busca;
-
-procedure TViewFuncionariosCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewFuncionariosCad.btnAlterarClick(Sender: TObject);
 begin

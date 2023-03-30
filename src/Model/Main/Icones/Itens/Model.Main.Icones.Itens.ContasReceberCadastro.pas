@@ -18,7 +18,7 @@ begin
                .ComponentName(TMainIconName.ContasReceberCadastro.ToString)
                .ResourceName('cadastro_contas_receber')
                .Hint('Cadastro de contas à receber')
-               //.OnClickViewMain(ViewSistemaMain.)
+               .OnClickViewMain(ViewSistemaMain.FinanceiroCadastroContasReceber1Click)
                .GroupOwner(TMainIconesGroup.Financeiro.ToInteger)
                );
 end;

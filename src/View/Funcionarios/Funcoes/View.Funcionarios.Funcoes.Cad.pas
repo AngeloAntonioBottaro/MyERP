@@ -8,11 +8,11 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Forms,
   Vcl.StdCtrls,
   Vcl.Controls,
   Vcl.ExtCtrls,
+  View.Base.Cadastros,
   Model.Funcionarios.Funcoes.Interfaces,
   Model.Funcionarios.Funcoes.Entitie;
 
@@ -23,7 +23,6 @@ type
     lbFuncao: TLabel;
     edtId: TEdit;
     edtFuncao: TEdit;
-    procedure FormCreate(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -51,12 +50,6 @@ uses
   Utils.LibrarySistema,
   Model.Funcionarios.Funcoes.Factory,
   View.Funcionarios.Funcoes.Busca;
-
-procedure TViewFuncionariosFuncoesCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewFuncionariosFuncoesCad.btnAlterarClick(Sender: TObject);
 begin

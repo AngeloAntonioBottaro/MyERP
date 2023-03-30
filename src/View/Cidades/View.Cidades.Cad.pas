@@ -8,11 +8,11 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Forms,
   Vcl.Controls,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
+  View.Base.Cadastros,
   Model.Cidades.Interfaces,
   Model.Cidades.Entitie;
 
@@ -28,7 +28,6 @@ type
     cBoxUF: TComboBox;
     edtIBGE: TEdit;
     procedure btnBuscarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
@@ -57,12 +56,6 @@ uses
   Utils.MyVclLibrary,
   View.Cidades.Busca,
   Model.Cidades.Factory;
-
-procedure TViewCidadesCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewCidadesCad.btnAlterarClick(Sender: TObject);
 begin

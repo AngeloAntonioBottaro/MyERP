@@ -8,7 +8,6 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-  View.Base.Cadastros,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -18,6 +17,7 @@ uses
   Vcl.DBCtrls,
   Vcl.Mask,
   Vcl.ComCtrls,
+  View.Base.Cadastros,
   Model.Clientes.Interfaces,
   Model.Clientes.Entitie;
 
@@ -71,7 +71,6 @@ type
     edtRGOrgaoExpedidor: TEdit;
     lbRgOrgaoExpedidor: TLabel;
     procedure ConfComponents(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -107,12 +106,6 @@ uses
   Utils.EditsKeyDownExit,
   Model.Clientes.Factory,
   View.Clientes.Busca;
-
-procedure TViewClientesCad.FormCreate(Sender: TObject);
-begin
-   inherited;
-   Self.InitialConfiguration;
-end;
 
 procedure TViewClientesCad.btnAlterarClick(Sender: TObject);
 begin
