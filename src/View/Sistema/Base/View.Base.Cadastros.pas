@@ -27,6 +27,7 @@ type
     btnBuscar: TButton;
     btnFechar: TButton;
     btnAlterar: TButton;
+    btnImprimir: TButton;
     procedure btnFecharClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnNovoClick(Sender: TObject);
@@ -94,6 +95,7 @@ begin
    btnExcluir.Enabled  := False;
    btnAlterar.Enabled  := False;
    btnBuscar.Enabled   := False;
+   btnImprimir.Enabled := False;
    btnFechar.Enabled   := False;
 end;
 
@@ -105,6 +107,7 @@ begin
    btnExcluir.Enabled  := True;
    btnAlterar.Enabled  := True;
    btnBuscar.Enabled   := True;
+   btnImprimir.Enabled := True;
    btnFechar.Enabled   := True;
 end;
 

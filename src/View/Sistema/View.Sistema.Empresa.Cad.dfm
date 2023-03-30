@@ -1,13 +1,17 @@
 inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
   Caption = 'Informa'#231#245'es da empresa'
   ClientHeight = 262
+  ClientWidth = 709
   OnShow = FormShow
+  ExplicitWidth = 725
   ExplicitHeight = 301
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 221
+    Width = 709
     ExplicitTop = 221
+    ExplicitWidth = 808
     inherited btnNovo: TButton
       Visible = False
     end
@@ -19,11 +23,12 @@ inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
     end
     inherited btnBuscar: TButton
       Visible = False
+      ExplicitLeft = 604
     end
     inherited btnFechar: TButton
       Left = 605
       Align = alRight
-      ExplicitLeft = 605
+      ExplicitLeft = 704
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -38,6 +43,7 @@ inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 802
     object lbId: TLabel
       Left = 8
       Top = 8

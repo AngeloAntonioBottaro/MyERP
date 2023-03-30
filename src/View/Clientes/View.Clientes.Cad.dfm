@@ -1,11 +1,14 @@
 inherited ViewClientesCad: TViewClientesCad
   Caption = 'Cadastro de clientes'
   ClientHeight = 261
+  ClientWidth = 709
+  ExplicitWidth = 725
   ExplicitHeight = 300
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 220
+    Width = 709
     ExplicitTop = 220
     inherited btnGravar: TButton
       OnClick = btnGravarClick

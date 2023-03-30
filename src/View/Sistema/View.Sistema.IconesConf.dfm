@@ -123,7 +123,7 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Height = 33
       Align = alLeft
       Caption = 'Marcar todos'
-      ImageIndex = 12
+      ImageIndex = 13
       ImageMargins.Left = 5
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 0
@@ -137,7 +137,7 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Height = 33
       Align = alLeft
       Caption = 'Desmarcar todos'
-      ImageIndex = 13
+      ImageIndex = 14
       ImageMargins.Left = 5
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 1

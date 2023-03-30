@@ -1,16 +1,16 @@
 inherited ViewBaseCadastros: TViewBaseCadastros
   Caption = 'Tela de cadastro de '
   ClientHeight = 369
-  ClientWidth = 709
+  ClientWidth = 808
   OnClose = FormClose
-  ExplicitWidth = 725
+  ExplicitWidth = 824
   ExplicitHeight = 408
   PixelsPerInch = 96
   TextHeight = 13
   object pnButtons: TPanel
     Left = 0
     Top = 328
-    Width = 709
+    Width = 808
     Height = 41
     Align = alBottom
     Padding.Left = 3
@@ -69,7 +69,7 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       TabOrder = 3
     end
     object btnBuscar: TButton
-      Left = 504
+      Left = 604
       Top = 4
       Width = 100
       Height = 33
@@ -81,7 +81,7 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       TabOrder = 4
     end
     object btnFechar: TButton
-      Left = 604
+      Left = 704
       Top = 4
       Width = 100
       Height = 33
@@ -104,6 +104,19 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       ImageMargins.Left = 10
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 6
+    end
+    object btnImprimir: TButton
+      Left = 504
+      Top = 4
+      Width = 100
+      Height = 33
+      Align = alLeft
+      Caption = 'Imprimir'
+      ImageIndex = 12
+      ImageMargins.Left = 10
+      Images = ModelSistemaImagensDM.imgListButtons
+      TabOrder = 7
+      Visible = False
     end
   end
 end

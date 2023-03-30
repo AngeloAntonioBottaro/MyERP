@@ -144,7 +144,12 @@ uses
   Model.Empresas.Entitie in 'src\Model\Empresas\Model.Empresas.Entitie.pas',
   Model.Empresas.Factory in 'src\Model\Empresas\Model.Empresas.Factory.pas',
   Model.Main.Icones.Itens.Agenda in 'src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Agenda.pas',
-  View.Agenda.Cad in 'src\View\Agenda\View.Agenda.Cad.pas' {ViewAgendaCad};
+  View.Agenda.Cad in 'src\View\Agenda\View.Agenda.Cad.pas' {ViewAgendaCad},
+  Model.Agenda.Interfaces in 'src\Model\Agenda\Model.Agenda.Interfaces.pas',
+  Model.Agenda.Entitie in 'src\Model\Agenda\Model.Agenda.Entitie.pas',
+  Model.Agenda.Factory in 'src\Model\Agenda\Model.Agenda.Factory.pas',
+  View.Agenda.Busca in 'src\View\Agenda\View.Agenda.Busca.pas' {ViewAgendaBusca},
+  Model.Agenda.Busca in 'src\Model\Agenda\Busca\Model.Agenda.Busca.pas';
 
 {$R *.res}
 

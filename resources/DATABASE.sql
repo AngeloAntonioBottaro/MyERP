@@ -76,7 +76,7 @@ CREATE TABLE AGENDA (
     FUNCIONARIO            INTEGER,
     DATA                   DATE,
     HORA                   TIME,
-    OBSERVACAO             BLOB SUB_TYPE 1 SEGMENT SIZE 80,
+    OBSERVACAO             VARCHAR(1000),
     STATUS                 VARCHAR(20),
     DATA_CADASTRO          TIMESTAMP,
     DATA_ULTIMA_ALTERACAO  TIMESTAMP

@@ -62,6 +62,9 @@ type
     N3: TMenuItem;
     GravarConfiguraes1: TMenuItem;
     RestaurarPadres1: TMenuItem;
+    pnBuscarComboBox: TPanel;
+    Label2: TLabel;
+    cBoxBusca: TComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);
@@ -84,6 +87,7 @@ type
     procedure GravarConfiguraes1Click(Sender: TObject);
     procedure RestaurarPadres1Click(Sender: TObject);
     procedure GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure cBoxBuscaChange(Sender: TObject);
   private
     FGridLib: TMyGridLibrary;
     procedure ValidacoesBasicas;
@@ -183,6 +187,12 @@ end;
 procedure TViewBaseBusca.Buscar;
 begin
    Self.GetTotalRegistros;
+end;
+
+procedure TViewBaseBusca.cBoxBuscaChange(Sender: TObject);
+begin
+   TimerBuscar.Enabled := False;
+   TimerBuscar.Enabled := True;
 end;
 
 procedure TViewBaseBusca.edtBuscaKeyPress(Sender: TObject; var Key: Char);

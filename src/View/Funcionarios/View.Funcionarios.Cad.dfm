@@ -1,12 +1,16 @@
 inherited ViewFuncionariosCad: TViewFuncionariosCad
   Caption = 'Cadastro de funcion'#225'rios'
   ClientHeight = 300
+  ClientWidth = 709
+  ExplicitWidth = 725
   ExplicitHeight = 339
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 259
+    Width = 709
     ExplicitTop = 259
+    ExplicitWidth = 709
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end

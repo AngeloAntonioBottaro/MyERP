@@ -104,7 +104,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       AlignWithMargins = True
       Left = 397
       Top = 1
-      Width = 230
+      Width = 196
       Height = 47
       Margins.Left = 5
       Margins.Top = 0
@@ -118,7 +118,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 224
+        Width = 190
         Height = 13
         Align = alTop
         Caption = 'Entre com o per'#237'odo a ser consultado'
@@ -145,6 +145,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Date = 45002.000000000000000000
         Time = 0.743960381943907100
         TabOrder = 0
+        OnKeyPress = edtBuscaKeyPress
       end
       object dtpPeriodoFinal: TDateTimePicker
         AlignWithMargins = True
@@ -156,6 +157,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Date = 45002.000000000000000000
         Time = 0.743960381943907100
         TabOrder = 1
+        OnKeyPress = edtBuscaKeyPress
       end
     end
     object pnBuscarConteudo: TPanel
@@ -190,6 +192,37 @@ inherited ViewBaseBusca: TViewBaseBusca
         Align = alTop
         TabOrder = 0
         OnKeyPress = edtBuscaKeyPress
+      end
+    end
+    object pnBuscarComboBox: TPanel
+      Left = 593
+      Top = 1
+      Width = 264
+      Height = 47
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 2
+      Visible = False
+      object Label2: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 258
+        Height = 13
+        Align = alTop
+        Caption = 'Selecione o conte'#250'do a ser consultado'
+        ExplicitWidth = 184
+      end
+      object cBoxBusca: TComboBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 22
+        Width = 258
+        Height = 21
+        Align = alClient
+        Style = csDropDownList
+        TabOrder = 0
+        OnChange = cBoxBuscaChange
       end
     end
   end

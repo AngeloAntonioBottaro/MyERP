@@ -18,10 +18,11 @@ uses
   Vcl.ExtCtrls,
   Vcl.Menus,
   Vcl.ComCtrls,
+  Vcl.Imaging.pngimage,
   View.Base.Busca,
   Data.DB,
   Utils.MyTypes,
-  Model.Cidades.Busca, Vcl.Imaging.pngimage;
+  Model.Cidades.Busca;
 
 type
   TViewCidadesBusca = class(TViewBaseBusca)

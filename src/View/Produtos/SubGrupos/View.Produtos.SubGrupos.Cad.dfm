@@ -1,12 +1,16 @@
 inherited ViewProdutosSubgruposCad: TViewProdutosSubgruposCad
   Caption = 'Cadastro de sub-grupos de produtos'
   ClientHeight = 106
+  ClientWidth = 709
+  ExplicitWidth = 725
   ExplicitHeight = 145
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 65
+    Width = 709
     ExplicitTop = 65
+    ExplicitWidth = 808
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -15,6 +19,10 @@ inherited ViewProdutosSubgruposCad: TViewProdutosSubgruposCad
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
+      ExplicitLeft = 604
+    end
+    inherited btnFechar: TButton
+      ExplicitLeft = 704
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -29,6 +37,7 @@ inherited ViewProdutosSubgruposCad: TViewProdutosSubgruposCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 802
     object lbIdsubgrupo: TLabel
       Left = 10
       Top = 8

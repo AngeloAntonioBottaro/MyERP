@@ -351,6 +351,14 @@
             <Form>ViewAgendaCad</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\Model\Agenda\Model.Agenda.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Agenda\Model.Agenda.Entitie.pas"/>
+        <DCCReference Include="src\Model\Agenda\Model.Agenda.Factory.pas"/>
+        <DCCReference Include="src\View\Agenda\View.Agenda.Busca.pas">
+            <Form>ViewAgendaBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\Agenda\Busca\Model.Agenda.Busca.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>fornecedores</ResourceId>

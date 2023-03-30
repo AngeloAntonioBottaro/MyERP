@@ -178,6 +178,7 @@ end;
 procedure TViewFuncionariosCad.btnNovoClick(Sender: TObject);
 begin
    inherited;
+   dtpDataNascimento.Date := Now;
    cBoxTipoJuridico.ItemIndex := 0;
    Self.ConfComponents(nil);
    TMyVclLibrary.SetFocusOn(edtRazaoSocial);

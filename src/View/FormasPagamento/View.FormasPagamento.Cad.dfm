@@ -1,12 +1,16 @@
 inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
   Caption = 'Cadastro de formas de pagamento'
   ClientHeight = 99
+  ClientWidth = 709
+  ExplicitWidth = 725
   ExplicitHeight = 138
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
     Top = 58
+    Width = 709
     ExplicitTop = 58
+    ExplicitWidth = 808
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -15,6 +19,10 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
+      ExplicitLeft = 604
+    end
+    inherited btnFechar: TButton
+      ExplicitLeft = 704
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -29,6 +37,7 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 802
     object lbId: TLabel
       Left = 8
       Top = 8
