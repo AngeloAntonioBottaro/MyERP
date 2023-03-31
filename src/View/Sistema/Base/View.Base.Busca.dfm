@@ -145,6 +145,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Date = 45002.000000000000000000
         Time = 0.743960381943907100
         TabOrder = 0
+        OnExit = dtpPeriodoInicialExit
         OnKeyPress = edtBuscaKeyPress
       end
       object dtpPeriodoFinal: TDateTimePicker
@@ -157,6 +158,7 @@ inherited ViewBaseBusca: TViewBaseBusca
         Date = 45002.000000000000000000
         Time = 0.743960381943907100
         TabOrder = 1
+        OnExit = dtpPeriodoInicialExit
         OnKeyPress = edtBuscaKeyPress
       end
     end

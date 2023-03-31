@@ -88,7 +88,7 @@ begin
 
    if(TMyLibrary.IdentifyCNPJ(FEntitie.Cnpj))then
    begin
-      if(TMyLibrary.ValidCNPJ(FEntitie.Cnpj))then
+      if(TMyLibrary.ValidateCNPJ(FEntitie.Cnpj))then
         Exit;
    end;
 
@@ -102,7 +102,7 @@ begin
 
    if(TMyLibrary.IdentifyCPF(FEntitie.Cpf))then
    begin
-      if(TMyLibrary.ValidCPF(FEntitie.Cpf))then
+      if(TMyLibrary.ValidateCPF(FEntitie.Cpf))then
         Exit;
    end;
 
@@ -114,7 +114,7 @@ begin
    if(FEntitie.Email = EmptyStr)then
      Exit;
 
-   if(TMyLibrary.ValidEmail(FEntitie.Email))then
+   if(TMyLibrary.ValidateEmail(FEntitie.Email))then
      Exit;
 
    raise ExceptionWarning.Create('E-mail inválido/incorreto');

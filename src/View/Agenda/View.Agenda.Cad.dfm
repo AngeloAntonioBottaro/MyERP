@@ -9,7 +9,7 @@
   inherited pnButtons: TPanel
     Top = 290
     Width = 810
-    ExplicitTop = 212
+    ExplicitTop = 290
     ExplicitWidth = 810
     inherited btnGravar: TButton
       OnClick = btnGravarClick
@@ -36,13 +36,18 @@
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 206
     object lbStatus: TLabel
       Left = 251
       Top = 48
-      Width = 41
+      Width = 49
       Height = 13
       Caption = 'Situa'#231#227'o'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbIdCliente: TLabel
       Left = 74
@@ -106,16 +111,28 @@
     object lbData: TLabel
       Left = 8
       Top = 48
-      Width = 23
+      Width = 27
       Height = 13
       Caption = 'Data'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbHora: TLabel
       Left = 129
       Top = 48
-      Width = 23
+      Width = 27
       Height = 13
       Caption = 'Hora'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object lbId: TLabel
       Left = 8

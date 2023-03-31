@@ -18,6 +18,7 @@ type
     FEntitie: TModelAgendaEntitie;
     procedure InsertCidade;
     procedure UpdateCidade;
+    procedure ValidarCampos;
   protected
     function Entitie: TModelAgendaEntitie;
 
@@ -59,6 +60,15 @@ end;
 function TModelAgendaFactory.Entitie: TModelAgendaEntitie;
 begin
    Result := FEntitie;
+end;
+
+procedure TModelAgendaFactory.ValidarCampos;
+begin
+   if(FEntitie.Cliente <= 0)then
+     raise ExceptionRequired.Create('Cliente obrigatório');
+
+   if(FEntitie.Funcionario <= 0)then
+     raise ExceptionRequired.Create('Funcionário obrigatório');
 end;
 
 function TModelAgendaFactory.ConsultarEntitie: IModelAgendaFactory<TModelAgendaEntitie>;
@@ -124,6 +134,8 @@ end;
 function TModelAgendaFactory.Gravar: IModelAgendaFactory<TModelAgendaEntitie>;
 begin
    Result := Self;
+
+   Self.ValidarCampos;
 
    if(FEntitie.Id > 0)then
      Self.UpdateCidade

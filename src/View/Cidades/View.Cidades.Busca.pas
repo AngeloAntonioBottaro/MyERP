@@ -39,6 +39,7 @@ type
   private
     FBusca: TModelCidadesBusca;
     function GetTipoBusca: TTipoBuscaCidade;
+    procedure GetConteudoBusca;
   public
     procedure Buscar; override;
   end;
@@ -58,6 +59,8 @@ uses
   Model.Cidades.Factory;
 
 procedure TViewCidadesBusca.FormCreate(Sender: TObject);
+var
+  I: Integer;
 begin
    FGridConf := Self.GridBusca;
    FNomeConf := Self.Name;
@@ -67,6 +70,10 @@ begin
    FBusca := TModelCidadesBusca.Create;
    FBusca
     .DataSource(DS_Busca);
+
+   cBoxBusca.Items.Clear;
+   for I := Low(ESTADOS) to High(ESTADOS) do
+     cBoxBusca.Items.Add(ESTADOS[I]);
 end;
 
 procedure TViewCidadesBusca.FormDestroy(Sender: TObject);
@@ -103,8 +110,9 @@ end;
 
 procedure TViewCidadesBusca.Buscar;
 begin
+   Self.GetConteudoBusca;
+
    FBusca
-    .ConteudoBusca(edtBusca.Text)
     .TipoBusca(Self.GetTipoBusca)
     .Inativos(ckBuscarInativos.Enabled and ckBuscarInativos.Checked)
     .Buscar;
@@ -115,6 +123,21 @@ procedure TViewCidadesBusca.ConfComponents(Sender: TObject);
 begin
    edtBusca.Clear;
    TMyVclLibrary.SetFocusOn(edtBusca);
+
+   pnBuscarConteudo.Visible := not rdBuscarUF.Checked;
+   pnBuscarComboBox.Visible := rdBuscarUF.Checked;
+end;
+
+procedure TViewCidadesBusca.GetConteudoBusca;
+begin
+   FBusca.ConteudoBusca(edtBusca.Text);
+   if(pnBuscarComboBox.Visible)then
+   begin
+      if(not cBoxBusca.ItemIndex >= 0)then
+        raise ExceptionRequired.Create('Selecione o conteúdo a ser consultado', cBoxBusca);
+
+      FBusca.ConteudoBusca(cBoxBusca.Text);
+   end;
 end;
 
 function TViewCidadesBusca.GetTipoBusca: TTipoBuscaCidade;

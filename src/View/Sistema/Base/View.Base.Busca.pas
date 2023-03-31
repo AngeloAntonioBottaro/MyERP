@@ -88,6 +88,7 @@ type
     procedure RestaurarPadres1Click(Sender: TObject);
     procedure GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cBoxBuscaChange(Sender: TObject);
+    procedure dtpPeriodoInicialExit(Sender: TObject);
   private
     FGridLib: TMyGridLibrary;
     procedure ValidacoesBasicas;
@@ -278,6 +279,12 @@ end;
 procedure TViewBaseBusca.DiminuirFonte1Click(Sender: TObject);
 begin
    FGridLib.DiminuirFonte;
+end;
+
+procedure TViewBaseBusca.dtpPeriodoInicialExit(Sender: TObject);
+begin
+   if(dtpPeriodoInicial.Date > dtpPeriodoFinal.Date)then
+     raise ExceptionWarning.Create('Data inicial não pode ser maior que a data final', dtpPeriodoFinal);
 end;
 
 procedure TViewBaseBusca.DeixarNegrito1Click(Sender: TObject);
