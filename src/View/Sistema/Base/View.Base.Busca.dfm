@@ -372,14 +372,17 @@ inherited ViewBaseBusca: TViewBaseBusca
     Top = 8
   end
   object PopupMenu: TPopupMenu
+    Images = ModelSistemaImagensDM.imgListButtons
     Left = 616
     Top = 8
     object Atualizar1: TMenuItem
       Caption = 'Atualizar - F5'
+      ImageIndex = 8
       OnClick = Atualizar1Click
     end
     object AtivarInativar1: TMenuItem
       Caption = 'Ativar/Inativar'
+      ImageIndex = 13
       Visible = False
       OnClick = AtivarInativar1Click
     end
@@ -388,6 +391,7 @@ inherited ViewBaseBusca: TViewBaseBusca
     end
     object Excluir1: TMenuItem
       Caption = 'Excluir'
+      ImageIndex = 10
       Visible = False
       OnClick = Excluir1Click
     end
@@ -396,22 +400,27 @@ inherited ViewBaseBusca: TViewBaseBusca
     end
   end
   object PopupMenuConfGrid: TPopupMenu
+    Images = ModelSistemaImagensDM.imgListButtons
     Left = 680
     Top = 72
     object AumentarFonte1: TMenuItem
       Caption = 'Aumentar fonte      CTRL  +'
+      ImageIndex = 1
       OnClick = AumentarFonte1Click
     end
     object DiminuirFonte1: TMenuItem
       Caption = 'Diminuir fonte        CTRL  -'
+      ImageIndex = 16
       OnClick = DiminuirFonte1Click
     end
     object DeixarNegrito1: TMenuItem
       Caption = 'Deixar negrito'
+      ImageIndex = 18
       OnClick = DeixarNegrito1Click
     end
     object TirarNegrito1: TMenuItem
       Caption = 'Tirar negrito'
+      ImageIndex = 19
       OnClick = TirarNegrito1Click
     end
     object N3: TMenuItem
@@ -419,10 +428,12 @@ inherited ViewBaseBusca: TViewBaseBusca
     end
     object GravarConfiguraes1: TMenuItem
       Caption = 'Gravar configura'#231#245'es'
+      ImageIndex = 17
       OnClick = GravarConfiguraes1Click
     end
     object RestaurarPadres1: TMenuItem
       Caption = 'Restaurar padr'#245'es'
+      ImageIndex = 20
       OnClick = RestaurarPadres1Click
     end
   end

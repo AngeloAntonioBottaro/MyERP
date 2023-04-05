@@ -69,6 +69,8 @@ type
     FinanceiroCadastroContasPagar1: TMenuItem;
     MovimentacoesAgenda1: TMenuItem;
     N3: TMenuItem;
+    SuporteExtras1: TMenuItem;
+    SuporteExtrasTelasCriadas1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -99,6 +101,7 @@ type
     procedure FinanceiroCadastroContasPagar1Click(Sender: TObject);
     procedure ConfiguracoesEmpresa1Click(Sender: TObject);
     procedure MovimentacoesAgenda1Click(Sender: TObject);
+    procedure SuporteExtrasTelasCriadas1Click(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -367,6 +370,17 @@ begin
      FreeAndNil(ViewSistemaIconesConf);
    end;
    Self.CreateShortcutIcons;
+end;
+
+procedure TViewSistemaMain.SuporteExtrasTelasCriadas1Click(Sender: TObject);
+var
+  I: integer;
+  LTemp: String;
+begin
+   for I := 0 to Pred(Screen.FormCount) do
+     LTemp := LTemp + Screen.Forms[I].Name + ' [' + Screen.Forms[I].Caption + ']' + sLineBreak;
+
+   ShowInformation('Clique em ver mais detalhes', LTemp);
 end;
 
 procedure TViewSistemaMain.SuporteSobreSistema1Click(Sender: TObject);
