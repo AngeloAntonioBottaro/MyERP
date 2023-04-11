@@ -13,6 +13,7 @@ type
   TModelSistemaImagensDM = class(TDataModule)
     imgListMenus: TImageList;
     imgListButtons: TImageList;
+    imgListMenusSmall: TImageList;
   private
   public
   end;

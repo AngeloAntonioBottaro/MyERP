@@ -227,15 +227,7 @@ end;
 
 procedure TViewBaseBusca.GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-   if(odd(TDBGrid(Sender).DataSource.DataSet.RecNo))then
-     Exit;
-
-   if((gdSelected in State))then
-     Exit;
-
-   TDBGrid(Sender).Canvas.Brush.Color := COLOR_GRID;
-   TDBGrid(Sender).Canvas.FillRect(Rect);
-   TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
+   TUtilsDBGrid.GridDrawColumnCell(TDBGrid(Sender), Rect, DataCol, Column, Vcl.Grids.TGridDrawState(State));
 end;
 
 procedure TViewBaseBusca.GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

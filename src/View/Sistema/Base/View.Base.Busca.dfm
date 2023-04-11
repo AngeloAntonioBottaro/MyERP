@@ -400,27 +400,27 @@ inherited ViewBaseBusca: TViewBaseBusca
     end
   end
   object PopupMenuConfGrid: TPopupMenu
-    Images = ModelSistemaImagensDM.imgListButtons
+    Images = ModelSistemaImagensDM.imgListMenusSmall
     Left = 680
     Top = 72
     object AumentarFonte1: TMenuItem
       Caption = 'Aumentar fonte      CTRL  +'
-      ImageIndex = 1
+      ImageIndex = 0
       OnClick = AumentarFonte1Click
     end
     object DiminuirFonte1: TMenuItem
       Caption = 'Diminuir fonte        CTRL  -'
-      ImageIndex = 16
+      ImageIndex = 1
       OnClick = DiminuirFonte1Click
     end
     object DeixarNegrito1: TMenuItem
       Caption = 'Deixar negrito'
-      ImageIndex = 18
+      ImageIndex = 2
       OnClick = DeixarNegrito1Click
     end
     object TirarNegrito1: TMenuItem
       Caption = 'Tirar negrito'
-      ImageIndex = 19
+      ImageIndex = 3
       OnClick = TirarNegrito1Click
     end
     object N3: TMenuItem
@@ -428,12 +428,12 @@ inherited ViewBaseBusca: TViewBaseBusca
     end
     object GravarConfiguraes1: TMenuItem
       Caption = 'Gravar configura'#231#245'es'
-      ImageIndex = 17
+      ImageIndex = 4
       OnClick = GravarConfiguraes1Click
     end
     object RestaurarPadres1: TMenuItem
       Caption = 'Restaurar padr'#245'es'
-      ImageIndex = 20
+      ImageIndex = 5
       OnClick = RestaurarPadres1Click
     end
   end

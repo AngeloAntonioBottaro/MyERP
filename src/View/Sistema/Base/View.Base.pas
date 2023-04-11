@@ -35,11 +35,13 @@ uses
   Utils.MyLibrary,
   Utils.MyFormLibrary,
   Utils.GlobalVariables,
-  Utils.LibrarySistema;
+  Utils.LibrarySistema,
+  Utils.MyGridLibrary;
 
 procedure TViewBase.FormCreate(Sender: TObject);
 begin
    TMyFormLibrary.New.ConfForm(Self);
+   TUtilsDBGrid.ConfDBGrid(Self);
 end;
 
 procedure TViewBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
