@@ -149,12 +149,14 @@ uses
   Model.Agenda.Entitie in 'src\Model\Agenda\Model.Agenda.Entitie.pas',
   Model.Agenda.Factory in 'src\Model\Agenda\Model.Agenda.Factory.pas',
   View.Agenda.Busca in 'src\View\Agenda\View.Agenda.Busca.pas' {ViewAgendaBusca},
-  Model.Agenda.Busca in 'src\Model\Agenda\Busca\Model.Agenda.Busca.pas';
+  Model.Agenda.Busca in 'src\Model\Agenda\Busca\Model.Agenda.Busca.pas',
+  View.Sistema.MenuConf in 'src\View\Sistema\View.Sistema.MenuConf.pas' {ViewSistemaMenuConf};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.CreateForm(TViewSistemaMenuConf, ViewSistemaMenuConf);
   TStyleManager.TrySetStyle('Amethyst Kamri');
 
   ViewSistemaSplash := TViewSistemaSplash.Create(nil);

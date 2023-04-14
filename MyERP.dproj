@@ -359,6 +359,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Agenda\Busca\Model.Agenda.Busca.pas"/>
+        <DCCReference Include="src\View\Sistema\View.Sistema.MenuConf.pas">
+            <Form>ViewSistemaMenuConf</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>fornecedores</ResourceId>
