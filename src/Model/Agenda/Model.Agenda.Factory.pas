@@ -98,6 +98,7 @@ begin
     .Funcionario(MyQuery.FieldByName('FUNCIONARIO').AsString)
     .Data(MyQuery.FieldByName('DATA').AsDateTime)
     .Hora(MyQuery.FieldByName('HORA').AsDateTime)
+    .Observacao(MyQuery.FieldByName('TITULO').AsString)
     .Observacao(MyQuery.FieldByName('OBSERVACAO').AsString)
     .Status(MyQuery.FieldByName('STATUS').AsString)
     .End_Entitie;
@@ -147,6 +148,7 @@ begin
     .AddParam('FUNCIONARIO', FEntitie.Funcionario)
     .AddParam('DATA', FEntitie.Data)
     .AddParam('HORA', FEntitie.Hora)
+    .AddParam('TITULO', FEntitie.Titulo)
     .AddParam('OBSERVACAO', FEntitie.Observacao)
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_ULTIMA_ALTERACAO', Now);
@@ -169,9 +171,9 @@ procedure TModelAgendaFactory.InsertCidade;
 begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
-    .Add('(CLIENTE, FUNCIONARIO, DATA, HORA, OBSERVACAO, STATUS, DATA_CADASTRO, DATA_ULTIMA_ALTERACAO)')
+    .Add('(CLIENTE, FUNCIONARIO, DATA, HORA, TITULO, OBSERVACAO, STATUS, DATA_CADASTRO, DATA_ULTIMA_ALTERACAO)')
     .Add('VALUES')
-    .Add('(:CLIENTE, :FUNCIONARIO, :DATA, :HORA, :OBSERVACAO, :STATUS, :DATA_CADASTRO, :DATA_ULTIMA_ALTERACAO)')
+    .Add('(:CLIENTE, :FUNCIONARIO, :DATA, :HORA, :TITULO, :OBSERVACAO, :STATUS, :DATA_CADASTRO, :DATA_ULTIMA_ALTERACAO)')
     .AddParam('DATA_CADASTRO', Now);
 end;
 
@@ -179,7 +181,7 @@ procedure TModelAgendaFactory.UpdateCidade;
 begin
    MyQueryNew
     .Add('UPDATE '+TABELA+' SET')
-    .Add('CLIENTE = :CLIENTE, FUNCIONARIO = :FUNCIONARIO, DATA = :DATA, HORA = :HORA, OBSERVACAO = :OBSERVACAO, ')
+    .Add('CLIENTE = :CLIENTE, FUNCIONARIO = :FUNCIONARIO, DATA = :DATA, HORA = :HORA, TITULO = :TITULO, OBSERVACAO = :OBSERVACAO, ')
     .Add('STATUS = :STATUS, DATA_ULTIMA_ALTERACAO = :DATA_ULTIMA_ALTERACAO')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);

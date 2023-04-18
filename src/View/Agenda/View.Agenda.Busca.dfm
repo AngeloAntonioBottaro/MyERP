@@ -67,6 +67,13 @@ inherited ViewAgendaBusca: TViewAgendaBusca
       Columns = <
         item
           Expanded = False
+          FieldName = 'TITULO'
+          Title.Caption = 'T'#237'tulo'
+          Width = 178
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'CLIENTE'
           Title.Caption = 'C'#243'd. Cliente'
           Visible = True

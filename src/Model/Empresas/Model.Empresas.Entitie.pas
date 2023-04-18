@@ -35,6 +35,7 @@ type
     FTelefone: string;
     FTelefone2: string;
     FTipoJuridico: string;
+    FServidorHash: string;
   public
     constructor Create(AParent: IModelEmpresasFactory<TModelEmpresasEntitie>);
     destructor Destroy; override;
@@ -98,6 +99,8 @@ type
     function TipoJuridico(AValue: string): TModelEmpresasEntitie; overload;
     function TipoJuridico: string; overload;
     function TipoJuridicoComboBox: Integer;
+    function ServidorHash(AValue: string): TModelEmpresasEntitie; overload;
+    function ServidorHash: string; overload;
   end;
 
 implementation
@@ -433,12 +436,12 @@ var
 begin
    Result := Self;
 
-   LTipo := UpperCase(AValue.Trim);
-
+   LTipo := AValue.Trim;
    FTipoJuridico := PESSOA_FISICA_DATABASE;
    if(LTipo.Equals(PESSOA_JURIDICA))then
      FTipoJuridico := PESSOA_JURIDICA_DATABASE;
 
+   LTipo := UpperCase(LTipo);
    if(LTipo.Equals(PESSOA_FISICA_DATABASE) or LTipo.Equals(PESSOA_JURIDICA_DATABASE))then
      FTipoJuridico := LTipo;
 end;
@@ -455,6 +458,17 @@ begin
      Result := 0
    else if(Self.TipoJuridico.Equals(PESSOA_JURIDICA_DATABASE))then
      Result := 1;
+end;
+
+function TModelEmpresasEntitie.ServidorHash(AValue: string): TModelEmpresasEntitie;
+begin
+   Result        := Self;
+   FServidorHash := AValue.Trim;
+end;
+
+function TModelEmpresasEntitie.ServidorHash: string;
+begin
+   Result := FServidorHash;
 end;
 
 end.

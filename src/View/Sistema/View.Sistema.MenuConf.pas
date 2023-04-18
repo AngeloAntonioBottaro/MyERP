@@ -91,10 +91,10 @@ var
   I: Integer;
 begin
    inherited;
-   for I := 0 to Pred(MENU.Count) do
+   {for I := 0 to Pred(MENU.Count) do
    begin
       ckList.AddItem(MENU.Caption, TItemMenu.Create(MENU.Name));
-   end;
+   end; }
 end;
 
 end.

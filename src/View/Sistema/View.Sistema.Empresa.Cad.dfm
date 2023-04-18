@@ -11,7 +11,7 @@ inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
     Top = 221
     Width = 709
     ExplicitTop = 221
-    ExplicitWidth = 808
+    ExplicitWidth = 709
     inherited btnNovo: TButton
       Visible = False
     end
@@ -23,12 +23,11 @@ inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
     end
     inherited btnBuscar: TButton
       Visible = False
-      ExplicitLeft = 604
     end
     inherited btnFechar: TButton
       Left = 605
       Align = alRight
-      ExplicitLeft = 704
+      ExplicitLeft = 605
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -43,7 +42,6 @@ inherited ViewSistemaEmpresaCad: TViewSistemaEmpresaCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 802
     object lbId: TLabel
       Left = 8
       Top = 8

@@ -147,6 +147,19 @@
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object lbTitulo: TLabel
+      Left = 394
+      Top = 48
+      Width = 32
+      Height = 13
+      Caption = 'T'#237'tulo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object cBoxStatus: TComboBox
       Left = 251
       Top = 62
@@ -204,7 +217,7 @@
         'mmObservacao')
       MaxLength = 1000
       ScrollBars = ssVertical
-      TabOrder = 8
+      TabOrder = 9
     end
     object dtpData: TDateTimePicker
       Left = 8
@@ -241,6 +254,15 @@
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
+    end
+    object edtTitulo: TEdit
+      Left = 394
+      Top = 62
+      Width = 407
+      Height = 21
+      TabOrder = 8
+      OnExit = edtIdFuncionarioExit
+      OnKeyDown = edtIdFuncionarioKeyDown
     end
   end
 end

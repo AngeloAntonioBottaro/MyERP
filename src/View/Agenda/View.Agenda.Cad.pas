@@ -40,6 +40,8 @@ type
     lbHora: TLabel;
     lbId: TLabel;
     edtId: TEdit;
+    lbTitulo: TLabel;
+    edtTitulo: TEdit;
     procedure edtIdClienteExit(Sender: TObject);
     procedure edtIdClienteKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtIdFuncionarioExit(Sender: TObject);
@@ -142,6 +144,7 @@ begin
      .Funcionario(edtIdFuncionario.Text)
      .Data(DateToStr(dtpData.Date))
      .Hora(TimeToStr(dtpHora.Time))
+     .Titulo(edtTitulo.Text)
      .Observacao(mmObservacao.Lines.Text)
      .Status(cBoxStatus.Text)
      .End_Entitie;
@@ -157,6 +160,7 @@ begin
    edtIdFuncionario.Text := FAgenda.Entitie.FuncionarioMascara;
    dtpData.Date          := FAgenda.Entitie.Data;
    dtpHora.Time          := FAgenda.Entitie.Hora;
+   edtTitulo.Text        := FAgenda.Entitie.Titulo;
    cBoxStatus.ItemIndex  := FAgenda.Entitie.StatusComboBox;
    mmObservacao.Lines.Clear;
    mmObservacao.Lines.Add(FAgenda.Entitie.Observacao);

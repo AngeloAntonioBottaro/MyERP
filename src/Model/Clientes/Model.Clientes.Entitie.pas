@@ -433,12 +433,12 @@ var
 begin
    Result := Self;
 
-   LTipo := UpperCase(AValue.Trim);
-
+   LTipo := AValue.Trim;
    FTipoJuridico := PESSOA_FISICA_DATABASE;
    if(LTipo.Equals(PESSOA_JURIDICA))then
      FTipoJuridico := PESSOA_JURIDICA_DATABASE;
 
+   LTipo := UpperCase(LTipo);
    if(LTipo.Equals(PESSOA_FISICA_DATABASE) or LTipo.Equals(PESSOA_JURIDICA_DATABASE))then
      FTipoJuridico := LTipo;
 end;

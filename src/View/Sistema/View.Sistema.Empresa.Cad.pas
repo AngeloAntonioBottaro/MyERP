@@ -76,9 +76,11 @@ type
     procedure edtIdCidadeExit(Sender: TObject);
     procedure edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FEmpresa: IModelEmpresasFactory<TModelEmpresasEntitie>;
     procedure FillEntitie;
+    function DadosIniciais: Boolean;
   public
     procedure InitialConfiguration; override;
     procedure NewEntitie; override;
@@ -99,14 +101,32 @@ uses
   Utils.MyLibrary,
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
+  Utils.GlobalVariables,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,
   Model.Empresas.Factory;
+
+procedure TViewSistemaEmpresaCad.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   inherited;
+   EmpresaLogada.ConsultarEntitie;
+   if(Self.DadosIniciais)then
+   begin
+      if(ShowQuestionYes('Não informado os dados de uma empresa válida. Deseja informálos?'))then
+        Abort;
+
+      Self.SystemTerminate;
+      Abort;
+   end;
+end;
 
 procedure TViewSistemaEmpresaCad.FormShow(Sender: TObject);
 begin
    inherited;
    Self.OnBusca(0);
+
+   if(Self.DadosIniciais)then
+     btnAlterar.Click;
 end;
 
 procedure TViewSistemaEmpresaCad.btnAlterarClick(Sender: TObject);
@@ -164,7 +184,7 @@ begin
      .Cpf(edtCPF.Text)
      .RG(edtRG.Text)
      .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
-     .End_Entitie
+     .End_Entitie;
 end;
 
 procedure TViewSistemaEmpresaCad.FillFields;
@@ -280,6 +300,14 @@ begin
       ShowWarning(E.Message)
    end;
    end;
+end;
+
+function TViewSistemaEmpresaCad.DadosIniciais: Boolean;
+begin
+   if(TMyLibrary.UnlockSpecialComands)then
+    Exit(False);
+
+   Result := GetEmpresaLogada.Entitie.Cnpj().IsEmpty and GetEmpresaLogada.Entitie.Cpf().IsEmpty;
 end;
 
 procedure TViewSistemaEmpresaCad.edtIdCidadeExit(Sender: TObject);

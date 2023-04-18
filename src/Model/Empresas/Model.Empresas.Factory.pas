@@ -68,8 +68,11 @@ end;
 
 procedure TModelEmpresasFactory.ValidarCampos;
 begin
-   if((FEntitie.RazaoSocial = EmptyStr) and (FEntitie.NomeFantasia = EmptyStr))then
+   if((FEntitie.RazaoSocial = EmptyStr))then
      raise ExceptionRequired.Create('Razão social da empresa é obrigatório');
+
+   if((FEntitie.NomeFantasia = EmptyStr))then
+     raise ExceptionRequired.Create('Fantasia da empresa é obrigatório');
 
    if((FEntitie.Cnpj = EmptyStr) and (FEntitie.Cpf = EmptyStr))then
      raise ExceptionRequired.Create('CNPJ/CPF da empresa é obrigatório');
@@ -157,6 +160,7 @@ begin
     .Cpf(MyQuery.FieldByName('CPF').AsString)
     .RG(MyQuery.FieldByName('RG').AsString)
     .RgOrgaoExpedidor(MyQuery.FieldByName('RG_ORGAO_EXPEDIDOR').AsString)
+    .ServidorHash(MyQuery.FieldByName('SERVIDOR_HASH').AsString)
     .End_Entitie;
 end;
 
@@ -190,7 +194,8 @@ begin
     .AddParam('INSCRICAO_ESTADUAL', FEntitie.IE)
     .AddParam('CPF', FEntitie.Cpf)
     .AddParam('RG', FEntitie.RG)
-    .AddParam('RG_ORGAO_EXPEDIDOR', FEntitie.RgOrgaoExpedidor);
+    .AddParam('RG_ORGAO_EXPEDIDOR', FEntitie.RgOrgaoExpedidor)
+    .AddParam('DATA_CADASTRO', Now);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -214,8 +219,7 @@ begin
     .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO)')
     .Add('VALUES')
     .Add('(:RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
-    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)')
-    .AddParam('DATA_CADASTRO', Now);
+    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)');
 end;
 
 procedure TModelEmpresasFactory.SQLUpdate;
@@ -225,7 +229,7 @@ begin
     .Add('RAZAO_SOCIAL = :RAZAO_SOCIAL, NOME_FANTASIA = :NOME_FANTASIA, ENDERECO = :ENDERECO, NUMERO = :NUMERO, BAIRRO = :BAIRRO, ')
     .Add('CEP = :CEP, CIDADE = :CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
     .Add('CELULAR = :CELULAR, FAX = :FAX, EMAIL = :EMAIL, TIPO_JURIDICO = :TIPO_JURIDICO, CNPJ = :CNPJ, INSCRICAO_ESTADUAL = :INSCRICAO_ESTADUAL, ')
-    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR')
+    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR, DATA_CADASTRO = :DATA_CADASTRO')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;

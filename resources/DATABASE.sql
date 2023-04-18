@@ -76,7 +76,8 @@ CREATE TABLE AGENDA (
     FUNCIONARIO            INTEGER,
     DATA                   DATE,
     HORA                   TIME,
-    OBSERVACAO             VARCHAR(1000),
+    TITULO                 VARCHAR(50),
+	OBSERVACAO             VARCHAR(1000),
     STATUS                 VARCHAR(20),
     DATA_CADASTRO          TIMESTAMP,
     DATA_ULTIMA_ALTERACAO  TIMESTAMP
@@ -178,7 +179,8 @@ CREATE TABLE EMPRESAS (
     CPF                 VARCHAR(11),
     RG                  VARCHAR(20),
     RG_ORGAO_EXPEDIDOR  VARCHAR(5),
-    DATA_CADASTRO       DATE
+    DATA_CADASTRO       DATE,
+	SERVIDOR_HASH       VARCHAR(50)
 );
 
 CREATE TABLE FORMA_PAGAMENTO (

@@ -107,6 +107,7 @@ type
     procedure ProcessStatus;
     procedure ProcessImageLogo(AImageFile: string);
     procedure CreateShortcutIcons;
+    procedure ValidarDadosEmpresa;
   public
   end;
 
@@ -180,6 +181,7 @@ begin
      end
     );
    LTask.Start;
+   Self.ValidarDadosEmpresa;
 end;
 
 procedure TViewSistemaMain.FormResize(Sender: TObject);
@@ -201,6 +203,7 @@ begin
    TimerFormResize.Enabled := False;
    Self.CreateShortcutIcons;
 end;
+
 {$ENDREGION 'EVENTS'}
 
 {$REGION 'MenuEvents'}
@@ -469,6 +472,15 @@ begin
    end;
 end;
 
+procedure TViewSistemaMain.ValidarDadosEmpresa;
+begin
+   if(TMyLibrary.UnlockSpecialComands)then
+     Exit;
+
+   GetEmpresaLogada.ConsultarEntitie;
+   if(GetEmpresaLogada.Entitie.Cnpj().IsEmpty and GetEmpresaLogada.Entitie.Cpf().IsEmpty)then
+     Self.ConfiguracoesEmpresa1.Click;
+end;
 {$ENDREGION 'Procedures'}
 
 end.

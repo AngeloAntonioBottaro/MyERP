@@ -22,6 +22,7 @@ type
     FId: Integer;
     FObservacao: string;
     FStatus: string;
+    FTitulo: string;
   public
     constructor Create(AParent: IModelAgendaFactory<TModelAgendaEntitie>);
     destructor Destroy; override;
@@ -56,6 +57,8 @@ type
     function Status(AValue: string): TModelAgendaEntitie; overload;
     function Status: string; overload;
     function StatusComboBox: Integer;
+    function Titulo(AValue: string): TModelAgendaEntitie; overload;
+    function Titulo: string; overload;
   end;
 
 implementation
@@ -251,6 +254,17 @@ begin
       if(Self.Status.Equals(AGENDA_STATUS[I]))then
         Result := I -1;
    end;
+end;
+
+function TModelAgendaEntitie.Titulo(AValue: string): TModelAgendaEntitie;
+begin
+   Result := Self;
+   FTitulo := AValue.Trim;
+end;
+
+function TModelAgendaEntitie.Titulo: string;
+begin
+   Result := FTitulo;
 end;
 
 end.

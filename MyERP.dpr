@@ -156,7 +156,6 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TViewSistemaMenuConf, ViewSistemaMenuConf);
   TStyleManager.TrySetStyle('Amethyst Kamri');
 
   ViewSistemaSplash := TViewSistemaSplash.Create(nil);

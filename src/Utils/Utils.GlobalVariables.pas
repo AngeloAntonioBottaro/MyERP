@@ -8,7 +8,9 @@ uses
   System.UITypes,
   Utils.MyConsts,
   Utils.MyLibrary,
-  Utils.MyVCLLibrary;
+  Utils.MyVCLLibrary,
+  Model.Empresas.Interfaces,
+  Model.Empresas.Entitie;
 
 var
   //PASTAS
@@ -31,16 +33,21 @@ var
   VG_Direitos: string;
   VG_Logo: string;
   VG_Impressora: string;
-  VG_IdEmpresaLog: Integer;
 
   //USUARIO
   VG_UsuarioLogadoId: Integer;
   VG_UsuarioLogadoNome: string;
 
+  EmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
+
 procedure RefreshVariables;
 procedure CreateAppDirectories;
+function GetEmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
 
 implementation
+
+uses
+  Model.Empresas.Factory;
 
 procedure RefreshVariables;
 begin
@@ -61,7 +68,6 @@ begin
    VG_Direitos     := DIREITOS_SISTEMA;
    VG_Logo         := IncludeTrailingPathDelimiter(VG_PastaImagens) + IMAGE_LOGO;
    VG_Impressora   := EmptyStr;
-   VG_IdEmpresaLog := 0;
 
    //USUARIO
    VG_UsuarioLogadoId   := 0;
@@ -90,6 +96,14 @@ begin
 
    if(not DirectoryExists(VG_PastaTemporaria))then
      ForceDirectories(VG_PastaTemporaria);
+end;
+
+function GetEmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
+begin
+   if(not Assigned(EmpresaLogada))then
+     EmpresaLogada := TModelEmpresasFactory.New;
+
+   Result := EmpresaLogada;
 end;
 
 end.
