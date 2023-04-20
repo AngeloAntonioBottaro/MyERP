@@ -237,7 +237,7 @@ end;
 
 procedure TViewClientesCad.NewEntitie;
 begin
-   FCliente := TModelClientesFactory.New;
+   FCliente := TModelClientesFactory.New('Cadastro de cliente');
 end;
 
 procedure TViewClientesCad.OnBusca(AId: Integer);

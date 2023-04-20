@@ -1,4 +1,4 @@
-unit Utils.Log;
+unit Utils.Logs;
 
 interface
 
@@ -9,8 +9,8 @@ uses
 type
   ILog = interface
    ['{3AEF44F8-4BFA-496F-924A-C066C5480A7E}']
-   procedure Gravar(AModulo, AAcao, ADescricao, AIdReferencia: string); overload;
-   procedure Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: Integer); overload;
+   procedure Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: string = ''); overload;
+   procedure Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: Integer = 0); overload;
   end;
 
   TUtilsLog = class(TInterfacedObject, ILog)
@@ -40,7 +40,7 @@ begin
    Result := Self.Create;
 end;
 
-procedure TUtilsLog.Gravar(AModulo, AAcao, ADescricao, AIdReferencia: string);
+procedure TUtilsLog.Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: string);
 begin
    FModulo       := AModulo.Trim;
    FAcao         := AAcao.Trim;
@@ -63,7 +63,7 @@ begin
    try
      MyQueryNew
       .Add('INSERT INTO LOGS(DATA_HORA, ID_FUNCIONARIO, MODULO, ACAO, DESCRICAO, REFERENCIA) VALUES ')
-      .Add('(:DATA, :HORA, :ID_FUNCIONARIO, :MODULO, :ACAO, :DESCRICAO, :REFERENCIA)')
+      .Add('(:DATA_HORA, :ID_FUNCIONARIO, :MODULO, :ACAO, :DESCRICAO, :REFERENCIA)')
       .AddParam('DATA_HORA', Now)
       .AddParam('ID_FUNCIONARIO', VG_UsuarioLogadoId)
       .AddParam('MODULO', FModulo)

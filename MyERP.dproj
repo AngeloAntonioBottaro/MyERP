@@ -363,7 +363,7 @@
             <Form>ViewSistemaMenuConf</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\Utils\Utils.Log.pas"/>
+        <DCCReference Include="src\Utils\Utils.Logs.pas"/>
         <DCCReference Include="src\Utils\Utils.Types.pas"/>
         <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>

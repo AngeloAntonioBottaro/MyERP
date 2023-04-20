@@ -154,8 +154,7 @@ begin
    inherited;
    if(DS_Busca.DataSet.FieldByName('STATUS').AsString.Equals(STATUS_INATIVO))then
    begin
-      if(not (gdSelected in State))then
-        TDBGrid(Sender).Canvas.Font.Color := clRed;
+      TDBGrid(Sender).Canvas.Font.Color := clRed;
       TDBGrid(Sender).Canvas.FillRect(Rect);
       TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
    end;

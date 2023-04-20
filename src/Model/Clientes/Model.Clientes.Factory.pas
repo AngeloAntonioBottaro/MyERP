@@ -16,6 +16,7 @@ type
   TModelClientesFactory = class(TInterfacedObject, IModelClientesFactory<TModelClientesEntitie>)
   private
     FEntitie: TModelClientesEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
     procedure ValidarCampos;
@@ -31,8 +32,8 @@ type
     function Deletar: IModelClientesFactory<TModelClientesEntitie>;
     function Gravar: IModelClientesFactory<TModelClientesEntitie>;
   public
-    class function New: IModelClientesFactory<TModelClientesEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelClientesFactory<TModelClientesEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -44,16 +45,21 @@ uses
   MyExceptions,
   Utils.MyLibrary,
   Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.GlobalConsts,
+  Utils.Logs;
 
-class function TModelClientesFactory.New: IModelClientesFactory<TModelClientesEntitie>;
+class function TModelClientesFactory.New(ATelaOrigem: string): IModelClientesFactory<TModelClientesEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory cliente necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelClientesFactory.Create;
+constructor TModelClientesFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelClientesEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelClientesEntitie.Create(Self);
 end;
 
 destructor TModelClientesFactory.Destroy;
@@ -150,6 +156,11 @@ begin
    try
      ShowDebug(MyQuery.SQL.Text);
      MyQuery.ExecSQL;
+
+     TUtilsLog.New.Gravar(FTelaOrigem,
+                          'Alteração de status',
+                          'Usuário alterou o status do cliente ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                          FEntitie.Id);
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -225,6 +236,11 @@ begin
    try
      ShowDebug(MyQuery.SQL.Text);
      MyQuery.ExecSQL;
+
+     TUtilsLog.New.Gravar(FTelaOrigem,
+                          'Exclusão de cliente',
+                          'Usuário excluiu o cliente ' + FEntitie.Id.ToString,
+                          FEntitie.Id);
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -276,6 +292,11 @@ begin
    try
      ShowDebug(MyQuery.SQL.Text);
      MyQuery.ExecSQL;
+
+     TUtilsLog.New.Gravar(FTelaOrigem,
+                          'Gravação de cliente',
+                          'Usuário gravou ' + IfThen(FEntitie.Id > 0, 'o cliente ' + FEntitie.Id.ToString, 'um novo cliente'),
+                          IfThen(FEntitie.Id > 0, FEntitie.Id.ToString, '0'));
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then

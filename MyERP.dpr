@@ -151,7 +151,7 @@ uses
   View.Agenda.Busca in 'src\View\Agenda\View.Agenda.Busca.pas' {ViewAgendaBusca},
   Model.Agenda.Busca in 'src\Model\Agenda\Busca\Model.Agenda.Busca.pas',
   View.Sistema.MenuConf in 'src\View\Sistema\View.Sistema.MenuConf.pas' {ViewSistemaMenuConf},
-  Utils.Log in 'src\Utils\Utils.Log.pas',
+  Utils.Logs in 'src\Utils\Utils.Logs.pas',
   Utils.Types in 'src\Utils\Utils.Types.pas';
 
 {$R *.res}
