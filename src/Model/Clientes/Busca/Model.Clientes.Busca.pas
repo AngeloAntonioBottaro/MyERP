@@ -6,7 +6,7 @@ uses
   System.SysUtils,
   Data.DB,
   MyConnection,
-  Utils.MyTypes;
+  Utils.Types;
 
 type
   TModelClientesBusca = class

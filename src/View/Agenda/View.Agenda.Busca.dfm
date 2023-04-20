@@ -2,13 +2,6 @@ inherited ViewAgendaBusca: TViewAgendaBusca
   Caption = 'Busca de compromissos agendados'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnTop: TPanel
-    inherited pnBuscarConteudo: TPanel
-      inherited lbBusca: TLabel
-        Width = 380
-      end
-    end
-  end
   inherited pnBotton: TPanel
     inherited pnButtons: TPanel
       inherited btnCadastro: TButton
@@ -16,6 +9,7 @@ inherited ViewAgendaBusca: TViewAgendaBusca
       end
     end
     inherited gBoxTipoConsulta: TGroupBox
+      ExplicitTop = 23
       object rdBuscarCliente: TRadioButton
         Left = 109
         Top = 20
@@ -54,10 +48,14 @@ inherited ViewAgendaBusca: TViewAgendaBusca
         TabOrder = 3
         OnClick = ConfComponents
       end
-    end
-    inherited pnOptions: TPanel
-      inherited lbTotalRegistros: TLabel
-        Height = 14
+      object rdBuscarTitulo: TRadioButton
+        Left = 10
+        Top = 43
+        Width = 78
+        Height = 17
+        Caption = 'T'#237'tulo (F7)'
+        TabOrder = 4
+        OnClick = ConfComponents
       end
     end
   end

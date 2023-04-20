@@ -21,7 +21,7 @@ uses
   Vcl.Imaging.pngimage,
   View.Base.Busca,
   Data.DB,
-  Utils.MyTypes,
+  Utils.Types,
   Model.Clientes.Busca;
 
 type
@@ -152,10 +152,9 @@ begin
    inherited;
    if(DS_Busca.DataSet.FieldByName('STATUS').AsString.Equals(STATUS_INATIVO))then
    begin
-      if(not (gdSelected in State))then
-        TDBGrid(Sender).Canvas.Font.Color := clRed;
+      TDBGrid(Sender).Canvas.Font.Color := clRed;
       TDBGrid(Sender).Canvas.FillRect(Rect);
-      TDBGrid(Sender).DefaultDrawDataCell(rect,Column.Field,state);
+      TDBGrid(Sender).DefaultDrawDataCell(rect, Column.Field, state);
    end;
 end;
 

@@ -6,7 +6,7 @@ uses
   System.SysUtils,
   Data.DB,
   MyConnection,
-  Utils.MyTypes;
+  Utils.Types;
 
 type
   TModelAgendaBusca = class
@@ -93,6 +93,15 @@ begin
         .Add('((FUNCIONARIOS.RAZAO_SOCIAL CONTAINING :NOME)or(FUNCIONARIOS.NOME_FANTASIA CONTAINING :NOME))')
         .AddParam('NOME', FConteudoBusca);
     end;
+    TTipoBuscaAgenda.Titulo:
+    begin
+       if(Length(FConteudoBusca) > 50)then
+         Abort;
+
+       FQueryBusca
+        .Add('(AGENDA.TITULO CONTAINING :TITULO)')
+        .AddParam('TITULO', FConteudoBusca);
+    end;
     TTipoBuscaAgenda.Status: FQueryBusca.Add('(AGENDA.STATUS CONTAINING :STATUS)').AddParam('STATUS', FConteudoBusca);
    else
      Abort;
@@ -108,6 +117,7 @@ begin
     TTipoBuscaAgenda.Cliente: FQueryBusca.Add('CLIENTE_NOME, CLIENTE');
     TTipoBuscaAgenda.Funcionario: FQueryBusca.Add('FUNCIONARIO_NOME, FUNCIONARIO');
     TTipoBuscaAgenda.Status: FQueryBusca.Add('STATUS');
+    TTipoBuscaAgenda.Titulo: FQueryBusca.Add('TITULO');
    else
      FQueryBusca.Add('ID');
    end;

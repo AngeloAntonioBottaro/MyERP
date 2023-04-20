@@ -21,7 +21,7 @@ uses
   Vcl.Imaging.pngimage,
   View.Base.Busca,
   Data.DB,
-  Utils.MyTypes,
+  Utils.Types,
   Model.FormasPagamento.Busca;
 
 type

@@ -21,7 +21,7 @@ uses
   Vcl.Imaging.pngimage,
   View.Base.Busca,
   Data.DB,
-  Utils.MyTypes,
+  Utils.Types,
   Model.Agenda.Busca;
 
 type
@@ -30,6 +30,7 @@ type
     rdBuscarCodigo: TRadioButton;
     rdBuscarFuncionario: TRadioButton;
     rdBuscarStatus: TRadioButton;
+    rdBuscarTitulo: TRadioButton;
     procedure ConfComponents(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -92,6 +93,7 @@ begin
     VK_F3: if(Shift = [])then rdBuscarCliente.Checked     := True;
     VK_F4: if(Shift = [])then rdBuscarFuncionario.Checked := True;
     VK_F6: if(Shift = [])then rdBuscarStatus.Checked      := True;
+    VK_F7: if(Shift = [])then rdBuscarTitulo.Checked      := True;
    end;
 end;
 
@@ -138,7 +140,9 @@ begin
    else if(rdBuscarFuncionario.Enabled and rdBuscarFuncionario.Checked)then
      Result := TTipoBuscaAgenda.Funcionario
    else if(rdBuscarStatus.Enabled and rdBuscarStatus.Checked)then
-     Result := TTipoBuscaAgenda.Status;
+     Result := TTipoBuscaAgenda.Status
+   else if(rdBuscarTitulo.Enabled and rdBuscarTitulo.Checked)then
+     Result := TTipoBuscaAgenda.Titulo;
 end;
 
 procedure TViewAgendaBusca.GridBuscaTitleClick(Column: TColumn);

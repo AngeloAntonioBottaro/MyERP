@@ -10,6 +10,7 @@ inherited ViewClientesCad: TViewClientesCad
     Top = 220
     Width = 709
     ExplicitTop = 220
+    ExplicitWidth = 709
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
