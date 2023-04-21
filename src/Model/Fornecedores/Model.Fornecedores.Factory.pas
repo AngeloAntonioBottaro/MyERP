@@ -16,6 +16,7 @@ type
   TModelFornecedoresFactory = class(TInterfacedObject, IModelFornecedoresFactory<TModelFornecedoresEntitie>)
   private
     FEntitie: TModelFornecedoresEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
     procedure ValidarCampos;
@@ -31,8 +32,8 @@ type
     function Deletar: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
     function Gravar: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
   public
-    class function New: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelFornecedoresFactory<TModelFornecedoresEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -44,16 +45,21 @@ uses
   MyExceptions,
   Utils.MyLibrary,
   Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.GlobalConsts,
+  Model.Logs;
 
-class function TModelFornecedoresFactory.New: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
+class function TModelFornecedoresFactory.New(ATelaOrigem: string): IModelFornecedoresFactory<TModelFornecedoresEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory fornecedores necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelFornecedoresFactory.Create;
+constructor TModelFornecedoresFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelFornecedoresEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelFornecedoresEntitie.Create(Self);
 end;
 
 destructor TModelFornecedoresFactory.Destroy;
@@ -156,6 +162,11 @@ begin
    end;
    end;
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Alteração de status',
+                         'Usuário alterou o status do fornecedor ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         FEntitie.Id);
+
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
 end;
 
@@ -229,10 +240,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de fornecedor',
+                         'Usuário excluiu o fornecedor ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelFornecedoresFactory.Gravar: IModelFornecedoresFactory<TModelFornecedoresEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -266,7 +284,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -274,6 +302,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de fornecedor',
+                         'Usuário gravou o fornecedor ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -287,6 +320,7 @@ begin
     .Add('VALUES')
     .Add('(:STATUS, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
     .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)')
+    .Add('RETURNING ID')
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_CADASTRO', Now);
 end;

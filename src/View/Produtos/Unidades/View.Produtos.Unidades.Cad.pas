@@ -98,8 +98,7 @@ begin
    FUnidade.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewProdutosUnidadesCad.btnNovoClick(Sender: TObject);
@@ -135,7 +134,7 @@ end;
 
 procedure TViewProdutosUnidadesCad.NewEntitie;
 begin
-   FUnidade := TModelProdutosUnidadesFactory.New;
+   FUnidade := TModelProdutosUnidadesFactory.New('Cadastro de unidade de produto');
 end;
 
 procedure TViewProdutosUnidadesCad.OnBusca(AId: Integer);

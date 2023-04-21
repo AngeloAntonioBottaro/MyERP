@@ -122,8 +122,7 @@ begin
    FAgenda.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewAgendaCad.btnNovoClick(Sender: TObject);
@@ -196,7 +195,7 @@ end;
 
 procedure TViewAgendaCad.NewEntitie;
 begin
-   FAgenda := TModelAgendaFactory.New;
+   FAgenda := TModelAgendaFactory.New('Cadastro de compromissos(Agenda)');
 end;
 
 procedure TViewAgendaCad.OnBusca(AId: Integer);

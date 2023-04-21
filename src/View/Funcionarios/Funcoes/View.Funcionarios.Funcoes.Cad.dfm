@@ -10,7 +10,7 @@ inherited ViewFuncionariosFuncoesCad: TViewFuncionariosFuncoesCad
     Top = 65
     Width = 709
     ExplicitTop = 65
-    ExplicitWidth = 808
+    ExplicitWidth = 709
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -19,10 +19,6 @@ inherited ViewFuncionariosFuncoesCad: TViewFuncionariosFuncoesCad
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
-      ExplicitLeft = 604
-    end
-    inherited btnFechar: TButton
-      ExplicitLeft = 704
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -37,7 +33,6 @@ inherited ViewFuncionariosFuncoesCad: TViewFuncionariosFuncoesCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 802
     object lbId: TLabel
       Left = 8
       Top = 8

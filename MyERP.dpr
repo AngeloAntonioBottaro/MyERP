@@ -15,11 +15,6 @@ uses
   Utils.GlobalVariables in 'src\Utils\Utils.GlobalVariables.pas',
   Model.Sistema.Interfaces in 'src\Model\Sistema\Model.Sistema.Interfaces.pas',
   Model.Sistema.Splash in 'src\Model\Sistema\Model.Sistema.Splash.pas',
-  MySearchComponents.Interfaces in '..\MySearchScreen\Src\MySearchComponents.Interfaces.pas',
-  MySearchComponents in '..\MySearchScreen\Src\MySearchComponents.pas',
-  MySearchComponents.Search in '..\MySearchScreen\Src\MySearchComponents.Search.pas',
-  MySearchComponents.Utils in '..\MySearchScreen\Src\MySearchComponents.Utils.pas',
-  MySearchComponents.View in '..\MySearchScreen\Src\MySearchComponents.View.pas' {MySearchComponentsView},
   Model.Behavior.Exceptions in 'src\Model\Behavior\Model.Behavior.Exceptions.pas',
   Model.Behavior in 'src\Model\Behavior\Model.Behavior.pas',
   Model.Sistema.Login in 'src\Model\Sistema\Model.Sistema.Login.pas',
@@ -151,13 +146,20 @@ uses
   View.Agenda.Busca in 'src\View\Agenda\View.Agenda.Busca.pas' {ViewAgendaBusca},
   Model.Agenda.Busca in 'src\Model\Agenda\Busca\Model.Agenda.Busca.pas',
   View.Sistema.MenuConf in 'src\View\Sistema\View.Sistema.MenuConf.pas' {ViewSistemaMenuConf},
-  Utils.Logs in 'src\Utils\Utils.Logs.pas',
-  Utils.Types in 'src\Utils\Utils.Types.pas';
+  Model.Logs in 'src\Model\Logs\Model.Logs.pas',
+  Utils.Types in 'src\Utils\Utils.Types.pas',
+  MySearchComponents.Interfaces in '..\MySearchComponents\Src\MySearchComponents.Interfaces.pas',
+  MySearchComponents in '..\MySearchComponents\Src\MySearchComponents.pas',
+  MySearchComponents.Search in '..\MySearchComponents\Src\MySearchComponents.Search.pas',
+  MySearchComponents.Utils in '..\MySearchComponents\Src\MySearchComponents.Utils.pas',
+  MySearchComponents.View in '..\MySearchComponents\Src\MySearchComponents.View.pas' {MySearchComponentsView},
+  View.Logs.Busca in 'src\View\Logs\View.Logs.Busca.pas' {ViewLogsBusca};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.CreateForm(TViewLogsBusca, ViewLogsBusca);
   TStyleManager.TrySetStyle('Amethyst Kamri');
 
   ViewSistemaSplash := TViewSistemaSplash.Create(nil);

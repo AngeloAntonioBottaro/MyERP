@@ -226,7 +226,7 @@ end;
 
 procedure TViewSistemaEmpresaCad.NewEntitie;
 begin
-   FEmpresa := TModelEmpresasFactory.New;
+   FEmpresa := TModelEmpresasFactory.New('Cadastro de empresa');
 end;
 
 procedure TViewSistemaEmpresaCad.OnBusca(AId: Integer);

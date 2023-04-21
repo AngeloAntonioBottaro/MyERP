@@ -102,8 +102,7 @@ begin
    FFormaPag.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewFormasPagamentoCad.btnNovoClick(Sender: TObject);
@@ -140,7 +139,7 @@ end;
 
 procedure TViewFormasPagamentoCad.NewEntitie;
 begin
-   FFormaPag := TModelFormasPagamentoFactory.New;
+   FFormaPag := TModelFormasPagamentoFactory.New('Cadastro de forma de pagamento');
 end;
 
 procedure TViewFormasPagamentoCad.OnBusca(AId: Integer);

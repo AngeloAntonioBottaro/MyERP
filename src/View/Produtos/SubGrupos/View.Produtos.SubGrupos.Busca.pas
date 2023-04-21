@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.Produtos.SubGrupos.Busca;
 
+const
+  TELA = 'Busca de subgrupos de produtos';
+
 type
   TViewProdutosSubGruposBusca = class(TViewBaseBusca)
     rdBuscarNome: TRadioButton;
@@ -122,7 +125,7 @@ end;
 procedure TViewProdutosSubGruposBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   TModelProdutosSubGruposFactory.New
+   TModelProdutosSubGruposFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie

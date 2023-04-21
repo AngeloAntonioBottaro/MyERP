@@ -100,8 +100,7 @@ begin
    FCidade.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewCidadesCad.btnNovoClick(Sender: TObject);
@@ -146,7 +145,7 @@ end;
 
 procedure TViewCidadesCad.NewEntitie;
 begin
-   FCidade := TModelCidadesFactory.New;
+   FCidade := TModelCidadesFactory.New('Cadastro de cidade');
 end;
 
 procedure TViewCidadesCad.OnBusca(AId: Integer);

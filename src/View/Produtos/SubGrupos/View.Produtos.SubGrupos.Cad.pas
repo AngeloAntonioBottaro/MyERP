@@ -102,8 +102,7 @@ begin
    FSubGrupo.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewProdutosSubgruposCad.btnNovoClick(Sender: TObject);
@@ -140,7 +139,7 @@ end;
 
 procedure TViewProdutosSubgruposCad.NewEntitie;
 begin
-   FSubGrupo := TModelProdutosSubGruposFactory.New;
+   FSubGrupo := TModelProdutosSubGruposFactory.New('Cadastro de subgrupo de produtos');
 end;
 
 procedure TViewProdutosSubgruposCad.OnBusca(AId: Integer);

@@ -504,12 +504,13 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       PasswordChar = '#'
       TabOrder = 26
     end
-    object edtSalario: TCurrencyEdit
+    object edtSalario: TEdit
       Left = 563
       Top = 227
       Width = 138
       Height = 21
-      Alignment = taLeftJustify
+      NumbersOnly = True
+      PasswordChar = '#'
       TabOrder = 27
     end
   end

@@ -157,8 +157,8 @@ begin
    FFornecedor.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
+   Self.ConfComponents(nil);
 end;
 
 procedure TViewFornecedoresCad.btnNovoClick(Sender: TObject);
@@ -236,7 +236,7 @@ end;
 
 procedure TViewFornecedoresCad.NewEntitie;
 begin
-   FFornecedor := TModelFornecedoresFactory.New;
+   FFornecedor := TModelFornecedoresFactory.New('Cadastro de fornecedor');
 end;
 
 procedure TViewFornecedoresCad.OnBusca(AId: Integer);

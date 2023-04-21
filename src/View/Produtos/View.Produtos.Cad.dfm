@@ -10,7 +10,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     Top = 181
     Width = 709
     ExplicitTop = 181
-    ExplicitWidth = 808
+    ExplicitWidth = 709
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -19,10 +19,6 @@ inherited ViewProdutosCad: TViewProdutosCad
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
-      ExplicitLeft = 604
-    end
-    inherited btnFechar: TButton
-      ExplicitLeft = 704
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -37,7 +33,6 @@ inherited ViewProdutosCad: TViewProdutosCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 802
     object lbId: TLabel
       Left = 8
       Top = 8
@@ -206,54 +201,12 @@ inherited ViewProdutosCad: TViewProdutosCad
       Height = 21
       TabOrder = 1
     end
-    object edtCusto: TCurrencyEdit
-      Left = 247
-      Top = 108
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      TabOrder = 10
-    end
     object edtDescricao: TEdit
       Left = 402
       Top = 22
       Width = 299
       Height = 21
       TabOrder = 2
-    end
-    object edtPorcLucroVista: TCurrencyEdit
-      Left = 338
-      Top = 108
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      DisplayFormat = ',0.00 %'
-      TabOrder = 11
-    end
-    object edtPrecoVendaVista: TCurrencyEdit
-      Left = 429
-      Top = 108
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      TabOrder = 12
-    end
-    object edtPorcLucroPrazo: TCurrencyEdit
-      Left = 520
-      Top = 108
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      DisplayFormat = ',0.00 %'
-      TabOrder = 13
-    end
-    object edtPrecoVendaPrazo: TCurrencyEdit
-      Left = 611
-      Top = 108
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      TabOrder = 14
     end
     object edtIdSubGrupo: TEdit
       Left = 8
@@ -293,45 +246,12 @@ inherited ViewProdutosCad: TViewProdutosCad
       ReadOnly = True
       TabOrder = 5
     end
-    object edtEstoque: TCurrencyEdit
-      Left = 190
-      Top = 148
-      Width = 90
-      Height = 21
-      TabStop = False
-      Alignment = taLeftJustify
-      Color = clBtnFace
-      DecimalPlaces = 3
-      DisplayFormat = ',0.000;- ,0.000'
-      ReadOnly = True
-      TabOrder = 17
-    end
     object edtCodBarras: TEdit
       Left = 8
       Top = 108
       Width = 238
       Height = 21
       TabOrder = 9
-    end
-    object edtEstoqueMinimo: TCurrencyEdit
-      Left = 8
-      Top = 148
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      DecimalPlaces = 3
-      DisplayFormat = ',0.000;- ,0.000'
-      TabOrder = 15
-    end
-    object edtEstoqueMaximo: TCurrencyEdit
-      Left = 99
-      Top = 148
-      Width = 90
-      Height = 21
-      Alignment = taLeftJustify
-      DecimalPlaces = 3
-      DisplayFormat = ',0.000;- ,0.000'
-      TabOrder = 16
     end
     object edtIdUnidade: TEdit
       Left = 402
@@ -370,6 +290,72 @@ inherited ViewProdutosCad: TViewProdutosCad
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 8
+    end
+    object edtCusto: TEdit
+      Left = 247
+      Top = 108
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 10
+    end
+    object edtPorcLucroVista: TEdit
+      Left = 338
+      Top = 108
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 11
+    end
+    object edtPrecoVendaVista: TEdit
+      Left = 429
+      Top = 108
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 12
+    end
+    object edtPorcLucroPrazo: TEdit
+      Left = 520
+      Top = 108
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 13
+    end
+    object edtPrecoVendaPrazo: TEdit
+      Left = 611
+      Top = 108
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 14
+    end
+    object edtEstoqueMinimo: TEdit
+      Left = 8
+      Top = 148
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 15
+    end
+    object edtEstoqueMaximo: TEdit
+      Left = 99
+      Top = 148
+      Width = 87
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 16
+    end
+    object edtEstoque: TEdit
+      Left = 190
+      Top = 148
+      Width = 87
+      Height = 21
+      Color = clBtnFace
+      NumbersOnly = True
+      ReadOnly = True
+      TabOrder = 17
     end
   end
 end

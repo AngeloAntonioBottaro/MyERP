@@ -16,6 +16,7 @@ type
   TModelProdutosSubGruposFactory = class(TInterfacedObject, IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>)
   private
     FEntitie: TModelProdutosSubGruposEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
   protected
@@ -25,8 +26,8 @@ type
     function Deletar: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
     function Gravar: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
   public
-    class function New: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -37,14 +38,18 @@ uses
   MyMessage,
   MyExceptions,
   Utils.MyLibrary,
-  Utils.LibrarySistema;
+  Utils.LibrarySistema,
+  Model.Logs;
 
-class function TModelProdutosSubGruposFactory.New: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
+class function TModelProdutosSubGruposFactory.New(ATelaOrigem: string): IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory subgrupos de produtos necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelProdutosSubGruposFactory.Create;
+constructor TModelProdutosSubGruposFactory.Create(ATelaOrigem: string);
 begin
    FEntitie := TModelProdutosSubGruposEntitie.Create(Self);
 end;
@@ -114,10 +119,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de subgrupo de produto',
+                         'Usuário excluiu o subgrupo ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelProdutosSubGruposFactory.Gravar: IModelProdutosSubGruposFactory<TModelProdutosSubGruposEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -132,7 +144,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -150,7 +172,8 @@ begin
     .Add('INSERT INTO '+TABELA)
     .Add('(NOME, GRUPO)')
     .Add('VALUES')
-    .Add('(:NOME, :GRUPO)');
+    .Add('(:NOME, :GRUPO)')
+    .Add('RETURNING ID');
 end;
 
 procedure TModelProdutosSubGruposFactory.SQLUpdate;

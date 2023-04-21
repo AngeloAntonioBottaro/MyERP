@@ -16,6 +16,7 @@ type
   TModelCidadesFactory = class(TInterfacedObject, IModelCidadesFactory<TModelCidadesEntitie>)
   private
     FEntitie: TModelCidadesEntitie;
+    FTelaOrigem: string;
     procedure InsertCidade;
     procedure UpdateCidade;
   protected
@@ -25,8 +26,8 @@ type
     function Deletar: IModelCidadesFactory<TModelCidadesEntitie>;
     function Gravar: IModelCidadesFactory<TModelCidadesEntitie>;
   public
-    class function New: IModelCidadesFactory<TModelCidadesEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelCidadesFactory<TModelCidadesEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -37,16 +38,21 @@ uses
   MyMessage,
   MyExceptions,
   Utils.MyLibrary,
-  Utils.LibrarySistema;
+  Utils.LibrarySistema,
+  Model.Logs;
 
-class function TModelCidadesFactory.New: IModelCidadesFactory<TModelCidadesEntitie>;
+class function TModelCidadesFactory.New(ATelaOrigem: string): IModelCidadesFactory<TModelCidadesEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory cidade necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelCidadesFactory.Create;
+constructor TModelCidadesFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelCidadesEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelCidadesEntitie.Create(Self);
 end;
 
 destructor TModelCidadesFactory.Destroy;
@@ -115,10 +121,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de cidade',
+                         'Usuário excluiu a cidade ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelCidadesFactory.Gravar: IModelCidadesFactory<TModelCidadesEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -134,7 +147,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -142,6 +165,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de cidade',
+                         'Usuário gravou a cidade ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -152,7 +180,8 @@ begin
     .Add('INSERT INTO '+TABELA)
     .Add('(NOME, UF, IBGE)')
     .Add('VALUES')
-    .Add('(:NOME, :UF, :IBGE)');
+    .Add('(:NOME, :UF, :IBGE)')
+    .Add('RETURNING ID');
 end;
 
 procedure TModelCidadesFactory.UpdateCidade;

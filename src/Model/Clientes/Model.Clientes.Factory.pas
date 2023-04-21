@@ -46,7 +46,7 @@ uses
   Utils.MyLibrary,
   Utils.LibrarySistema,
   Utils.GlobalConsts,
-  Utils.Logs;
+  Model.Logs;
 
 class function TModelClientesFactory.New(ATelaOrigem: string): IModelClientesFactory<TModelClientesEntitie>;
 begin
@@ -156,11 +156,6 @@ begin
    try
      ShowDebug(MyQuery.SQL.Text);
      MyQuery.ExecSQL;
-
-     TUtilsLog.New.Gravar(FTelaOrigem,
-                          'Alteração de status',
-                          'Usuário alterou o status do cliente ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
-                          FEntitie.Id);
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -169,6 +164,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Alteração de status',
+                         'Usuário alterou o status do cliente ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         FEntitie.Id);
 
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
 end;
@@ -236,11 +236,6 @@ begin
    try
      ShowDebug(MyQuery.SQL.Text);
      MyQuery.ExecSQL;
-
-     TUtilsLog.New.Gravar(FTelaOrigem,
-                          'Exclusão de cliente',
-                          'Usuário excluiu o cliente ' + FEntitie.Id.ToString,
-                          FEntitie.Id);
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -251,10 +246,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de cliente',
+                         'Usuário excluiu o cliente ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelClientesFactory.Gravar: IModelClientesFactory<TModelClientesEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -291,12 +293,18 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
 
-     TUtilsLog.New.Gravar(FTelaOrigem,
-                          'Gravação de cliente',
-                          'Usuário gravou ' + IfThen(FEntitie.Id > 0, 'o cliente ' + FEntitie.Id.ToString, 'um novo cliente'),
-                          IfThen(FEntitie.Id > 0, FEntitie.Id.ToString, '0'));
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -304,6 +312,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de cliente',
+                         'Usuário gravou o cliente ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -317,6 +330,7 @@ begin
     .Add('VALUES')
     .Add('(:STATUS, :DATA_CADASTRO, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
     .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR)')
+    .Add('RETURNING ID')
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_CADASTRO', Now);
 end;

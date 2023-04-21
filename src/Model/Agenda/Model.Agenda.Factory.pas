@@ -16,6 +16,7 @@ type
   TModelAgendaFactory = class(TInterfacedObject, IModelAgendaFactory<TModelAgendaEntitie>)
   private
     FEntitie: TModelAgendaEntitie;
+    FTelaOrigem: string;
     procedure InsertCidade;
     procedure UpdateCidade;
     procedure ValidarCampos;
@@ -26,8 +27,8 @@ type
     function Deletar: IModelAgendaFactory<TModelAgendaEntitie>;
     function Gravar: IModelAgendaFactory<TModelAgendaEntitie>;
   public
-    class function New: IModelAgendaFactory<TModelAgendaEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelAgendaFactory<TModelAgendaEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -38,16 +39,21 @@ uses
   MyMessage,
   MyExceptions,
   Utils.MyLibrary,
-  Utils.LibrarySistema;
+  Utils.LibrarySistema,
+  Model.Logs;
 
-class function TModelAgendaFactory.New: IModelAgendaFactory<TModelAgendaEntitie>;
+class function TModelAgendaFactory.New(ATelaOrigem: string): IModelAgendaFactory<TModelAgendaEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory agenda necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelAgendaFactory.Create;
+constructor TModelAgendaFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelAgendaEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelAgendaEntitie.Create(Self);
 end;
 
 destructor TModelAgendaFactory.Destroy;
@@ -86,7 +92,7 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível consultar o registro',
+        raise ExceptionError.Create('Não foi possível consultar o compromisso',
                                     THIS + ': ' + FEntitie.IdMascara + sLineBreak +
                                     'Mensagem: ' + E.Message);
    end;
@@ -122,17 +128,24 @@ begin
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível deletar o registro',
+        raise ExceptionError.Create('Não foi possível deletar o compromisso',
                                     THIS + ': ' + FEntitie.IdMascara + sLineBreak +
                                     'Mensagem: ' + E.Message);
    end;
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de compromisso',
+                         'Usuário excluiu o compromisso ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelAgendaFactory.Gravar: IModelAgendaFactory<TModelAgendaEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -155,14 +168,29 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
-        raise ExceptionError.Create('Não foi possível gravar o registro',
+        raise ExceptionError.Create('Não foi possível gravar o compromisso',
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de compromisso',
+                         'Usuário gravou o compromisso ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -174,6 +202,7 @@ begin
     .Add('(CLIENTE, FUNCIONARIO, DATA, HORA, TITULO, OBSERVACAO, STATUS, DATA_CADASTRO, DATA_ULTIMA_ALTERACAO)')
     .Add('VALUES')
     .Add('(:CLIENTE, :FUNCIONARIO, :DATA, :HORA, :TITULO, :OBSERVACAO, :STATUS, :DATA_CADASTRO, :DATA_ULTIMA_ALTERACAO)')
+    .Add('RETURNING ID')
     .AddParam('DATA_CADASTRO', Now);
 end;
 

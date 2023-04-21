@@ -1,4 +1,4 @@
-unit Utils.Logs;
+unit Model.Logs;
 
 interface
 
@@ -13,7 +13,7 @@ type
    procedure Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: Integer = 0); overload;
   end;
 
-  TUtilsLog = class(TInterfacedObject, ILog)
+  TModelLogs = class(TInterfacedObject, ILog)
   private
     FModulo: string;
     FAcao: string;
@@ -35,12 +35,12 @@ uses
   MyMessage,
   Utils.GlobalVariables;
 
-class function TUtilsLog.New: ILog;
+class function TModelLogs.New: ILog;
 begin
    Result := Self.Create;
 end;
 
-procedure TUtilsLog.Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: string);
+procedure TModelLogs.Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: string);
 begin
    FModulo       := AModulo.Trim;
    FAcao         := AAcao.Trim;
@@ -49,7 +49,7 @@ begin
    Self.GravarNoBanco;
 end;
 
-procedure TUtilsLog.Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: Integer);
+procedure TModelLogs.Gravar(AModulo, AAcao, ADescricao: string; AIdReferencia: Integer);
 begin
    FModulo       := AModulo.Trim;
    FAcao         := AAcao.Trim;
@@ -58,7 +58,7 @@ begin
    Self.GravarNoBanco;
 end;
 
-procedure TUtilsLog.GravarNoBanco;
+procedure TModelLogs.GravarNoBanco;
 begin
    try
      MyQueryNew

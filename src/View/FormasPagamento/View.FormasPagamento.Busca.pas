@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.FormasPagamento.Busca;
 
+const
+  TELA = 'Busca de forma de pagamento';
+
 type
   TViewFormasPagamentoBusca = class(TViewBaseBusca)
     rdBuscarNome: TRadioButton;
@@ -89,7 +92,7 @@ end;
 procedure TViewFormasPagamentoBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   TModelFormasPagamentoFactory.New
+   TModelFormasPagamentoFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
@@ -125,7 +128,7 @@ procedure TViewFormasPagamentoBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
    inherited;
-   TModelFormasPagamentoFactory.New
+   TModelFormasPagamentoFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie

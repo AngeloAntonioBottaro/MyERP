@@ -16,6 +16,7 @@ type
   TModelEmpresasFactory = class(TInterfacedObject, IModelEmpresasFactory<TModelEmpresasEntitie>)
   private
     FEntitie: TModelEmpresasEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
     procedure ValidarCampos;
@@ -29,8 +30,8 @@ type
     function ConsultarEntitie: IModelEmpresasFactory<TModelEmpresasEntitie>;
     function Gravar: IModelEmpresasFactory<TModelEmpresasEntitie>;
   public
-    class function New: IModelEmpresasFactory<TModelEmpresasEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelEmpresasFactory<TModelEmpresasEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -42,16 +43,21 @@ uses
   MyExceptions,
   Utils.MyLibrary,
   Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.GlobalConsts,
+  Model.Logs;
 
-class function TModelEmpresasFactory.New: IModelEmpresasFactory<TModelEmpresasEntitie>;
+class function TModelEmpresasFactory.New(ATelaOrigem: string): IModelEmpresasFactory<TModelEmpresasEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory empresa necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelEmpresasFactory.Create;
+constructor TModelEmpresasFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelEmpresasEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelEmpresasEntitie.Create(Self);
 end;
 
 destructor TModelEmpresasFactory.Destroy;
@@ -165,6 +171,8 @@ begin
 end;
 
 function TModelEmpresasFactory.Gravar: IModelEmpresasFactory<TModelEmpresasEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -199,7 +207,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -207,6 +225,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de empresa',
+                         'Usuário gravou a empresa ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -219,7 +242,8 @@ begin
     .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO)')
     .Add('VALUES')
     .Add('(:RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
-    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)');
+    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO)')
+    .Add('RETURNING ID');
 end;
 
 procedure TModelEmpresasFactory.SQLUpdate;

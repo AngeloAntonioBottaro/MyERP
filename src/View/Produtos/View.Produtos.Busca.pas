@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.Produtos.Busca;
 
+const
+  TELA = 'Busca de produtos';
+
 type
   TViewProdutosBusca = class(TViewBaseBusca)
     rdBuscarCodigo: TRadioButton;
@@ -91,7 +94,7 @@ end;
 procedure TViewProdutosBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   TModelProdutosFactory.New
+   TModelProdutosFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
@@ -132,7 +135,7 @@ end;
 procedure TViewProdutosBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   TModelProdutosFactory.New
+   TModelProdutosFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie

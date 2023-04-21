@@ -16,6 +16,7 @@ type
   TModelFormasPagamentoFactory = class(TInterfacedObject, IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>)
   private
     FEntitie: TModelFormasPagamentoEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
   protected
@@ -26,8 +27,8 @@ type
     function Deletar: IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
     function Gravar: IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
   public
-    class function New: IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -39,16 +40,21 @@ uses
   MyExceptions,
   Utils.MyLibrary,
   Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.GlobalConsts,
+  Model.Logs;
 
-class function TModelFormasPagamentoFactory.New: IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
+class function TModelFormasPagamentoFactory.New(ATelaOrigem: string): IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory forma de pagamento necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelFormasPagamentoFactory.Create;
+constructor TModelFormasPagamentoFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelFormasPagamentoEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelFormasPagamentoEntitie.Create(Self);
 end;
 
 destructor TModelFormasPagamentoFactory.Destroy;
@@ -102,6 +108,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Alteração de status',
+                         'Usuário alterou o status da forma de pagamento ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         FEntitie.Id);
 
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
 end;
@@ -160,10 +171,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de forma de pagamento',
+                         'Usuário excluiu a forma de pagamento ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelFormasPagamentoFactory.Gravar: IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -178,7 +196,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -186,6 +214,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de forma de pagamento',
+                         'Usuário gravou a forma de pagamento ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -197,6 +230,7 @@ begin
     .Add('(STATUS, NOME, TIPO_LANCAMENTO)')
     .Add('VALUES')
     .Add('(:STATUS, :NOME, :TIPO_LANCAMENTO)')
+    .Add('RETURNING ID')
     .AddParam('STATUS', STATUS_ATIVO);
 end;
 

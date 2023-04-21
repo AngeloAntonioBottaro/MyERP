@@ -16,6 +16,7 @@ type
   TModelFuncionariosFuncoesFactory = class(TInterfacedObject, IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>)
   private
     FEntitie: TModelFuncionariosFuncoesEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
   protected
@@ -25,8 +26,8 @@ type
     function Deletar: IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
     function Gravar: IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
   public
-    class function New: IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -37,16 +38,21 @@ uses
   MyMessage,
   MyExceptions,
   Utils.MyLibrary,
-  Utils.LibrarySistema;
+  Utils.LibrarySistema,
+  Model.Logs;
 
-class function TModelFuncionariosFuncoesFactory.New: IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
+class function TModelFuncionariosFuncoesFactory.New(ATelaOrigem: string): IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory funções de funcionários necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelFuncionariosFuncoesFactory.Create;
+constructor TModelFuncionariosFuncoesFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelFuncionariosFuncoesEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelFuncionariosFuncoesEntitie.Create(Self);
 end;
 
 destructor TModelFuncionariosFuncoesFactory.Destroy;
@@ -113,10 +119,17 @@ begin
    end;
    end;
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de função de funcionário',
+                         'Usuário excluiu a função ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelFuncionariosFuncoesFactory.Gravar: IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -130,7 +143,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -138,6 +161,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de função de funcionário',
+                         'Usuário gravou a função ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -148,7 +176,8 @@ begin
     .Add('INSERT INTO '+TABELA)
     .Add('(NOME)')
     .Add('VALUES')
-    .Add('(:NOME)');
+    .Add('(:NOME)')
+    .Add('RETURNING ID');
 end;
 
 procedure TModelFuncionariosFuncoesFactory.SQLUpdate;

@@ -157,8 +157,8 @@ begin
    FCliente.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
+   Self.ConfComponents(nil);
 end;
 
 procedure TViewClientesCad.btnNovoClick(Sender: TObject);

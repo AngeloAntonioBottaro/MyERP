@@ -16,6 +16,7 @@ type
   TModelProdutosFactory = class(TInterfacedObject, IModelProdutosFactory<TModelProdutosEntitie>)
   private
     FEntitie: TModelProdutosEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
   protected
@@ -26,8 +27,8 @@ type
     function Deletar: IModelProdutosFactory<TModelProdutosEntitie>;
     function Gravar: IModelProdutosFactory<TModelProdutosEntitie>;
   public
-    class function New: IModelProdutosFactory<TModelProdutosEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelProdutosFactory<TModelProdutosEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -39,16 +40,21 @@ uses
   MyExceptions,
   Utils.MyLibrary,
   Utils.LibrarySistema,
-  Utils.GlobalConsts;
+  Utils.GlobalConsts,
+  Model.Logs;
 
-class function TModelProdutosFactory.New: IModelProdutosFactory<TModelProdutosEntitie>;
+class function TModelProdutosFactory.New(ATelaOrigem: string): IModelProdutosFactory<TModelProdutosEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory produtos necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelProdutosFactory.Create;
+constructor TModelProdutosFactory.Create(ATelaOrigem: string);
 begin
-   FEntitie := TModelProdutosEntitie.Create(Self);
+   FTelaOrigem := ATelaOrigem;
+   FEntitie    := TModelProdutosEntitie.Create(Self);
 end;
 
 destructor TModelProdutosFactory.Destroy;
@@ -102,6 +108,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Alteração de status',
+                         'Usuário alterou o status do produto ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         FEntitie.Id);
 
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
 end;
@@ -173,10 +184,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de produto',
+                         'Usuário excluiu o produto ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelProdutosFactory.Gravar: IModelProdutosFactory<TModelProdutosEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -205,7 +223,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -213,6 +241,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de produto',
+                         'Usuário gravou o produto ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
@@ -228,6 +261,7 @@ begin
     .Add('(:STATUS, :DATA_CADASTRO, :NOME, :DESCRICAO, :CUSTO, ')
     .Add(':PRECO_VENDA_VISTA, :PORCENTO_LUCRO_VENDA_VISTA, :PRECO_VENDA_PRAZO, :PORCENTO_LUCRO_VENDA_PRAZO, :SUBGRUPO, ')
     .Add(':ESTOQUE, :ESTOQUE_MAXIMO, :ESTOQUE_MINIMO, :CODIGO_BARRAS, :UNIDADE)')
+    .Add('RETURNING ID')
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_CADASTRO', Now);
 end;

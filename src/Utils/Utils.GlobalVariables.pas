@@ -101,7 +101,7 @@ end;
 function GetEmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
 begin
    if(not Assigned(EmpresaLogada))then
-     EmpresaLogada := TModelEmpresasFactory.New;
+     EmpresaLogada := TModelEmpresasFactory.New('Empresa global');
 
    Result := EmpresaLogada;
 end;

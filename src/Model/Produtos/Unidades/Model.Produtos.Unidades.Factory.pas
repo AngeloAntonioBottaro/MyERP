@@ -16,6 +16,7 @@ type
   TModelProdutosUnidadesFactory = class(TInterfacedObject, IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>)
   private
     FEntitie: TModelProdutosUnidadesEntitie;
+    FTelaOrigem: string;
     procedure SQLInsert;
     procedure SQLUpdate;
   protected
@@ -25,8 +26,8 @@ type
     function Deletar: IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
     function Gravar: IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
   public
-    class function New: IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
-    constructor Create;
+    class function New(ATelaOrigem: string): IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
+    constructor Create(ATelaOrigem: string);
     destructor Destroy; override;
   end;
 
@@ -37,14 +38,18 @@ uses
   MyMessage,
   MyExceptions,
   Utils.MyLibrary,
-  Utils.LibrarySistema;
+  Utils.LibrarySistema,
+  Model.Logs;
 
-class function TModelProdutosUnidadesFactory.New: IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
+class function TModelProdutosUnidadesFactory.New(ATelaOrigem: string): IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
 begin
-   Result := Self.Create;
+   if(ATelaOrigem.Trim.IsEmpty)then
+     raise ExceptionRequired.Create('Tela de origem da factory unidades de produtos necessária');
+
+   Result := Self.Create(ATelaOrigem);
 end;
 
-constructor TModelProdutosUnidadesFactory.Create;
+constructor TModelProdutosUnidadesFactory.Create(ATelaOrigem: string);
 begin
    FEntitie := TModelProdutosUnidadesEntitie.Create(Self);
 end;
@@ -114,10 +119,17 @@ begin
    end;
    FEntitie.Id(0);
 
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         'Exclusão de unidade de produto',
+                         'Usuário excluiu a unidade ' + FEntitie.Id.ToString,
+                         FEntitie.Id);
+
    ShowDone('Exclusão realizada');
 end;
 
 function TModelProdutosUnidadesFactory.Gravar: IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>;
+var
+  LAcao: string;
 begin
    Result := Self;
 
@@ -132,7 +144,17 @@ begin
 
    try
      ShowDebug(MyQuery.SQL.Text);
-     MyQuery.ExecSQL;
+     if(FEntitie.Id > 0)then
+     begin
+        LAcao := 'Alteração';
+        MyQuery.ExecSQL;
+     end
+     else
+     begin
+        LAcao := 'Gravação';
+        MyQuery.Open;
+        FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
+     end;
    except on E: Exception do
    begin
       if(not MyQuery.ExceptionZeroRecordsUpdated)then
@@ -150,7 +172,8 @@ begin
     .Add('INSERT INTO '+TABELA)
     .Add('(NOME, SIGLA)')
     .Add('VALUES')
-    .Add('(:NOME, :SIGLA)');
+    .Add('(:NOME, :SIGLA)')
+    .Add('RETURNING ID');
 end;
 
 procedure TModelProdutosUnidadesFactory.SQLUpdate;

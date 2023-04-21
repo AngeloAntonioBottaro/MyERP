@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.Funcionarios.Busca;
 
+const
+  TELA = 'Busca de funcionários';
+
 type
   TViewFuncionariosBusca = class(TViewBaseBusca)
     rdBuscarNome: TRadioButton;
@@ -93,7 +96,7 @@ end;
 procedure TViewFuncionariosBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   TModelFuncionariosFactory.New
+   TModelFuncionariosFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
@@ -134,7 +137,7 @@ end;
 procedure TViewFuncionariosBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   TModelFuncionariosFactory.New
+   TModelFuncionariosFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie

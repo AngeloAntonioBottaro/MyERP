@@ -94,8 +94,7 @@ begin
    FGrupo.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewProdutosGruposCad.btnNovoClick(Sender: TObject);
@@ -129,7 +128,7 @@ end;
 
 procedure TViewProdutosGruposCad.NewEntitie;
 begin
-   FGrupo := TModelProdutosGruposFactory.New;
+   FGrupo := TModelProdutosGruposFactory.New('Cadastro de grupos de produtos');
 end;
 
 procedure TViewProdutosGruposCad.OnBusca(AId: Integer);

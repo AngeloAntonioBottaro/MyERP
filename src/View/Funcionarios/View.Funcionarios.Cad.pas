@@ -17,8 +17,6 @@ uses
   Vcl.Mask,
   Vcl.DBCtrls,
   Vcl.ComCtrls,
-  RxToolEdit,
-  RxCurrEdit,
   View.Base.Cadastros,
   Model.Funcionarios.Interfaces,
   Model.Funcionarios.Entitie;
@@ -81,7 +79,7 @@ type
     lbSenha: TLabel;
     edtLogin: TEdit;
     edtSenha: TEdit;
-    edtSalario: TCurrencyEdit;
+    edtSalario: TEdit;
     procedure ConfComponents(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -171,8 +169,8 @@ begin
    FFuncionario.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
+   Self.ConfComponents(nil);
 end;
 
 procedure TViewFuncionariosCad.btnNovoClick(Sender: TObject);
@@ -260,7 +258,7 @@ end;
 
 procedure TViewFuncionariosCad.NewEntitie;
 begin
-   FFuncionario := TModelFuncionariosFactory.New;
+   FFuncionario := TModelFuncionariosFactory.New('Cadastro de funcionários');
 end;
 
 procedure TViewFuncionariosCad.OnBusca(AId: Integer);

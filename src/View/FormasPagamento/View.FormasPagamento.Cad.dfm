@@ -10,7 +10,7 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
     Top = 58
     Width = 709
     ExplicitTop = 58
-    ExplicitWidth = 808
+    ExplicitWidth = 709
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end
@@ -19,10 +19,6 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
     end
     inherited btnBuscar: TButton
       OnClick = btnBuscarClick
-      ExplicitLeft = 604
-    end
-    inherited btnFechar: TButton
-      ExplicitLeft = 704
     end
     inherited btnAlterar: TButton
       OnClick = btnAlterarClick
@@ -37,7 +33,6 @@ inherited ViewFormasPagamentoCad: TViewFormasPagamentoCad
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 802
     object lbId: TLabel
       Left = 8
       Top = 8

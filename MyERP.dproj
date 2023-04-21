@@ -125,14 +125,6 @@
         <DCCReference Include="src\Utils\Utils.GlobalVariables.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Interfaces.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Splash.pas"/>
-        <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.Interfaces.pas"/>
-        <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.pas"/>
-        <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.Search.pas"/>
-        <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.Utils.pas"/>
-        <DCCReference Include="..\MySearchScreen\Src\MySearchComponents.View.pas">
-            <Form>MySearchComponentsView</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.Exceptions.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.pas"/>
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Login.pas"/>
@@ -363,8 +355,20 @@
             <Form>ViewSistemaMenuConf</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\Utils\Utils.Logs.pas"/>
+        <DCCReference Include="src\Model\Logs\Model.Logs.pas"/>
         <DCCReference Include="src\Utils\Utils.Types.pas"/>
+        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Interfaces.pas"/>
+        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.pas"/>
+        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Search.pas"/>
+        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Utils.pas"/>
+        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.View.pas">
+            <Form>MySearchComponentsView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Logs\View.Logs.Busca.pas">
+            <Form>ViewLogsBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>fornecedores</ResourceId>

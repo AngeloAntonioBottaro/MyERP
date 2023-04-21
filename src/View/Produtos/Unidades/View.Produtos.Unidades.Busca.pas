@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.Produtos.Unidades.Busca;
 
+const
+  TELA = 'Busca de unidade de produto';
+
 type
   TViewProdutosUnidadesBusca = class(TViewBaseBusca)
     rdBuscarNome: TRadioButton;
@@ -120,7 +123,7 @@ end;
 procedure TViewProdutosUnidadesBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   TModelProdutosUnidadesFactory.New
+   TModelProdutosUnidadesFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie

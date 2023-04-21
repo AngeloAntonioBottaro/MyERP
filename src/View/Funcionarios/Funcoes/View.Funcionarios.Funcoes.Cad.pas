@@ -94,8 +94,7 @@ begin
    FFuncao.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewFuncionariosFuncoesCad.btnNovoClick(Sender: TObject);
@@ -129,7 +128,7 @@ end;
 
 procedure TViewFuncionariosFuncoesCad.NewEntitie;
 begin
-   FFuncao := TModelFuncionariosFuncoesFactory.New;
+   FFuncao := TModelFuncionariosFuncoesFactory.New('Cadastro de funções de funcioário');
 end;
 
 procedure TViewFuncionariosFuncoesCad.OnBusca(AId: Integer);

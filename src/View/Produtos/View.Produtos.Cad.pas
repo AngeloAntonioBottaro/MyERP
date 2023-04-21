@@ -16,8 +16,6 @@ uses
   Vcl.ExtCtrls,
   Vcl.ComCtrls,
   Vcl.Mask,
-  RxToolEdit,
-  RxCurrEdit,
   View.Base.Cadastros,
   Model.Produtos.Interfaces,
   Model.Produtos.Entitie;
@@ -29,17 +27,12 @@ type
     lbNome: TLabel;
     edtId: TEdit;
     edtNome: TEdit;
-    edtCusto: TCurrencyEdit;
     lbCusto: TLabel;
     lbDescricao: TLabel;
     edtDescricao: TEdit;
-    edtPorcLucroVista: TCurrencyEdit;
     lbPorcLucroVista: TLabel;
-    edtPrecoVendaVista: TCurrencyEdit;
     lbPrecoVendaVista: TLabel;
-    edtPorcLucroPrazo: TCurrencyEdit;
     lbPorcLucroPrazo: TLabel;
-    edtPrecoVendaPrazo: TCurrencyEdit;
     lbPrecoVendaPrazo: TLabel;
     lbIdSubgrupo: TLabel;
     lbGrupo: TLabel;
@@ -48,19 +41,24 @@ type
     lbSubGrupo: TLabel;
     edtSubGrupo: TEdit;
     lbEstoque: TLabel;
-    edtEstoque: TCurrencyEdit;
     lbCodBarras: TLabel;
     edtCodBarras: TEdit;
     lbEstoqueMin: TLabel;
-    edtEstoqueMinimo: TCurrencyEdit;
     lbEstoqueMax: TLabel;
-    edtEstoqueMaximo: TCurrencyEdit;
     lbIdUnidade: TLabel;
     lbUnidadeDesc: TLabel;
     edtIdUnidade: TEdit;
     edtUnidadeNome: TEdit;
     edtUnidadeSigla: TEdit;
     lbUnidadeSigla: TLabel;
+    edtCusto: TEdit;
+    edtPorcLucroVista: TEdit;
+    edtPrecoVendaVista: TEdit;
+    edtPorcLucroPrazo: TEdit;
+    edtPrecoVendaPrazo: TEdit;
+    edtEstoqueMinimo: TEdit;
+    edtEstoqueMaximo: TEdit;
+    edtEstoque: TEdit;
     procedure btnAlterarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -141,8 +139,7 @@ begin
    FProduto.Gravar;
 
    Self.EndOperations;
-   if(Trim(edtId.Text).IsEmpty)then
-     Self.EmptyFields;
+   Self.FillFields;
 end;
 
 procedure TViewProdutosCad.btnNovoClick(Sender: TObject);
@@ -203,7 +200,7 @@ end;
 
 procedure TViewProdutosCad.NewEntitie;
 begin
-   FProduto := TModelProdutosFactory.New;
+   FProduto := TModelProdutosFactory.New('Cadastro de produtos');
 end;
 
 procedure TViewProdutosCad.OnBusca(AId: Integer);

@@ -51,7 +51,7 @@ uses
 
 procedure TViewSistemaSplash.FormCreate(Sender: TObject);
 begin
-   Application.Title := EMPRESA_DESENVOLVEDOR + ' - ERP Simples';
+   Application.Title := EMPRESA_DESENVOLVEDOR + ' - ERP';
    RefreshVariables;
 end;
 

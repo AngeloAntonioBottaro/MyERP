@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.Fornecedores.Busca;
 
+const
+  TELA = 'Busca de fornecedores';
+
 type
   TViewFornecedoresBusca = class(TViewBaseBusca)
     rdBuscarNome: TRadioButton;
@@ -93,7 +96,7 @@ end;
 procedure TViewFornecedoresBusca.AtivarInativar1Click(Sender: TObject);
 begin
    inherited;
-   TModelFornecedoresFactory.New
+   TModelFornecedoresFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
@@ -163,7 +166,7 @@ end;
 procedure TViewFornecedoresBusca.Excluir1Click(Sender: TObject);
 begin
    inherited;
-   TModelFornecedoresFactory.New
+   TModelFornecedoresFactory.New(TELA)
     .Entitie
      .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
      .End_Entitie
