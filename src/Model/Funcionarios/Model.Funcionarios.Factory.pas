@@ -274,6 +274,9 @@ begin
    if(FEntitie.Id = 1)then
      raise ExceptionWarning.Create('Funcionário padrão do sistema não pode ser excluído');
 
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial))then
+     Exit;
+
    MyQueryNew
     .Add('DELETE FROM '+TABELA)
     .Add('WHERE('+TABELA+'.ID = :ID)')
@@ -292,7 +295,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de funcionário',
-                         'Usuário excluiu o funcionário ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o funcionário ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial,
                          FEntitie.Id);
    FEntitie.Id(0);
 

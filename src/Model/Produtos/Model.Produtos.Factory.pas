@@ -166,6 +166,9 @@ begin
    if(FEntitie.Id = 1)then
      raise ExceptionWarning.Create('Produto padrão do sistema não pode ser excluído');
 
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome))then
+     Exit;
+
    MyQueryNew
     .Add('DELETE FROM '+TABELA)
     .Add('WHERE('+TABELA+'.ID = :ID)')
@@ -184,7 +187,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de produto',
-                         'Usuário excluiu o produto ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o produto ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome,
                          FEntitie.Id);
    FEntitie.Id(0);
 

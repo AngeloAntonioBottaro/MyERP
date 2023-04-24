@@ -101,6 +101,9 @@ begin
    if(not (FEntitie.Id > 0))then
      ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome))then
+     Exit;
+
    MyQueryNew
     .Add('DELETE FROM '+TABELA+' ')
     .Add('WHERE('+TABELA+'.ID = :ID)')
@@ -119,7 +122,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de subgrupo de produto',
-                         'Usuário excluiu o subgrupo ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o subgrupo ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome,
                          FEntitie.Id);
    FEntitie.Id(0);
 

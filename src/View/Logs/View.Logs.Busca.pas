@@ -12,14 +12,15 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  View.Base,
-  Data.DB,
   Vcl.StdCtrls,
   Vcl.Grids,
   Vcl.DBGrids,
   Vcl.ExtCtrls,
   Vcl.ComCtrls,
-  Model.Logs.Busca, Vcl.DBCtrls;
+  Vcl.DBCtrls,
+  View.Base,
+  Data.DB,
+  Model.Logs.Busca;
 
 type
   TViewLogsBusca = class(TViewBase)

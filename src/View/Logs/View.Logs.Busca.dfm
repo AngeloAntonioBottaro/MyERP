@@ -35,14 +35,14 @@ inherited ViewLogsBusca: TViewLogsBusca
           Expanded = False
           FieldName = 'DATA'
           Title.Caption = 'Data'
-          Width = 80
+          Width = 70
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'HORA'
           Title.Caption = 'Hora'
-          Width = 80
+          Width = 50
           Visible = True
         end
         item

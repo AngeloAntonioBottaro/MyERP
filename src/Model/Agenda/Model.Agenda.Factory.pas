@@ -117,6 +117,9 @@ begin
    if(not (FEntitie.Id > 0))then
      ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.Titulo))then
+     Exit;
+
    MyQueryNew
     .Add('DELETE FROM '+TABELA)
     .Add('WHERE('+TABELA+'.ID = :ID)')
@@ -133,12 +136,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
-   FEntitie.Id(0);
-
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de compromisso',
-                         'Usuário excluiu o compromisso ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o compromisso ' + FEntitie.Id.ToString + ' - ' + FEntitie.Titulo,
                          FEntitie.Id);
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;

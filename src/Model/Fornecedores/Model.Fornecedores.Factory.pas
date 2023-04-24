@@ -222,6 +222,9 @@ begin
    if(not (FEntitie.Id > 0))then
      ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial))then
+     Exit;
+
    MyQueryNew
     .Add('DELETE FROM ' + TABELA)
     .Add('WHERE('+TABELA+'.ID = :ID)')
@@ -240,7 +243,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de fornecedor',
-                         'Usuário excluiu o fornecedor ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o fornecedor ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial,
                          FEntitie.Id);
    FEntitie.Id(0);
 
