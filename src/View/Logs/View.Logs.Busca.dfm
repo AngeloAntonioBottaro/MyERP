@@ -2,6 +2,7 @@ inherited ViewLogsBusca: TViewLogsBusca
   Caption = 'Consulta de logs'
   ClientHeight = 520
   ClientWidth = 1083
+  OnDestroy = FormDestroy
   ExplicitWidth = 1099
   ExplicitHeight = 559
   PixelsPerInch = 96
@@ -18,7 +19,7 @@ inherited ViewLogsBusca: TViewLogsBusca
       Left = 0
       Top = 0
       Width = 1083
-      Height = 292
+      Height = 232
       Align = alClient
       DataSource = DS_Busca
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -28,12 +29,20 @@ inherited ViewLogsBusca: TViewLogsBusca
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnTitleClick = GridBuscaTitleClick
       Columns = <
         item
           Expanded = False
-          FieldName = 'DATA_HORA'
+          FieldName = 'DATA'
           Title.Caption = 'Data'
-          Width = 97
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'HORA'
+          Title.Caption = 'Hora'
+          Width = 80
           Visible = True
         end
         item
@@ -54,21 +63,21 @@ inherited ViewLogsBusca: TViewLogsBusca
           Expanded = False
           FieldName = 'MODULO'
           Title.Caption = 'M'#243'dulo'
-          Width = 119
+          Width = 152
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'ACAO'
           Title.Caption = 'A'#231#227'o'
-          Width = 102
+          Width = 141
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'REFERENCIA'
-          Title.Caption = 'C'#243'd. refer'#234'ncia'
-          Width = 79
+          Title.Caption = 'C'#243'd. ref.'
+          Width = 48
           Visible = True
         end
         item
@@ -84,6 +93,18 @@ inherited ViewLogsBusca: TViewLogsBusca
           Title.Caption = 'C'#243'digo'
           Visible = True
         end>
+    end
+    object DBMemo1: TDBMemo
+      Left = 0
+      Top = 232
+      Width = 1083
+      Height = 60
+      Align = alBottom
+      DataField = 'DESCRICAO'
+      DataSource = DS_Busca
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 1
     end
   end
   object pnBotton: TPanel
@@ -189,7 +210,7 @@ inherited ViewLogsBusca: TViewLogsBusca
         Margins.Bottom = 0
         BevelOuter = bvNone
         TabOrder = 0
-        object edtBusca: TEdit
+        object edtModulo: TEdit
           AlignWithMargins = True
           Left = 3
           Top = 3
@@ -198,12 +219,13 @@ inherited ViewLogsBusca: TViewLogsBusca
           Align = alLeft
           TabOrder = 0
         end
-        object cBoxBusca: TComboBox
+        object cBoxModulo: TComboBox
           AlignWithMargins = True
-          Left = 255
+          Left = 252
           Top = 3
           Width = 74
           Height = 21
+          Margins.Left = 0
           Align = alLeft
           Style = csDropDownList
           TabOrder = 1
@@ -270,30 +292,34 @@ inherited ViewLogsBusca: TViewLogsBusca
         Margins.Bottom = 0
         BevelOuter = bvNone
         TabOrder = 2
-        object Edit1: TEdit
+        object edtFuncionario: TEdit
           AlignWithMargins = True
-          Left = 59
+          Left = 54
           Top = 3
-          Width = 270
+          Width = 275
           Height = 21
+          Margins.Left = 0
           Align = alLeft
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 0
         end
-        object Edit2: TEdit
+        object edtIdFuncionario: TEdit
           AlignWithMargins = True
           Left = 3
           Top = 3
           Width = 50
           Height = 21
+          Margins.Right = 1
           Align = alLeft
           NumbersOnly = True
           TabOrder = 1
+          OnExit = edtIdFuncionarioExit
+          OnKeyDown = edtIdFuncionarioKeyDown
         end
       end
       object ckBuscaPeriodo: TCheckBox
-        Left = 16
+        Left = 8
         Top = 16
         Width = 57
         Height = 17
@@ -302,16 +328,16 @@ inherited ViewLogsBusca: TViewLogsBusca
         OnClick = ckBuscaPeriodoClick
       end
       object ckBuscaFuncionario: TCheckBox
-        Left = 16
+        Left = 8
         Top = 44
-        Width = 73
+        Width = 77
         Height = 17
         Caption = 'Funcion'#225'rio'
         TabOrder = 4
         OnClick = ckBuscaPeriodoClick
       end
       object ckBuscaModulo: TCheckBox
-        Left = 16
+        Left = 8
         Top = 73
         Width = 57
         Height = 17
@@ -320,7 +346,7 @@ inherited ViewLogsBusca: TViewLogsBusca
         OnClick = ckBuscaPeriodoClick
       end
       object ckBuscaAcao: TCheckBox
-        Left = 16
+        Left = 8
         Top = 101
         Width = 49
         Height = 17
@@ -329,7 +355,7 @@ inherited ViewLogsBusca: TViewLogsBusca
         OnClick = ckBuscaPeriodoClick
       end
       object ckBuscaReferencia: TCheckBox
-        Left = 16
+        Left = 8
         Top = 130
         Width = 73
         Height = 17
@@ -349,7 +375,7 @@ inherited ViewLogsBusca: TViewLogsBusca
         Margins.Bottom = 0
         BevelOuter = bvNone
         TabOrder = 8
-        object Edit3: TEdit
+        object edtAcao: TEdit
           AlignWithMargins = True
           Left = 3
           Top = 3
@@ -358,12 +384,13 @@ inherited ViewLogsBusca: TViewLogsBusca
           Align = alLeft
           TabOrder = 0
         end
-        object ComboBox1: TComboBox
+        object cBoxAcao: TComboBox
           AlignWithMargins = True
-          Left = 255
+          Left = 252
           Top = 3
           Width = 74
           Height = 21
+          Margins.Left = 0
           Align = alLeft
           Style = csDropDownList
           TabOrder = 1
@@ -385,7 +412,7 @@ inherited ViewLogsBusca: TViewLogsBusca
         Margins.Bottom = 0
         BevelOuter = bvNone
         TabOrder = 9
-        object Edit5: TEdit
+        object edtReferencia: TEdit
           AlignWithMargins = True
           Left = 3
           Top = 3

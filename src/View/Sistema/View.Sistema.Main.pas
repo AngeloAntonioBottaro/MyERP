@@ -71,6 +71,7 @@ type
     N3: TMenuItem;
     SuporteExtras1: TMenuItem;
     SuporteExtrasTelasCriadas1: TMenuItem;
+    Logs1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -102,6 +103,7 @@ type
     procedure ConfiguracoesEmpresa1Click(Sender: TObject);
     procedure MovimentacoesAgenda1Click(Sender: TObject);
     procedure SuporteExtrasTelasCriadas1Click(Sender: TObject);
+    procedure Logs1Click(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -142,7 +144,8 @@ uses
   View.Funcionarios.Funcoes.Cad,
   View.Fornecedores.Cad,
   View.FormasPagamento.Cad,
-  View.Agenda.Cad;
+  View.Agenda.Cad,
+  View.Logs.Busca;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -207,6 +210,16 @@ end;
 {$ENDREGION 'EVENTS'}
 
 {$REGION 'MenuEvents'}
+procedure TViewSistemaMain.Logs1Click(Sender: TObject);
+begin
+   if(ViewLogsBusca = nil)then Application.CreateForm(TViewLogsBusca, ViewLogsBusca);
+   try
+     ViewLogsBusca.ShowModal;
+   finally
+     FreeAndNil(ViewLogsBusca);
+   end;
+end;
+
 procedure TViewSistemaMain.AtualizarIconesDeAtalhos1Click(Sender: TObject);
 begin
    Self.CreateShortcutIcons;

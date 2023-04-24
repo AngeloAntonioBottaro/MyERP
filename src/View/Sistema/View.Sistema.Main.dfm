@@ -640,10 +640,9 @@ object ViewSistemaMain: TViewSistemaMain
     end
     object Suporte1: TMenuItem
       Caption = '&Suporte'
-      object SuporteSobreSistema1: TMenuItem
-        Caption = 'Sobre o sistema'
-        ImageIndex = 32
-        OnClick = SuporteSobreSistema1Click
+      object Logs1: TMenuItem
+        Caption = 'Logs'
+        OnClick = Logs1Click
       end
       object SuporteExtras1: TMenuItem
         Caption = 'Extras'
@@ -651,6 +650,11 @@ object ViewSistemaMain: TViewSistemaMain
           Caption = 'Telas criadas'
           OnClick = SuporteExtrasTelasCriadas1Click
         end
+      end
+      object SuporteSobreSistema1: TMenuItem
+        Caption = 'Sobre o sistema'
+        ImageIndex = 32
+        OnClick = SuporteSobreSistema1Click
       end
     end
     object Sair1: TMenuItem

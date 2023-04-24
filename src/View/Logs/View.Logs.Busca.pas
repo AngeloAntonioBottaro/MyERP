@@ -3,8 +3,23 @@ unit View.Logs.Busca;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base, Data.DB, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.ComCtrls;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  View.Base,
+  Data.DB,
+  Vcl.StdCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.ExtCtrls,
+  Vcl.ComCtrls,
+  Model.Logs.Busca, Vcl.DBCtrls;
 
 type
   TViewLogsBusca = class(TViewBase)
@@ -22,30 +37,36 @@ type
     dtpPeriodoInicial: TDateTimePicker;
     dtpPeriodoFinal: TDateTimePicker;
     pnBuscaModulo: TPanel;
-    edtBusca: TEdit;
+    edtModulo: TEdit;
     gBoxTipoConsulta: TGroupBox;
-    cBoxBusca: TComboBox;
+    cBoxModulo: TComboBox;
     pnBuscaFuncionario: TPanel;
-    Edit1: TEdit;
-    Edit2: TEdit;
+    edtFuncionario: TEdit;
+    edtIdFuncionario: TEdit;
     ckBuscaPeriodo: TCheckBox;
     ckBuscaFuncionario: TCheckBox;
     ckBuscaModulo: TCheckBox;
     ckBuscaAcao: TCheckBox;
     ckBuscaReferencia: TCheckBox;
     pnBuscaAcao: TPanel;
-    Edit3: TEdit;
-    ComboBox1: TComboBox;
+    edtAcao: TEdit;
+    cBoxAcao: TComboBox;
     pnBuscaReferencia: TPanel;
-    Edit5: TEdit;
+    edtReferencia: TEdit;
     Panel2: TPanel;
     btnBuscar: TButton;
     DS_Busca: TDataSource;
+    DBMemo1: TDBMemo;
     procedure ckBuscaPeriodoClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure GridBuscaTitleClick(Column: TColumn);
+    procedure edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtIdFuncionarioExit(Sender: TObject);
   private
+    FBusca: TModelLogsBusca;
     procedure ConfComponentes;
     procedure GetTotalRegistros;
   public
@@ -64,11 +85,37 @@ uses
   Utils.MyLibrary,
   Utils.MyVclLibrary,
   Utils.MyConsts,
+  Utils.EditsKeyDownExit,
   Model.Sistema.Imagens.DM;
+
+procedure TViewLogsBusca.FormCreate(Sender: TObject);
+begin
+   inherited;
+   FBusca := TModelLogsBusca.Create;
+   FBusca.DataSource(DS_Busca);
+
+   dtpPeriodoInicial.Date := Date;
+   dtpPeriodoFinal.Date   := Date;
+   ckBuscaPeriodo.Checked := True;
+   Self.ConfComponentes;
+   btnBuscar.Click;
+end;
+
+procedure TViewLogsBusca.FormDestroy(Sender: TObject);
+begin
+   FBusca.Free;
+   inherited;
+end;
 
 procedure TViewLogsBusca.btnBuscarClick(Sender: TObject);
 begin
-
+   FBusca
+    .Periodo(ckBuscaPeriodo.Checked, dtpPeriodoInicial.Date, dtpPeriodoFinal.Date)
+    .Funcionario(ckBuscaFuncionario.Checked, edtIdFuncionario.Text)
+    .Modulo(ckBuscaModulo.Checked, edtModulo.Text, cBoxModulo.ItemIndex)
+    .Acao(ckBuscaAcao.Checked, edtAcao.Text, cBoxAcao.ItemIndex)
+    .Referencia(ckBuscaReferencia.Checked, edtReferencia.Text)
+    .Buscar;
 
    Self.GetTotalRegistros;
 end;
@@ -94,15 +141,14 @@ begin
    pnBuscaReferencia.Visible  := ckBuscaReferencia.Checked;
 end;
 
-procedure TViewLogsBusca.FormCreate(Sender: TObject);
+procedure TViewLogsBusca.edtIdFuncionarioExit(Sender: TObject);
 begin
-   inherited;
-   dtpPeriodoInicial.Date := Date;
-   dtpPeriodoFinal.Date   := Date;
-   ckBuscaPeriodo.Checked := True;
-   Self.ConfComponentes;
-   Self.GetTotalRegistros;
-   btnBuscar.Click;
+   IdFuncionarioExit(edtIdFuncionario, edtFuncionario);
+end;
+
+procedure TViewLogsBusca.edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   IdFuncionarioKeyDown(edtIdFuncionario, Key, Shift);
 end;
 
 procedure TViewLogsBusca.GetTotalRegistros;
@@ -113,6 +159,12 @@ begin
      Exit;
 
    lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_Busca.DataSet.RecordCount.ToString, '0', 6);
+end;
+
+procedure TViewLogsBusca.GridBuscaTitleClick(Column: TColumn);
+begin
+   inherited;
+   FBusca.IndexFieldNames(Column.FieldName);
 end;
 
 end.

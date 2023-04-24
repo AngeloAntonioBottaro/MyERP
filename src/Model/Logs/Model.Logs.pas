@@ -62,9 +62,10 @@ procedure TModelLogs.GravarNoBanco;
 begin
    try
      MyQueryNew
-      .Add('INSERT INTO LOGS(DATA_HORA, ID_FUNCIONARIO, MODULO, ACAO, DESCRICAO, REFERENCIA) VALUES ')
-      .Add('(:DATA_HORA, :ID_FUNCIONARIO, :MODULO, :ACAO, :DESCRICAO, :REFERENCIA)')
-      .AddParam('DATA_HORA', Now)
+      .Add('INSERT INTO LOGS(DATA, HORA, ID_FUNCIONARIO, MODULO, ACAO, DESCRICAO, REFERENCIA) VALUES ')
+      .Add('(:DATA, :HORA, :ID_FUNCIONARIO, :MODULO, :ACAO, :DESCRICAO, :REFERENCIA)')
+      .AddParam('DATA', Date)
+      .AddParam('HORA', Time)
       .AddParam('ID_FUNCIONARIO', VG_UsuarioLogadoId)
       .AddParam('MODULO', FModulo)
       .AddParam('ACAO', FAcao)

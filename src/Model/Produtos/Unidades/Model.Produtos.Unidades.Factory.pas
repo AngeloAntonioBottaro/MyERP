@@ -117,12 +117,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
-   FEntitie.Id(0);
-
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de unidade de produto',
                          'Usuário excluiu a unidade ' + FEntitie.Id.ToString,
                          FEntitie.Id);
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;

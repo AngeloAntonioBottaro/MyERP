@@ -118,11 +118,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
-
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de função de funcionário',
                          'Usuário excluiu a função ' + FEntitie.Id.ToString,
                          FEntitie.Id);
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;

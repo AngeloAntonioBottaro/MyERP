@@ -290,12 +290,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
-   FEntitie.Id(0);
-
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de funcionário',
                          'Usuário excluiu o funcionário ' + FEntitie.Id.ToString,
                          FEntitie.Id);
+   FEntitie.Id(0);
 
    ShowDone('Exclusão realizada');
 end;

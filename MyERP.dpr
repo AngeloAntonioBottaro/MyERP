@@ -153,13 +153,13 @@ uses
   MySearchComponents.Search in '..\MySearchComponents\Src\MySearchComponents.Search.pas',
   MySearchComponents.Utils in '..\MySearchComponents\Src\MySearchComponents.Utils.pas',
   MySearchComponents.View in '..\MySearchComponents\Src\MySearchComponents.View.pas' {MySearchComponentsView},
-  View.Logs.Busca in 'src\View\Logs\View.Logs.Busca.pas' {ViewLogsBusca};
+  View.Logs.Busca in 'src\View\Logs\View.Logs.Busca.pas' {ViewLogsBusca},
+  Model.Logs.Busca in 'src\Model\Logs\Model.Logs.Busca.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TViewLogsBusca, ViewLogsBusca);
   TStyleManager.TrySetStyle('Amethyst Kamri');
 
   ViewSistemaSplash := TViewSistemaSplash.Create(nil);
