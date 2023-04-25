@@ -370,53 +370,59 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Logs\Model.Logs.Busca.pas"/>
-        <RcItem Include="resources\Images\PNG\Menus\ClientManagement.png">
+        <DCCReference Include="src\Utils\Utils.GridsMenu.pas"/>
+        <DCCReference Include="src\Utils\Utils.ConfMenu.pas"/>
+        <RcItem Include="resources\Images\PNG\PopupMenu\Grids\Gear.png">
             <ResourceType>RCDATA</ResourceType>
-            <ResourceId>fornecedores</ResourceId>
+            <ResourceId>confgrid</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\Group.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\BookAndPencil.png">
             <ResourceType>RCDATA</ResourceType>
-            <ResourceId>clientes</ResourceId>
+            <ResourceId>agenda</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\Product.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>produtos</ResourceId>
-        </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\ProductSearch.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>consulta_produtos</ResourceId>
-        </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\Sell.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>vendas</ResourceId>
-        </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\Buying.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>compras</ResourceId>
-        </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\CashRegister.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\CashRegister.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>caixa</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\RequestMoney.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\Group.png">
             <ResourceType>RCDATA</ResourceType>
-            <ResourceId>consulta_contas_receber</ResourceId>
+            <ResourceId>clientes</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\InitiateMoneyTransfer.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\Buying.png">
             <ResourceType>RCDATA</ResourceType>
-            <ResourceId>consulta_contas_pagar</ResourceId>
+            <ResourceId>compras</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\InitiateMoneyTransferAdd.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\InitiateMoneyTransferAdd.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cadastro_contas_pagar</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\RequestMoneyAdd.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\InitiateMoneyTransfer.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>consulta_contas_pagar</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\MainMenu\RequestMoneyAdd.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>cadastro_contas_receber</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\Menus\BookAndPencil.png">
+        <RcItem Include="resources\Images\PNG\MainMenu\RequestMoney.png">
             <ResourceType>RCDATA</ResourceType>
-            <ResourceId>agenda</ResourceId>
+            <ResourceId>consulta_contas_receber</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\MainMenu\ClientManagement.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>fornecedores</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\MainMenu\Product.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>produtos</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\MainMenu\Sell.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>vendas</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\PopupMenu\ConfMenu\Document.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>confmenu</ResourceId>
         </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -444,73 +450,55 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="resources\Images\PNG\Menus\Group.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\BookAndPencil.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\BookAndPencil.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\RequestMoney.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\Product.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\ClientManagement.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\Buying.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\RequestMoneyAdd.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\RequestMoneyAdd.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\Product.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\ClientManagement.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\Group.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\RequestMoney.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\Sell.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\InitiateMoneyTransfer.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\InitiateMoneyTransfer.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\ProductSearch.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\InitiateMoneyTransferAdd.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\Sell.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\Menus\CashRegister.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\PopupMenu\ConfMenu\Document.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -519,6 +507,30 @@
                 <DeployFile LocalName="C:\AABSoft\ERP\MyERP.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MyERP.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\PopupMenu\Grids\Gear.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\CashRegister.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\InitiateMoneyTransferAdd.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\Buying.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

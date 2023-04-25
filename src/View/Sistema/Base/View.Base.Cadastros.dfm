@@ -25,9 +25,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Novo'
-      ImageIndex = 4
+      ImageIndex = 0
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 0
       OnClick = btnNovoClick
     end
@@ -38,9 +38,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Gravar'
-      ImageIndex = 6
+      ImageIndex = 2
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 1
     end
     object btnCancelar: TButton
@@ -50,9 +50,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Cancelar'
-      ImageIndex = 7
+      ImageIndex = 3
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 2
       OnClick = btnCancelarClick
     end
@@ -63,9 +63,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Excluir'
-      ImageIndex = 10
+      ImageIndex = 6
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 3
     end
     object btnBuscar: TButton
@@ -75,9 +75,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Buscar'
-      ImageIndex = 9
+      ImageIndex = 5
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 4
     end
     object btnFechar: TButton
@@ -87,7 +87,7 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Fechar'
-      ImageIndex = 3
+      ImageIndex = 0
       ImageMargins.Left = 10
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 5
@@ -100,9 +100,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Alterar'
-      ImageIndex = 5
+      ImageIndex = 1
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 6
     end
     object btnImprimir: TButton
@@ -112,9 +112,9 @@ inherited ViewBaseCadastros: TViewBaseCadastros
       Height = 33
       Align = alLeft
       Caption = 'Imprimir'
-      ImageIndex = 12
+      ImageIndex = 8
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 7
       Visible = False
     end

@@ -1,5 +1,7 @@
 program MyERP;
 
+
+
 {$R *.dres}
 
 uses
@@ -154,7 +156,9 @@ uses
   MySearchComponents.Utils in '..\MySearchComponents\Src\MySearchComponents.Utils.pas',
   MySearchComponents.View in '..\MySearchComponents\Src\MySearchComponents.View.pas' {MySearchComponentsView},
   View.Logs.Busca in 'src\View\Logs\View.Logs.Busca.pas' {ViewLogsBusca},
-  Model.Logs.Busca in 'src\Model\Logs\Model.Logs.Busca.pas';
+  Model.Logs.Busca in 'src\Model\Logs\Model.Logs.Busca.pas',
+  Utils.GridsMenu in 'src\Utils\Utils.GridsMenu.pas',
+  Utils.ConfMenu in 'src\Utils\Utils.ConfMenu.pas';
 
 {$R *.res}
 

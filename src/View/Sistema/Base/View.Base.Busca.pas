@@ -21,7 +21,8 @@ uses
   Vcl.Menus,
   Vcl.ComCtrls,
   Vcl.Imaging.pngimage,
-  Utils.MyGridLibrary;
+  Utils.GridsMenu,
+  Utils.ConfMenu;
 
 type
   TViewBaseBusca = class(TViewBase)
@@ -54,17 +55,10 @@ type
     pnGrid: TPanel;
     GridBusca: TDBGrid;
     imgConfGrid: TImage;
-    PopupMenuConfGrid: TPopupMenu;
-    AumentarFonte1: TMenuItem;
-    DiminuirFonte1: TMenuItem;
-    DeixarNegrito1: TMenuItem;
-    TirarNegrito1: TMenuItem;
-    N3: TMenuItem;
-    GravarConfiguraes1: TMenuItem;
-    RestaurarPadres1: TMenuItem;
     pnBuscarComboBox: TPanel;
     Label2: TLabel;
     cBoxBusca: TComboBox;
+    imgConfMenu: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);
@@ -78,19 +72,12 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Excluir1Click(Sender: TObject);
     procedure AtivarInativar1Click(Sender: TObject);
-    procedure imgConfGridClick(Sender: TObject);
-    procedure AumentarFonte1Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure DiminuirFonte1Click(Sender: TObject);
-    procedure DeixarNegrito1Click(Sender: TObject);
-    procedure TirarNegrito1Click(Sender: TObject);
-    procedure GravarConfiguraes1Click(Sender: TObject);
-    procedure RestaurarPadres1Click(Sender: TObject);
-    procedure GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cBoxBuscaChange(Sender: TObject);
     procedure dtpPeriodoInicialExit(Sender: TObject);
   private
-    FGridLib: TMyGridLibrary;
+    FGridLib: TUtilsGridsMenu;
+    FConfMenu: TUtilsConfMenu;
     procedure ValidacoesBasicas;
     procedure GetTotalRegistros;
   public
@@ -113,6 +100,7 @@ uses
   Utils.MyLibrary,
   Utils.MyVclLibrary,
   Utils.MyConsts,
+  Utils.MyGridLibrary,
   Model.Sistema.Imagens.DM;
 
 procedure TViewBaseBusca.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -126,8 +114,8 @@ end;
 procedure TViewBaseBusca.FormCreate(Sender: TObject);
 begin
    inherited;
-   FGridLib := TMyGridLibrary.New(FGridConf, FNomeConf);
-   FGridLib.CarregarConfiguracoes;
+   FGridLib  := TUtilsGridsMenu.New(imgConfGrid, FGridConf, FNomeConf);
+   FConfMenu := TUtilsConfMenu.New(imgConfMenu, PopupMenu, FNomeConf);
 
    TimerBuscar.Enabled    := False;
    dtpPeriodoInicial.Date := Now;
@@ -136,8 +124,9 @@ end;
 
 procedure TViewBaseBusca.FormDestroy(Sender: TObject);
 begin
-   inherited;
+   FConfMenu.Free;
    FGridLib.Free;
+   inherited;
 end;
 
 procedure TViewBaseBusca.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -230,20 +219,6 @@ begin
    TUtilsDBGrid.GridDrawColumnCell(TDBGrid(Sender), Rect, DataCol, Column, Vcl.Grids.TGridDrawState(State));
 end;
 
-procedure TViewBaseBusca.GridBuscaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-   inherited;
-   case(Key)of
-    107{+}: if(Shift = [ssCtrl])then AumentarFonte1.Click;
-    109{-}: if(Shift = [ssCtrl])then DiminuirFonte1.Click;
-   end;
-end;
-
-procedure TViewBaseBusca.imgConfGridClick(Sender: TObject);
-begin
-   TMyVclLibrary.PopUpMenuSelfActive(imgConfGrid);
-end;
-
 procedure TViewBaseBusca.TimerBuscarTimer(Sender: TObject);
 begin
    TimerBuscar.Enabled := False;
@@ -262,42 +237,10 @@ begin
      raise ExceptionRequired.Create(LMsg);
 end;
 
-{$REGION 'GRID'}
-procedure TViewBaseBusca.AumentarFonte1Click(Sender: TObject);
-begin
-   FGridLib.AumentarFonte;
-end;
-
-procedure TViewBaseBusca.DiminuirFonte1Click(Sender: TObject);
-begin
-   FGridLib.DiminuirFonte;
-end;
-
 procedure TViewBaseBusca.dtpPeriodoInicialExit(Sender: TObject);
 begin
    if(dtpPeriodoInicial.Date > dtpPeriodoFinal.Date)then
      raise ExceptionWarning.Create('Data inicial não pode ser maior que a data final', dtpPeriodoFinal);
 end;
-
-procedure TViewBaseBusca.DeixarNegrito1Click(Sender: TObject);
-begin
-   FGridLib.DeixarNegrito;
-end;
-
-procedure TViewBaseBusca.TirarNegrito1Click(Sender: TObject);
-begin
-   FGridLib.TirarNegrito;
-end;
-
-procedure TViewBaseBusca.GravarConfiguraes1Click(Sender: TObject);
-begin
-   FGridLib.SalvarConfiguracoes;
-end;
-
-procedure TViewBaseBusca.RestaurarPadres1Click(Sender: TObject);
-begin
-   FGridLib.RestaurarPadrao;
-end;
-{$ENDREGION}
 
 end.

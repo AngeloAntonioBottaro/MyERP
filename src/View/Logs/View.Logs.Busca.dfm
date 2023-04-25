@@ -136,9 +136,9 @@ inherited ViewLogsBusca: TViewLogsBusca
         Height = 36
         Align = alRight
         Caption = 'Imprimir'
-        ImageIndex = 12
+        ImageIndex = 8
         ImageMargins.Left = 10
-        Images = ModelSistemaImagensDM.imgListButtons
+        Images = ModelSistemaImagensDM.imgListButtonsProperties
         TabOrder = 0
       end
       object btnFechar: TButton
@@ -148,7 +148,7 @@ inherited ViewLogsBusca: TViewLogsBusca
         Height = 36
         Align = alRight
         Caption = 'Fechar'
-        ImageIndex = 3
+        ImageIndex = 0
         ImageMargins.Left = 10
         Images = ModelSistemaImagensDM.imgListButtons
         TabOrder = 1
@@ -189,6 +189,15 @@ inherited ViewLogsBusca: TViewLogsBusca
     DesignSize = (
       1083
       163)
+    object imgConfGrid: TImage
+      Left = 1057
+      Top = 143
+      Width = 25
+      Height = 21
+      Cursor = crHandPoint
+      Center = True
+      Proportional = True
+    end
     object gBoxTipoConsulta: TGroupBox
       AlignWithMargins = True
       Left = 4
@@ -425,9 +434,9 @@ inherited ViewLogsBusca: TViewLogsBusca
       end
     end
     object Panel2: TPanel
-      Left = 917
+      Left = 443
       Top = 118
-      Width = 161
+      Width = 116
       Height = 46
       Anchors = [akRight, akBottom]
       BevelOuter = bvNone
@@ -437,15 +446,15 @@ inherited ViewLogsBusca: TViewLogsBusca
       Padding.Bottom = 5
       TabOrder = 1
       object btnBuscar: TButton
-        Left = 56
+        Left = 11
         Top = 5
         Width = 100
         Height = 36
         Align = alRight
         Caption = 'Consultar'
-        ImageIndex = 9
+        ImageIndex = 5
         ImageMargins.Left = 10
-        Images = ModelSistemaImagensDM.imgListButtons
+        Images = ModelSistemaImagensDM.imgListButtonsProperties
         TabOrder = 0
         OnClick = btnBuscarClick
       end

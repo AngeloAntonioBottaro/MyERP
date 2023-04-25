@@ -24,7 +24,7 @@ uses
 
 constructor TModelBehavior.Create;
 begin
-   ReportMemoryLeaksOnShutdown    := True; //FileExists('C:\Temp\Sistema\ReportMemoryLeaksOnShutdown.aab');
+   ReportMemoryLeaksOnShutdown    := True; //FileExists('C:\Temp\adm.lock');
    Application.HintPause          := 10;
    Application.HintShortPause     := 5;
    FormatSettings.ShortDateFormat := 'dd/mm/yyyy';

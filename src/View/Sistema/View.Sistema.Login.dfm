@@ -710,7 +710,7 @@ inherited ViewSistemaLogin: TViewSistemaLogin
     Height = 30
     Caption = 'Logar'
     ImageAlignment = iaRight
-    ImageIndex = 0
+    ImageIndex = 1
     ImageMargins.Left = 10
     Images = ModelSistemaImagensDM.imgListButtons
     TabOrder = 2
@@ -722,7 +722,7 @@ inherited ViewSistemaLogin: TViewSistemaLogin
     Width = 88
     Height = 30
     Caption = 'Cancelar'
-    ImageIndex = 2
+    ImageIndex = 3
     ImageMargins.Left = 10
     Images = ModelSistemaImagensDM.imgListButtons
     TabOrder = 3

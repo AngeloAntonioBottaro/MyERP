@@ -123,7 +123,7 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Height = 33
       Align = alLeft
       Caption = 'Marcar todos'
-      ImageIndex = 14
+      ImageIndex = 5
       ImageMargins.Left = 5
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 0
@@ -137,7 +137,7 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Height = 33
       Align = alLeft
       Caption = 'Desmarcar todos'
-      ImageIndex = 15
+      ImageIndex = 6
       ImageMargins.Left = 5
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 1
@@ -150,7 +150,7 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Height = 33
       Align = alRight
       Caption = 'Fechar'
-      ImageIndex = 3
+      ImageIndex = 0
       ImageMargins.Left = 10
       Images = ModelSistemaImagensDM.imgListButtons
       TabOrder = 2
@@ -163,9 +163,9 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Height = 33
       Align = alRight
       Caption = 'Gravar'
-      ImageIndex = 6
+      ImageIndex = 2
       ImageMargins.Left = 10
-      Images = ModelSistemaImagensDM.imgListButtons
+      Images = ModelSistemaImagensDM.imgListButtonsProperties
       TabOrder = 3
       OnClick = btnGravarClick
     end

@@ -17,8 +17,10 @@ uses
   Vcl.StdCtrls,
   Vcl.DBCtrls,
   Vcl.ComCtrls,
+  Vcl.Imaging.pngimage,
+  Vcl.Menus,
   Data.DB,
-  Datasnap.DBClient, Vcl.Imaging.pngimage, Vcl.Menus;
+  Datasnap.DBClient;
 
 type
   TViewSistemaIconesConf = class(TViewBase)
@@ -72,10 +74,11 @@ uses
   Utils.MyConsts,
   Utils.GlobalVariables,
   Utils.EditsKeyDownExit,
+  Utils.LibrarySistema,
   Model.Main.Icones,
   Model.Main.Icones.Types,
   Model.Main.Icones.Consts,
-  Model.Sistema.Imagens.DM, Utils.LibrarySistema;
+  Model.Sistema.Imagens.DM;
 
 procedure TViewSistemaIconesConf.FormCreate(Sender: TObject);
 begin
@@ -218,6 +221,9 @@ begin
    inherited;
    Self.MarcarCheckBoxEspecifico('ckClientes');
    Self.MarcarCheckBoxEspecifico('ckProdutos');
+   Self.MarcarCheckBoxEspecifico('ckCompras');
+   Self.MarcarCheckBoxEspecifico('ckVendas');
+   Self.MarcarCheckBoxEspecifico('ckCaixa');
 end;
 
 procedure TViewSistemaIconesConf.MostrarAbaCadastrosOnShow;

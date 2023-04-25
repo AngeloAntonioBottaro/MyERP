@@ -20,7 +20,8 @@ uses
   Vcl.DBCtrls,
   View.Base,
   Data.DB,
-  Model.Logs.Busca;
+  Model.Logs.Busca,
+  Utils.GridsMenu;
 
 type
   TViewLogsBusca = class(TViewBase)
@@ -58,6 +59,7 @@ type
     btnBuscar: TButton;
     DS_Busca: TDataSource;
     DBMemo1: TDBMemo;
+    imgConfGrid: TImage;
     procedure ckBuscaPeriodoClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -67,6 +69,7 @@ type
     procedure edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtIdFuncionarioExit(Sender: TObject);
   private
+    FGridLib: TUtilsGridsMenu;
     FBusca: TModelLogsBusca;
     procedure ConfComponentes;
     procedure GetTotalRegistros;
@@ -92,6 +95,8 @@ uses
 procedure TViewLogsBusca.FormCreate(Sender: TObject);
 begin
    inherited;
+   FGridLib := TUtilsGridsMenu.New(imgConfGrid, GridBusca, Self.Name);
+
    FBusca := TModelLogsBusca.Create;
    FBusca.DataSource(DS_Busca);
 
@@ -105,6 +110,7 @@ end;
 procedure TViewLogsBusca.FormDestroy(Sender: TObject);
 begin
    FBusca.Free;
+   FGridLib.Free;
    inherited;
 end;
 

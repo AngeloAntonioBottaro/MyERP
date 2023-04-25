@@ -117,7 +117,8 @@ procedure TModelLogsBusca.ConfFieldsMask;
 begin
    FQueryBusca
     .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO)
-    .DisplayFormat('REFERENCIA', DISPLAY_FORMAT_CODIGO);
+    .DisplayFormat('REFERENCIA', DISPLAY_FORMAT_CODIGO)
+    .DisplayFormat('ID_FUNCIONARIO', DISPLAY_FORMAT_CODIGO);
 end;
 
 function TModelLogsBusca.DataSource(ADataSource: TDataSource): TModelLogsBusca;
