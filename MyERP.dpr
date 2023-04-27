@@ -157,8 +157,11 @@ uses
   MySearchComponents.View in '..\MySearchComponents\Src\MySearchComponents.View.pas' {MySearchComponentsView},
   View.Logs.Busca in 'src\View\Logs\View.Logs.Busca.pas' {ViewLogsBusca},
   Model.Logs.Busca in 'src\Model\Logs\Model.Logs.Busca.pas',
-  Utils.GridsMenu in 'src\Utils\Utils.GridsMenu.pas',
-  Utils.ConfMenu in 'src\Utils\Utils.ConfMenu.pas';
+  Utils.ConfGrid in 'src\Utils\Utils.ConfGrid.pas',
+  Utils.ConfMenu in 'src\Utils\Utils.ConfMenu.pas',
+  Model.Behavior.Hint in 'src\Model\Behavior\Model.Behavior.Hint.pas',
+  Model.Behavior.ReportMemoryLeaks in 'src\Model\Behavior\Model.Behavior.ReportMemoryLeaks.pas',
+  Model.Behavior.DateFormat in 'src\Model\Behavior\Model.Behavior.DateFormat.pas';
 
 {$R *.res}
 

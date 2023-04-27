@@ -21,7 +21,7 @@ uses
   View.Base,
   Data.DB,
   Model.Logs.Busca,
-  Utils.GridsMenu;
+  Utils.ConfGrid;
 
 type
   TViewLogsBusca = class(TViewBase)
@@ -69,7 +69,7 @@ type
     procedure edtIdFuncionarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtIdFuncionarioExit(Sender: TObject);
   private
-    FGridLib: TUtilsGridsMenu;
+    FConfGrid: TUtilsConfGrid;
     FBusca: TModelLogsBusca;
     procedure ConfComponentes;
     procedure GetTotalRegistros;
@@ -95,7 +95,7 @@ uses
 procedure TViewLogsBusca.FormCreate(Sender: TObject);
 begin
    inherited;
-   FGridLib := TUtilsGridsMenu.New(imgConfGrid, GridBusca, Self.Name);
+   FConfGrid := TUtilsConfGrid.New(imgConfGrid, GridBusca, Self.Name);
 
    FBusca := TModelLogsBusca.Create;
    FBusca.DataSource(DS_Busca);
@@ -110,7 +110,7 @@ end;
 procedure TViewLogsBusca.FormDestroy(Sender: TObject);
 begin
    FBusca.Free;
-   FGridLib.Free;
+   FConfGrid.Free;
    inherited;
 end;
 

@@ -190,10 +190,10 @@ inherited ViewLogsBusca: TViewLogsBusca
       1083
       163)
     object imgConfGrid: TImage
-      Left = 1057
-      Top = 143
+      Left = 1055
+      Top = 137
       Width = 25
-      Height = 21
+      Height = 25
       Cursor = crHandPoint
       Center = True
       Proportional = True

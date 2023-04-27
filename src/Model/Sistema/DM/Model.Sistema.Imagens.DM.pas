@@ -17,6 +17,7 @@ type
     imgPopupMenuMain: TImageList;
     imgListButtons: TImageList;
     imgPopupMenuBusca: TImageList;
+    imgListPopupMenuConfMenu: TImageList;
   private
   public
   end;

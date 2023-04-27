@@ -2,10 +2,6 @@ unit Model.Behavior;
 
 interface
 
-uses
-  System.SysUtils,
-  Vcl.Forms;
-
 type
  TModelBehavior = class
   private
@@ -20,15 +16,17 @@ var
 implementation
 
 uses
-  Model.Behavior.Exceptions;
+  Model.Behavior.Exceptions,
+  Model.Behavior.ReportMemoryLeaks,
+  Model.Behavior.Hint,
+  Model.Behavior.DateFormat;
 
 constructor TModelBehavior.Create;
 begin
-   ReportMemoryLeaksOnShutdown    := True; //FileExists('C:\Temp\adm.lock');
-   Application.HintPause          := 10;
-   Application.HintShortPause     := 5;
-   FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
    TModelBehaviorExceptions.Configurar;
+   TModelBehaviorReportMemoryLeaks.Configurar;
+   TModelBehaviorHint.Configurar;
+   TModelBehaviorDateFormat.Configurar;
 end;
 
 destructor TModelBehavior.Destroy;

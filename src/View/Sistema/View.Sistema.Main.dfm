@@ -673,6 +673,11 @@ object ViewSistemaMain: TViewSistemaMain
         Caption = 'Par'#226'metros do sistema'
         ImageIndex = 25
       end
+      object ConfiguracoesPermissoes1: TMenuItem
+        Tag = 999
+        Caption = 'Permiss'#245'es'
+        ImageIndex = 30
+      end
       object N2: TMenuItem
         Caption = '-'
       end
@@ -681,11 +686,6 @@ object ViewSistemaMain: TViewSistemaMain
         Caption = 'Empresa'
         ImageIndex = 26
         OnClick = ConfiguracoesEmpresa1Click
-      end
-      object ConfigurarMenu1: TMenuItem
-        Tag = 999
-        Caption = 'Configurar Menu'
-        ImageIndex = 30
       end
     end
     object Suporte1: TMenuItem
@@ -745,41 +745,5 @@ object ViewSistemaMain: TViewSistemaMain
     OnTimer = TimerFormResizeTimer
     Left = 32
     Top = 120
-  end
-  object PopupMenu1: TPopupMenu
-    Images = ModelSistemaImagensDM.imgPopupMenuMain
-    Left = 192
-    Top = 32
-    object MenuItem1: TMenuItem
-      Caption = 'Atualizar '#237'cones de atalhos'
-      ImageIndex = 2
-      OnClick = AtualizarIconesDeAtalhos1Click
-    end
-    object MenuItem2: TMenuItem
-      Caption = 'Ocultar '#237'cones'
-      ImageIndex = 1
-      OnClick = OcultarIcones1Click
-    end
-    object MenuItem3: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem4: TMenuItem
-      Caption = 'Configurar '#237'cones'
-      ImageIndex = 0
-      OnClick = Configurarcones1Click
-    end
-    object FIXO1: TMenuItem
-      Tag = 999
-      Caption = 'FIXO'
-    end
-    object Atalho1: TMenuItem
-      Caption = '&Atalho'
-    end
-    object N6: TMenuItem
-      Caption = '-'
-    end
-    object Ultimo1: TMenuItem
-      Caption = 'Ultimo'
-    end
   end
 end

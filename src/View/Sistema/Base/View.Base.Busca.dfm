@@ -25,14 +25,47 @@ inherited ViewBaseBusca: TViewBaseBusca
       755
       49)
     object imgConfGrid: TImage
-      Left = 728
-      Top = 29
+      Left = 724
+      Top = 22
       Width = 25
-      Height = 21
+      Height = 25
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
       Center = True
       Proportional = True
+    end
+    object pnBuscarComboBox: TPanel
+      Left = 593
+      Top = 1
+      Width = 264
+      Height = 47
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 2
+      Visible = False
+      ExplicitLeft = 596
+      ExplicitTop = -4
+      object Label2: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 258
+        Height = 13
+        Align = alTop
+        Caption = 'Selecione o conte'#250'do a ser consultado'
+        ExplicitWidth = 184
+      end
+      object cBoxBusca: TComboBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 22
+        Width = 258
+        Height = 21
+        Align = alClient
+        Style = csDropDownList
+        TabOrder = 0
+        OnChange = cBoxBuscaChange
+      end
     end
     object pnBuscarPeriodo: TPanel
       AlignWithMargins = True
@@ -130,37 +163,6 @@ inherited ViewBaseBusca: TViewBaseBusca
         OnKeyPress = edtBuscaKeyPress
       end
     end
-    object pnBuscarComboBox: TPanel
-      Left = 593
-      Top = 1
-      Width = 264
-      Height = 47
-      Align = alLeft
-      BevelOuter = bvNone
-      TabOrder = 2
-      Visible = False
-      object Label2: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 258
-        Height = 13
-        Align = alTop
-        Caption = 'Selecione o conte'#250'do a ser consultado'
-        ExplicitWidth = 184
-      end
-      object cBoxBusca: TComboBox
-        AlignWithMargins = True
-        Left = 3
-        Top = 22
-        Width = 258
-        Height = 21
-        Align = alClient
-        Style = csDropDownList
-        TabOrder = 0
-        OnChange = cBoxBuscaChange
-      end
-    end
   end
   object pnBotton: TPanel
     Left = 0
@@ -173,10 +175,10 @@ inherited ViewBaseBusca: TViewBaseBusca
       755
       120)
     object imgConfMenu: TImage
-      Left = 728
+      Left = 724
       Top = 23
-      Width = 20
-      Height = 18
+      Width = 25
+      Height = 25
       Cursor = crHandPoint
       Anchors = [akTop, akRight]
       Center = True

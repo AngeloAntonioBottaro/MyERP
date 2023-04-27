@@ -1,4 +1,4 @@
-unit Utils.GridsMenu;
+unit Utils.ConfGrid;
 
 interface
 
@@ -13,15 +13,15 @@ uses
   Utils.MyGridLibrary;
 
 type
-  TUtilsGridsMenu = class
+  TUtilsConfGrid = class
   private
     FGridLib: TMyGridLibrary;
     FPopupMenu: TPopupMenu;
     procedure CriarItensMenu;
     procedure CriarPopupMenu(AImage: TImage);
-    procedure CarregarImagem(AImage: TImage);
+    procedure ConfigurarImagem(AImage: TImage);
   public
-    class function New(AImage: TImage; AGrid: TDBGrid; ANomeConf: string): TUtilsGridsMenu;
+    class function New(AImage: TImage; AGrid: TDBGrid; ANomeConf: string): TUtilsConfGrid;
     constructor Create(AImage: TImage; AGrid: TDBGrid; ANomeConf: string);
     destructor Destroy; override;
 
@@ -41,7 +41,7 @@ uses
   Model.Sistema.Imagens.DM,
   Utils.MyVclLibrary;
 
-class function TUtilsGridsMenu.New(AImage: TImage; AGrid: TDBGrid; ANomeConf: string): TUtilsGridsMenu;
+class function TUtilsConfGrid.New(AImage: TImage; AGrid: TDBGrid; ANomeConf: string): TUtilsConfGrid;
 begin
    if(AImage = nil)then
      raise ExceptionWarning.Create('Imagem de configuração do menu da grid não informada');
@@ -55,19 +55,17 @@ begin
    Result := Self.Create(AImage, AGrid, ANomeConf);
 end;
 
-constructor TUtilsGridsMenu.Create(AImage: TImage; AGrid: TDBGrid; ANomeConf: string);
+constructor TUtilsConfGrid.Create(AImage: TImage; AGrid: TDBGrid; ANomeConf: string);
 begin
    FGridLib := TMyGridLibrary.New(AGrid, ANomeConf);
    FGridLib.CarregarConfiguracoes;
 
    Self.CriarPopupMenu(AImage);
    Self.CriarItensMenu;
-   Self.CarregarImagem(AImage);
-   AImage.OnClick   := imgConfGridClick;
-   AImage.PopupMenu := FPopupMenu;
+   Self.ConfigurarImagem(AImage);
 end;
 
-destructor TUtilsGridsMenu.Destroy;
+destructor TUtilsConfGrid.Destroy;
 begin
    if(Assigned(FGridLib))then
      FGridLib.Free;
@@ -78,7 +76,7 @@ begin
    inherited;
 end;
 
-procedure TUtilsGridsMenu.CarregarImagem(AImage: TImage);
+procedure TUtilsConfGrid.ConfigurarImagem(AImage: TImage);
 var
   LPngImage: TPngImage;
 begin
@@ -86,56 +84,61 @@ begin
    try
      LPngImage.LoadFromResourceName(HInstance, 'confgrid');
      AImage.Picture.Assign(LPngImage);
-     AImage.Center       := True;
-     AImage.Proportional := True;
    finally
      LPngImage.Free;
    end;
+
+   AImage.ShowHint     := True;
+   AImage.Hint         := 'Configurar grid';
+   AImage.Center       := True;
+   AImage.Proportional := True;
+   AImage.OnClick      := imgConfGridClick;
+   AImage.PopupMenu    := FPopupMenu;
 end;
 
-procedure TUtilsGridsMenu.imgConfGridClick(Sender: TObject);
+procedure TUtilsConfGrid.imgConfGridClick(Sender: TObject);
 begin
    TMyVclLibrary.PopUpMenuSelfActive(TImage(Sender));
 end;
 
-procedure TUtilsGridsMenu.AumentarFonte1Click(Sender: TObject);
+procedure TUtilsConfGrid.AumentarFonte1Click(Sender: TObject);
 begin
    FGridLib.AumentarFonte;
 end;
 
-procedure TUtilsGridsMenu.DiminuirFonte1Click(Sender: TObject);
+procedure TUtilsConfGrid.DiminuirFonte1Click(Sender: TObject);
 begin
    FGridLib.DiminuirFonte;
 end;
 
-procedure TUtilsGridsMenu.DeixarNegrito1Click(Sender: TObject);
+procedure TUtilsConfGrid.DeixarNegrito1Click(Sender: TObject);
 begin
    FGridLib.DeixarNegrito;
 end;
 
-procedure TUtilsGridsMenu.TirarNegrito1Click(Sender: TObject);
+procedure TUtilsConfGrid.TirarNegrito1Click(Sender: TObject);
 begin
    FGridLib.TirarNegrito;
 end;
 
-procedure TUtilsGridsMenu.GravarConfiguracoes1Click(Sender: TObject);
+procedure TUtilsConfGrid.GravarConfiguracoes1Click(Sender: TObject);
 begin
    FGridLib.SalvarConfiguracoes;
 end;
 
-procedure TUtilsGridsMenu.RestaurarConfiguracoes1Click(Sender: TObject);
+procedure TUtilsConfGrid.RestaurarConfiguracoes1Click(Sender: TObject);
 begin
    FGridLib.RestaurarPadrao;
 end;
 
-procedure TUtilsGridsMenu.CriarPopupMenu(AImage: TImage);
+procedure TUtilsConfGrid.CriarPopupMenu(AImage: TImage);
 begin
    FPopupMenu        := TPopupMenu.Create(AImage);
    FPopupMenu.Name   := 'pMenuConfGrid';
    FPopupMenu.Images := ModelSistemaImagensDM.imgListPopupMenuConfGrid;
 end;
 
-procedure TUtilsGridsMenu.CriarItensMenu;
+procedure TUtilsConfGrid.CriarItensMenu;
 var
   LItem: TMenuItem;
 begin

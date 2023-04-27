@@ -370,12 +370,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Logs\Model.Logs.Busca.pas"/>
-        <DCCReference Include="src\Utils\Utils.GridsMenu.pas"/>
+        <DCCReference Include="src\Utils\Utils.ConfGrid.pas"/>
         <DCCReference Include="src\Utils\Utils.ConfMenu.pas"/>
-        <RcItem Include="resources\Images\PNG\PopupMenu\Grids\Gear.png">
-            <ResourceType>RCDATA</ResourceType>
-            <ResourceId>confgrid</ResourceId>
-        </RcItem>
+        <DCCReference Include="src\Model\Behavior\Model.Behavior.Hint.pas"/>
+        <DCCReference Include="src\Model\Behavior\Model.Behavior.ReportMemoryLeaks.pas"/>
+        <DCCReference Include="src\Model\Behavior\Model.Behavior.DateFormat.pas"/>
         <RcItem Include="resources\Images\PNG\MainMenu\BookAndPencil.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>agenda</ResourceId>
@@ -420,7 +419,11 @@
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>vendas</ResourceId>
         </RcItem>
-        <RcItem Include="resources\Images\PNG\PopupMenu\ConfMenu\Document.png">
+        <RcItem Include="resources\Images\PNG\PopupMenu\ConfGrid\ConfDataSheet.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>confgrid</ResourceId>
+        </RcItem>
+        <RcItem Include="resources\Images\PNG\PopupMenu\ConfMenu\ConfPopup.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>confmenu</ResourceId>
         </RcItem>
@@ -498,7 +501,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\PopupMenu\ConfMenu\Document.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\PopupMenu\ConfGrid\ConfDataSheet.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="resources\Images\PNG\PopupMenu\ConfMenu\ConfPopup.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -510,19 +519,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\PopupMenu\Grids\Gear.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="resources\Images\PNG\MainMenu\InitiateMoneyTransferAdd.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="resources\Images\PNG\MainMenu\CashRegister.png" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="resources\Images\PNG\MainMenu\InitiateMoneyTransferAdd.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

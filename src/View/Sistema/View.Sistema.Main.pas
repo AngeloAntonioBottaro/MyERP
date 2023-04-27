@@ -82,16 +82,7 @@ type
     RelatoriosCaixa1: TMenuItem;
     RelatoriosContaReceber1: TMenuItem;
     RelatoriosContasPagar1: TMenuItem;
-    PopupMenu1: TPopupMenu;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    FIXO1: TMenuItem;
-    Atalho1: TMenuItem;
-    N6: TMenuItem;
-    Ultimo1: TMenuItem;
-    ConfigurarMenu1: TMenuItem;
+    ConfiguracoesPermissoes1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);

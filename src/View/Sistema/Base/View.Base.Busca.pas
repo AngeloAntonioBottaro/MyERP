@@ -21,7 +21,7 @@ uses
   Vcl.Menus,
   Vcl.ComCtrls,
   Vcl.Imaging.pngimage,
-  Utils.GridsMenu,
+  Utils.ConfGrid,
   Utils.ConfMenu;
 
 type
@@ -76,7 +76,7 @@ type
     procedure cBoxBuscaChange(Sender: TObject);
     procedure dtpPeriodoInicialExit(Sender: TObject);
   private
-    FGridLib: TUtilsGridsMenu;
+    FConfGrid: TUtilsConfGrid;
     FConfMenu: TUtilsConfMenu;
     procedure ValidacoesBasicas;
     procedure GetTotalRegistros;
@@ -114,7 +114,7 @@ end;
 procedure TViewBaseBusca.FormCreate(Sender: TObject);
 begin
    inherited;
-   FGridLib  := TUtilsGridsMenu.New(imgConfGrid, FGridConf, FNomeConf);
+   FConfGrid := TUtilsConfGrid.New(imgConfGrid, FGridConf, FNomeConf);
    FConfMenu := TUtilsConfMenu.New(imgConfMenu, PopupMenu, FNomeConf);
 
    TimerBuscar.Enabled    := False;
@@ -125,7 +125,7 @@ end;
 procedure TViewBaseBusca.FormDestroy(Sender: TObject);
 begin
    FConfMenu.Free;
-   FGridLib.Free;
+   FConfGrid.Free;
    inherited;
 end;
 

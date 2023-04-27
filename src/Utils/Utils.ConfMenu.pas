@@ -17,7 +17,7 @@ type
     FFormulario: string;
     procedure CriarItensMenu;
     procedure CriarPopupMenu(AImage: TImage);
-    procedure CarregarImagem(AImage: TImage);
+    procedure ConfigurarImagem(AImage: TImage);
   public
     class function New(AImage: TImage; AMenu: TMenu; AFormulario: string): TUtilsConfMenu;
     constructor Create(AImage: TImage; AMenu: TMenu; AFormulario: string);
@@ -58,9 +58,7 @@ begin
 
    Self.CriarPopupMenu(AImage);
    Self.CriarItensMenu;
-   Self.CarregarImagem(AImage);
-   AImage.OnClick   := imgConfMenuClick;
-   AImage.PopupMenu := FPopupMenu;
+   Self.ConfigurarImagem(AImage);
 end;
 
 destructor TUtilsConfMenu.Destroy;
@@ -70,7 +68,7 @@ begin
    inherited;
 end;
 
-procedure TUtilsConfMenu.CarregarImagem(AImage: TImage);
+procedure TUtilsConfMenu.ConfigurarImagem(AImage: TImage);
 var
   LPngImage: TPngImage;
 begin
@@ -78,11 +76,16 @@ begin
    try
      LPngImage.LoadFromResourceName(HInstance, 'confmenu');
      AImage.Picture.Assign(LPngImage);
-     AImage.Center       := True;
-     AImage.Proportional := True;
    finally
      LPngImage.Free;
    end;
+
+   AImage.ShowHint     := True;
+   AImage.Hint         := 'Configurar menus';
+   AImage.Center       := True;
+   AImage.Proportional := True;
+   AImage.OnClick      := imgConfMenuClick;
+   AImage.PopupMenu    := FPopupMenu;
 end;
 
 procedure TUtilsConfMenu.imgConfMenuClick(Sender: TObject);
@@ -94,6 +97,7 @@ procedure TUtilsConfMenu.CriarPopupMenu(AImage: TImage);
 begin
    FPopupMenu        := TPopupMenu.Create(AImage);
    FPopupMenu.Name   := 'pMenuConfMenus';
+   FPopupMenu.Images := ModelSistemaImagensDM.imgListPopupMenuConfMenu;
 end;
 
 procedure TUtilsConfMenu.CriarItensMenu;
@@ -103,6 +107,7 @@ begin
    LItem := TMenuItem.Create(FPopupMenu);
    LItem.Caption    := 'Configurar itens do menu';
    LItem.OnClick    := ConfigurarMenuClick;
+   LItem.ImageIndex := 0;
    FPopupMenu.Items.Add(LItem);
 end;
 
