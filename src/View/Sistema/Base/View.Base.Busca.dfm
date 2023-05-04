@@ -144,10 +144,11 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 187
+        Width = 380
         Height = 13
         Align = alTop
         Caption = 'Entre com o conte'#250'do a ser consultado'
+        ExplicitWidth = 187
       end
       object edtBusca: TEdit
         AlignWithMargins = True
@@ -255,13 +256,14 @@ inherited ViewBaseBusca: TViewBaseBusca
         Left = 670
         Top = 1
         Width = 77
-        Height = 13
+        Height = 14
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 5
         Margins.Bottom = 0
         Align = alRight
         Caption = 'lbTotalRegistros'
+        ExplicitHeight = 13
       end
     end
     object ckBuscarInativos: TCheckBox
@@ -290,7 +292,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Align = alClient
       DataSource = DS_Busca
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      PopupMenu = PopupMenu
+      PopupMenu = MenuBusca
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -312,7 +314,7 @@ inherited ViewBaseBusca: TViewBaseBusca
     Left = 672
     Top = 8
   end
-  object PopupMenu: TPopupMenu
+  object MenuBusca: TPopupMenu
     Images = ModelSistemaImagensDM.imgPopupMenuBusca
     Left = 616
     Top = 8

@@ -38,8 +38,6 @@ var
   VG_UsuarioLogadoId: Integer;
   VG_UsuarioLogadoNome: string;
 
-  EmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
-
 procedure RefreshVariables;
 procedure CreateAppDirectories;
 function GetEmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
@@ -48,6 +46,9 @@ implementation
 
 uses
   Model.Empresas.Factory;
+
+var
+  EmpresaLogada: IModelEmpresasFactory<TModelEmpresasEntitie>;
 
 procedure RefreshVariables;
 begin

@@ -240,8 +240,7 @@ end;
 function TModelProdutosEntitie.IdNome: string;
 begin
    Result := Self.Nome;
-   if(not Result.IsEmpty)then
-     Result := Self.IdMascara + ' - ' + Result;
+   Result := IfThen(Result.IsEmpty, Self.IdMascara, Self.IdMascara + ' - ' + Result);
 end;
 
 function TModelProdutosEntitie.Nome(AValue: string): TModelProdutosEntitie;

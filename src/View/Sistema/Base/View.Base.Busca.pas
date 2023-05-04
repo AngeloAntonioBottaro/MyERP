@@ -34,7 +34,7 @@ type
     DS_Busca: TDataSource;
     btnFechar: TButton;
     TimerBuscar: TTimer;
-    PopupMenu: TPopupMenu;
+    MenuBusca: TPopupMenu;
     Atualizar1: TMenuItem;
     gBoxTipoConsulta: TGroupBox;
     pnOptions: TPanel;
@@ -115,7 +115,7 @@ procedure TViewBaseBusca.FormCreate(Sender: TObject);
 begin
    inherited;
    FConfGrid := TUtilsConfGrid.New(imgConfGrid, FGridConf, FNomeConf);
-   FConfMenu := TUtilsConfMenu.New(imgConfMenu, PopupMenu, FNomeConf);
+   FConfMenu := TUtilsConfMenu.New(imgConfMenu, MenuBusca, FNomeConf);
 
    TimerBuscar.Enabled    := False;
    dtpPeriodoInicial.Date := Now;

@@ -117,7 +117,7 @@ begin
    if(not (FEntitie.Id > 0))then
      ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
-   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.Titulo))then
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.IdTitulo))then
      Exit;
 
    MyQueryNew
@@ -136,6 +136,7 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de compromisso',
                          'Usuário excluiu o compromisso ' + FEntitie.Id.ToString + ' - ' + FEntitie.Titulo,

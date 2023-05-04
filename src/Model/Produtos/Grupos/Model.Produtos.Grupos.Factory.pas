@@ -100,7 +100,7 @@ begin
    if(not (FEntitie.Id > 0))then
      ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
-   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome))then
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.IdNome))then
      Exit;
 
    MyQueryNew
@@ -122,7 +122,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de grupo de produto',
-                         'Usuário excluiu o grupo ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o grupo ' + FEntitie.IdNome,
                          FEntitie.Id);
    FEntitie.Id(0);
 

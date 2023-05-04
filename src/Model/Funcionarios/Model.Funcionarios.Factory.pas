@@ -209,7 +209,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Alteração de status',
-                         'Usuário alterou o status do funcionário ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         'Usuário alterou o status do funcionário ' + FEntitie.IdNome + ' para ' + LStatusNovo,
                          FEntitie.Id);
 
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
@@ -275,7 +275,7 @@ begin
    if(FEntitie.Id = 1)then
      raise ExceptionWarning.Create('Funcionário padrão do sistema não pode ser excluído');
 
-   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial))then
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.IdNome))then
      Exit;
 
    MyQueryNew
@@ -294,9 +294,10 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de funcionário',
-                         'Usuário excluiu o funcionário ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o funcionário ' + FEntitie.IdNome,
                          FEntitie.Id);
    FEntitie.Id(0);
 

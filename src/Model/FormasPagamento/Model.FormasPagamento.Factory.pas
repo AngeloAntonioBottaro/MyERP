@@ -111,7 +111,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Alteração de status',
-                         'Usuário alterou o status da forma de pagamento ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         'Usuário alterou o status da forma de pagamento ' + FEntitie.IdNome + ' para ' + LStatusNovo,
                          FEntitie.Id);
 
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
@@ -153,7 +153,7 @@ begin
    if(not (FEntitie.Id > 0))then
      ExceptionMsgRegistroNaoInformadoExclusao(THIS);
 
-   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome))then
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.IdNome))then
      Exit;
 
    MyQueryNew
@@ -172,9 +172,10 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de forma de pagamento',
-                         'Usuário excluiu a forma de pagamento ' + FEntitie.Id.ToString,
+                         'Usuário excluiu a forma de pagamento ' + FEntitie.IdNome,
                          FEntitie.Id);
    FEntitie.Id(0);
 

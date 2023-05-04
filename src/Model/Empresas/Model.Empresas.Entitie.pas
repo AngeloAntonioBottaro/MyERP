@@ -328,8 +328,7 @@ begin
    if(Result.IsEmpty)then
      Result := Self.RazaoSocial;
 
-   if(not Result.IsEmpty)then
-     Result := Self.IdMascara + ' - ' + Result;
+   Result := IfThen(Result.IsEmpty, Self.IdMascara, Self.IdMascara + ' - ' + Result);
 end;
 
 function TModelEmpresasEntitie.IE(AValue: string): TModelEmpresasEntitie;

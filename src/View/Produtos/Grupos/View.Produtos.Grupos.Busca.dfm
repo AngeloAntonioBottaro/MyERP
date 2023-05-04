@@ -51,7 +51,7 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
         end>
     end
   end
-  inherited PopupMenu: TPopupMenu
+  inherited MenuBusca: TPopupMenu
     inherited Excluir1: TMenuItem
       Visible = True
     end

@@ -31,10 +31,8 @@ object ViewSistemaMain: TViewSistemaMain
     Align = alClient
     Center = True
     Proportional = True
-    ExplicitLeft = 360
-    ExplicitTop = 16
-    ExplicitWidth = 105
-    ExplicitHeight = 105
+    ExplicitLeft = -2
+    ExplicitTop = 0
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -686,15 +684,17 @@ object ViewSistemaMain: TViewSistemaMain
     object Configuracoes1: TMenuItem
       Tag = 999
       Caption = '&Configura'#231#245'es'
-      object ConfiguracoesParametrosdosistema1: TMenuItem
+      object ConfiguracoesParametrosDoSistema1: TMenuItem
         Tag = 999
         Caption = 'Par'#226'metros do sistema'
         ImageIndex = 25
+        OnClick = ConfiguracoesParametrosDoSistema1Click
       end
       object ConfiguracoesPermissoes1: TMenuItem
         Tag = 999
         Caption = 'Permiss'#245'es'
         ImageIndex = 30
+        OnClick = ConfiguracoesPermissoes1Click
       end
       object N2: TMenuItem
         Caption = '-'
@@ -721,6 +721,9 @@ object ViewSistemaMain: TViewSistemaMain
           Caption = 'Telas criadas'
           OnClick = SuporteExtrasTelasCriadas1Click
         end
+      end
+      object N5: TMenuItem
+        Caption = '-'
       end
       object SuporteSobreSistema1: TMenuItem
         Caption = 'Sobre o sistema'

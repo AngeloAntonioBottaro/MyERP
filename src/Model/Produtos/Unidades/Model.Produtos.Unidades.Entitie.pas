@@ -79,8 +79,7 @@ end;
 function TModelProdutosUnidadesEntitie.IdNome: string;
 begin
    Result := Self.Nome;
-   if(not Result.IsEmpty)then
-     Result := Self.IdMascara + ' - ' + Result;
+   Result := IfThen(Result.IsEmpty, Self.IdMascara, Self.IdMascara + ' - ' + Result);
 end;
 
 function TModelProdutosUnidadesEntitie.Nome(AValue: string): TModelProdutosUnidadesEntitie;

@@ -167,7 +167,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Alteração de status',
-                         'Usuário alterou o status do cliente ' + FEntitie.Id.ToString + ' para ' + LStatusNovo,
+                         'Usuário alterou o status do cliente ' + FEntitie.IdNome + ' para ' + LStatusNovo,
                          FEntitie.Id);
 
    ShowDone(THIS + IfThen(LStatusNovo.Equals(STATUS_ATIVO), ' ativado', ' inativado'));
@@ -228,7 +228,7 @@ begin
    if(FEntitie.Id = 1)then
      raise ExceptionWarning.Create('Cliente padrão do sistema não pode ser excluído');
 
-   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial))then
+   if(not ShowQuestionNo('Deseja excluir o registro ' + FEntitie.IdNome))then
      Exit;
 
    MyQueryNew
@@ -250,7 +250,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de cliente',
-                         'Usuário excluiu o cliente ' + FEntitie.Id.ToString,
+                         'Usuário excluiu o cliente ' + FEntitie.IdNome,
                          FEntitie.Id);
    FEntitie.Id(0);
 

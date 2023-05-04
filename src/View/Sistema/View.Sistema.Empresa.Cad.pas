@@ -104,12 +104,13 @@ uses
   Utils.GlobalVariables,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,
-  Model.Empresas.Factory;
+  Model.Empresas.Factory,
+  View.Sistema.SenhaAdm;
 
 procedure TViewSistemaEmpresaCad.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    inherited;
-   EmpresaLogada.ConsultarEntitie;
+   GetEmpresaLogada.ConsultarEntitie;
    if(Self.DadosIniciais)then
    begin
       if(ShowQuestionYes('Não informado os dados de uma empresa válida. Deseja informálos?'))then
@@ -136,6 +137,9 @@ begin
      Exit;
 
    if(not (FEmpresa.Entitie.Id > 0))then
+     Exit;
+
+   if(not ChamaSenhaAdministrativa)then
      Exit;
 
    Self.StartOperations;

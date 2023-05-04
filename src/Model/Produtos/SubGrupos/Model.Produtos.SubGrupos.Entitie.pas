@@ -105,8 +105,7 @@ end;
 function TModelProdutosSubGruposEntitie.IdNome: string;
 begin
    Result := Self.Nome;
-   if(not Result.IsEmpty)then
-     Result := Self.IdMascara + ' - ' + Result;
+   Result := IfThen(Result.IsEmpty, Self.IdMascara, Self.IdMascara + ' - ' + Result);
 end;
 
 function TModelProdutosSubGruposEntitie.Nome(AValue: string): TModelProdutosSubGruposEntitie;

@@ -52,6 +52,7 @@ type
     function Id(AValue: Integer): TModelAgendaEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdTitulo: string;
     function Observacao(AValue: string): TModelAgendaEntitie; overload;
     function Observacao: string; overload;
     function Status(AValue: string): TModelAgendaEntitie; overload;
@@ -220,6 +221,12 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelAgendaEntitie.IdTitulo: string;
+begin
+   Result := Self.Titulo;
+   Result := IfThen(Result.IsEmpty, Self.IdMascara, Self.IdMascara + ' - ' + Result);
 end;
 
 function TModelAgendaEntitie.Observacao(AValue: string): TModelAgendaEntitie;

@@ -165,7 +165,8 @@ uses
   Model.Permissoes.Grupos.Factory in 'src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Factory.pas',
   Model.Permissoes.Grupos.Busca in 'src\Model\Permissoes\Grupos\Busca\Model.Permissoes.Grupos.Busca.pas',
   View.Permissoes.Grupos.Busca in 'src\View\Permissoes\View.Permissoes.Grupos.Busca.pas' {ViewPermissoesGruposBusca},
-  View.Permissoes.Grupos.Cad in 'src\View\Permissoes\View.Permissoes.Grupos.Cad.pas' {ViewPermissoesGruposCad};
+  View.Permissoes.Grupos.Cad in 'src\View\Permissoes\View.Permissoes.Grupos.Cad.pas' {ViewPermissoesGruposCad},
+  View.Sistema.SenhaAdm in 'src\View\Sistema\View.Sistema.SenhaAdm.pas' {ViewSistemaSenhaAdm};
 
 {$R *.res}
 

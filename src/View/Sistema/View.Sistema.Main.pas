@@ -57,7 +57,7 @@ type
     Configuracoes1: TMenuItem;
     ConfiguracoesEmpresa1: TMenuItem;
     N2: TMenuItem;
-    ConfiguracoesParametrosdosistema1: TMenuItem;
+    ConfiguracoesParametrosDoSistema1: TMenuItem;
     MovimentacoesVendas1: TMenuItem;
     MovimentacoesCompras1: TMenuItem;
     FinanceiroCaixadiario1: TMenuItem;
@@ -87,6 +87,7 @@ type
     Financeiro2: TMenuItem;
     N4: TMenuItem;
     CadastrosFuncionariosGrupoPermissoes1: TMenuItem;
+    N5: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -120,6 +121,8 @@ type
     procedure SuporteExtrasTelasCriadas1Click(Sender: TObject);
     procedure Logs1Click(Sender: TObject);
     procedure CadastrosFuncionariosGrupoPermissoes1Click(Sender: TObject);
+    procedure ConfiguracoesParametrosDoSistema1Click(Sender: TObject);
+    procedure ConfiguracoesPermissoes1Click(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -162,7 +165,7 @@ uses
   View.FormasPagamento.Cad,
   View.Agenda.Cad,
   View.Logs.Busca,
-  View.Permissoes.Grupos.Cad;
+  View.Permissoes.Grupos.Cad, View.Sistema.SenhaAdm;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -284,6 +287,7 @@ procedure TViewSistemaMain.FinanceiroConsultaContasReceber1Click(Sender: TObject
 begin
    //
 end;
+
 procedure TViewSistemaMain.MovimentacoesAgenda1Click(Sender: TObject);
 begin
    if(ViewAgendaCad = nil)then Application.CreateForm(TViewAgendaCad, ViewAgendaCad);
@@ -302,6 +306,22 @@ begin
    finally
      FreeAndNil(ViewSistemaEmpresaCad);
    end;
+end;
+
+procedure TViewSistemaMain.ConfiguracoesParametrosDoSistema1Click(Sender: TObject);
+begin
+   if(not ChamaSenhaAdministrativa)then
+     Exit;
+
+   //TELA CONFIGURACOES
+end;
+
+procedure TViewSistemaMain.ConfiguracoesPermissoes1Click(Sender: TObject);
+begin
+   if(not ChamaSenhaAdministrativa)then
+     Exit;
+
+   //TELA PERMISSOES
 end;
 
 procedure TViewSistemaMain.CadastroFormaPagamentoCadastro1Click(Sender: TObject);

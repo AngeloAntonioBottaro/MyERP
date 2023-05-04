@@ -112,7 +112,7 @@ inherited ViewFornecedoresBusca: TViewFornecedoresBusca
         end>
     end
   end
-  inherited PopupMenu: TPopupMenu
+  inherited MenuBusca: TPopupMenu
     inherited AtivarInativar1: TMenuItem
       Visible = True
     end
