@@ -37,6 +37,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Excluir1Click(Sender: TObject);
     procedure GridBuscaTitleClick(Column: TColumn);
+    procedure btnCadastroClick(Sender: TObject);
   private
     FBusca: TModelPermissoesGruposBusca;
     function GetTipoBusca: TTipoBuscaPermissoesGrupo;
@@ -56,7 +57,7 @@ uses
   Utils.MyConsts,
   Utils.MyVclLibrary,
   Utils.GlobalConsts,
-  //View.Permissoes.Grupos.Cad,
+  View.Permissoes.Grupos.Cad,
   Model.Permissoes.Grupos.Factory;
 
 procedure TViewPermissoesGruposBusca.FormCreate(Sender: TObject);
@@ -84,6 +85,21 @@ begin
     VK_F2: if(Shift = [])then rdBuscarCodigo.Checked    := True;
     VK_F3: if(Shift = [])then rdBuscarNome.Checked      := True;
     VK_F4: if(Shift = [])then rdBuscarDescricao.Checked := True;
+   end;
+end;
+
+procedure TViewPermissoesGruposBusca.btnCadastroClick(Sender: TObject);
+begin
+   inherited;
+   if(ViewPermissoesGruposCad = nil)then Application.CreateForm(TViewPermissoesGruposCad, ViewPermissoesGruposCad);
+
+   if(ViewPermissoesGruposCad.Showing)then
+     raise ExceptionInformation.Create(MSG_TELA_JA_ABERTA);
+
+   try
+     ViewPermissoesGruposCad.ShowModal;
+   finally
+     FreeAndNil(ViewPermissoesGruposCad);
    end;
 end;
 

@@ -491,6 +491,14 @@ object ViewSistemaMain: TViewSistemaMain
           ImageIndex = 11
           OnClick = CadastrosFuncionariosFuncoes1Click
         end
+        object N4: TMenuItem
+          Caption = '-'
+        end
+        object CadastrosFuncionariosGrupoPermissoes1: TMenuItem
+          Caption = 'Grupo permiss'#245'es'
+          ImageIndex = 32
+          OnClick = CadastrosFuncionariosGrupoPermissoes1Click
+        end
       end
       object CadastrosCidades1: TMenuItem
         Bitmap.Data = {

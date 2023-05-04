@@ -10,6 +10,11 @@ inherited ViewPermissoesGruposBusca: TViewPermissoesGruposBusca
     end
   end
   inherited pnBotton: TPanel
+    inherited pnButtons: TPanel
+      inherited btnCadastro: TButton
+        OnClick = btnCadastroClick
+      end
+    end
     inherited gBoxTipoConsulta: TGroupBox
       object rdBuscarNome: TRadioButton
         Left = 109

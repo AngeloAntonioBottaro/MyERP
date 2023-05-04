@@ -85,6 +85,8 @@ type
     RelatoriosFornecedores1: TMenuItem;
     Movimentacoes2: TMenuItem;
     Financeiro2: TMenuItem;
+    N4: TMenuItem;
+    CadastrosFuncionariosGrupoPermissoes1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CadastrosProdutosCadastro1Click(Sender: TObject);
@@ -117,6 +119,7 @@ type
     procedure MovimentacoesAgenda1Click(Sender: TObject);
     procedure SuporteExtrasTelasCriadas1Click(Sender: TObject);
     procedure Logs1Click(Sender: TObject);
+    procedure CadastrosFuncionariosGrupoPermissoes1Click(Sender: TObject);
   private
     procedure DoLoggin;
     procedure ProcessStatus;
@@ -158,7 +161,8 @@ uses
   View.Fornecedores.Cad,
   View.FormasPagamento.Cad,
   View.Agenda.Cad,
-  View.Logs.Busca;
+  View.Logs.Busca,
+  View.Permissoes.Grupos.Cad;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -357,6 +361,17 @@ begin
      ViewFuncionariosFuncoesCad.ShowModal;
    finally
      FreeAndNil(ViewFuncionariosFuncoesCad);
+   end;
+end;
+
+procedure TViewSistemaMain.CadastrosFuncionariosGrupoPermissoes1Click(Sender: TObject);
+begin
+   inherited;
+   if(ViewPermissoesGruposCad = nil)then Application.CreateForm(TViewPermissoesGruposCad, ViewPermissoesGruposCad);
+   try
+     ViewPermissoesGruposCad.ShowModal;
+   finally
+     FreeAndNil(ViewPermissoesGruposCad);
    end;
 end;
 
