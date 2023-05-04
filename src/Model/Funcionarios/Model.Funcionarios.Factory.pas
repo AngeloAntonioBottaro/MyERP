@@ -261,6 +261,7 @@ begin
     .Salario(MyQuery.FieldByName('SALARIO').AsFloat)
     .Login(MyQuery.FieldByName('LOGIN').AsString)
     .Senha(MyQuery.FieldByName('SENHA').AsString)
+    .GrupoPermissao(MyQuery.FieldByName('PERMISSOES_GRUPO').AsString)
     .End_Entitie;
 end;
 
@@ -295,7 +296,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de funcionário',
-                         'Usuário excluiu o funcionário ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial,
+                         'Usuário excluiu o funcionário ' + FEntitie.Id.ToString,
                          FEntitie.Id);
    FEntitie.Id(0);
 
@@ -341,7 +342,8 @@ begin
     .AddParam('SALARIO', FEntitie.Salario)
     .AddParam('FUNCAO', FEntitie.Funcao)
     .AddParam('LOGIN', FEntitie.Login)
-    .AddParam('SENHA', FEntitie.Senha);
+    .AddParam('SENHA', FEntitie.Senha)
+    .AddParam('PERMISSOES_GRUPO', FEntitie.GrupoPermissao);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -352,7 +354,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;
@@ -366,7 +368,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          LAcao + ' de funcionário',
-                         'Usuário gravou o funcionário ' + FEntitie.Id.ToString,
+                         'Usuário gravou o funcionário ' + FEntitie.IdNome,
                          FEntitie.Id);
 
    ShowDone('Gravação realizada');
@@ -377,10 +379,10 @@ begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
     .Add('(STATUS, RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
-    .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO, SALARIO, FUNCAO, LOGIN, SENHA)')
+    .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO, SALARIO, FUNCAO, LOGIN, SENHA, PERMISSOES_GRUPO)')
     .Add('VALUES')
     .Add('(:STATUS, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
-    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO, :SALARIO, :FUNCAO, :LOGIN, :SENHA)')
+    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO, :SALARIO, :FUNCAO, :LOGIN, :SENHA, :PERMISSOES_GRUPO)')
     .Add('RETURNING ID')
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_CADASTRO', Now);
@@ -393,7 +395,7 @@ begin
     .Add('RAZAO_SOCIAL = :RAZAO_SOCIAL, NOME_FANTASIA = :NOME_FANTASIA, ENDERECO = :ENDERECO, NUMERO = :NUMERO, BAIRRO = :BAIRRO, ')
     .Add('CEP = :CEP, CIDADE = :CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
     .Add('CELULAR = :CELULAR, FAX = :FAX, EMAIL = :EMAIL, TIPO_JURIDICO = :TIPO_JURIDICO, CNPJ = :CNPJ, INSCRICAO_ESTADUAL = :INSCRICAO_ESTADUAL, ')
-    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR, SALARIO = :SALARIO, FUNCAO = :FUNCAO, LOGIN = :LOGIN, SENHA = :SENHA')
+    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR, SALARIO = :SALARIO, FUNCAO = :FUNCAO, LOGIN = :LOGIN, SENHA = :SENHA, PERMISSOES_GRUPO = :PERMISSOES_GRUPO')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;

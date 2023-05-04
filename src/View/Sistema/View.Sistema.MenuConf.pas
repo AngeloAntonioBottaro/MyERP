@@ -97,7 +97,7 @@ begin
       if(AMenu.Items[I].Caption.Equals('-'))then
         Continue;
 
-      AMenu.Items[I].Visible := MyQuery.DataSet.Locate('NOME', AMenu.Items[I].Name, [loCaseInsensitive]);
+      AMenu.Items[I].Visible := MyQuery.DataSet.Locate('NOME_MENU', AMenu.Items[I].Name, [loCaseInsensitive]);
    end;
 end;
 
@@ -138,11 +138,11 @@ begin
           Continue;
 
         MyQueryNew
-         .Add('INSERT INTO CONFIGURACOES_MENUS(ID_FUNCIONARIO, NOME, FORMULARIO)')
+         .Add('INSERT INTO CONFIGURACOES_MENUS(ID_FUNCIONARIO, NOME_MENU, FORMULARIO)')
          .Add('VALUES')
-         .Add('(:ID_FUNCIONARIO, :NOME, :FORMULARIO)')
+         .Add('(:ID_FUNCIONARIO, :NOME_MENU, :FORMULARIO)')
          .AddParam('ID_FUNCIONARIO', VG_UsuarioLogadoId)
-         .AddParam('NOME', TItemMenu(ckList.Items.Objects[I]).Nome)
+         .AddParam('NOME_MENU', TItemMenu(ckList.Items.Objects[I]).Nome)
          .AddParam('FORMULARIO', FFormulario)
          .ExecSQL;
      end;

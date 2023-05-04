@@ -247,9 +247,10 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de cliente',
-                         'Usuário excluiu o cliente ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial,
+                         'Usuário excluiu o cliente ' + FEntitie.Id.ToString,
                          FEntitie.Id);
    FEntitie.Id(0);
 
@@ -303,7 +304,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;
@@ -317,7 +318,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          LAcao + ' de cliente',
-                         'Usuário gravou o cliente ' + FEntitie.Id.ToString,
+                         'Usuário gravou o cliente ' + FEntitie.IdNome,
                          FEntitie.Id);
 
    ShowDone('Gravação realizada');

@@ -177,7 +177,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;

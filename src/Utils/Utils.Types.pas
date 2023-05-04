@@ -15,6 +15,7 @@ type
   TTipoBuscaProdutoUnidade    = (Id, Nome, Sigla);
   TTipoBuscaFormaPagamento    = (Id, Nome);
   TTipoBuscaAgenda            = (Id, Titulo, Status, Cliente, Funcionario);
+  TTipoBuscaPermissoesGrupo   = (Id, Nome, Descricao);
   {$SCOPEDENUMS OFF}
 
 implementation

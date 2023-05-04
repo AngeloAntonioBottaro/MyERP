@@ -111,15 +111,12 @@
         </DCCReference>
         <DCCReference Include="src\View\Sistema\View.Sistema.Splash.pas">
             <Form>ViewSistemaSplash</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Sistema\Base\View.Base.pas">
             <Form>ViewBase</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Sistema\View.Sistema.Login.pas">
             <Form>ViewSistemaLogin</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Utils\Utils.Versao.pas"/>
         <DCCReference Include="src\Utils\Utils.GlobalVariables.pas"/>
@@ -130,7 +127,6 @@
         <DCCReference Include="src\Model\Sistema\Model.Sistema.Login.pas"/>
         <DCCReference Include="src\Model\Sistema\DM\Model.Sistema.Imagens.DM.pas">
             <Form>ModelSistemaImagensDM</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Fields.pas"/>
@@ -145,46 +141,36 @@
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Consts.pas"/>
         <DCCReference Include="src\View\Sistema\Base\View.Base.Cadastros.pas">
             <Form>ViewBaseCadastros</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Cidades\View.Cidades.Cad.pas">
             <Form>ViewCidadesCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Clientes\View.Clientes.Cad.pas">
             <Form>ViewClientesCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Cad.pas">
             <Form>ViewFornecedoresCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Funcionarios\View.Funcionarios.Cad.pas">
             <Form>ViewFuncionariosCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Cad.pas">
             <Form>ViewFuncionariosFuncoesCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\View.Produtos.Cad.pas">
             <Form>ViewProdutosCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\Grupos\View.Produtos.Grupos.Cad.pas">
             <Form>ViewProdutosGruposCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Cad.pas">
             <Form>ViewProdutosSubgruposCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PanelIcones.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Model.Main.Icones.Lista.VisibilidadeManual.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Componentes\Model.Main.Icones.Componentes.PageControlIcones.pas"/>
         <DCCReference Include="src\View\Sistema\View.Sistema.Sobre.pas">
             <Form>ViewSistemaSobre</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\MyUtilsLibrary\Utils.MyConsts.pas"/>
         <DCCReference Include="..\MyUtilsLibrary\Utils.MyLibrary.pas"/>
@@ -200,11 +186,9 @@
         <DCCReference Include="..\MyMessage\src\MyMessage.Types.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.View.pas">
             <Form>MyMessageView</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Sistema\View.Sistema.IconesConf.pas">
             <Form>ViewSistemaIconesConf</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\MyUtilsLibrary\Utils.MyFormLibrary.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Factory.pas"/>
@@ -212,39 +196,30 @@
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Entitie.pas"/>
         <DCCReference Include="src\View\Sistema\Base\View.Base.Busca.pas">
             <Form>ViewBaseBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Cidades\View.Cidades.Busca.pas">
             <Form>ViewCidadesBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Clientes\View.Clientes.Busca.pas">
             <Form>ViewClientesBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Fornecedores\View.Fornecedores.Busca.pas">
             <Form>ViewFornecedoresBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Funcionarios\View.Funcionarios.Busca.pas">
             <Form>ViewFuncionariosBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Funcionarios\Funcoes\View.Funcionarios.Funcoes.Busca.pas">
             <Form>ViewFuncionarioFuncoesBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\View.Produtos.Busca.pas">
             <Form>ViewProdutosBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\Grupos\View.Produtos.Grupos.Busca.pas">
             <Form>ViewProdutosGruposBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Produtos\SubGrupos\View.Produtos.SubGrupos.Busca.pas">
             <Form>ViewProdutosSubGruposBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Fornecedores\Model.Fornecedores.Interfaces.pas"/>
         <DCCReference Include="src\Model\Funcionarios\Model.Funcionarios.Interfaces.pas"/>
@@ -279,15 +254,12 @@
         <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.pas"/>
         <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Lista.pas">
             <Form>ViewLista</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Manutencao.pas">
             <Form>ViewManutencao</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.SelecionarConexao.pas">
             <Form>ViewSelecionarConexao</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Utils\Utils.EditsKeyDownExit.pas"/>
         <DCCReference Include="src\Model\Cidades\Busca\Model.Cidades.Busca.pas"/>
@@ -316,16 +288,13 @@
         </DCCReference>
         <DCCReference Include="src\View\Produtos\Unidades\View.Produtos.Unidades.Cad.pas">
             <Form>ViewProdutosUnidadesCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Produtos\Unidades\Busca\Model.Produtos.Unidades.Busca.pas"/>
         <DCCReference Include="src\View\FormasPagamento\View.FormasPagamento.Cad.pas">
             <Form>ViewFormasPagamentoCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\FormasPagamento\View.FormasPagamento.Busca.pas">
             <Form>ViewFormasPagamentoBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Interfaces.pas"/>
         <DCCReference Include="src\Model\FormasPagamento\Model.FormasPagamento.Entitie.pas"/>
@@ -333,7 +302,6 @@
         <DCCReference Include="src\Model\FormasPagamento\Busca\Model.FormasPagamento.Busca.pas"/>
         <DCCReference Include="src\View\Sistema\View.Sistema.Empresa.Cad.pas">
             <Form>ViewSistemaEmpresaCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Empresas\Model.Empresas.Interfaces.pas"/>
         <DCCReference Include="src\Model\Empresas\Model.Empresas.Entitie.pas"/>
@@ -341,19 +309,16 @@
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Agenda.pas"/>
         <DCCReference Include="src\View\Agenda\View.Agenda.Cad.pas">
             <Form>ViewAgendaCad</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Agenda\Model.Agenda.Interfaces.pas"/>
         <DCCReference Include="src\Model\Agenda\Model.Agenda.Entitie.pas"/>
         <DCCReference Include="src\Model\Agenda\Model.Agenda.Factory.pas"/>
         <DCCReference Include="src\View\Agenda\View.Agenda.Busca.pas">
             <Form>ViewAgendaBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Agenda\Busca\Model.Agenda.Busca.pas"/>
         <DCCReference Include="src\View\Sistema\View.Sistema.MenuConf.pas">
             <Form>ViewSistemaMenuConf</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Logs\Model.Logs.pas"/>
         <DCCReference Include="src\Utils\Utils.Types.pas"/>
@@ -363,11 +328,9 @@
         <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Utils.pas"/>
         <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.View.pas">
             <Form>MySearchComponentsView</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\Logs\View.Logs.Busca.pas">
             <Form>ViewLogsBusca</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Logs\Model.Logs.Busca.pas"/>
         <DCCReference Include="src\Utils\Utils.ConfGrid.pas"/>
@@ -375,6 +338,14 @@
         <DCCReference Include="src\Model\Behavior\Model.Behavior.Hint.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.ReportMemoryLeaks.pas"/>
         <DCCReference Include="src\Model\Behavior\Model.Behavior.DateFormat.pas"/>
+        <DCCReference Include="src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Entitie.pas"/>
+        <DCCReference Include="src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Interfaces.pas"/>
+        <DCCReference Include="src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Factory.pas"/>
+        <DCCReference Include="src\Model\Permissoes\Grupos\Busca\Model.Permissoes.Grupos.Busca.pas"/>
+        <DCCReference Include="src\View\Permissoes\View.Permissoes.Grupos.Busca.pas">
+            <Form>ViewPermissoesGruposBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="resources\Images\PNG\MainMenu\BookAndPencil.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>agenda</ResourceId>

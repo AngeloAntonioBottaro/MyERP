@@ -243,7 +243,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de fornecedor',
-                         'Usuário excluiu o fornecedor ' + FEntitie.Id.ToString + ' - ' + FEntitie.RazaoSocial,
+                         'Usuário excluiu o fornecedor ' + FEntitie.Id.ToString,
                          FEntitie.Id);
    FEntitie.Id(0);
 
@@ -293,7 +293,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;
@@ -307,7 +307,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          LAcao + ' de fornecedor',
-                         'Usuário gravou o fornecedor ' + FEntitie.Id.ToString,
+                         'Usuário gravou o fornecedor ' + FEntitie.IdNome,
                          FEntitie.Id);
 
    ShowDone('Gravação realizada');

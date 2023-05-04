@@ -43,8 +43,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       BevelOuter = bvNone
       TabOrder = 2
       Visible = False
-      ExplicitLeft = 596
-      ExplicitTop = -4
       object Label2: TLabel
         AlignWithMargins = True
         Left = 3
@@ -146,11 +144,10 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 380
+        Width = 187
         Height = 13
         Align = alTop
         Caption = 'Entre com o conte'#250'do a ser consultado'
-        ExplicitWidth = 187
       end
       object edtBusca: TEdit
         AlignWithMargins = True
@@ -258,14 +255,13 @@ inherited ViewBaseBusca: TViewBaseBusca
         Left = 670
         Top = 1
         Width = 77
-        Height = 14
+        Height = 13
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 5
         Margins.Bottom = 0
         Align = alRight
         Caption = 'lbTotalRegistros'
-        ExplicitHeight = 13
       end
     end
     object ckBuscarInativos: TCheckBox

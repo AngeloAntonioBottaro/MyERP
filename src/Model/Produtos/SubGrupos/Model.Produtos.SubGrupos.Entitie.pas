@@ -29,6 +29,7 @@ type
     function Id(AValue: Integer): TModelProdutosSubGruposEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdNome: string;
     function Nome(AValue: string): TModelProdutosSubGruposEntitie; overload;
     function Nome: string; overload;
   end;
@@ -99,6 +100,13 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelProdutosSubGruposEntitie.IdNome: string;
+begin
+   Result := Self.Nome;
+   if(not Result.IsEmpty)then
+     Result := Self.IdMascara + ' - ' + Result;
 end;
 
 function TModelProdutosSubGruposEntitie.Nome(AValue: string): TModelProdutosSubGruposEntitie;

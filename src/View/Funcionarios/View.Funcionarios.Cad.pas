@@ -80,6 +80,10 @@ type
     edtLogin: TEdit;
     edtSenha: TEdit;
     edtSalario: TEdit;
+    lbCodPermissao: TLabel;
+    lbPermissao: TLabel;
+    edtIdGrupoPermissao: TEdit;
+    edtGrupoPermissao: TEdit;
     procedure ConfComponents(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -91,6 +95,8 @@ type
     procedure edtIdCidadeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtIdFuncaoExit(Sender: TObject);
     procedure edtIdFuncaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtIdGrupoPermissaoExit(Sender: TObject);
+    procedure edtIdGrupoPermissaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     FFuncionario: IModelFuncionariosFactory<TModelFuncionariosEntitie>;
     procedure FillEntitie;
@@ -207,9 +213,10 @@ begin
      .RG(edtRG.Text)
      .RgOrgaoExpedidor(edtRGOrgaoExpedidor.Text)
      .Funcao(edtIdFuncao.Text)
-     .Salario(edtSalario.Text)
+     .GrupoPermissao(edtIdGrupoPermissao.Text)
      .Login(edtLogin.Text)
      .Senha(edtSenha.Text)
+     .Salario(edtSalario.Text)
      .End_Entitie;
 end;
 
@@ -238,19 +245,22 @@ begin
    edtRG.Text                 := FFuncionario.Entitie.RG;
    edtRGOrgaoExpedidor.Text   := FFuncionario.Entitie.RgOrgaoExpedidor;
    cBoxTipoJuridico.ItemIndex := FFuncionario.Entitie.TipoJuridicoComboBox;
-   edtFuncao.Text             := FFuncionario.Entitie.FuncaoMascara;
-   edtSalario.Text            := FFuncionario.Entitie.Salario.ToString;
+   edtIdFuncao.Text           := FFuncionario.Entitie.FuncaoMascara;
+   edtIdGrupoPermissao.Text   := FFuncionario.Entitie.GrupoPermissaoMascara;
    edtLogin.Text              := FFuncionario.Entitie.Login;
    edtSenha.Text              := FFuncionario.Entitie.Senha;
+   edtSalario.Text            := FFuncionario.Entitie.Salario.ToString;
 end;
 
 procedure TViewFuncionariosCad.InitialConfiguration;
 begin
-   dtpDataNascimento.Date := Now;
-   edtIdCidade.ShowHint   := True;
-   edtIdCidade.Hint       := HINT_ATALHO_CONSULTA;
-   edtIdFuncao.ShowHint   := True;
-   edtIdFuncao.Hint       := HINT_ATALHO_CONSULTA;
+   dtpDataNascimento.Date       := Now;
+   edtIdCidade.ShowHint         := True;
+   edtIdCidade.Hint             := HINT_ATALHO_CONSULTA;
+   edtIdFuncao.ShowHint         := True;
+   edtIdFuncao.Hint             := HINT_ATALHO_CONSULTA;
+   edtIdGrupoPermissao.ShowHint := True;
+   edtIdGrupoPermissao.Hint     := HINT_ATALHO_CONSULTA;
 
    CriarComboBoxTipoJuridico(cBoxTipoJuridico.Items);
    Self.ConfComponents(nil);
@@ -275,6 +285,7 @@ begin
    Self.ConfComponents(nil);
    edtIdCidadeExit(edtIdCidade);
    edtIdFuncaoExit(edtIdFuncao);
+   edtIdGrupoPermissaoExit(edtIdGrupoPermissao);
 end;
 
 procedure TViewFuncionariosCad.ConfComponents(Sender: TObject);
@@ -349,6 +360,16 @@ end;
 procedure TViewFuncionariosCad.edtIdFuncaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    IdFuncaoFuncionarioKeyDown(edtIdFuncao, Key, Shift);
+end;
+
+procedure TViewFuncionariosCad.edtIdGrupoPermissaoExit(Sender: TObject);
+begin
+   IdPermissoesGrupoExit(edtIdGrupoPermissao, edtGrupoPermissao);
+end;
+
+procedure TViewFuncionariosCad.edtIdGrupoPermissaoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   IdPermissoesGrupoKeyDown(edtIdGrupoPermissao, Key, Shift);
 end;
 
 end.

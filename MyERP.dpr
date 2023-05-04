@@ -1,7 +1,5 @@
 program MyERP;
 
-
-
 {$R *.dres}
 
 uses
@@ -161,7 +159,12 @@ uses
   Utils.ConfMenu in 'src\Utils\Utils.ConfMenu.pas',
   Model.Behavior.Hint in 'src\Model\Behavior\Model.Behavior.Hint.pas',
   Model.Behavior.ReportMemoryLeaks in 'src\Model\Behavior\Model.Behavior.ReportMemoryLeaks.pas',
-  Model.Behavior.DateFormat in 'src\Model\Behavior\Model.Behavior.DateFormat.pas';
+  Model.Behavior.DateFormat in 'src\Model\Behavior\Model.Behavior.DateFormat.pas',
+  Model.Permissoes.Grupos.Entitie in 'src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Entitie.pas',
+  Model.Permissoes.Grupos.Interfaces in 'src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Interfaces.pas',
+  Model.Permissoes.Grupos.Factory in 'src\Model\Permissoes\Grupos\Model.Permissoes.Grupos.Factory.pas',
+  Model.Permissoes.Grupos.Busca in 'src\Model\Permissoes\Grupos\Busca\Model.Permissoes.Grupos.Busca.pas',
+  View.Permissoes.Grupos.Busca in 'src\View\Permissoes\View.Permissoes.Grupos.Busca.pas' {ViewPermissoesGruposBusca};
 
 {$R *.res}
 

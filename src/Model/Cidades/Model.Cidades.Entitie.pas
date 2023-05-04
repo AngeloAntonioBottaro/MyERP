@@ -29,6 +29,7 @@ type
     function Id(AValue: Integer): TModelCidadesEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdNome: string;
     function Nome(AValue: string): TModelCidadesEntitie; overload;
     function Nome: string; overload;
     function UF(AValue: string): TModelCidadesEntitie; overload;
@@ -96,6 +97,13 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelCidadesEntitie.IdNome: string;
+begin
+   Result := Self.Nome;
+   if(not Result.IsEmpty)then
+     Result := Self.IdMascara + ' - ' + Result;
 end;
 
 function TModelCidadesEntitie.Nome(AValue: string): TModelCidadesEntitie;

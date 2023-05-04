@@ -26,6 +26,7 @@ type
     function Id(AValue: Integer): TModelFormasPagamentoEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdNome: string;
     function Nome(AValue: string): TModelFormasPagamentoEntitie; overload;
     function Nome: string; overload;
     function Status(AValue: string): TModelFormasPagamentoEntitie; overload;
@@ -80,6 +81,13 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelFormasPagamentoEntitie.IdNome: string;
+begin
+   Result := Self.Nome;
+   if(not Result.IsEmpty)then
+     Result := Self.IdMascara + ' - ' + Result;
 end;
 
 function TModelFormasPagamentoEntitie.Nome(AValue: string): TModelFormasPagamentoEntitie;

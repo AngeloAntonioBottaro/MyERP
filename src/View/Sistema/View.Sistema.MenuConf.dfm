@@ -17,8 +17,6 @@ inherited ViewSistemaMenuConf: TViewSistemaMenuConf
     Align = alClient
     ItemHeight = 13
     TabOrder = 0
-    ExplicitWidth = 378
-    ExplicitHeight = 348
   end
   object pnButtons: TPanel
     Left = 0

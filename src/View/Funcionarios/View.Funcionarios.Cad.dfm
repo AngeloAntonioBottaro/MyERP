@@ -251,25 +251,51 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       Caption = 'Org'#227'o expedidor'
     end
     object lbSalario: TLabel
-      Left = 563
+      Left = 601
       Top = 212
       Width = 32
       Height = 13
       Caption = 'Sal'#225'rio'
     end
     object lbLogin: TLabel
-      Left = 342
+      Left = 400
       Top = 213
       Width = 25
       Height = 13
       Caption = 'Login'
     end
     object lbSenha: TLabel
-      Left = 463
+      Left = 501
       Top = 213
       Width = 30
       Height = 13
       Caption = 'Senha'
+    end
+    object lbCodPermissao: TLabel
+      Left = 218
+      Top = 213
+      Width = 38
+      Height = 13
+      Caption = 'C'#243'digo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lbPermissao: TLabel
+      Left = 284
+      Top = 213
+      Width = 96
+      Height = 13
+      Caption = 'Grupo permiss'#227'o'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object edtIdFuncao: TEdit
       Left = 8
@@ -283,7 +309,7 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
     object edtFuncao: TEdit
       Left = 74
       Top = 227
-      Width = 267
+      Width = 143
       Height = 21
       TabStop = False
       Color = clBtnFace
@@ -490,28 +516,47 @@ inherited ViewFuncionariosCad: TViewFuncionariosCad
       TabOrder = 22
     end
     object edtLogin: TEdit
-      Left = 342
+      Left = 400
       Top = 227
-      Width = 120
+      Width = 100
       Height = 21
-      TabOrder = 25
+      TabOrder = 27
     end
     object edtSenha: TEdit
-      Left = 463
+      Left = 501
       Top = 227
       Width = 99
       Height = 21
       PasswordChar = '#'
-      TabOrder = 26
+      TabOrder = 28
     end
     object edtSalario: TEdit
-      Left = 563
+      Left = 601
       Top = 227
-      Width = 138
+      Width = 100
       Height = 21
       NumbersOnly = True
       PasswordChar = '#'
-      TabOrder = 27
+      TabOrder = 29
+    end
+    object edtIdGrupoPermissao: TEdit
+      Left = 218
+      Top = 227
+      Width = 65
+      Height = 21
+      TabOrder = 25
+      OnExit = edtIdGrupoPermissaoExit
+      OnKeyDown = edtIdGrupoPermissaoKeyDown
+    end
+    object edtGrupoPermissao: TEdit
+      Left = 284
+      Top = 227
+      Width = 115
+      Height = 21
+      TabStop = False
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 26
     end
   end
 end

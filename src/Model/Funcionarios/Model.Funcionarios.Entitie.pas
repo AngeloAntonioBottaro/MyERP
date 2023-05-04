@@ -25,6 +25,7 @@ type
     FEndereco: string;
     FFax: string;
     FFuncao: Integer;
+    FGrupoPermissao: Integer;
     FId: Integer;
     FIE: string;
     FLogin: string;
@@ -79,10 +80,15 @@ type
     function Funcao(AValue: Integer): TModelFuncionariosEntitie; overload;
     function Funcao: Integer; overload;
     function FuncaoMascara: string;
+    function GrupoPermissao(AValue: string): TModelFuncionariosEntitie; overload;
+    function GrupoPermissao(AValue: Integer): TModelFuncionariosEntitie; overload;
+    function GrupoPermissao: Integer; overload;
+    function GrupoPermissaoMascara: string;
     function Id(AValue: string): TModelFuncionariosEntitie; overload;
     function Id(AValue: Integer): TModelFuncionariosEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdNome: string;
     function IE(AValue: string): TModelFuncionariosEntitie; overload;
     function IE: string; overload;
     function Login(AValue: string): TModelFuncionariosEntitie; overload;
@@ -312,7 +318,7 @@ end;
 
 function TModelFuncionariosEntitie.Funcao(AValue: string): TModelFuncionariosEntitie;
 begin
-   Result  := Self;
+   Result := Self;
    Self.Funcao(TMyLibrary.StrToIntDef(AValue.Trim));
 end;
 
@@ -332,6 +338,30 @@ begin
    Result := EmptyStr;
    if(Self.Funcao > 0)then
      Result := TMyLibrary.CompLeft(Self.Funcao);
+end;
+
+function TModelFuncionariosEntitie.GrupoPermissao(AValue: string): TModelFuncionariosEntitie;
+begin
+   Result := Self;
+   Self.GrupoPermissao(TMyLibrary.StrToIntDef(AValue.Trim));
+end;
+
+function TModelFuncionariosEntitie.GrupoPermissao(AValue: Integer): TModelFuncionariosEntitie;
+begin
+   Result          := Self;
+   FGrupoPermissao := AValue;
+end;
+
+function TModelFuncionariosEntitie.GrupoPermissao: Integer;
+begin
+   Result := FGrupoPermissao;
+end;
+
+function TModelFuncionariosEntitie.GrupoPermissaoMascara: string;
+begin
+   Result := EmptyStr;
+   if(Self.GrupoPermissao > 0)then
+     Result := TMyLibrary.CompLeft(Self.GrupoPermissao);
 end;
 
 function TModelFuncionariosEntitie.Id(AValue: string): TModelFuncionariosEntitie;
@@ -356,6 +386,16 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelFuncionariosEntitie.IdNome: string;
+begin
+   Result := Self.NomeFantasia;
+   if(Result.IsEmpty)then
+     Result := Self.RazaoSocial;
+
+   if(not Result.IsEmpty)then
+     Result := Self.IdMascara + ' - ' + Result;
 end;
 
 function TModelFuncionariosEntitie.IE(AValue: string): TModelFuncionariosEntitie;

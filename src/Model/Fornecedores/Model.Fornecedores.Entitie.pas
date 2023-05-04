@@ -75,6 +75,7 @@ type
     function Id(AValue: Integer): TModelFornecedoresEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdNome: string;
     function IE(AValue: string): TModelFornecedoresEntitie; overload;
     function IE: string; overload;
     function NomeFantasia(AValue: string): TModelFornecedoresEntitie; overload;
@@ -316,6 +317,16 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelFornecedoresEntitie.IdNome: string;
+begin
+   Result := Self.NomeFantasia;
+   if(Result.IsEmpty)then
+     Result := Self.RazaoSocial;
+
+   if(not Result.IsEmpty)then
+     Result := Self.IdMascara + ' - ' + Result;
 end;
 
 function TModelFornecedoresEntitie.IE(AValue: string): TModelFornecedoresEntitie;

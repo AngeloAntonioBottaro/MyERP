@@ -294,7 +294,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtCusto: TEdit
       Left = 247
       Top = 108
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 10
@@ -302,7 +302,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtPorcLucroVista: TEdit
       Left = 338
       Top = 108
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 11
@@ -310,7 +310,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtPrecoVendaVista: TEdit
       Left = 429
       Top = 108
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 12
@@ -318,7 +318,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtPorcLucroPrazo: TEdit
       Left = 520
       Top = 108
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 13
@@ -326,7 +326,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtPrecoVendaPrazo: TEdit
       Left = 611
       Top = 108
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 14
@@ -334,7 +334,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtEstoqueMinimo: TEdit
       Left = 8
       Top = 148
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 15
@@ -342,7 +342,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtEstoqueMaximo: TEdit
       Left = 99
       Top = 148
-      Width = 87
+      Width = 90
       Height = 21
       NumbersOnly = True
       TabOrder = 16
@@ -350,7 +350,7 @@ inherited ViewProdutosCad: TViewProdutosCad
     object edtEstoque: TEdit
       Left = 190
       Top = 148
-      Width = 87
+      Width = 90
       Height = 21
       Color = clBtnFace
       NumbersOnly = True

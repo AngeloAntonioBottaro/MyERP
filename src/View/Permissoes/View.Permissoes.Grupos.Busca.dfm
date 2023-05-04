@@ -1,5 +1,5 @@
-inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
-  Caption = 'Busca de grupo de produto'
+inherited ViewPermissoesGruposBusca: TViewPermissoesGruposBusca
+  Caption = 'Busca de grupos de permiss'#245'es'
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnTop: TPanel
@@ -10,11 +10,6 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
     end
   end
   inherited pnBotton: TPanel
-    inherited pnButtons: TPanel
-      inherited btnCadastro: TButton
-        OnClick = btnCadastroClick
-      end
-    end
     inherited gBoxTipoConsulta: TGroupBox
       object rdBuscarNome: TRadioButton
         Left = 109
@@ -22,9 +17,7 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
         Width = 75
         Height = 17
         Caption = 'Nome (F3)'
-        Checked = True
-        TabOrder = 1
-        TabStop = True
+        TabOrder = 0
         OnClick = ConfComponents
       end
       object rdBuscarCodigo: TRadioButton
@@ -33,7 +26,18 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
         Width = 78
         Height = 17
         Caption = 'C'#243'digo (F2)'
-        TabOrder = 0
+        TabOrder = 1
+        OnClick = ConfComponents
+      end
+      object rdBuscarDescricao: TRadioButton
+        Left = 205
+        Top = 20
+        Width = 92
+        Height = 17
+        Caption = 'Descri'#231#227'o (F4)'
+        Checked = True
+        TabOrder = 2
+        TabStop = True
         OnClick = ConfComponents
       end
     end
@@ -57,8 +61,15 @@ inherited ViewProdutosGruposBusca: TViewProdutosGruposBusca
         item
           Expanded = False
           FieldName = 'NOME'
-          Title.Caption = 'Grupo'
-          Width = 671
+          Title.Caption = 'Nome'
+          Width = 238
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCRICAO'
+          Title.Caption = 'Descri'#231#227'o'
+          Width = 421
           Visible = True
         end>
     end

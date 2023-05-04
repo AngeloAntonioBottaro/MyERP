@@ -124,7 +124,7 @@ begin
    end;
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de cidade',
-                         'Usuário excluiu a cidade ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome,
+                         'Usuário excluiu a cidade ' + FEntitie.Id.ToString,
                          FEntitie.Id);
    FEntitie.Id(0);
 
@@ -156,7 +156,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;
@@ -170,7 +170,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          LAcao + ' de cidade',
-                         'Usuário gravou a cidade ' + FEntitie.Id.ToString,
+                         'Usuário gravou a cidade ' + FEntitie.IdNome,
                          FEntitie.Id);
 
    ShowDone('Gravação realizada');

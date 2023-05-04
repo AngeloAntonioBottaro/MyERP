@@ -74,6 +74,12 @@ procedure IdFormaPagamentoExit(AEdtId: TEdit); overload;
 procedure IdFormaPagamentoExit(AEdtId, AEdtNome: TEdit); overload;
 {$ENDREGION 'FORMAS_PAGAMENTOS'}
 
+{$REGION 'PERMISSOES.GRUPO'}
+procedure IdPermissoesGrupoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
+procedure IdPermissoesGrupoExit(AEdtId: TEdit); overload;
+procedure IdPermissoesGrupoExit(AEdtId, AEdtNome: TEdit); overload;
+{$ENDREGION 'PERMISSOES.GRUPO'}
+
 var
   FId: Integer;
 
@@ -92,7 +98,8 @@ uses
   View.Produtos.Grupos.Busca,
   View.Produtos.SubGrupos.Busca,
   View.Produtos.Unidades.Busca,
-  View.FormasPagamento.Busca;
+  View.FormasPagamento.Busca,
+  View.Permissoes.Grupos.Busca;
 
 procedure OnBuscaID(AId: Integer);
 begin
@@ -701,5 +708,62 @@ begin
      AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
 end;
 {$ENDREGION 'FORMAS_PAGAMENTOS'}
+
+{$REGION 'PERMISSOES.GRUPO'}
+procedure IdPermissoesGrupoKeyDown(ASender: TEdit; AKey: Word; AShift: TShiftState);
+begin
+   if(not ((AKey = VK_F2)and(AShift = [])))then
+     Exit;
+
+   FId := 0;
+   if(ViewPermissoesGruposBusca = nil)then Application.CreateForm(TViewPermissoesGruposBusca, ViewPermissoesGruposBusca);
+   try
+     ViewPermissoesGruposBusca.FOnBusca := OnBuscaId;
+     ViewPermissoesGruposBusca.ShowModal;
+   finally
+     FreeAndNil(ViewPermissoesGruposBusca);
+   end;
+
+   if(FId > 0)then
+     ASender.Text := TMyLibrary.CompLeft(FId);
+end;
+
+procedure IdPermissoesGrupoExit(AEdtId: TEdit); overload;
+begin
+   IdPermissoesGrupoExit(AEdtId, nil);
+end;
+
+procedure IdPermissoesGrupoExit(AEdtId, AEdtNome: TEdit); overload;
+var
+  LId: Integer;
+begin
+   if(AEdtId = nil)then
+     Exit;
+
+   if(AEdtNome <> nil)then
+     AEdtNome.Clear;
+
+   LId := StrToIntDef(AEdtId.Text, 0);
+   if(LId <= 0)then
+   begin
+      AEdtId.Clear;
+      Exit;
+   end;
+
+   MyQueryNew
+    .Add('SELECT PERMISSOES_GRUPO.ID, PERMISSOES_GRUPO.NOME')
+    .Add('FROM PERMISSOES_GRUPO ')
+    .Add('WHERE(PERMISSOES_GRUPO.ID = :ID)')
+    .AddParam('ID', LId);
+
+   ShowDebug(MyQuery.SQL.Text);
+   MyQuery.Open;
+
+   AEdtId.Text := TMyLibrary.CompLeft(MyQuery.FieldByName('ID').AsInteger);
+
+   if(AEdtNome <> nil)then
+     AEdtNome.Text := MyQuery.FieldByName('NOME').AsString;
+end;
+{$ENDREGION 'PERMISSOES.GRUPO'}
 
 end.

@@ -626,43 +626,53 @@ object ViewSistemaMain: TViewSistemaMain
     object Relatorios1: TMenuItem
       Tag = 999
       Caption = '&Relat'#243'rios'
-      object RelatoriosClientes1: TMenuItem
-        Caption = 'Clientes'
+      object Cadastros2: TMenuItem
+        Caption = 'Cadastros'
         ImageIndex = 24
+        object RelatoriosClientes1: TMenuItem
+          Caption = 'Clientes'
+          ImageIndex = 24
+        end
+        object RelatoriosProdutos1: TMenuItem
+          Caption = 'Produtos'
+          ImageIndex = 24
+        end
+        object RelatoriosFornecedores1: TMenuItem
+          Caption = 'Fornecedores'
+          ImageIndex = 24
+        end
       end
-      object RelatoriosProdutos1: TMenuItem
-        Caption = 'Produtos'
+      object Movimentacoes2: TMenuItem
+        Caption = 'Movimenta'#231#245'es'
         ImageIndex = 24
+        object RelatoriosCompras1: TMenuItem
+          Caption = 'Compras'
+          ImageIndex = 24
+        end
+        object RelatoriosVendas1: TMenuItem
+          Caption = 'Vendas'
+          ImageIndex = 24
+        end
+        object RelatoriosAgenda1: TMenuItem
+          Caption = 'Agenda'
+          ImageIndex = 24
+        end
       end
-      object N4: TMenuItem
-        Caption = '-'
-      end
-      object RelatoriosCompras1: TMenuItem
-        Caption = 'Compras'
+      object Financeiro2: TMenuItem
+        Caption = 'Financeiro'
         ImageIndex = 24
-      end
-      object RelatoriosVendas1: TMenuItem
-        Caption = 'Vendas'
-        ImageIndex = 24
-      end
-      object RelatoriosAgenda1: TMenuItem
-        Caption = 'Agenda'
-        ImageIndex = 24
-      end
-      object N5: TMenuItem
-        Caption = '-'
-      end
-      object RelatoriosCaixa1: TMenuItem
-        Caption = 'Caixa'
-        ImageIndex = 24
-      end
-      object RelatoriosContaReceber1: TMenuItem
-        Caption = 'Conta receber'
-        ImageIndex = 24
-      end
-      object RelatoriosContasPagar1: TMenuItem
-        Caption = 'Contas pagar'
-        ImageIndex = 24
+        object RelatoriosCaixa1: TMenuItem
+          Caption = 'Caixa'
+          ImageIndex = 24
+        end
+        object RelatoriosContaReceber1: TMenuItem
+          Caption = 'Conta receber'
+          ImageIndex = 24
+        end
+        object RelatoriosContasPagar1: TMenuItem
+          Caption = 'Contas pagar'
+          ImageIndex = 24
+        end
       end
     end
     object Configuracoes1: TMenuItem

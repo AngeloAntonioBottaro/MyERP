@@ -24,6 +24,7 @@ type
     function Id(AValue: Integer): TModelFuncionariosFuncoesEntitie; overload;
     function Id: Integer; overload;
     function IdMascara: string;
+    function IdNome: string;
     function Nome(AValue: string): TModelFuncionariosFuncoesEntitie; overload;
     function Nome: string; overload;
   end;
@@ -70,6 +71,13 @@ begin
    Result := EmptyStr;
    if(Self.Id > 0)then
      Result := TMyLibrary.CompLeft(Self.Id);
+end;
+
+function TModelFuncionariosFuncoesEntitie.IdNome: string;
+begin
+   Result := Self.Nome;
+   if(not Result.IsEmpty)then
+     Result := Self.IdMascara + ' - ' + Result;
 end;
 
 function TModelFuncionariosFuncoesEntitie.Nome(AValue: string): TModelFuncionariosFuncoesEntitie;

@@ -214,7 +214,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;
@@ -228,7 +228,7 @@ begin
 
    TModelLogs.New.Gravar(FTelaOrigem,
                          LAcao + ' de empresa',
-                         'Usuário gravou a empresa ' + FEntitie.Id.ToString,
+                         'Usuário gravou a empresa ' + FEntitie.IdNome,
                          FEntitie.Id);
 
    ShowDone('Gravação realizada');

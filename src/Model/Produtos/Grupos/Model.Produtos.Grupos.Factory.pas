@@ -119,9 +119,10 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
    TModelLogs.New.Gravar(FTelaOrigem,
                          'Exclusão de grupo de produto',
-                         'Usuário excluiu o grupo ' + FEntitie.Id.ToString + ' - ' + FEntitie.Nome,
+                         'Usuário excluiu o grupo ' + FEntitie.Id.ToString,
                          FEntitie.Id);
    FEntitie.Id(0);
 
@@ -151,7 +152,7 @@ begin
      end
      else
      begin
-        LAcao := 'Gravação';
+        LAcao := 'Cadastro';
         MyQuery.Open;
         FEntitie.Id(MyQuery.FieldByName('ID').AsInteger);
      end;
@@ -162,6 +163,11 @@ begin
                                     'Mensagem: ' + E.Message);
    end;
    end;
+
+   TModelLogs.New.Gravar(FTelaOrigem,
+                         LAcao + ' de grupo de produto',
+                         'Usuário gravou o grupo ' + FEntitie.IdNome,
+                         FEntitie.Id);
 
    ShowDone('Gravação realizada');
 end;
