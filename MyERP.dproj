@@ -354,6 +354,26 @@
             <Form>ViewSistemaSenhaAdm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\View\Vendas\View.Vendas.Cad.pas">
+            <Form>ViewVendasCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Vendas\View.Vendas.Busca.pas">
+            <Form>ViewVendasBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Compras\View.Compras.Cad.pas">
+            <Form>ViewComprasCad</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Compras\View.Compras.Busca.pas">
+            <Form>ViewComprasBusca</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\Caixa\View.Caixa.CaixaDiario.pas">
+            <Form>ViewCaixaCaixaDiario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="resources\Images\PNG\MainMenu\BookAndPencil.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>agenda</ResourceId>

@@ -165,7 +165,7 @@ uses
   View.FormasPagamento.Cad,
   View.Agenda.Cad,
   View.Logs.Busca,
-  View.Permissoes.Grupos.Cad, View.Sistema.SenhaAdm;
+  View.Permissoes.Grupos.Cad, View.Sistema.SenhaAdm, View.Compras.Cad, View.Vendas.Cad, View.Caixa.CaixaDiario;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -255,12 +255,32 @@ end;
 
 procedure TViewSistemaMain.MovimentacoesCompras1Click(Sender: TObject);
 begin
-   //
+   if(ViewComprasCad = nil)then Application.CreateForm(TViewComprasCad, ViewComprasCad);
+   try
+     ViewComprasCad.ShowModal;
+   finally
+     FreeAndNil(ViewComprasCad);
+   end;
 end;
 
 procedure TViewSistemaMain.MovimentacoesVendas1Click(Sender: TObject);
 begin
-   //
+   if(ViewVendasCad = nil)then Application.CreateForm(TViewVendasCad, ViewVendasCad);
+   try
+     ViewVendasCad.ShowModal;
+   finally
+     FreeAndNil(ViewVendasCad);
+   end;
+end; 
+
+procedure TViewSistemaMain.FinanceiroCaixadiario1Click(Sender: TObject);
+begin
+   if(ViewCaixaCaixaDiario = nil)then Application.CreateForm(TViewCaixaCaixaDiario, ViewCaixaCaixaDiario);
+   try
+     ViewCaixaCaixaDiario.ShowModal;
+   finally
+     FreeAndNil(ViewCaixaCaixaDiario);
+   end;
 end;
 
 procedure TViewSistemaMain.FinanceiroCadastroContasPagar1Click(Sender: TObject);
@@ -271,11 +291,6 @@ end;
 procedure TViewSistemaMain.FinanceiroCadastroContasReceber1Click(Sender: TObject);
 begin
    //
-end;
-
-procedure TViewSistemaMain.FinanceiroCaixadiario1Click(Sender: TObject);
-begin
-  //
 end;
 
 procedure TViewSistemaMain.FinanceiroConsultaContasPagar1Click(Sender: TObject);

@@ -37,8 +37,6 @@ type
     MenuBusca: TPopupMenu;
     Atualizar1: TMenuItem;
     gBoxTipoConsulta: TGroupBox;
-    pnOptions: TPanel;
-    lbTotalRegistros: TLabel;
     pnBuscarPeriodo: TPanel;
     pnBuscarConteudo: TPanel;
     lbBusca: TLabel;
@@ -59,6 +57,8 @@ type
     Label2: TLabel;
     cBoxBusca: TComboBox;
     imgConfMenu: TImage;
+    pnOptions: TPanel;
+    lbTotalRegistros: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GridBuscaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVincularClick(Sender: TObject);

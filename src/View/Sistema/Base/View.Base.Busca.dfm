@@ -164,17 +164,17 @@ inherited ViewBaseBusca: TViewBaseBusca
   end
   object pnBotton: TPanel
     Left = 0
-    Top = 288
+    Top = 320
     Width = 755
-    Height = 120
+    Height = 88
     Align = alBottom
     TabOrder = 1
     DesignSize = (
       755
-      120)
+      88)
     object imgConfMenu: TImage
       Left = 724
-      Top = 23
+      Top = 4
       Width = 25
       Height = 25
       Cursor = crHandPoint
@@ -184,7 +184,7 @@ inherited ViewBaseBusca: TViewBaseBusca
     end
     object pnButtons: TPanel
       Left = 440
-      Top = 69
+      Top = 37
       Width = 310
       Height = 46
       Anchors = [akRight, akBottom]
@@ -194,6 +194,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Padding.Right = 5
       Padding.Bottom = 5
       TabOrder = 0
+      ExplicitTop = 69
       object btnCadastro: TButton
         Left = 5
         Top = 5
@@ -236,43 +237,22 @@ inherited ViewBaseBusca: TViewBaseBusca
     object gBoxTipoConsulta: TGroupBox
       AlignWithMargins = True
       Left = 4
-      Top = 20
+      Top = 4
       Width = 435
-      Height = 96
+      Height = 80
       Align = alLeft
       Caption = '  Buscar  '
       TabOrder = 1
-    end
-    object pnOptions: TPanel
-      Left = 1
-      Top = 1
-      Width = 753
-      Height = 16
-      Align = alTop
-      BevelOuter = bvLowered
-      TabOrder = 2
-      object lbTotalRegistros: TLabel
-        AlignWithMargins = True
-        Left = 670
-        Top = 1
-        Width = 77
-        Height = 14
-        Margins.Left = 0
-        Margins.Top = 0
-        Margins.Right = 5
-        Margins.Bottom = 0
-        Align = alRight
-        Caption = 'lbTotalRegistros'
-        ExplicitHeight = 13
-      end
+      ExplicitTop = 20
+      ExplicitHeight = 96
     end
     object ckBuscarInativos: TCheckBox
       Left = 445
-      Top = 31
+      Top = 12
       Width = 60
       Height = 17
       Caption = 'Inativos'
-      TabOrder = 3
+      TabOrder = 2
       Visible = False
     end
   end
@@ -280,15 +260,16 @@ inherited ViewBaseBusca: TViewBaseBusca
     Left = 0
     Top = 49
     Width = 755
-    Height = 239
+    Height = 271
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitHeight = 239
     object GridBusca: TDBGrid
       Left = 0
       Top = 0
       Width = 755
-      Height = 239
+      Height = 255
       Align = alClient
       DataSource = DS_Busca
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -301,6 +282,30 @@ inherited ViewBaseBusca: TViewBaseBusca
       TitleFont.Style = []
       OnDrawColumnCell = GridBuscaDrawColumnCell
       OnDblClick = GridBuscaDblClick
+    end
+    object pnOptions: TPanel
+      Left = 0
+      Top = 255
+      Width = 755
+      Height = 16
+      Align = alBottom
+      BevelOuter = bvLowered
+      TabOrder = 1
+      ExplicitTop = 16
+      object lbTotalRegistros: TLabel
+        AlignWithMargins = True
+        Left = 672
+        Top = 1
+        Width = 77
+        Height = 14
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 5
+        Margins.Bottom = 0
+        Align = alRight
+        Caption = 'lbTotalRegistros'
+        ExplicitHeight = 13
+      end
     end
   end
   object DS_Busca: TDataSource

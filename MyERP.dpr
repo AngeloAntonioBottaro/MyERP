@@ -166,7 +166,12 @@ uses
   Model.Permissoes.Grupos.Busca in 'src\Model\Permissoes\Grupos\Busca\Model.Permissoes.Grupos.Busca.pas',
   View.Permissoes.Grupos.Busca in 'src\View\Permissoes\View.Permissoes.Grupos.Busca.pas' {ViewPermissoesGruposBusca},
   View.Permissoes.Grupos.Cad in 'src\View\Permissoes\View.Permissoes.Grupos.Cad.pas' {ViewPermissoesGruposCad},
-  View.Sistema.SenhaAdm in 'src\View\Sistema\View.Sistema.SenhaAdm.pas' {ViewSistemaSenhaAdm};
+  View.Sistema.SenhaAdm in 'src\View\Sistema\View.Sistema.SenhaAdm.pas' {ViewSistemaSenhaAdm},
+  View.Vendas.Cad in 'src\View\Vendas\View.Vendas.Cad.pas' {ViewVendasCad},
+  View.Vendas.Busca in 'src\View\Vendas\View.Vendas.Busca.pas' {ViewVendasBusca},
+  View.Compras.Cad in 'src\View\Compras\View.Compras.Cad.pas' {ViewComprasCad},
+  View.Compras.Busca in 'src\View\Compras\View.Compras.Busca.pas' {ViewComprasBusca},
+  View.Caixa.CaixaDiario in 'src\View\Caixa\View.Caixa.CaixaDiario.pas' {ViewCaixaCaixaDiario};
 
 {$R *.res}
 
