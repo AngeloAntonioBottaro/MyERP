@@ -13,10 +13,29 @@ uses
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.ExtCtrls,
-  View.Base;
+  Vcl.StdCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.ComCtrls,
+  View.Base,
+  Data.DB;
 
 type
   TViewCaixaCaixaDiario = class(TViewBase)
+    pnGrid: TPanel;
+    GridBusca: TDBGrid;
+    pnRegistros: TPanel;
+    lbTotalRegistros: TLabel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    dtpDataCaixa: TDateTimePicker;
+    lbDataCaixa: TLabel;
+    lbCredito: TLabel;
+    lbDebito: TLabel;
+    lbTotal: TLabel;
+    lbValorCredito: TLabel;
+    lbValorDebito: TLabel;
+    lbValorSaldo: TLabel;
   private
   public
   end;
