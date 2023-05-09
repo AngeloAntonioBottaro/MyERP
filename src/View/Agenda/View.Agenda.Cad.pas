@@ -71,10 +71,10 @@ implementation
 
 uses
   MyMessage,
-  Utils.MyVclLibrary,
+  Common.Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,
-  Utils.MyConsts,
   Utils.GlobalConsts,
   Model.Agenda.Factory,
   View.Agenda.Busca;

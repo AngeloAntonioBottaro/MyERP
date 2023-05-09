@@ -124,8 +124,8 @@ type
 implementation
 
 uses
-  Utils.MyConsts,
-  Utils.MyLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelFuncionariosEntitie.Create(AParent: IModelFuncionariosFactory<TModelFuncionariosEntitie>);

@@ -32,11 +32,11 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyLibrary,
-  Utils.MyFormLibrary,
+  Common.Utils.MyLibrary,
+  Common.Utils.MyFormLibrary,
+  Common.Utils.MyGridLibrary,
   Utils.GlobalVariables,
-  Utils.LibrarySistema,
-  Utils.MyGridLibrary;
+  Utils.LibrarySistema;
 
 procedure TViewBase.FormCreate(Sender: TObject);
 begin

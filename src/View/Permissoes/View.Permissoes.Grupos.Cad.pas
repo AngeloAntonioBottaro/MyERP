@@ -50,7 +50,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyVclLibrary,
+  Common.Utils.MyVclLibrary,
   Utils.LibrarySistema,
   Model.Permissoes.Grupos.Factory,
   View.Permissoes.Grupos.Busca;

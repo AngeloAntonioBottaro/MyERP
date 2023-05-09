@@ -6,9 +6,9 @@ uses
   System.SysUtils,
   System.StrUtils,
   System.UITypes,
-  Utils.MyConsts,
-  Utils.MyLibrary,
-  Utils.MyVCLLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyLibrary,
+  Common.Utils.MyVCLLibrary,
   Model.Empresas.Interfaces,
   Model.Empresas.Entitie;
 
@@ -31,8 +31,13 @@ var
   VG_Host: string;
   VG_Database: string;
   VG_Direitos: string;
+  VG_ApplicationTitle: string;
   VG_Logo: string;
   VG_Impressora: string;
+
+  //TERMINAL
+  VG_IdTerminal: Integer;
+  VG_NomeTerminal: string;
 
   //USUARIO
   VG_UsuarioLogadoId: Integer;
@@ -66,9 +71,14 @@ begin
    VG_PastaAppData    := TMyLibrary.GetPathAppDataLocal;
 
    //SISTEMA
-   VG_Direitos     := DIREITOS_SISTEMA;
-   VG_Logo         := IncludeTrailingPathDelimiter(VG_PastaImagens) + IMAGE_LOGO;
-   VG_Impressora   := EmptyStr;
+   VG_ApplicationTitle := EMPRESA_DESENVOLVEDOR + ' - ERP';
+   VG_Direitos         := DIREITOS_SISTEMA;
+   VG_Logo             := IncludeTrailingPathDelimiter(VG_PastaImagens) + IMAGE_LOGO;
+   VG_Impressora       := EmptyStr;
+
+   //TERMINAL
+   VG_IdTerminal   := 0;
+   VG_NomeTerminal := EmptyStr;
 
    //USUARIO
    VG_UsuarioLogadoId   := 0;

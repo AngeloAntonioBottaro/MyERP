@@ -45,14 +45,14 @@ implementation
 
 uses
   View.Sistema.Main,
-  Utils.MyConsts,
+  Common.Utils.MyConsts,
   Utils.GlobalVariables,
   Model.Sistema.Splash;
 
 procedure TViewSistemaSplash.FormCreate(Sender: TObject);
 begin
-   Application.Title := EMPRESA_DESENVOLVEDOR + ' - ERP';
    RefreshVariables;
+   Application.Title := VG_ApplicationTitle;
 end;
 
 procedure TViewSistemaSplash.FormShow(Sender: TObject);

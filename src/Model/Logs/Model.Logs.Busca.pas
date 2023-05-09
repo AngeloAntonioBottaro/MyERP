@@ -62,7 +62,7 @@ implementation
 
 uses
   MyExceptions,
-  Utils.MyConsts,
+  Common.Utils.MyConsts,
   Utils.LibrarySistema;
 
 constructor TModelLogsBusca.Create;

@@ -56,8 +56,8 @@ implementation
 
 uses
   MyExceptions,
-  Utils.MyConsts,
-  Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyVclLibrary,
   Utils.GlobalConsts,
   View.FormasPagamento.Cad,
   Model.FormasPagamento.Factory;

@@ -39,7 +39,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelFormasPagamentoEntitie.Create(AParent: IModelFormasPagamentoFactory<TModelFormasPagamentoEntitie>);

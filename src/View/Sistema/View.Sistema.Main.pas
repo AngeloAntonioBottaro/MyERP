@@ -140,9 +140,9 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyVclLibrary,
-  Utils.MyLibrary,
-  Utils.MyFormLibrary,
+  Common.Utils.MyVclLibrary,
+  Common.Utils.MyLibrary,
+  Common.Utils.MyFormLibrary,
   Utils.Versao,
   Utils.GlobalVariables,
   MyMessage,

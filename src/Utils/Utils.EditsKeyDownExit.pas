@@ -87,7 +87,7 @@ implementation
 
 uses
   MyConnection,
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.LibrarySistema,
   View.Cidades.Busca,
   View.Clientes.Busca,

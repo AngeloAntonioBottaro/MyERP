@@ -19,7 +19,7 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Left = 11
       Top = 4
       Width = 82
-      Height = 25
+      Height = 16
       Margins.Left = 10
       Align = alLeft
       Alignment = taCenter
@@ -31,7 +31,6 @@ inherited ViewSistemaIconesConf: TViewSistemaIconesConf
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
-      ExplicitHeight = 16
     end
     object edtFuncionario: TEdit
       AlignWithMargins = True

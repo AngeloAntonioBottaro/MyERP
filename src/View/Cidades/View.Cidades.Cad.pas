@@ -52,8 +52,8 @@ implementation
 uses
   MyConnection,
   Utils.LibrarySistema,
-  Utils.MyConsts,
-  Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyVclLibrary,
   View.Cidades.Busca,
   Model.Cidades.Factory;
 

@@ -26,7 +26,7 @@ implementation
 uses
   MyMessage,
   MyExceptions,
-  Utils.MyConsts,
+  Common.Utils.MyConsts,
   Utils.GlobalVariables,
   Utils.GlobalConsts,
   View.Sistema.Main;

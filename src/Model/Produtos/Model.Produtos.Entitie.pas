@@ -87,7 +87,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelProdutosEntitie.Create(AParent: IModelProdutosFactory<TModelProdutosEntitie>);

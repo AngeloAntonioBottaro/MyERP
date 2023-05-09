@@ -58,8 +58,8 @@ implementation
 
 uses
   MyExceptions,
-  Utils.MyConsts,
-  Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyVclLibrary,
   Utils.GlobalConsts,
   View.Clientes.Cad,
   Model.Clientes.Factory;

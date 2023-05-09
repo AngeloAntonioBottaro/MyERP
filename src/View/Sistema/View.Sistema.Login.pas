@@ -42,10 +42,10 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyVclLibrary,
+  MyConnectionConfiguration,
+  Common.Utils.MyVclLibrary,
   Utils.GlobalVariables,
   Model.Sistema.Imagens.DM,
-  MyConnectionConfiguration,
   Model.Sistema.Login;
 
 procedure TViewSistemaLogin.btnCancelarClick(Sender: TObject);

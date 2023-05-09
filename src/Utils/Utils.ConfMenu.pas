@@ -32,7 +32,7 @@ implementation
 uses
   MyExceptions,
   Model.Sistema.Imagens.DM,
-  Utils.MyVclLibrary,
+  Common.Utils.MyVclLibrary,
   View.Sistema.MenuConf;
 
 class function TUtilsConfMenu.New(AImage: TImage; AMenu: TMenu; AFormulario: string): TUtilsConfMenu;

@@ -54,8 +54,8 @@ implementation
 
 uses
   MyExceptions,
-  Utils.MyConsts,
-  Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyVclLibrary,
   Utils.GlobalConsts,
   View.Produtos.Grupos.Cad,
   Model.Produtos.Grupos.Factory;

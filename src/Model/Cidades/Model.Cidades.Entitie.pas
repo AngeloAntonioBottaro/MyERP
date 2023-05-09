@@ -40,8 +40,8 @@ type
 implementation
 
 uses
-  Utils.MyLibrary,
-  Utils.MyConsts;
+  Common.Utils.MyLibrary,
+  Common.Utils.MyConsts;
 
 constructor TModelCidadesEntitie.Create(AParent: IModelCidadesFactory<TModelCidadesEntitie>);
 begin

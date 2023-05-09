@@ -36,7 +36,7 @@ type
 implementation
 
 uses
-  Utils.MyConsts,
+  Common.Utils.MyConsts,
   Utils.LibrarySistema;
 
 constructor TModelPermissoesGruposBusca.Create;

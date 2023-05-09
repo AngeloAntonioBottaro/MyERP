@@ -35,7 +35,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary;
+  Common.Utils.MyLibrary;
 
 constructor TModelPermissoesGruposEntitie.Create(AParent: IModelPermissoesGruposFactory<TModelPermissoesGruposEntitie>);
 begin

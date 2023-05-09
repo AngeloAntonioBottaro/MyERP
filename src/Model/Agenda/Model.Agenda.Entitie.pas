@@ -65,7 +65,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelAgendaEntitie.Create(AParent: IModelAgendaFactory<TModelAgendaEntitie>);

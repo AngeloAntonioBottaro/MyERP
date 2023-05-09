@@ -6,7 +6,7 @@ uses
   System.SysUtils,
   System.TypInfo,
   System.Generics.Collections,
-  Utils.MyObjectDictionary,
+  Common.Utils.MyObjectDictionary,
   Model.Main.Icones.Fields;
 
 type

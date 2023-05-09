@@ -172,13 +172,13 @@
         <DCCReference Include="src\View\Sistema\View.Sistema.Sobre.pas">
             <Form>ViewSistemaSobre</Form>
         </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyConsts.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyLibrary.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyVclLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyConsts.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyVclLibrary.pas"/>
         <DCCReference Include="..\MyExceptions\Src\MyExceptions.Base.pas"/>
         <DCCReference Include="..\MyExceptions\Src\MyExceptions.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyObjectDictionary.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyTypes.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyObjectDictionary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyTypes.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.Consts.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.Helpers.TMemo.pas"/>
         <DCCReference Include="..\MyMessage\src\MyMessage.Interfaces.pas"/>
@@ -190,7 +190,7 @@
         <DCCReference Include="src\View\Sistema\View.Sistema.IconesConf.pas">
             <Form>ViewSistemaIconesConf</Form>
         </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyFormLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyFormLibrary.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Factory.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Interfaces.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Entitie.pas"/>
@@ -240,7 +240,7 @@
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Interfaces.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Entitie.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Factory.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyIniLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyIniLibrary.pas"/>
         <DCCReference Include="..\MyConnection\src\MyConnection.Configuration.pas"/>
         <DCCReference Include="..\MyConnection\src\MyConnection.FireDAC.ComponentConnection.pas"/>
         <DCCReference Include="..\MyConnection\src\MyConnection.FireDAC.Query.pas"/>
@@ -272,7 +272,7 @@
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Factory.pas"/>
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Interfaces.pas"/>
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Entitie.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Utils.MyGridLibrary.pas"/>
+        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyGridLibrary.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Vendas.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Compras.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Caixa.pas"/>

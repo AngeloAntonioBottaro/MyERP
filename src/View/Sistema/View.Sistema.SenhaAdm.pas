@@ -42,8 +42,8 @@ implementation
 
 uses
   MyExceptions,
-  Utils.MyConsts,
-  Utils.MyLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyLibrary,
   Model.Sistema.Imagens.DM;
 
 function ChamaSenhaAdministrativa: Boolean;

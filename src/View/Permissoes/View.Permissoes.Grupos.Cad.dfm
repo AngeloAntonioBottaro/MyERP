@@ -9,6 +9,8 @@ inherited ViewPermissoesGruposCad: TViewPermissoesGruposCad
   inherited pnButtons: TPanel
     Top = 55
     Width = 712
+    ExplicitTop = 55
+    ExplicitWidth = 712
     inherited btnGravar: TButton
       OnClick = btnGravarClick
     end

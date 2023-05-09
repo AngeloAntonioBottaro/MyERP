@@ -41,7 +41,7 @@ uses
   MyConnection,
   MyMessage,
   MyExceptions,
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.LibrarySistema,
   Utils.GlobalConsts,
   Model.Logs;

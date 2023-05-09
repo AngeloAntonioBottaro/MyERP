@@ -35,7 +35,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary;
+  Common.Utils.MyLibrary;
 
 constructor TModelProdutosUnidadesEntitie.Create(AParent: IModelProdutosUnidadesFactory<TModelProdutosUnidadesEntitie>);
 begin

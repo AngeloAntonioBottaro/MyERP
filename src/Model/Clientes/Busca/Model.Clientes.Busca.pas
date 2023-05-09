@@ -36,8 +36,8 @@ type
 implementation
 
 uses
-  Utils.MyConsts,
-  Utils.MyLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyLibrary,
   Utils.LibrarySistema,
   Utils.GlobalConsts;
 

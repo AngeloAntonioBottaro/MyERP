@@ -32,7 +32,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary;
+  Common.Utils.MyLibrary;
 
 constructor TModelFuncionariosFuncoesEntitie.Create(AParent: IModelFuncionariosFuncoesFactory<TModelFuncionariosFuncoesEntitie>);
 begin

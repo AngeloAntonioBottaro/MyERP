@@ -97,10 +97,10 @@ implementation
 uses
   MyExceptions,
   MyConnection,
-  Utils.MyLibrary,
-  Utils.MyVclLibrary,
-  Utils.MyConsts,
-  Utils.MyGridLibrary,
+  Common.Utils.MyLibrary,
+  Common.Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyGridLibrary,
   Model.Sistema.Imagens.DM;
 
 procedure TViewBaseBusca.FormClose(Sender: TObject; var Action: TCloseAction);

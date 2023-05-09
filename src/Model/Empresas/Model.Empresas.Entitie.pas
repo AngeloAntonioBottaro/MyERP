@@ -107,7 +107,7 @@ type
 implementation
 
 uses
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.GlobalConsts;
 
 constructor TModelEmpresasEntitie.Create(AParent: IModelEmpresasFactory<TModelEmpresasEntitie>);

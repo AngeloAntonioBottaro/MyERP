@@ -97,9 +97,9 @@ implementation
 
 uses
   MyMessage,
-  Utils.MyConsts,
-  Utils.MyLibrary,
-  Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
+  Common.Utils.MyLibrary,
+  Common.Utils.MyVclLibrary,
   Utils.GlobalConsts,
   Utils.GlobalVariables,
   Utils.LibrarySistema,

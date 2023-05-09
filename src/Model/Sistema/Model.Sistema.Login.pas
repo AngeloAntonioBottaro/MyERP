@@ -28,7 +28,9 @@ implementation
 uses
   MyMessage,
   Myconnection,
-  Utils.GlobalVariables;
+  Utils.GlobalVariables,
+  Utils.Versao,
+  Model.Logs;
 
 class function TModelSistemaLogin.New: IModelSistemaLogin;
 begin
@@ -74,6 +76,13 @@ begin
 
    VG_UsuarioLogadoId   := MyQuery.FieldByName('id').AsInteger;
    VG_UsuarioLogadoNome := MyQuery.FieldByName('razao_social').AsString;
+
+   TModelLogs.New.Gravar('Tela de login',
+                         'Logando no sistema',
+                         'Usuário ' + VG_UsuarioLogadoNome + ' logou no sistema ' +
+                         'pelo terminal: "' + VG_IdTerminal.ToString + '-' + VG_NomeTerminal + '".' +
+                         TUtilsVersao.CompleteVersion,
+                         VG_UsuarioLogadoId);
 end;
 
 procedure TModelSistemaLogin.OnError(AMessage: string = '');

@@ -86,9 +86,9 @@ implementation
 uses
   MyExceptions,
   MyConnection,
-  Utils.MyLibrary,
-  Utils.MyVclLibrary,
-  Utils.MyConsts,
+  Common.Utils.MyLibrary,
+  Common.Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
   Utils.EditsKeyDownExit,
   Model.Sistema.Imagens.DM;
 

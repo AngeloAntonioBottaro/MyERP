@@ -52,9 +52,9 @@ implementation
 {$R *.dfm}
 
 uses
-  Utils.MyVclLibrary,
+  Common.Utils.MyVclLibrary,
+  Common.Utils.MyConsts,
   Utils.LibrarySistema,
-  Utils.MyConsts,
   Utils.EditsKeyDownExit,
   Model.Produtos.SubGrupos.Factory,
   View.Produtos.SubGrupos.Busca;

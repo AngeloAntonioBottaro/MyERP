@@ -38,7 +38,7 @@ uses
   MyConnection,
   MyMessage,
   MyExceptions,
-  Utils.MyLibrary,
+  Common.Utils.MyLibrary,
   Utils.LibrarySistema,
   Model.Logs;
 
