@@ -1,0 +1,54 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2023-05-09T15:19:15.8632974-03:00",
+	"installedModules": {
+		"github.com/angeloantoniobottaro/myconnection": {
+			"name": "myconnection",
+			"version": "v1.0.0",
+			"hash": "a68ba06a12e5527989b7378cff66558c",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/mydbconnconfiguration": {
+			"name": "mydbconnconfiguration",
+			"version": "v1.0.0",
+			"hash": "511fb10196a29720a648df6ed4a3158c",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/myexceptions": {
+			"name": "myexceptions",
+			"version": "v1.0.0",
+			"hash": "4afc9cb1bb6067dea9dd21ce0e8008e6",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/mymessage": {
+			"name": "mymessage",
+			"version": "v1.0.0",
+			"hash": "3ba8a3559f57c88e58e0f8bef39a9f7c",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/mysearchcomponents": {
+			"name": "mysearchcomponents",
+			"version": "v1.0.0",
+			"hash": "a379f83a1e5f97247d72a6c8858f136a",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/myutilslibrary": {
+			"name": "myutilslibrary",
+			"version": "v1.0.0",
+			"hash": "c682cae963227d5341555f512bea97a3",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

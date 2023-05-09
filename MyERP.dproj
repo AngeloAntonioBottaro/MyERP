@@ -61,6 +61,7 @@
         <Custom_Styles>&quot;Amethyst Kamri|VCLSTYLE|$(BDSCOMMONDIR)\Styles\AmethystKamri.vsf&quot;</Custom_Styles>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_UnitSearchPath>modules\.dcp;modules\.dcu;modules;modules\myconnection\Demo\src;modules\myconnection\src;modules\mydbconnconfiguration\Demo\src;modules\mydbconnconfiguration\src;modules\myexceptions\Src;modules\mymessage\Demo\src;modules\mymessage\src;modules\mysearchcomponents\Demo\src;modules\mysearchcomponents\Src;modules\myutilslibrary;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;vclactnband;vclFireDAC;tethering;FireDACADSDriver;ACBr_BPeDabpeESCPOS;ACBr_BPe;JvPluginSystem;FireDACMSSQLDriver;vcltouch;ACBr_NFe;ACBr_NFeDanfeFR;vcldb;JvBands;svn;JvJans;ACBr_NFeDanfeESCPOS;JvDotNetCtrls;vclib;frxTee26;FireDACDBXDriver;ACBr_NFSeDanfseFR;vclx;RESTBackendComponents;ACBr_Reinf;VCLRESTComponents;fsTee26;vclie;bindengine;CloudService;ACBr_PAF;FireDACMySQLDriver;JvHMI;fsIBX26;ACBr_SATECFVirtual;frx26;DataSnapClient;bindcompdbx;ACBr_CTeDacteRL;ACBr_TCP;DBXSybaseASEDriver;IndyIPServer;ACBr_CTe;IndySystem;frxDBX26;fsADO26;dsnapcon;ACBre_Social;VirtualTreesR;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;ACBr_SPEDImportar;Jcl;bsfd103Rio;mydacvcl260;ACBr_SPED;ACBr_MDFe;emshosting;ACBr_BoletoRL;ACBr_LFD;DBXOdbcDriver;FireDACTDataDriver;FMXTee;crcontrols260;soaprtl;DbxCommonDriver;ACBr_CIOT;ACBr_NFSeDanfseRL;JvManagedThreads;xmlrtl;DataSnapNativeClient;soapmidas;fmxobj;JvTimeFramework;rtl;emsserverresource;DbxClientDriver;DBXSybaseASADriver;JvSystem;JvStdCtrls;ACBr_Convenio115;appanalytics;IndyIPClient;bindcompvcl;TeeUI;JvDocking;JvPascalInterpreter;VclSmp;FireDACODBCDriver;RtmRxDB260;mydacfmx260;JclVcl;DataSnapIndy10ServerTransport;ACBr_Boleto;DataSnapProviderClient;ACBr_SEF2;FireDACMongoDBDriver;JvControls;JvPrintPreview;ACBr_MDFeDamdfeFR;ACBr_NFSe;DataSnapServerMidas;RESTComponents;ZComponent;DBXInterBaseDriver;ACBr_NF3e;ACBr_TEFD;ZCore;emsclientfiredac;dacfmx260;DataSnapFireDAC;svnui;ACBr_SATWS;JvGlobus;DBXMSSQLDriver;JvMM;ACBr_MDFeDamdfeRL;DatasnapConnectorsFreePascal;ACBr_EDI;ACBr_ONE;PngComponentsD;bindcompfmx;JvNet;DBXOracleDriver;inetdb;JvAppFrm;ACBr_Diversos;FmxTeeUI;emsedge;ACBr_LCDPR;FireDACIBDriver;fmx;fmxdae;DSPack_DXE2;ACBr_CTeDacteFR;MSNPopUp_D104;ZipMasterR;JvWizards;dacvcl260;ACBr_Ponto;fs26;dbexpress;IndyCore;frxIntIO26;ZParseSql;JvPageComps;dsnap;DataSnapCommon;emsclient;FireDACCommon;JvDB;frxcs26;DataSnapConnectors;ACBR_DeSTDA;soapserver;ACBr_SAT;JclDeveloperTools;FireDACOracleDriver;DBXMySQLDriver;JvCmp;DBXFirebirdDriver;ACBr_Sintegra;FireDACCommonODBC;FireDACCommonDriver;ACBr_ADRCST;frxIntIOIndy26;inet;IndyIPCommon;JvCustom;vcl;ACBr_NFeDanfeRL;ACBr_SATExtratoESCPOS;frxDB26;JvXPCtrls;FireDACDb2Driver;ACBr_Integrador;fsDB26;ZDbc;TeeDB;FireDAC;mydac260;JvCore;ACBr_Comum;frxe26;JvCrypt;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;frxIBX26;JvDlgs;JvRuntimeDesign;VDOPrint;ibxpress;Tee;DataSnapServer;ibxbindings;BossExperts;dac260;FireDACDSDriver;vclwinx;mysqlmon260;ACBr_OpenSSL;frxADO26;CustomIPTransport;vcldsnap;bindcomp;ZPlain;ACBr_Serial;DBXInformixDriver;frce;ACBr_BlocoX;RtmRxCtl260;dbxcds;ACBr_NFCeECFVirtual;adortl;ACBr_BoletoFR;ACBr_ANe;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;JclContainers;ACBr_NF3eDANF3eESCPOS;ACBr_MTER;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -172,25 +173,9 @@
         <DCCReference Include="src\View\Sistema\View.Sistema.Sobre.pas">
             <Form>ViewSistemaSobre</Form>
         </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyConsts.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyLibrary.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyVclLibrary.pas"/>
-        <DCCReference Include="..\MyExceptions\Src\MyExceptions.Base.pas"/>
-        <DCCReference Include="..\MyExceptions\Src\MyExceptions.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyObjectDictionary.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyTypes.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.Consts.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.Helpers.TMemo.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.Interfaces.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.Types.pas"/>
-        <DCCReference Include="..\MyMessage\src\MyMessage.View.pas">
-            <Form>MyMessageView</Form>
-        </DCCReference>
         <DCCReference Include="src\View\Sistema\View.Sistema.IconesConf.pas">
             <Form>ViewSistemaIconesConf</Form>
         </DCCReference>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyFormLibrary.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Factory.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Interfaces.pas"/>
         <DCCReference Include="src\Model\Clientes\Model.Clientes.Entitie.pas"/>
@@ -240,13 +225,6 @@
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Interfaces.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Entitie.pas"/>
         <DCCReference Include="src\Model\Produtos\SubGrupos\Model.Produtos.SubGrupos.Factory.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyIniLibrary.pas"/>
-        <DCCReference Include="..\MyConnection\src\MyConnection.Configuration.pas"/>
-        <DCCReference Include="..\MyConnection\src\MyConnection.FireDAC.ComponentConnection.pas"/>
-        <DCCReference Include="..\MyConnection\src\MyConnection.FireDAC.Query.pas"/>
-        <DCCReference Include="..\MyConnection\src\MyConnection.Interfaces.pas"/>
-        <DCCReference Include="..\MyConnection\src\MyConnection.pas"/>
-        <DCCReference Include="..\MyConnection\src\MyConnection.Types.pas"/>
         <DCCReference Include="src\Utils\Utils.LibrarySistema.pas"/>
         <DCCReference Include="src\Model\Clientes\Busca\Model.Clientes.Busca.pas"/>
         <DCCReference Include="src\Utils\Utils.EditsKeyDownExit.pas"/>
@@ -260,7 +238,6 @@
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Factory.pas"/>
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Interfaces.pas"/>
         <DCCReference Include="src\Model\Produtos\Model.Produtos.Entitie.pas"/>
-        <DCCReference Include="..\MyUtilsLibrary\Common.Utils.MyGridLibrary.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Vendas.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Compras.pas"/>
         <DCCReference Include="src\Model\Main\Icones\Itens\Model.Main.Icones.Itens.Caixa.pas"/>
@@ -310,13 +287,6 @@
         </DCCReference>
         <DCCReference Include="src\Model\Logs\Model.Logs.pas"/>
         <DCCReference Include="src\Utils\Utils.Types.pas"/>
-        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Interfaces.pas"/>
-        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.pas"/>
-        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Search.pas"/>
-        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.Utils.pas"/>
-        <DCCReference Include="..\MySearchComponents\Src\MySearchComponents.View.pas">
-            <Form>MySearchComponentsView</Form>
-        </DCCReference>
         <DCCReference Include="src\View\Logs\View.Logs.Busca.pas">
             <Form>ViewLogsBusca</Form>
         </DCCReference>
@@ -360,21 +330,6 @@
         </DCCReference>
         <DCCReference Include="src\View\Caixa\View.Caixa.CaixaDiario.pas">
             <Form>ViewCaixaCaixaDiario</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.Consts.pas"/>
-        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.Ini.pas"/>
-        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.pas"/>
-        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.Lista.pas">
-            <Form>ViewLista</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.Manutencao.pas">
-            <Form>ViewManutencao</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.SelecionarConexao.pas">
-            <Form>ViewSelecionarConexao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\Model\Terminais\Model.Terminais.pas"/>
