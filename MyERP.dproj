@@ -249,18 +249,6 @@
         <DCCReference Include="..\MyConnection\src\MyConnection.Types.pas"/>
         <DCCReference Include="src\Utils\Utils.LibrarySistema.pas"/>
         <DCCReference Include="src\Model\Clientes\Busca\Model.Clientes.Busca.pas"/>
-        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.Consts.pas"/>
-        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.Ini.pas"/>
-        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.pas"/>
-        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Lista.pas">
-            <Form>ViewLista</Form>
-        </DCCReference>
-        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Manutencao.pas">
-            <Form>ViewManutencao</Form>
-        </DCCReference>
-        <DCCReference Include="..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.SelecionarConexao.pas">
-            <Form>ViewSelecionarConexao</Form>
-        </DCCReference>
         <DCCReference Include="src\Utils\Utils.EditsKeyDownExit.pas"/>
         <DCCReference Include="src\Model\Cidades\Busca\Model.Cidades.Busca.pas"/>
         <DCCReference Include="src\Model\Fornecedores\Busca\Model.Fornecedores.Busca.pas"/>
@@ -374,6 +362,22 @@
             <Form>ViewCaixaCaixaDiario</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.Consts.pas"/>
+        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.Ini.pas"/>
+        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.pas"/>
+        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.Lista.pas">
+            <Form>ViewLista</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.Manutencao.pas">
+            <Form>ViewManutencao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.SelecionarConexao.pas">
+            <Form>ViewSelecionarConexao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\Terminais\Model.Terminais.pas"/>
         <RcItem Include="resources\Images\PNG\MainMenu\BookAndPencil.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>agenda</ResourceId>

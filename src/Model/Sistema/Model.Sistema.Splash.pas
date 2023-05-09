@@ -22,6 +22,7 @@ type
     procedure CriarPastasSistema;
     procedure ConnectToDatabase;
     procedure CriarDataModules;
+    procedure VerificarTerminal;
 
     procedure CriarDM(InstanceClass: TComponentClass; var Reference; AMensagem: string);
   protected
@@ -38,9 +39,10 @@ uses
   MyMessage,
   MyExceptions,
   MyConnection,
-  MyConnectionConfiguration,
+  MyDBConnConfiguration,
   Utils.GlobalVariables,
-  Model.Sistema.Imagens.DM;
+  Model.Sistema.Imagens.DM,
+  Model.Terminais;
 
 class function TModelSistemaSplash.GetInstance: IModelSistemaSplash;
 begin
@@ -75,6 +77,7 @@ begin
      Self.CriarPastasSistema;
      Self.ConnectToDatabase;
      Self.CriarDataModules;
+     Self.VerificarTerminal;
 
      FLoadingComplete := True;
    except on E: Exception do
@@ -90,10 +93,10 @@ end;
 
 procedure TModelSistemaSplash.ConnectToDatabase;
 var
-  LMCC: TMyConnectionConfiguration;
+  LMCC: TMyDBConnConfiguration;
 begin
    Self.WriteInformation('Acessando arquivo de configurações de conexão');
-   LMCC := TMyConnectionConfiguration.Create;
+   LMCC := TMyDBConnConfiguration.Create;
    try
      if(LMCC.LoadConfiguration.Cancel)then
      begin
@@ -126,7 +129,7 @@ end;
 
 procedure TModelSistemaSplash.CriarDataModules;
 begin
-   Self.CriarDM(TModelSistemaImagensDM, ModelSistemaImagensDM, 'Criando o modulo de imagens');
+   Self.CriarDM(TModelSistemaImagensDM, ModelSistemaImagensDM, 'Criando o módulo de imagens');
 end;
 
 procedure TModelSistemaSplash.CriarDM(InstanceClass: TComponentClass; var Reference; AMensagem: string);
@@ -135,11 +138,17 @@ begin
    Application.CreateForm(InstanceClass, Reference);
 end;
 
+procedure TModelSistemaSplash.VerificarTerminal;
+begin
+   Self.WriteInformation('Verificando informações do terminal');
+   TModelTerminais.New.VerificarTerminal;
+end;
+
 procedure TModelSistemaSplash.WriteInformation(AValue: String);
 begin
-   Sleep(1000);
    if(Assigned(FDisplayInformation))then
      FDisplayInformation(Trim(AValue));
+   Sleep(1000);
 end;
 
 end.
