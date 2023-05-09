@@ -79,8 +79,7 @@ begin
 
    TModelLogs.New.Gravar('Tela de login',
                          'Logando no sistema',
-                         'Usuário ' + VG_UsuarioLogadoNome + ' logou no sistema ' +
-                         'pelo terminal: "' + VG_IdTerminal.ToString + '-' + VG_NomeTerminal + '".' +
+                         'Usuário logou no sistema pelo terminal: "' + VG_IdTerminal.ToString + '-' + VG_NomeTerminal + '".' +
                          TUtilsVersao.CompleteVersion,
                          VG_UsuarioLogadoId);
 end;

@@ -97,12 +97,6 @@ uses
   MyConnection.Types in '..\MyConnection\src\MyConnection.Types.pas',
   Utils.LibrarySistema in 'src\Utils\Utils.LibrarySistema.pas',
   Model.Clientes.Busca in 'src\Model\Clientes\Busca\Model.Clientes.Busca.pas',
-  MyConnectionConfiguration.Consts in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.Consts.pas',
-  MyConnectionConfiguration.Ini in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.Ini.pas',
-  MyConnectionConfiguration in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.pas',
-  MyConnectionConfiguration.View.Lista in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Lista.pas' {ViewLista},
-  MyConnectionConfiguration.View.Manutencao in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.Manutencao.pas' {ViewManutencao},
-  MyConnectionConfiguration.View.SelecionarConexao in '..\MyConnectionConfiguration\src\MyConnectionConfiguration.View.SelecionarConexao.pas' {ViewSelecionarConexao},
   Utils.EditsKeyDownExit in 'src\Utils\Utils.EditsKeyDownExit.pas',
   Model.Cidades.Busca in 'src\Model\Cidades\Busca\Model.Cidades.Busca.pas',
   Model.Fornecedores.Busca in 'src\Model\Fornecedores\Busca\Model.Fornecedores.Busca.pas',
@@ -171,7 +165,14 @@ uses
   View.Vendas.Busca in 'src\View\Vendas\View.Vendas.Busca.pas' {ViewVendasBusca},
   View.Compras.Cad in 'src\View\Compras\View.Compras.Cad.pas' {ViewComprasCad},
   View.Compras.Busca in 'src\View\Compras\View.Compras.Busca.pas' {ViewComprasBusca},
-  View.Caixa.CaixaDiario in 'src\View\Caixa\View.Caixa.CaixaDiario.pas' {ViewCaixaCaixaDiario};
+  View.Caixa.CaixaDiario in 'src\View\Caixa\View.Caixa.CaixaDiario.pas' {ViewCaixaCaixaDiario},
+  MyDBConnConfiguration.Consts in '..\MyDBConnConfiguration\src\MyDBConnConfiguration.Consts.pas',
+  MyDBConnConfiguration.Ini in '..\MyDBConnConfiguration\src\MyDBConnConfiguration.Ini.pas',
+  MyDBConnConfiguration in '..\MyDBConnConfiguration\src\MyDBConnConfiguration.pas',
+  MyDBConnConfiguration.View.Lista in '..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.Lista.pas' {ViewLista},
+  MyDBConnConfiguration.View.Manutencao in '..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.Manutencao.pas' {ViewManutencao},
+  MyDBConnConfiguration.View.SelecionarConexao in '..\MyDBConnConfiguration\src\MyDBConnConfiguration.View.SelecionarConexao.pas' {ViewSelecionarConexao},
+  Model.Terminais in 'src\Model\Terminais\Model.Terminais.pas';
 
 {$R *.res}
 

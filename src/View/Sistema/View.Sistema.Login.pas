@@ -42,7 +42,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MyConnectionConfiguration,
+  MyDBConnConfiguration,
   Common.Utils.MyVclLibrary,
   Utils.GlobalVariables,
   Model.Sistema.Imagens.DM,
@@ -75,9 +75,9 @@ end;
 
 procedure TViewSistemaLogin.imgConfClick(Sender: TObject);
 var
-  LMCC: TMyConnectionConfiguration;
+  LMCC: TMyDBConnConfiguration;
 begin
-   LMCC := TMyConnectionConfiguration.Create;
+   LMCC := TMyDBConnConfiguration.Create;
    try
      LMCC.ListConfigurations;
    finally
