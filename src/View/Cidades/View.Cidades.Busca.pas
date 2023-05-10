@@ -53,8 +53,8 @@ implementation
 
 uses
   MyExceptions,
+  MyVclLibrary,
   Common.Utils.MyConsts,
-  Common.Utils.MyVclLibrary,
   View.Cidades.Cad,
   Model.Cidades.Factory;
 

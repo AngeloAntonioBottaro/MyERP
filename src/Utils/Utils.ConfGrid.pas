@@ -10,7 +10,7 @@ uses
   Vcl.DBGrids,
   Vcl.Menus,
   Vcl.Imaging.pngimage,
-  Common.Utils.MyGridLibrary;
+  MyDBGridLibrary;
 
 type
   TUtilsConfGrid = class
@@ -38,8 +38,8 @@ implementation
 
 uses
   MyExceptions,
-  Model.Sistema.Imagens.DM,
-  Common.Utils.MyVclLibrary;
+  MyVclLibrary,
+  Model.Sistema.Imagens.DM;
 
 class function TUtilsConfGrid.New(AImage: TImage; AGrid: TDBGrid; ANomeConf: string): TUtilsConfGrid;
 begin

@@ -1,6 +1,6 @@
 {
 	"hash": "d41d8cd98f00b204e9800998ecf8427e",
-	"updated": "2023-05-09T15:19:15.8632974-03:00",
+	"updated": "2023-05-10T13:27:13.3393943-03:00",
 	"installedModules": {
 		"github.com/angeloantoniobottaro/myconnection": {
 			"name": "myconnection",
@@ -13,7 +13,15 @@
 		"github.com/angeloantoniobottaro/mydbconnconfiguration": {
 			"name": "mydbconnconfiguration",
 			"version": "v1.0.0",
-			"hash": "511fb10196a29720a648df6ed4a3158c",
+			"hash": "ef12fd8aad474cc89a69d69aeab64dee",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/mydbgridlibrary": {
+			"name": "mydbgridlibrary",
+			"version": "",
+			"hash": "7ef42afb2f8a93483dd5f7364d0bb929",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
@@ -21,7 +29,15 @@
 		"github.com/angeloantoniobottaro/myexceptions": {
 			"name": "myexceptions",
 			"version": "v1.0.0",
-			"hash": "4afc9cb1bb6067dea9dd21ce0e8008e6",
+			"hash": "d2986f5f9e66939ae9e7aa22853c1801",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/myformlibrary": {
+			"name": "myformlibrary",
+			"version": "",
+			"hash": "5202cfb92bbf429e2654d01de55bc9c6",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
@@ -45,7 +61,15 @@
 		"github.com/angeloantoniobottaro/myutilslibrary": {
 			"name": "myutilslibrary",
 			"version": "v1.0.0",
-			"hash": "c682cae963227d5341555f512bea97a3",
+			"hash": "eb558673c085ef77b30c43138ed0adcc",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/angeloantoniobottaro/myvcllibrary": {
+			"name": "myvcllibrary",
+			"version": "",
+			"hash": "55733926aa9cdb4b780d3cc0fa599728",
 			"artifacts": {},
 			"failed": false,
 			"changed": false

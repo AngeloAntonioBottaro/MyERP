@@ -52,7 +52,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Common.Utils.Myconsts;
 
 procedure TViewSistemaSobre.FormCreate(Sender: TObject);

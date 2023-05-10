@@ -71,7 +71,7 @@ implementation
 
 uses
   MyMessage,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Common.Utils.MyConsts,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,

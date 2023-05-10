@@ -70,7 +70,7 @@ uses
   MyConnection,
   MyExceptions,
   MyMessage,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Common.Utils.MyConsts,
   Utils.GlobalVariables,
   Utils.EditsKeyDownExit,

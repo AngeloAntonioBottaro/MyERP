@@ -140,13 +140,13 @@ implementation
 {$R *.dfm}
 
 uses
-  Common.Utils.MyVclLibrary,
-  Common.Utils.MyLibrary,
-  Common.Utils.MyFormLibrary,
-  Utils.Versao,
-  Utils.GlobalVariables,
   MyMessage,
   MyExceptions,
+  MyVclLibrary,
+  MyFormLibrary,
+  Common.Utils.MyLibrary,
+  Utils.Versao,
+  Utils.GlobalVariables,
   Model.Sistema.Imagens.DM,
   Model.Main.Icones,
   View.Sistema.Login,
@@ -165,7 +165,11 @@ uses
   View.FormasPagamento.Cad,
   View.Agenda.Cad,
   View.Logs.Busca,
-  View.Permissoes.Grupos.Cad, View.Sistema.SenhaAdm, View.Compras.Cad, View.Vendas.Cad, View.Caixa.CaixaDiario;
+  View.Permissoes.Grupos.Cad,
+  View.Sistema.SenhaAdm,
+  View.Compras.Cad,
+  View.Vendas.Cad,
+  View.Caixa.CaixaDiario;
 
 {$REGION 'FormEvents'}
 procedure TViewSistemaMain.FormCreate(Sender: TObject);
@@ -493,8 +497,8 @@ end;
 procedure TViewSistemaMain.ProcessStatus;
 begin
    //STATUS BAR
-   StatusBar.Panels[0].Text := 'Usuário: '  + VG_UsuarioLogadoId.ToString + ' - ' + VG_UsuarioLogadoNome;
-   StatusBar.Panels[1].Text := 'Terminal: ' + TMyLibrary.GetNetUserName;
+   StatusBar.Panels[0].Text := 'Usuário: '  + TMyLibrary.CompLeft(VG_UsuarioLogadoId.ToString, '0', 3) + ' - ' + VG_UsuarioLogadoNome;
+   StatusBar.Panels[1].Text := 'Terminal: ' + TMyLibrary.CompLeft(VG_IdTerminal.ToString, '0', 3) + ' - ' + VG_NomeTerminal;
    StatusBar.Panels[2].Text := 'Servidor: ' + VG_Host;
    StatusBar.Panels[3].Text := 'Dados: '    + VG_Database;
 end;

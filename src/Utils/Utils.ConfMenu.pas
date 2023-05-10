@@ -31,8 +31,8 @@ implementation
 
 uses
   MyExceptions,
+  MyVclLibrary,
   Model.Sistema.Imagens.DM,
-  Common.Utils.MyVclLibrary,
   View.Sistema.MenuConf;
 
 class function TUtilsConfMenu.New(AImage: TImage; AMenu: TMenu; AFormulario: string): TUtilsConfMenu;

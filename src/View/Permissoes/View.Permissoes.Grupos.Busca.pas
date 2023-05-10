@@ -55,7 +55,7 @@ implementation
 uses
   MyExceptions,
   Common.Utils.MyConsts,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Utils.GlobalConsts,
   View.Permissoes.Grupos.Cad,
   Model.Permissoes.Grupos.Factory;

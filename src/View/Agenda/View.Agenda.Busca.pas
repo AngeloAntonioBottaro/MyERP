@@ -54,7 +54,7 @@ implementation
 uses
   MyExceptions,
   Common.Utils.MyConsts,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Utils.GlobalConsts,
   View.Cidades.Cad,
   Model.Agenda.Factory;

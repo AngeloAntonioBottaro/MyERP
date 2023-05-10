@@ -50,7 +50,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Utils.LibrarySistema,
   Model.Produtos.Unidades.Factory,
   View.Produtos.Unidades.Busca;

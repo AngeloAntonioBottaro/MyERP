@@ -46,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Utils.LibrarySistema,
   Model.Produtos.Grupos.Factory,
   View.Produtos.Grupos.Busca;

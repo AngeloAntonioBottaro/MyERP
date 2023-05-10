@@ -53,7 +53,7 @@ uses
   MyMessage,
   Common.Utils.MyConsts,
   Common.Utils.MyLibrary,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Utils.GlobalConsts,
   Utils.LibrarySistema,
   Model.FormasPagamento.Factory,

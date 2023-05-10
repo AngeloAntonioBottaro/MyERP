@@ -33,8 +33,8 @@ implementation
 
 uses
   Common.Utils.MyLibrary,
-  Common.Utils.MyFormLibrary,
-  Common.Utils.MyGridLibrary,
+  MyFormLibrary,
+  MyDBGridLibrary,
   Utils.GlobalVariables,
   Utils.LibrarySistema;
 

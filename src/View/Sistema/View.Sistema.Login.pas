@@ -43,7 +43,7 @@ implementation
 
 uses
   MyDBConnConfiguration,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Utils.GlobalVariables,
   Model.Sistema.Imagens.DM,
   Model.Sistema.Login;

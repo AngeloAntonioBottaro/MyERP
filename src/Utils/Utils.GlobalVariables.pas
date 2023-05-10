@@ -8,7 +8,7 @@ uses
   System.UITypes,
   Common.Utils.MyConsts,
   Common.Utils.MyLibrary,
-  Common.Utils.MyVCLLibrary,
+  MyVCLLibrary,
   Model.Empresas.Interfaces,
   Model.Empresas.Entitie;
 

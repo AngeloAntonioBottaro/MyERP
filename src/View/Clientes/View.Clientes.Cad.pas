@@ -98,9 +98,9 @@ implementation
 
 uses
   MyMessage,
+  MyVclLibrary,
   Common.Utils.MyConsts,
   Common.Utils.MyLibrary,
-  Common.Utils.MyVclLibrary,
   Utils.GlobalConsts,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,

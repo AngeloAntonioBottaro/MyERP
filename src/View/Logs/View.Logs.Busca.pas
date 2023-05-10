@@ -87,7 +87,7 @@ uses
   MyExceptions,
   MyConnection,
   Common.Utils.MyLibrary,
-  Common.Utils.MyVclLibrary,
+  MyVclLibrary,
   Common.Utils.MyConsts,
   Utils.EditsKeyDownExit,
   Model.Sistema.Imagens.DM;
