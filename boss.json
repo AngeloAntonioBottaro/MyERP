@@ -6,6 +6,7 @@
 	"mainsrc": "./src",
 	"projects": [],
 	"dependencies": {
+		"github.com/angeloantoniobottaro/myadmpassword": ">0.0.0",
 		"github.com/angeloantoniobottaro/myconnection": "^v1.0.0",
 		"github.com/angeloantoniobottaro/mydbconnconfiguration": "^v1.0.0",
 		"github.com/angeloantoniobottaro/mydbgridlibrary": ">0.0.0"

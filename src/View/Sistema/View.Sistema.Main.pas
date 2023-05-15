@@ -144,6 +144,7 @@ uses
   MyExceptions,
   MyVclLibrary,
   MyFormLibrary,
+  MyAdmPassword,
   Common.Utils.MyLibrary,
   Utils.Versao,
   Utils.GlobalVariables,
@@ -166,7 +167,6 @@ uses
   View.Agenda.Cad,
   View.Logs.Busca,
   View.Permissoes.Grupos.Cad,
-  View.Sistema.SenhaAdm,
   View.Compras.Cad,
   View.Vendas.Cad,
   View.Caixa.CaixaDiario;
@@ -329,7 +329,7 @@ end;
 
 procedure TViewSistemaMain.ConfiguracoesParametrosDoSistema1Click(Sender: TObject);
 begin
-   if(not ChamaSenhaAdministrativa)then
+   if(not CallAdmPassword)then
      Exit;
 
    //TELA CONFIGURACOES
@@ -337,7 +337,7 @@ end;
 
 procedure TViewSistemaMain.ConfiguracoesPermissoes1Click(Sender: TObject);
 begin
-   if(not ChamaSenhaAdministrativa)then
+   if(not CallAdmPassword)then
      Exit;
 
    //TELA PERMISSOES

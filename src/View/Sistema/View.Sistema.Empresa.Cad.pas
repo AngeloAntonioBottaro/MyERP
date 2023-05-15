@@ -97,15 +97,15 @@ implementation
 
 uses
   MyMessage,
+  MyVclLibrary,
+  MyAdmPassword,
   Common.Utils.MyConsts,
   Common.Utils.MyLibrary,
-  MyVclLibrary,
   Utils.GlobalConsts,
   Utils.GlobalVariables,
   Utils.LibrarySistema,
   Utils.EditsKeyDownExit,
-  Model.Empresas.Factory,
-  View.Sistema.SenhaAdm;
+  Model.Empresas.Factory;
 
 procedure TViewSistemaEmpresaCad.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -139,7 +139,7 @@ begin
    if(not (FEmpresa.Entitie.Id > 0))then
      Exit;
 
-   if(not ChamaSenhaAdministrativa)then
+   if(not CallAdmPassword)then
      Exit;
 
    Self.StartOperations;

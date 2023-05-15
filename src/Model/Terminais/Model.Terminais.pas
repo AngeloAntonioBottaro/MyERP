@@ -71,9 +71,9 @@ begin
    MyQueryNew
     .Add('INSERT INTO TERMINAIS(NOME, NOME_USUARIO, NOME_PC)')
     .Add('VALUES(:NOME, :NOME_USUARIO, :NOME_PC)')
-    .AddParam('NOME', FNetUserName)
-    .AddParam('NOME_USUARIO', FNetUserName)
-    .AddParam('NOME_PC', FMachineName)
+    .AddParam('NOME', UpperCase(FNetUserName))
+    .AddParam('NOME_USUARIO', UpperCase(FNetUserName))
+    .AddParam('NOME_PC', UpperCase(FMachineName))
     .ExecSQL;
 
    Self.ConsultarTerminal;

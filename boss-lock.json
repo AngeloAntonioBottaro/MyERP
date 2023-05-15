@@ -2,6 +2,14 @@
 	"hash": "d41d8cd98f00b204e9800998ecf8427e",
 	"updated": "2023-05-10T13:27:13.3393943-03:00",
 	"installedModules": {
+		"github.com/angeloantoniobottaro/myadmpassword": {
+			"name": "myadmpassword",
+			"version": "",
+			"hash": "9c614b25f7205457eba38f691a425c41",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
 		"github.com/angeloantoniobottaro/myconnection": {
 			"name": "myconnection",
 			"version": "v1.0.0",
@@ -13,7 +21,7 @@
 		"github.com/angeloantoniobottaro/mydbconnconfiguration": {
 			"name": "mydbconnconfiguration",
 			"version": "v1.0.0",
-			"hash": "ef12fd8aad474cc89a69d69aeab64dee",
+			"hash": "7088990b9aa89ede81f56aa27c65fb45",
 			"artifacts": {},
 			"failed": false,
 			"changed": false

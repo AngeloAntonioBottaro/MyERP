@@ -2,6 +2,13 @@ inherited ViewProdutosUnidadesBusca: TViewProdutosUnidadesBusca
   Caption = 'Busca de unidade de produto'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited pnTop: TPanel
+    inherited pnBuscarConteudo: TPanel
+      inherited lbBusca: TLabel
+        Width = 380
+      end
+    end
+  end
   inherited pnBotton: TPanel
     inherited pnButtons: TPanel
       inherited btnCadastro: TButton
@@ -66,9 +73,15 @@ inherited ViewProdutosUnidadesBusca: TViewProdutosUnidadesBusca
           Visible = True
         end>
     end
+    inherited pnOptions: TPanel
+      inherited lbTotalRegistros: TLabel
+        Height = 14
+      end
+    end
   end
-  inherited PopupMenu: TPopupMenu
+  inherited MenuBusca: TPopupMenu
     inherited Excluir1: TMenuItem
+      Tag = 0
       Visible = True
     end
   end

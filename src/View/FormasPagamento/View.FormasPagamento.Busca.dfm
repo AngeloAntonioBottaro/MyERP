@@ -2,6 +2,13 @@ inherited ViewFormasPagamentoBusca: TViewFormasPagamentoBusca
   Caption = 'Busca de formas de pagamento'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited pnTop: TPanel
+    inherited pnBuscarConteudo: TPanel
+      inherited lbBusca: TLabel
+        Width = 380
+      end
+    end
+  end
   inherited pnBotton: TPanel
     inherited pnButtons: TPanel
       inherited btnCadastro: TButton
@@ -57,12 +64,19 @@ inherited ViewFormasPagamentoBusca: TViewFormasPagamentoBusca
           Visible = True
         end>
     end
+    inherited pnOptions: TPanel
+      inherited lbTotalRegistros: TLabel
+        Height = 14
+      end
+    end
   end
-  inherited PopupMenu: TPopupMenu
+  inherited MenuBusca: TPopupMenu
     inherited AtivarInativar1: TMenuItem
+      Tag = 0
       Visible = True
     end
     inherited Excluir1: TMenuItem
+      Tag = 0
       Visible = True
     end
   end

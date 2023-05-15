@@ -47,10 +47,11 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 184
+        Width = 258
         Height = 13
         Align = alTop
         Caption = 'Selecione o conte'#250'do a ser consultado'
+        ExplicitWidth = 184
       end
       object cBoxBusca: TComboBox
         AlignWithMargins = True
@@ -143,10 +144,11 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 187
+        Width = 380
         Height = 13
         Align = alTop
         Caption = 'Entre com o conte'#250'do a ser consultado'
+        ExplicitWidth = 187
       end
       object edtBusca: TEdit
         AlignWithMargins = True
@@ -192,7 +194,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       Padding.Right = 5
       Padding.Bottom = 5
       TabOrder = 0
-      ExplicitTop = 69
       object btnCadastro: TButton
         Left = 5
         Top = 5
@@ -241,8 +242,6 @@ inherited ViewBaseBusca: TViewBaseBusca
       Align = alLeft
       Caption = '  Buscar  '
       TabOrder = 1
-      ExplicitTop = 20
-      ExplicitHeight = 96
     end
     object ckBuscarInativos: TCheckBox
       Left = 445
@@ -262,7 +261,6 @@ inherited ViewBaseBusca: TViewBaseBusca
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitHeight = 239
     object GridBusca: TDBGrid
       Left = 0
       Top = 0
@@ -289,19 +287,19 @@ inherited ViewBaseBusca: TViewBaseBusca
       Align = alBottom
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitTop = 16
       object lbTotalRegistros: TLabel
         AlignWithMargins = True
         Left = 672
         Top = 1
         Width = 77
-        Height = 13
+        Height = 14
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 5
         Margins.Bottom = 0
         Align = alRight
         Caption = 'lbTotalRegistros'
+        ExplicitHeight = 13
       end
     end
   end
@@ -326,6 +324,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       OnClick = Atualizar1Click
     end
     object AtivarInativar1: TMenuItem
+      Tag = 999
       Caption = 'Ativar/Inativar'
       ImageIndex = 1
       Visible = False
@@ -335,6 +334,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Caption = '-'
     end
     object Excluir1: TMenuItem
+      Tag = 999
       Caption = 'Excluir'
       ImageIndex = 2
       Visible = False

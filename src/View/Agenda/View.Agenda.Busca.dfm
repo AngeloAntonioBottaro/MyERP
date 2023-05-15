@@ -9,7 +9,6 @@ inherited ViewAgendaBusca: TViewAgendaBusca
       end
     end
     inherited gBoxTipoConsulta: TGroupBox
-      ExplicitTop = 23
       object rdBuscarCliente: TRadioButton
         Left = 109
         Top = 20

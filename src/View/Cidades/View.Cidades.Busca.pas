@@ -24,6 +24,9 @@ uses
   Utils.Types,
   Model.Cidades.Busca;
 
+const
+  TELA = 'Busca de cidades';
+
 type
   TViewCidadesBusca = class(TViewBaseBusca)
     rdBuscarNome: TRadioButton;
@@ -36,6 +39,7 @@ type
     procedure btnCadastroClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure GridBuscaTitleClick(Column: TColumn);
+    procedure Excluir1Click(Sender: TObject);
   private
     FBusca: TModelCidadesBusca;
     function GetTipoBusca: TTipoBuscaCidade;
@@ -126,6 +130,16 @@ begin
 
    pnBuscarConteudo.Visible := not rdBuscarUF.Checked;
    pnBuscarComboBox.Visible := rdBuscarUF.Checked;
+end;
+
+procedure TViewCidadesBusca.Excluir1Click(Sender: TObject);
+begin
+   inherited;
+   TModelCidadesFactory.New(TELA)
+    .Entitie
+     .Id(DS_Busca.DataSet.FieldByName('ID').AsInteger)
+     .End_Entitie
+    .Deletar;
 end;
 
 procedure TViewCidadesBusca.GetConteudoBusca;
