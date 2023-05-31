@@ -5,7 +5,6 @@ interface
 uses
   System.SysUtils,
   MyConnection,
-  Datasnap.DBClient,
   Model.Vendas.Itens.Interfaces,
   Model.Vendas.Itens.Entitie;
 
@@ -13,13 +12,13 @@ type
   TModelVendasItensFactory = class(TInterfacedObject, IModelVendasItensFactory)
   private
     FItem: TModelVendasItensEntitie;
-    FQItensVenda: TClientDataSet;
+    FTBItensVenda: IMyTable;
   protected
     function NewItem: TModelVendasItensEntitie;
     procedure AddItem;
   public
-    class function New(AQItensVenda: TClientDataSet): IModelVendasItensFactory;
-    constructor Create(AQItensVenda: TClientDataSet);
+    class function New(AQItensVenda: IMyTable): IModelVendasItensFactory;
+    constructor Create(AQItensVenda: IMyTable);
     destructor Destroy; override;
   end;
 
@@ -29,14 +28,14 @@ uses
   Common.Utils.MyLibrary;
 
 {$REGION 'PUBLIC'}
-class function TModelVendasItensFactory.New(AQItensVenda: TClientDataSet): IModelVendasItensFactory;
+class function TModelVendasItensFactory.New(AQItensVenda: IMyTable): IModelVendasItensFactory;
 begin
    Result := Self.Create(AQItensVenda);
 end;
 
-constructor TModelVendasItensFactory.Create(AQItensVenda: TClientDataSet);
+constructor TModelVendasItensFactory.Create(AQItensVenda: IMyTable);
 begin
-   FQItensVenda := AQItensVenda;
+   FTBItensVenda := AQItensVenda;
 end;
 
 destructor TModelVendasItensFactory.Destroy;
@@ -54,16 +53,16 @@ begin
    if(Assigned(FItem))then
      FItem.Free;
 
-   FItem := TModelVendasItensEntitie.Create(Self);
+   FItem := TModelVendasItensEntitie.Create;
    Result := FItem;
 end;
 
 procedure TModelVendasItensFactory.AddItem;
 begin
-   FQItensVenda.Insert;
-   FQItensVenda.FieldByName('ID').AsInteger := FItem.IdProduto;
-   FQItensVenda.FieldByName('NOME').AsInteger := FItem.Nome;
-   FQItensVenda.Post;
+   FTBItensVenda.DataSet.Append;
+   FTBItensVenda.DataSet.FieldByName('ID_PRODUTO').AsInteger := FItem.IdProduto;
+   FTBItensVenda.DataSet.FieldByName('NOME_PRODUTO').AsString := FItem.Nome;
+   FTBItensVenda.DataSet.Post;
 end;
 {$ENDREGION 'PROTECTED'}
 

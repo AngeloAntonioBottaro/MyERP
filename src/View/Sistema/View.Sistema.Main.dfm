@@ -53,6 +53,11 @@ object ViewSistemaMain: TViewSistemaMain
         Width = 200
       end
       item
+        Text = 'Database: '
+        Width = 300
+      end
+      item
+        Text = 'Impressoras: '
         Width = 50
       end>
   end

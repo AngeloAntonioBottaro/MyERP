@@ -3,20 +3,14 @@ unit Model.Vendas.Itens.Entitie;
 interface
 
 uses
-  System.SysUtils,
-  Model.Vendas.Itens.Interfaces;
+  System.SysUtils;
 
 type
   TModelVendasItensEntitie = class
   private
-    [weak]
-    FParent: IModelVendasItensFactory;
-
     FIdProduto: Integer;
     FNome: string;
   public
-    constructor Create(AParent: IModelVendasItensFactory);
-    function End_Itens: IModelVendasItensFactory;
     function IdProduto(AValue: string): TModelVendasItensEntitie; overload;
     function IdProduto(AValue: Integer): TModelVendasItensEntitie; overload;
     function IdProduto: Integer; overload;
@@ -28,16 +22,6 @@ implementation
 
 uses
   Common.Utils.MyLibrary;
-
-constructor TModelVendasItensEntitie.Create(AParent: IModelVendasItensFactory);
-begin
-   FParent := AParent;
-end;
-
-function TModelVendasItensEntitie.End_Itens: IModelVendasItensFactory;
-begin
-   Result := FParent;
-end;
 
 function TModelVendasItensEntitie.IdProduto(AValue: string): TModelVendasItensEntitie;
 begin

@@ -64,6 +64,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     FVendasFactory: IModelVendasFactory;
     FConfGrid: TUtilsConfGrid;
@@ -96,6 +97,19 @@ begin
    edtIdCliente.SetFocus;
 end;
 
+procedure TViewVendasCad.Button1Click(Sender: TObject);
+begin
+   FVendasFactory
+    .Itens
+     .NewItem
+      .IdProduto(edtIdProduto.Text)
+      .Nome(edtProduto.Text);
+
+   FVendasFactory
+    .Itens
+     .AddItem;
+end;
+
 procedure TViewVendasCad.edtIdClienteExit(Sender: TObject);
 begin
    IdClienteExit(edtIdCliente, edtCliente);
@@ -108,7 +122,7 @@ end;
 
 procedure TViewVendasCad.edtIdProdutoExit(Sender: TObject);
 begin
-   IdProdutoExit(edtIdProduto, edtCliente);
+   IdProdutoExit(edtIdProduto, edtProduto);
 end;
 
 procedure TViewVendasCad.edtIdProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -158,7 +172,7 @@ begin
    if(DS_ItensVenda.DataSet = nil)then
      Exit;
 
-   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_ItensVenda.DataSet.RecordCount.ToString, '0', 6);
+   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_ItensVenda.DataSet.RecordCount);
 end;
 
 procedure TViewVendasCad.InitialConfiguration;

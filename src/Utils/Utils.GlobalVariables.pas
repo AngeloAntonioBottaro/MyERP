@@ -61,7 +61,7 @@ begin
    VG_DEBUG := False;
 
    //PASTAS
-   VG_PastaPadrao     := TMyVclLibrary.GetAppPath + 'ERP\';
+   VG_PastaPadrao     := TMyVclLibrary.GetAppPath;
    VG_PastaArquivos   := VG_PastaPadrao + FOLDER_ARQUIVO;
    VG_PastaBackups    := VG_PastaPadrao + FOLDER_BACKUP;
    VG_PastaImagens    := VG_PastaArquivos + FOLDER_IMAGEM;

@@ -5,7 +5,6 @@ interface
 uses
   MyConnection,
   Data.DB,
-  Datasnap.DBClient,
   Model.Vendas.Itens.Interfaces;
 
 type
@@ -15,12 +14,13 @@ type
    function DataSourceItens(AValue: TDataSource): IModelVendasFactory;
    function NovaVenda: IModelVendasFactory;
    function Itens: IModelVendasItensFactory;
+   procedure Gravar;
   end;
 
   TModelVendasFactory = class(TInterfacedObject, IModelVendasFactory)
   private
-    FTBVenda: TClientDataSet;
-    FTBItensVenda: TClientDataSet;
+    FTBVenda: IMyTable;
+    FTBItensVenda: IMyTable;
     FDataSourceVenda: TDataSource;
     FDataSourceItensVenda: TDataSource;
     FItensFactory: IModelVendasItensFactory;
@@ -31,6 +31,7 @@ type
     function DataSourceItens(AValue: TDataSource): IModelVendasFactory;
     function NovaVenda: IModelVendasFactory;
     function Itens: IModelVendasItensFactory;
+    procedure Gravar;
   public
     class function New: IModelVendasFactory;
   end;
@@ -47,30 +48,6 @@ begin
    Result := Self.Create;
 end;
 {$ENDREGION 'PUBLIC'}
-
-{$REGION 'PRIVATE'}
-procedure TModelVendasFactory.NovaTabelaVenda;
-begin
-   if(Assigned(FTBVenda))then
-     FTBVenda.Free;
-
-   FTBVenda := TClientDataSet.Create(nil);
-
-   if(Assigned(FDataSourceVenda))then
-     FDataSourceVenda.DataSet := FTBVenda;
-end;
-
-procedure TModelVendasFactory.NovaTabelaItensVenda;
-begin
-   if(Assigned(FTBItensVenda))then
-     FTBItensVenda.Free;
-
-   FTBItensVenda := TClientDataSet.Create(nil);
-
-   if(Assigned(FDataSourceItensVenda))then
-     FDataSourceItensVenda.DataSet := FTBItensVenda;
-end;
-{$ENDREGION 'PRIVATE'}
 
 {$REGION 'PROTECTED'}
 function TModelVendasFactory.DataSourceVenda(AValue: TDataSource): IModelVendasFactory;
@@ -94,8 +71,46 @@ end;
 
 function TModelVendasFactory.Itens: IModelVendasItensFactory;
 begin
-   Result := TModelVendasItensFactory.New(FTBItensVenda);
+   Result := FItensFactory;
+end;
+
+procedure TModelVendasFactory.Gravar;
+var
+  LIdVenda: Integer;
+begin
+   LIdVenda := FTBVenda.SaveOnDatabase.LastIDCreated;
+
+   FTBItensVenda.DataSet.First;
+   while(not FTBItensVenda.DataSet.Eof)do
+   begin
+      FTBItensVenda.DataSet.Edit;
+      FTBItensVenda.DataSet.FieldByName('ID_VENDA').AsInteger := LIdVenda;
+      FTBItensVenda.DataSet.Post;
+      FTBItensVenda.DataSet.Next;
+   end;
+
+   FTBItensVenda.SaveOnDatabase;
 end;
 {$ENDREGION 'PROTECTED'}
+
+{$REGION 'PRIVATE'}
+procedure TModelVendasFactory.NovaTabelaVenda;
+begin
+   FTBVenda := MyMemTableNew.Open('SELECT FIRST 0 FROM VENDAS', 'ID');
+
+   if(Assigned(FDataSourceVenda))then
+     FDataSourceVenda.DataSet := FTBVenda.DataSet;
+end;
+
+procedure TModelVendasFactory.NovaTabelaItensVenda;
+begin
+   FTBVenda := MyMemTableNew.Open('SELECT FIRST 0 FROM VENDAS_ITENS', 'ID');
+
+   if(Assigned(FDataSourceVenda))then
+     FDataSourceVenda.DataSet := FTBVenda.DataSet;
+
+   FItensFactory := TModelVendasItensFactory.New(FTBItensVenda);
+end;
+{$ENDREGION 'PRIVATE'}
 
 end.

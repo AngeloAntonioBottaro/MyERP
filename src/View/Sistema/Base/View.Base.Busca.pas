@@ -204,7 +204,7 @@ begin
    if(DS_Busca.DataSet = nil)then
      Exit;
 
-   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_Busca.DataSet.RecordCount.ToString, '0', 6);
+   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_Busca.DataSet.RecordCount);
 end;
 
 procedure TViewBaseBusca.GridBuscaDblClick(Sender: TObject);

@@ -275,6 +275,7 @@ inherited ViewVendasCad: TViewVendasCad
         ImageIndex = 2
         Images = ModelSistemaImagensDM.imgListButtons
         TabOrder = 5
+        OnClick = Button1Click
       end
     end
     object pnGrid: TPanel

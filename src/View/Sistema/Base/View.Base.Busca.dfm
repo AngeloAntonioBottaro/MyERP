@@ -47,11 +47,10 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 258
+        Width = 184
         Height = 13
         Align = alTop
         Caption = 'Selecione o conte'#250'do a ser consultado'
-        ExplicitWidth = 184
       end
       object cBoxBusca: TComboBox
         AlignWithMargins = True
@@ -144,11 +143,10 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 380
+        Width = 187
         Height = 13
         Align = alTop
         Caption = 'Entre com o conte'#250'do a ser consultado'
-        ExplicitWidth = 187
       end
       object edtBusca: TEdit
         AlignWithMargins = True
@@ -292,14 +290,13 @@ inherited ViewBaseBusca: TViewBaseBusca
         Left = 672
         Top = 1
         Width = 77
-        Height = 14
+        Height = 13
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 5
         Margins.Bottom = 0
         Align = alRight
         Caption = 'lbTotalRegistros'
-        ExplicitHeight = 13
       end
     end
   end

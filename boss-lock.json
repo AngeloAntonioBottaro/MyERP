@@ -12,16 +12,16 @@
 		},
 		"github.com/angeloantoniobottaro/myconnection": {
 			"name": "myconnection",
-			"version": "v1.0.0",
-			"hash": "a68ba06a12e5527989b7378cff66558c",
+			"version": "",
+			"hash": "b77d74ea0ac1e32ed1942f95e64978b3",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
 		},
 		"github.com/angeloantoniobottaro/mydbconnconfiguration": {
 			"name": "mydbconnconfiguration",
-			"version": "v1.0.0",
-			"hash": "7088990b9aa89ede81f56aa27c65fb45",
+			"version": "",
+			"hash": "61839b91de2ac346330fd80fdc39887d",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
@@ -36,7 +36,7 @@
 		},
 		"github.com/angeloantoniobottaro/myexceptions": {
 			"name": "myexceptions",
-			"version": "v1.0.0",
+			"version": "",
 			"hash": "d2986f5f9e66939ae9e7aa22853c1801",
 			"artifacts": {},
 			"failed": false,
@@ -52,7 +52,7 @@
 		},
 		"github.com/angeloantoniobottaro/mymessage": {
 			"name": "mymessage",
-			"version": "v1.0.0",
+			"version": "",
 			"hash": "3ba8a3559f57c88e58e0f8bef39a9f7c",
 			"artifacts": {},
 			"failed": false,
@@ -60,16 +60,16 @@
 		},
 		"github.com/angeloantoniobottaro/mysearchcomponents": {
 			"name": "mysearchcomponents",
-			"version": "v1.0.0",
-			"hash": "a379f83a1e5f97247d72a6c8858f136a",
+			"version": "",
+			"hash": "c7899e3caff7e7608f0dbc81eb4452bd",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
 		},
 		"github.com/angeloantoniobottaro/myutilslibrary": {
 			"name": "myutilslibrary",
-			"version": "v1.0.0",
-			"hash": "eb558673c085ef77b30c43138ed0adcc",
+			"version": "",
+			"hash": "306e0963a01b58ebcb40908b72716245",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
@@ -77,7 +77,7 @@
 		"github.com/angeloantoniobottaro/myvcllibrary": {
 			"name": "myvcllibrary",
 			"version": "",
-			"hash": "55733926aa9cdb4b780d3cc0fa599728",
+			"hash": "6e223e54fa9c847011b6f172d8751405",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
