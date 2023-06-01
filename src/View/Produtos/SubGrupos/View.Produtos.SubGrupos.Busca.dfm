@@ -1,5 +1,5 @@
 inherited ViewProdutosSubGruposBusca: TViewProdutosSubGruposBusca
-  Caption = 'Busca de sub grupo de produto'
+  Caption = 'Busca de sub-grupo de produto'
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnTop: TPanel
@@ -76,9 +76,9 @@ inherited ViewProdutosSubGruposBusca: TViewProdutosSubGruposBusca
         end
         item
           Expanded = False
-          FieldName = 'GRUPO'
+          FieldName = 'ID_GRUPO'
           Title.Caption = 'C'#243'd. grupo'
-          Width = 63
+          Width = 65
           Visible = True
         end
         item

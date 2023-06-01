@@ -60,12 +60,12 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('AGENDA.ID, AGENDA.CLIENTE, AGENDA.FUNCIONARIO, AGENDA.STATUS, AGENDA.TITULO, AGENDA.DATA, AGENDA.HORA,')
-    .Add('CLIENTES.NOME_FANTASIA AS CLIENTE_NOME,')
-    .Add('FUNCIONARIOS.NOME_FANTASIA AS FUNCIONARIO_NOME')
+    .Add('AGENDA.ID, AGENDA.ID_CLIENTE, AGENDA.ID_FUNCIONARIO, AGENDA.STATUS, AGENDA.TITULO, AGENDA.DATA, AGENDA.HORA,')
+    .Add('CLIENTES.NOME_FANTASIA AS NOME_CLIENTE,')
+    .Add('FUNCIONARIOS.NOME_FANTASIA AS NOME_FUNCIONARIO')
     .Add('FROM AGENDA ')
-    .Add('LEFT JOIN CLIENTES ON (CLIENTES.ID = AGENDA.CLIENTE)')
-    .Add('LEFT JOIN FUNCIONARIOS ON (FUNCIONARIOS.ID = AGENDA.FUNCIONARIO)');
+    .Add('LEFT JOIN CLIENTES ON (CLIENTES.ID = AGENDA.ID_CLIENTE)')
+    .Add('LEFT JOIN FUNCIONARIOS ON (FUNCIONARIOS.ID = AGENDA.ID_FUNCIONARIO)');
 end;
 
 procedure TModelAgendaBusca.GetSQLCondicao;
@@ -114,8 +114,8 @@ procedure TModelAgendaBusca.GetSQLOrderBy;
 begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
-    TTipoBuscaAgenda.Cliente: FQueryBusca.Add('CLIENTE_NOME, CLIENTE');
-    TTipoBuscaAgenda.Funcionario: FQueryBusca.Add('FUNCIONARIO_NOME, FUNCIONARIO');
+    TTipoBuscaAgenda.Cliente: FQueryBusca.Add('NOME_CLIENTE, ID_CLIENTE');
+    TTipoBuscaAgenda.Funcionario: FQueryBusca.Add('NOME_FUNCIONARIO, ID_FUNCIONARIO');
     TTipoBuscaAgenda.Status: FQueryBusca.Add('STATUS');
     TTipoBuscaAgenda.Titulo: FQueryBusca.Add('TITULO');
    else
@@ -141,8 +141,8 @@ procedure TModelAgendaBusca.ConfFieldsMask;
 begin
    FQueryBusca
     .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO)
-    .DisplayFormat('CLIENTE', DISPLAY_FORMAT_CODIGO)
-    .DisplayFormat('FUNCIONARIO', DISPLAY_FORMAT_CODIGO);
+    .DisplayFormat('ID_CLIENTE', DISPLAY_FORMAT_CODIGO)
+    .DisplayFormat('ID_FUNCIONARIO', DISPLAY_FORMAT_CODIGO);
 end;
 
 function TModelAgendaBusca.ConteudoBusca(AConteudoBusca: string): TModelAgendaBusca;

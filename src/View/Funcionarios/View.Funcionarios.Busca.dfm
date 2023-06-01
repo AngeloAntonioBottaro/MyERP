@@ -128,7 +128,7 @@ inherited ViewFuncionariosBusca: TViewFuncionariosBusca
           Expanded = False
           FieldName = 'ID_PERMISSAO'
           Title.Caption = 'C'#243'd. permiss'#227'o'
-          Width = 81
+          Width = 100
           Visible = True
         end>
     end

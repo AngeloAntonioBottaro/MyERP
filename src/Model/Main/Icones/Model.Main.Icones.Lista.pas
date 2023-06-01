@@ -51,9 +51,9 @@ var
  LVisible: Boolean;
 begin
    MyQueryNew
-       .Add('SELECT ICONE FROM CONFIGURACOES_ICONES WHERE (FUNCIONARIO = :ID)OR(FUNCIONARIO = 0)')
-       .Add('ORDER BY FUNCIONARIO DESC')
-       .AddParam('ID', VG_UsuarioLogadoId)
+       .Add('SELECT ICONE FROM CONFIGURACOES_ICONES WHERE (ID_FUNCIONARIO = :ID_FUNCIONARIO)OR(ID_FUNCIONARIO = 0)')
+       .Add('ORDER BY ID_FUNCIONARIO DESC')
+       .AddParam('ID_FUNCIONARIO', VG_UsuarioLogadoId)
        .Open;
 
    for LIndex in FListaPairsIconesFields.ToSortKeys do

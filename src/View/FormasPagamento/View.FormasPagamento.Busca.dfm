@@ -60,7 +60,7 @@ inherited ViewFormasPagamentoBusca: TViewFormasPagamentoBusca
           Expanded = False
           FieldName = 'TIPO_LANCAMENTO'
           Title.Caption = 'Lan'#231'amento'
-          Width = 65
+          Width = 75
           Visible = True
         end>
     end

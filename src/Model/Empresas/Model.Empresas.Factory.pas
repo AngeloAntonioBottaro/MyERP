@@ -153,7 +153,7 @@ begin
     .Numero(MyQuery.FieldByName('NUMERO').AsString)
     .Bairro(MyQuery.FieldByName('BAIRRO').AsString)
     .Cep(MyQuery.FieldByName('CEP').AsString)
-    .Cidade(MyQuery.FieldByName('CIDADE').AsString)
+    .Cidade(MyQuery.FieldByName('ID_CIDADE').AsString)
     .DataNascimento(MyQuery.FieldByName('DATA_NASCIMENTO').AsDateTime)
     .Telefone(MyQuery.FieldByName('TELEFONE').AsString)
     .Telefone2(MyQuery.FieldByName('TELEFONE2').AsString)

@@ -1,18 +1,18 @@
 inherited ViewBaseBusca: TViewBaseBusca
   Caption = 'ViewBaseBusca'
   ClientHeight = 408
-  ClientWidth = 755
+  ClientWidth = 866
   OnClose = FormClose
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ExplicitWidth = 771
+  ExplicitWidth = 882
   ExplicitHeight = 447
   PixelsPerInch = 96
   TextHeight = 13
   object pnTop: TPanel
     Left = 0
     Top = 0
-    Width = 755
+    Width = 866
     Height = 49
     Margins.Left = 0
     Margins.Top = 0
@@ -21,11 +21,12 @@ inherited ViewBaseBusca: TViewBaseBusca
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
+    ExplicitWidth = 755
     DesignSize = (
-      755
+      866
       49)
     object imgConfGrid: TImage
-      Left = 724
+      Left = 835
       Top = 22
       Width = 25
       Height = 25
@@ -33,6 +34,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Anchors = [akTop, akRight]
       Center = True
       Proportional = True
+      ExplicitLeft = 724
     end
     object pnBuscarComboBox: TPanel
       Left = 593
@@ -47,10 +49,11 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 184
+        Width = 258
         Height = 13
         Align = alTop
         Caption = 'Selecione o conte'#250'do a ser consultado'
+        ExplicitWidth = 184
       end
       object cBoxBusca: TComboBox
         AlignWithMargins = True
@@ -143,10 +146,11 @@ inherited ViewBaseBusca: TViewBaseBusca
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 187
+        Width = 380
         Height = 13
         Align = alTop
         Caption = 'Entre com o conte'#250'do a ser consultado'
+        ExplicitWidth = 187
       end
       object edtBusca: TEdit
         AlignWithMargins = True
@@ -163,15 +167,16 @@ inherited ViewBaseBusca: TViewBaseBusca
   object pnBotton: TPanel
     Left = 0
     Top = 320
-    Width = 755
+    Width = 866
     Height = 88
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 755
     DesignSize = (
-      755
+      866
       88)
     object imgConfMenu: TImage
-      Left = 724
+      Left = 835
       Top = 4
       Width = 25
       Height = 25
@@ -179,9 +184,10 @@ inherited ViewBaseBusca: TViewBaseBusca
       Anchors = [akTop, akRight]
       Center = True
       Proportional = True
+      ExplicitLeft = 724
     end
     object pnButtons: TPanel
-      Left = 440
+      Left = 551
       Top = 37
       Width = 310
       Height = 46
@@ -192,6 +198,7 @@ inherited ViewBaseBusca: TViewBaseBusca
       Padding.Right = 5
       Padding.Bottom = 5
       TabOrder = 0
+      ExplicitLeft = 440
       object btnCadastro: TButton
         Left = 5
         Top = 5
@@ -254,15 +261,16 @@ inherited ViewBaseBusca: TViewBaseBusca
   object pnGrid: TPanel
     Left = 0
     Top = 49
-    Width = 755
+    Width = 866
     Height = 271
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitWidth = 755
     object GridBusca: TDBGrid
       Left = 0
       Top = 0
-      Width = 755
+      Width = 866
       Height = 255
       Align = alClient
       DataSource = DS_Busca
@@ -280,23 +288,26 @@ inherited ViewBaseBusca: TViewBaseBusca
     object pnOptions: TPanel
       Left = 0
       Top = 255
-      Width = 755
+      Width = 866
       Height = 16
       Align = alBottom
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 755
       object lbTotalRegistros: TLabel
         AlignWithMargins = True
-        Left = 672
+        Left = 783
         Top = 1
         Width = 77
-        Height = 13
+        Height = 14
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 5
         Margins.Bottom = 0
         Align = alRight
         Caption = 'lbTotalRegistros'
+        ExplicitLeft = 672
+        ExplicitHeight = 13
       end
     end
   end

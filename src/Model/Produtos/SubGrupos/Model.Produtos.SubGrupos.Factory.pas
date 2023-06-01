@@ -90,7 +90,7 @@ begin
    Self.Entitie
     .Id(MyQuery.FieldByName('ID').AsString)
     .Nome(MyQuery.FieldByName('NOME').AsString)
-    .Grupo(MyQuery.FieldByName('GRUPO').AsInteger)
+    .Grupo(MyQuery.FieldByName('ID_GRUPO').AsInteger)
     .End_Entitie;
 end;
 
@@ -143,7 +143,7 @@ begin
 
    MyQuery
     .AddParam('NOME', FEntitie.Nome)
-    .AddParam('GRUPO', FEntitie.Grupo);
+    .AddParam('ID_GRUPO', FEntitie.Grupo);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -178,9 +178,9 @@ procedure TModelProdutosSubGruposFactory.SQLInsert;
 begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
-    .Add('(NOME, GRUPO)')
+    .Add('(NOME, ID_GRUPO)')
     .Add('VALUES')
-    .Add('(:NOME, :GRUPO)')
+    .Add('(:NOME, :ID_GRUPO)')
     .Add('RETURNING ID');
 end;
 
@@ -188,7 +188,7 @@ procedure TModelProdutosSubGruposFactory.SQLUpdate;
 begin
    MyQueryNew
     .Add('UPDATE '+TABELA+' SET')
-    .Add('NOME = :NOME, GRUPO = :GRUPO')
+    .Add('NOME = :NOME, ID_GRUPO = :ID_GRUPO')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;

@@ -142,7 +142,7 @@ begin
     .Id(MyQuery.FieldByName('ID').AsString)
     .Nome(MyQuery.FieldByName('NOME').AsString)
     .Descricao(MyQuery.FieldByName('DESCRICAO').AsString)
-    .Subgrupo(MyQuery.FieldByName('SUBGRUPO').AsInteger)
+    .Subgrupo(MyQuery.FieldByName('ID_SUBGRUPO').AsInteger)
     .Custo(MyQuery.FieldByName('CUSTO').AsFloat)
     .PorcentoLucroVendaVista(MyQuery.FieldByName('PORCENTO_LUCRO_VENDA_VISTA').AsFloat)
     .PrecoVendaVista(MyQuery.FieldByName('PRECO_VENDA_VISTA').AsFloat)
@@ -152,7 +152,7 @@ begin
     .EstoqueMaximo(MyQuery.FieldByName('ESTOQUE_MAXIMO').AsFloat)
     .EstoqueMinimo(MyQuery.FieldByName('ESTOQUE_MINIMO').AsFloat)
     .CodigoBarras(MyQuery.FieldByName('CODIGO_BARRAS').AsString)
-    .Unidade(MyQuery.FieldByName('UNIDADE').AsInteger)
+    .Unidade(MyQuery.FieldByName('ID_UNIDADE').AsInteger)
     .End_Entitie;
 end;
 
@@ -217,12 +217,12 @@ begin
     .AddParam('PORCENTO_LUCRO_VENDA_VISTA', FEntitie.PorcentoLucroVendaVista)
     .AddParam('PRECO_VENDA_PRAZO', FEntitie.PrecoVendaPrazo)
     .AddParam('PORCENTO_LUCRO_VENDA_PRAZO', FEntitie.PorcentoLucroVendaPrazo)
-    .AddParam('SUBGRUPO', FEntitie.Subgrupo)
+    .AddParam('ID_SUBGRUPO', FEntitie.Subgrupo)
     .AddParam('ESTOQUE', FEntitie.Estoque)
     .AddParam('ESTOQUE_MAXIMO', FEntitie.EstoqueMaximo)
     .AddParam('ESTOQUE_MINIMO', FEntitie.EstoqueMinimo)
     .AddParam('CODIGO_BARRAS', FEntitie.CodigoBarras)
-    .AddParam('UNIDADE', FEntitie.Unidade);
+    .AddParam('ID_UNIDADE', FEntitie.Unidade);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -258,12 +258,12 @@ begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
     .Add('(STATUS, DATA_CADASTRO, NOME, DESCRICAO, CUSTO, ')
-    .Add('PRECO_VENDA_VISTA, PORCENTO_LUCRO_VENDA_VISTA, PRECO_VENDA_PRAZO, PORCENTO_LUCRO_VENDA_PRAZO, SUBGRUPO, ')
-    .Add('ESTOQUE, ESTOQUE_MAXMIO, ESTOQUE_MINIMO, CODIGO_BARRAS, UNIDADE)')
+    .Add('PRECO_VENDA_VISTA, PORCENTO_LUCRO_VENDA_VISTA, PRECO_VENDA_PRAZO, PORCENTO_LUCRO_VENDA_PRAZO, ID_SUBGRUPO, ')
+    .Add('ESTOQUE, ESTOQUE_MAXMIO, ESTOQUE_MINIMO, CODIGO_BARRAS, ID_UNIDADE)')
     .Add('VALUES')
     .Add('(:STATUS, :DATA_CADASTRO, :NOME, :DESCRICAO, :CUSTO, ')
-    .Add(':PRECO_VENDA_VISTA, :PORCENTO_LUCRO_VENDA_VISTA, :PRECO_VENDA_PRAZO, :PORCENTO_LUCRO_VENDA_PRAZO, :SUBGRUPO, ')
-    .Add(':ESTOQUE, :ESTOQUE_MAXIMO, :ESTOQUE_MINIMO, :CODIGO_BARRAS, :UNIDADE)')
+    .Add(':PRECO_VENDA_VISTA, :PORCENTO_LUCRO_VENDA_VISTA, :PRECO_VENDA_PRAZO, :PORCENTO_LUCRO_VENDA_PRAZO, :ID_SUBGRUPO, ')
+    .Add(':ESTOQUE, :ESTOQUE_MAXIMO, :ESTOQUE_MINIMO, :CODIGO_BARRAS, :ID_UNIDADE)')
     .Add('RETURNING ID')
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_CADASTRO', Now);
@@ -274,9 +274,9 @@ begin
    MyQueryNew
     .Add('UPDATE '+TABELA+' SET')
     .Add('NOME = :NOME, DESCRICAO = :DESCRICAO, CUSTO = :CUSTO, PRECO_VENDA_VISTA = :PRECO_VENDA_VISTA, PORCENTO_LUCRO_VENDA_VISTA = :PORCENTO_LUCRO_VENDA_VISTA, ')
-    .Add('PRECO_VENDA_PRAZO = :PRECO_VENDA_PRAZO, PORCENTO_LUCRO_VENDA_PRAZO = :PORCENTO_LUCRO_VENDA_PRAZO, SUBGRUPO = :SUBGRUPO, ')
+    .Add('PRECO_VENDA_PRAZO = :PRECO_VENDA_PRAZO, PORCENTO_LUCRO_VENDA_PRAZO = :PORCENTO_LUCRO_VENDA_PRAZO, ID_SUBGRUPO = :ID_SUBGRUPO, ')
     .Add('ESTOQUE = :ESTOQUE, ESTOQUE_MAXIMO = :ESTOQUE_MAXIMO, ESTOQUE_MINIMO = :ESTOQUE_MINIMO, CODIGO_BARRAS = :CODIGO_BARRAS, ')
-    .Add('UNIDADE = :UNIDADE')
+    .Add('ID_UNIDADE = :ID_UNIDADE')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;

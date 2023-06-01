@@ -60,10 +60,10 @@ begin
    FQueryBusca
     .Clear
     .Add('SELECT ')
-    .Add('PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.NOME, PRODUTOS_SUBGRUPOS.GRUPO,')
+    .Add('PRODUTOS_SUBGRUPOS.ID, PRODUTOS_SUBGRUPOS.NOME, PRODUTOS_SUBGRUPOS.ID_GRUPO,')
     .Add('PRODUTOS_GRUPOS.NOME AS NOME_GRUPO')
     .Add('FROM PRODUTOS_SUBGRUPOS ')
-    .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.GRUPO)');
+    .Add('LEFT JOIN PRODUTOS_GRUPOS ON(PRODUTOS_GRUPOS.ID = PRODUTOS_SUBGRUPOS.ID_GRUPO)');
 end;
 
 procedure TModelProdutosSubGruposBusca.GetSQLCondicao;
@@ -80,7 +80,7 @@ begin
 
        FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.NOME CONTAINING :NOME)').AddParam('NOME', FConteudoBusca);
     end;
-    TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.GRUPO CONTAINING :GRUPO)').AddParam('GRUPO', FConteudoBusca);
+    TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('(PRODUTOS_SUBGRUPOS.ID_GRUPO CONTAINING :ID_GRUPO)').AddParam('ID_GRUPO', FConteudoBusca);
     TTipoBuscaProdutoSubGrupo.GrupoNome:
     begin
        if(Length(FConteudoBusca) > 50)then
@@ -105,7 +105,7 @@ begin
    FQueryBusca.Add('ORDER BY ');
    case(FTipoBusca)of
     TTipoBuscaProdutoSubGrupo.Nome: FQueryBusca.Add('NOME');
-    TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('GRUPO');
+    TTipoBuscaProdutoSubGrupo.GrupoId: FQueryBusca.Add('ID_GRUPO');
     TTipoBuscaProdutoSubGrupo.GrupoNome: FQueryBusca.Add('NOME_GRUPO');
    else
      FQueryBusca.Add('ID');
@@ -123,7 +123,7 @@ procedure TModelProdutosSubGruposBusca.ConfFieldsMask;
 begin
    FQueryBusca
     .DisplayFormat('ID', DISPLAY_FORMAT_CODIGO)
-    .DisplayFormat('GRUPO', DISPLAY_FORMAT_CODIGO);
+    .DisplayFormat('ID_GRUPO', DISPLAY_FORMAT_CODIGO);
 end;
 
 function TModelProdutosSubGruposBusca.ConteudoBusca(AConteudoBusca: string): TModelProdutosSubGruposBusca;

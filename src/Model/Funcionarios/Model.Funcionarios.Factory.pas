@@ -244,7 +244,7 @@ begin
     .Numero(MyQuery.FieldByName('NUMERO').AsString)
     .Bairro(MyQuery.FieldByName('BAIRRO').AsString)
     .Cep(MyQuery.FieldByName('CEP').AsString)
-    .Cidade(MyQuery.FieldByName('CIDADE').AsString)
+    .Cidade(MyQuery.FieldByName('ID_CIDADE').AsString)
     .DataNascimento(MyQuery.FieldByName('DATA_NASCIMENTO').AsDateTime)
     .Telefone(MyQuery.FieldByName('TELEFONE').AsString)
     .Telefone2(MyQuery.FieldByName('TELEFONE2').AsString)
@@ -257,11 +257,11 @@ begin
     .Cpf(MyQuery.FieldByName('CPF').AsString)
     .RG(MyQuery.FieldByName('RG').AsString)
     .RgOrgaoExpedidor(MyQuery.FieldByName('RG_ORGAO_EXPEDIDOR').AsString)
-    .Funcao(MyQuery.FieldByName('FUNCAO').AsInteger)
+    .Funcao(MyQuery.FieldByName('ID_FUNCAO').AsInteger)
     .Salario(MyQuery.FieldByName('SALARIO').AsFloat)
     .Login(MyQuery.FieldByName('LOGIN').AsString)
     .Senha(MyQuery.FieldByName('SENHA').AsString)
-    .GrupoPermissao(MyQuery.FieldByName('PERMISSOES_GRUPO').AsString)
+    .GrupoPermissao(MyQuery.FieldByName('ID_PERMISSOES_GRUPO').AsString)
     .End_Entitie;
 end;
 
@@ -327,7 +327,7 @@ begin
     .AddParam('NUMERO', FEntitie.Numero)
     .AddParam('BAIRRO', FEntitie.Bairro)
     .AddParam('CEP', FEntitie.Cep)
-    .AddParam('CIDADE', FEntitie.Cidade)
+    .AddParam('ID_CIDADE', FEntitie.Cidade)
     .AddParam('DATA_NASCIMENTO', FEntitie.DataNascimento)
     .AddParam('TELEFONE', FEntitie.Telefone)
     .AddParam('TELEFONE2', FEntitie.Telefone2)
@@ -341,10 +341,10 @@ begin
     .AddParam('RG', FEntitie.RG)
     .AddParam('RG_ORGAO_EXPEDIDOR', FEntitie.RgOrgaoExpedidor)
     .AddParam('SALARIO', FEntitie.Salario)
-    .AddParam('FUNCAO', FEntitie.Funcao)
+    .AddParam('ID_FUNCAO', FEntitie.Funcao)
     .AddParam('LOGIN', FEntitie.Login)
     .AddParam('SENHA', FEntitie.Senha)
-    .AddParam('PERMISSOES_GRUPO', FEntitie.GrupoPermissao);
+    .AddParam('ID_PERMISSOES_GRUPO', FEntitie.GrupoPermissao);
 
    try
      ShowDebug(MyQuery.SQL.Text);
@@ -379,11 +379,11 @@ procedure TModelFuncionariosFactory.SQLInsert;
 begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
-    .Add('(STATUS, RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
-    .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO, SALARIO, FUNCAO, LOGIN, SENHA, PERMISSOES_GRUPO)')
+    .Add('(STATUS, RAZAO_SOCIAL, NOME_FANTASIA, ENDERECO, NUMERO, BAIRRO, CEP, ID_CIDADE, DATA_NASCIMENTO, TELEFONE, TELEFONE2, CELULAR, FAX,')
+    .Add('EMAIL, TIPO_JURIDICO, CNPJ, INSCRICAO_ESTADUAL, CPF, RG, RG_ORGAO_EXPEDIDOR, DATA_CADASTRO, SALARIO, ID_FUNCAO, LOGIN, SENHA, ID_PERMISSOES_GRUPO)')
     .Add('VALUES')
-    .Add('(:STATUS, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
-    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO, :SALARIO, :FUNCAO, :LOGIN, :SENHA, :PERMISSOES_GRUPO)')
+    .Add('(:STATUS, :RAZAO_SOCIAL, :NOME_FANTASIA, :ENDERECO, :NUMERO, :BAIRRO, :CEP, :ID_CIDADE, :DATA_NASCIMENTO, :TELEFONE, :TELEFONE2, :CELULAR, :FAX,')
+    .Add(':EMAIL, :TIPO_JURIDICO, :CNPJ, :INSCRICAO_ESTADUAL, :CPF, :RG, :RG_ORGAO_EXPEDIDOR, :DATA_CADASTRO, :SALARIO, :ID_FUNCAO, :LOGIN, :SENHA, :ID_PERMISSOES_GRUPO)')
     .Add('RETURNING ID')
     .AddParam('STATUS', FEntitie.Status)
     .AddParam('DATA_CADASTRO', Now);
@@ -394,9 +394,9 @@ begin
    MyQueryNew
     .Add('UPDATE '+TABELA+' SET')
     .Add('RAZAO_SOCIAL = :RAZAO_SOCIAL, NOME_FANTASIA = :NOME_FANTASIA, ENDERECO = :ENDERECO, NUMERO = :NUMERO, BAIRRO = :BAIRRO, ')
-    .Add('CEP = :CEP, CIDADE = :CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
+    .Add('CEP = :CEP, ID_CIDADE = :ID_CIDADE, DATA_NASCIMENTO = :DATA_NASCIMENTO, TELEFONE = :TELEFONE, TELEFONE2 = :TELEFONE2, ')
     .Add('CELULAR = :CELULAR, FAX = :FAX, EMAIL = :EMAIL, TIPO_JURIDICO = :TIPO_JURIDICO, CNPJ = :CNPJ, INSCRICAO_ESTADUAL = :INSCRICAO_ESTADUAL, ')
-    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR, SALARIO = :SALARIO, FUNCAO = :FUNCAO, LOGIN = :LOGIN, SENHA = :SENHA, PERMISSOES_GRUPO = :PERMISSOES_GRUPO')
+    .Add('CPF = :CPF, RG = :RG, RG_ORGAO_EXPEDIDOR = :RG_ORGAO_EXPEDIDOR, SALARIO = :SALARIO, ID_FUNCAO = :ID_FUNCAO, LOGIN = :LOGIN, SENHA = :SENHA, ID_PERMISSOES_GRUPO = :ID_PERMISSOES_GRUPO')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);
 end;

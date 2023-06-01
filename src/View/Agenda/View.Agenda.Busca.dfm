@@ -71,26 +71,26 @@ inherited ViewAgendaBusca: TViewAgendaBusca
         end
         item
           Expanded = False
-          FieldName = 'CLIENTE'
+          FieldName = 'ID_CLIENTE'
           Title.Caption = 'C'#243'd. Cliente'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'CLIENTE_NOME'
+          FieldName = 'NOME_CLIENTE'
           Title.Caption = 'Cliente'
           Width = 201
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'FUNCIONARIO'
+          FieldName = 'ID_FUNCIONARIO'
           Title.Caption = 'C'#243'd. func.'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'FUNCIONARIO_NOME'
+          FieldName = 'NOME_FUNCIONARIO'
           Title.Caption = 'Funcion'#225'rio'
           Width = 143
           Visible = True

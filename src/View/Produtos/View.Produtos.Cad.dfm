@@ -213,7 +213,6 @@ inherited ViewProdutosCad: TViewProdutosCad
       Top = 66
       Width = 65
       Height = 21
-      TabStop = False
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -258,7 +257,6 @@ inherited ViewProdutosCad: TViewProdutosCad
       Top = 66
       Width = 65
       Height = 21
-      TabStop = False
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

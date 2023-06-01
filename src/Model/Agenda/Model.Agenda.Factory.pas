@@ -100,11 +100,11 @@ begin
 
    FEntitie
     .Id(MyQuery.FieldByName('ID').AsInteger)
-    .Cliente(MyQuery.FieldByName('CLIENTE').AsInteger)
-    .Funcionario(MyQuery.FieldByName('FUNCIONARIO').AsString)
+    .Cliente(MyQuery.FieldByName('ID_CLIENTE').AsInteger)
+    .Funcionario(MyQuery.FieldByName('ID_FUNCIONARIO').AsString)
     .Data(MyQuery.FieldByName('DATA').AsDateTime)
     .Hora(MyQuery.FieldByName('HORA').AsDateTime)
-    .Observacao(MyQuery.FieldByName('TITULO').AsString)
+    .Titulo(MyQuery.FieldByName('TITULO').AsString)
     .Observacao(MyQuery.FieldByName('OBSERVACAO').AsString)
     .Status(MyQuery.FieldByName('STATUS').AsString)
     .End_Entitie;
@@ -160,8 +160,8 @@ begin
      Self.InsertCidade;
 
    MyQuery
-    .AddParam('CLIENTE', FEntitie.Cliente)
-    .AddParam('FUNCIONARIO', FEntitie.Funcionario)
+    .AddParam('ID_CLIENTE', FEntitie.Cliente)
+    .AddParam('ID_FUNCIONARIO', FEntitie.Funcionario)
     .AddParam('DATA', FEntitie.Data)
     .AddParam('HORA', FEntitie.Hora)
     .AddParam('TITULO', FEntitie.Titulo)
@@ -202,9 +202,9 @@ procedure TModelAgendaFactory.InsertCidade;
 begin
    MyQueryNew
     .Add('INSERT INTO '+TABELA)
-    .Add('(CLIENTE, FUNCIONARIO, DATA, HORA, TITULO, OBSERVACAO, STATUS, DATA_CADASTRO, DATA_ULTIMA_ALTERACAO)')
+    .Add('(ID_CLIENTE, ID_FUNCIONARIO, DATA, HORA, TITULO, OBSERVACAO, STATUS, DATA_CADASTRO, DATA_ULTIMA_ALTERACAO)')
     .Add('VALUES')
-    .Add('(:CLIENTE, :FUNCIONARIO, :DATA, :HORA, :TITULO, :OBSERVACAO, :STATUS, :DATA_CADASTRO, :DATA_ULTIMA_ALTERACAO)')
+    .Add('(:ID_CLIENTE, :ID_FUNCIONARIO, :DATA, :HORA, :TITULO, :OBSERVACAO, :STATUS, :DATA_CADASTRO, :DATA_ULTIMA_ALTERACAO)')
     .Add('RETURNING ID')
     .AddParam('DATA_CADASTRO', Now);
 end;
@@ -213,7 +213,7 @@ procedure TModelAgendaFactory.UpdateCidade;
 begin
    MyQueryNew
     .Add('UPDATE '+TABELA+' SET')
-    .Add('CLIENTE = :CLIENTE, FUNCIONARIO = :FUNCIONARIO, DATA = :DATA, HORA = :HORA, TITULO = :TITULO, OBSERVACAO = :OBSERVACAO, ')
+    .Add('ID_CLIENTE = :ID_CLIENTE, ID_FUNCIONARIO = :ID_FUNCIONARIO, DATA = :DATA, HORA = :HORA, TITULO = :TITULO, OBSERVACAO = :OBSERVACAO, ')
     .Add('STATUS = :STATUS, DATA_ULTIMA_ALTERACAO = :DATA_ULTIMA_ALTERACAO')
     .Add('WHERE('+TABELA+'.ID = :ID)')
     .AddParam('ID', FEntitie.Id);

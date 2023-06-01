@@ -148,7 +148,6 @@ procedure TModelSistemaSplash.WriteInformation(AValue: String);
 begin
    if(Assigned(FDisplayInformation))then
      FDisplayInformation(Trim(AValue));
-   Sleep(1000);
 end;
 
 end.

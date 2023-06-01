@@ -3,6 +3,7 @@ unit Model.Vendas.Factory;
 interface
 
 uses
+  System.SysUtils,
   MyConnection,
   Data.DB,
   Model.Vendas.Itens.Interfaces;
@@ -40,7 +41,8 @@ implementation
 
 uses
   MyExceptions,
-  Model.Vendas.Itens.Factory;
+  MyMessage,
+  Model.Vendas.Itens.Factory, Model.Logs;
 
 {$REGION 'PUBLIC'}
 class function TModelVendasFactory.New: IModelVendasFactory;
@@ -90,6 +92,9 @@ begin
    end;
 
    FTBItensVenda.SaveOnDatabase;
+
+   TModelLogs.New.Gravar('Tela de Vendas', 'Gravação de venda', 'Usuário gravou a venda nº: ' + LIdVenda.ToString, LIdVenda);
+   ShowDone('Venda gravada com sucesso');
 end;
 {$ENDREGION 'PROTECTED'}
 

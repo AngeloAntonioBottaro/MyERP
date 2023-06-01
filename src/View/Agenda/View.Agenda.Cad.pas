@@ -206,7 +206,10 @@ begin
      .Id(AId)
      .End_Entitie
     .ConsultarEntitie;
+
    Self.FillFields;
+   edtIdClienteExit(edtIdCliente);
+   edtIdFuncionarioExit(edtIdFuncionario);
 end;
 
 procedure TViewAgendaCad.edtIdClienteExit(Sender: TObject);

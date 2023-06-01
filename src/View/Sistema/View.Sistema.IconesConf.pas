@@ -147,8 +147,8 @@ begin
        Exit;
 
    MyQueryNew
-    .Add('DELETE FROM CONFIGURACOES_ICONES WHERE(FUNCIONARIO = :ID)')
-    .AddParam('ID', edtIdFuncionario.Text)
+    .Add('DELETE FROM CONFIGURACOES_ICONES WHERE(ID_FUNCIONARIO = :ID_FUNCIONARIO)')
+    .AddParam('ID_FUNCIONARIO', edtIdFuncionario.Text)
     .ExecSQL;
 
    Self.InserirIconesMarcados;
@@ -194,9 +194,9 @@ var
   LCheckBox: TCheckBox;
 begin
    MyQueryNew
-    .Add('SELECT * FROM CONFIGURACOES_ICONES WHERE (FUNCIONARIO = :ID)OR(FUNCIONARIO = 0)')
-    .Add('ORDER BY FUNCIONARIO DESC')
-    .AddParam('ID', edtIdFuncionario.Text)
+    .Add('SELECT * FROM CONFIGURACOES_ICONES WHERE (ID_FUNCIONARIO = :ID_FUNCIONARIO)OR(ID_FUNCIONARIO = 0)')
+    .Add('ORDER BY ID_FUNCIONARIO DESC')
+    .AddParam('ID_FUNCIONARIO', edtIdFuncionario.Text)
     .Open;
 
    MyQuery.DataSet.First;
@@ -209,7 +209,7 @@ begin
       begin
          LCheckBox.Checked := True;
          if(Self.IdFuncionarioSelecionado <> 0)then
-           LCheckBox.Enabled := MyQuery.FieldByName('FUNCIONARIO').AsInteger <> 0;
+           LCheckBox.Enabled := MyQuery.FieldByName('ID_FUNCIONARIO').AsInteger <> 0;
       end;
 
       MyQuery.DataSet.Next;
@@ -253,9 +253,9 @@ begin
               LNomeIcone := StringReplace(TCheckBox(Self.Components[I]).Name, PREFIX_CHECKBOX_NAME, '', [rfIgnoreCase]);
 
               MyQueryNew
-               .Add('INSERT INTO CONFIGURACOES_ICONES (FUNCIONARIO, ICONE) VALUES')
-               .Add('(:FUNCIONARIO , :ICONE)')
-               .AddParam('FUNCIONARIO', edtIdFuncionario.Text)
+               .Add('INSERT INTO CONFIGURACOES_ICONES (ID_FUNCIONARIO, ICONE) VALUES')
+               .Add('(:ID_FUNCIONARIO , :ICONE)')
+               .AddParam('ID_FUNCIONARIO', edtIdFuncionario.Text)
                .AddParam('ICONE', LNomeIcone);
 
               ShowDebug(MyQuery.SQL.Text);
