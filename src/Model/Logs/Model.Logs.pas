@@ -62,8 +62,8 @@ procedure TModelLogs.GravarNoBanco;
 begin
    try
      MyQueryNew
-      .Add('INSERT INTO LOGS(DATA, HORA, ID_FUNCIONARIO, MODULO, ACAO, DESCRICAO, REFERENCIA) VALUES ')
-      .Add('(:DATA, :HORA, :ID_FUNCIONARIO, :MODULO, :ACAO, :DESCRICAO, :REFERENCIA)')
+      .Add('INSERT INTO LOGS(DATA, HORA, ID_FUNCIONARIO, MODULO, ACAO, DESCRICAO, REFERENCIA, ID_TERMINAL) VALUES ')
+      .Add('(:DATA, :HORA, :ID_FUNCIONARIO, :MODULO, :ACAO, :DESCRICAO, :REFERENCIA, :ID_TERMINAL)')
       .AddParam('DATA', Date)
       .AddParam('HORA', Time)
       .AddParam('ID_FUNCIONARIO', VG_UsuarioLogadoId)
@@ -71,6 +71,7 @@ begin
       .AddParam('ACAO', FAcao)
       .AddParam('DESCRICAO', FDescricao)
       .AddParam('REFERENCIA', FIdReferencia)
+      .AddParam('ID_TERMINAL', VG_IdTerminal)
       .ExecSQL;
    except on E: Exception do
      raise ExceptionError.Create('Falha ao salvar o log' + sLineBreak + 'Mensagem: ' + E.Message);

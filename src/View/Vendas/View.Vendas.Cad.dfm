@@ -1,6 +1,7 @@
 inherited ViewVendasCad: TViewVendasCad
   Caption = 'Vendas'
   OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
@@ -142,7 +143,7 @@ inherited ViewVendasCad: TViewVendasCad
       Width = 808
       Height = 49
       Align = alBottom
-      TabOrder = 1
+      TabOrder = 3
     end
     object pnItens: TPanel
       Left = 0
@@ -150,7 +151,7 @@ inherited ViewVendasCad: TViewVendasCad
       Width = 808
       Height = 49
       Align = alTop
-      TabOrder = 2
+      TabOrder = 1
       object lbIdProduto: TLabel
         Left = 8
         Top = 8
@@ -178,7 +179,7 @@ inherited ViewVendasCad: TViewVendasCad
         ParentFont = False
       end
       object lbQuantidade: TLabel
-        Left = 478
+        Left = 391
         Top = 8
         Width = 56
         Height = 13
@@ -191,7 +192,7 @@ inherited ViewVendasCad: TViewVendasCad
         ParentFont = False
       end
       object lbPreco: TLabel
-        Left = 544
+        Left = 457
         Top = 8
         Width = 27
         Height = 13
@@ -216,6 +217,19 @@ inherited ViewVendasCad: TViewVendasCad
         Font.Style = []
         ParentFont = False
       end
+      object lbDesconto: TLabel
+        Left = 544
+        Top = 8
+        Width = 61
+        Height = 13
+        Caption = 'Desconto R$'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object edtIdProduto: TEdit
         Left = 8
         Top = 21
@@ -226,47 +240,7 @@ inherited ViewVendasCad: TViewVendasCad
         OnExit = edtIdProdutoExit
         OnKeyDown = edtIdProdutoKeyDown
       end
-      object edtProduto: TEdit
-        Left = 74
-        Top = 21
-        Width = 403
-        Height = 21
-        TabStop = False
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 1
-      end
-      object edtQuantidade: TEdit
-        Left = 478
-        Top = 21
-        Width = 65
-        Height = 21
-        NumbersOnly = True
-        TabOrder = 2
-        OnExit = edtIdProdutoExit
-        OnKeyDown = edtIdProdutoKeyDown
-      end
-      object edtPreco: TEdit
-        Left = 544
-        Top = 21
-        Width = 86
-        Height = 21
-        NumbersOnly = True
-        TabOrder = 3
-        OnExit = edtIdProdutoExit
-        OnKeyDown = edtIdProdutoKeyDown
-      end
-      object edtSubTotal: TEdit
-        Left = 631
-        Top = 21
-        Width = 86
-        Height = 21
-        NumbersOnly = True
-        TabOrder = 4
-        OnExit = edtIdProdutoExit
-        OnKeyDown = edtIdProdutoKeyDown
-      end
-      object Button1: TButton
+      object btnIncluirItem: TButton
         Left = 718
         Top = 16
         Width = 86
@@ -274,8 +248,61 @@ inherited ViewVendasCad: TViewVendasCad
         Caption = 'Incluir'
         ImageIndex = 2
         Images = ModelSistemaImagensDM.imgListButtons
+        TabOrder = 6
+        OnClick = btnIncluirItemClick
+      end
+      object edtQuantidade: TDBEdit
+        Left = 391
+        Top = 21
+        Width = 65
+        Height = 21
+        DataField = 'QUANTIDADE'
+        DataSource = DSItensVenda
+        TabOrder = 2
+        OnExit = edtQuantidadeExit
+      end
+      object edtPreco: TDBEdit
+        Left = 457
+        Top = 21
+        Width = 86
+        Height = 21
+        DataField = 'PRECO'
+        DataSource = DSItensVenda
+        TabOrder = 3
+        OnExit = edtQuantidadeExit
+      end
+      object edtDesconto: TDBEdit
+        Left = 544
+        Top = 21
+        Width = 86
+        Height = 21
+        DataField = 'DESCONTO'
+        DataSource = DSItensVenda
+        TabOrder = 4
+        OnExit = edtQuantidadeExit
+      end
+      object edtTotal: TDBEdit
+        Left = 631
+        Top = 21
+        Width = 86
+        Height = 21
+        Color = clBtnFace
+        DataField = 'TOTAL'
+        DataSource = DSItensVenda
+        ReadOnly = True
         TabOrder = 5
-        OnClick = Button1Click
+        OnExit = edtQuantidadeExit
+      end
+      object edtNomeProduto: TDBEdit
+        Left = 74
+        Top = 21
+        Width = 316
+        Height = 21
+        Color = clBtnFace
+        DataField = 'NOME_PRODUTO'
+        DataSource = DSItensVenda
+        ReadOnly = True
+        TabOrder = 1
       end
     end
     object pnGrid: TPanel
@@ -285,14 +312,14 @@ inherited ViewVendasCad: TViewVendasCad
       Height = 181
       Align = alClient
       BevelOuter = bvNone
-      TabOrder = 3
+      TabOrder = 2
       object GridItensVenda: TDBGrid
         Left = 0
         Top = 0
         Width = 785
         Height = 165
         Align = alClient
-        DataSource = DS_ItensVenda
+        DataSource = DSItensVenda
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -303,56 +330,37 @@ inherited ViewVendasCad: TViewVendasCad
         Columns = <
           item
             Expanded = False
-            FieldName = 'ID'
-            Title.Caption = 'C'#243'digo'
-            Width = 50
+            FieldName = 'ID_PRODUTO'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'RAZAO_SOCIAL'
-            Title.Caption = 'Raz'#227'o social'
-            Width = 200
+            FieldName = 'NOME_PRODUTO'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NOME_FANTASIA'
-            Title.Caption = 'Nome fantasia'
-            Width = 200
+            FieldName = 'UNIDADE_PRODUTO'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'TELEFONE'
-            Title.Caption = 'Telefone'
-            Width = 100
+            FieldName = 'QUANTIDADE'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'CELULAR'
-            Title.Caption = 'Celular'
-            Width = 100
+            FieldName = 'PRECO'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'CPF'
-            Width = 100
+            FieldName = 'DESCONTO'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'CNPJ'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_CIDADE'
-            Title.Caption = 'Cidade'
-            Width = 150
+            FieldName = 'TOTAL'
             Visible = True
           end>
       end
@@ -403,8 +411,12 @@ inherited ViewVendasCad: TViewVendasCad
       end
     end
   end
-  object DS_ItensVenda: TDataSource
+  object DSItensVenda: TDataSource
     Left = 696
     Top = 138
+  end
+  object DSVenda: TDataSource
+    Left = 696
+    Top = 90
   end
 end

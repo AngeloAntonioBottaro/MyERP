@@ -17,6 +17,8 @@ uses
   Vcl.ComCtrls,
   Vcl.Grids,
   Vcl.DBGrids,
+  Vcl.Mask,
+  Vcl.DBCtrls,
   View.Base.Cadastros,
   Data.DB,
   Utils.ConfGrid,
@@ -41,21 +43,24 @@ type
     lbIdProduto: TLabel;
     lbProduto: TLabel;
     edtIdProduto: TEdit;
-    edtProduto: TEdit;
     pnGrid: TPanel;
     GridItensVenda: TDBGrid;
     pnOptions: TPanel;
     lbTotalRegistros: TLabel;
     pnConfGrid: TPanel;
     imgConfGrid: TImage;
-    DS_ItensVenda: TDataSource;
+    DSItensVenda: TDataSource;
     lbQuantidade: TLabel;
-    edtQuantidade: TEdit;
     lbPreco: TLabel;
-    edtPreco: TEdit;
-    edtSubTotal: TEdit;
     lbSubTotal: TLabel;
-    Button1: TButton;
+    btnIncluirItem: TButton;
+    lbDesconto: TLabel;
+    DSVenda: TDataSource;
+    edtQuantidade: TDBEdit;
+    edtPreco: TDBEdit;
+    edtDesconto: TDBEdit;
+    edtTotal: TDBEdit;
+    edtNomeProduto: TDBEdit;
     procedure edtIdClienteKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtIdClienteExit(Sender: TObject);
     procedure edtIdProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -64,11 +69,16 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnIncluirItemClick(Sender: TObject);
+    procedure edtQuantidadeExit(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FVendasFactory: IModelVendasFactory;
     FConfGrid: TUtilsConfGrid;
     procedure GetTotalRegistros;
+    procedure Liga;
+    procedure Desliga;
   public
     procedure InitialConfiguration; override;
     procedure NewEntitie; override;
@@ -88,26 +98,27 @@ uses
   Utils.EditsKeyDownExit,
   Model.Sistema.Imagens.DM;
 
+procedure TViewVendasCad.btnCancelarClick(Sender: TObject);
+begin
+   inherited;
+   Self.Desliga;
+end;
+
 procedure TViewVendasCad.btnNovoClick(Sender: TObject);
 begin
    inherited;
    FVendasFactory.NovaVenda;
+   Self.Liga;
    Self.GetTotalRegistros;
    dtpDataVenda.Date := Date;
    edtIdCliente.SetFocus;
 end;
 
-procedure TViewVendasCad.Button1Click(Sender: TObject);
+procedure TViewVendasCad.btnIncluirItemClick(Sender: TObject);
 begin
-   FVendasFactory
-    .Itens
-     .NewItem
-      .IdProduto(edtIdProduto.Text)
-      .Nome(edtProduto.Text);
-
-   FVendasFactory
-    .Itens
-     .AddItem;
+   FVendasFactory.SalvarItem;
+   edtIdProduto.SetFocus;
+   Self.GetTotalRegistros;
 end;
 
 procedure TViewVendasCad.edtIdClienteExit(Sender: TObject);
@@ -122,7 +133,7 @@ end;
 
 procedure TViewVendasCad.edtIdProdutoExit(Sender: TObject);
 begin
-   IdProdutoExit(edtIdProduto, edtProduto);
+   FVendasFactory.NovoItem(edtIdProduto.Text);
 end;
 
 procedure TViewVendasCad.edtIdProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -139,6 +150,11 @@ begin
    end;
 
    IdProdutoKeyDown(edtIdProduto, LKey, LShift);
+end;
+
+procedure TViewVendasCad.edtQuantidadeExit(Sender: TObject);
+begin
+   FVendasFactory.CalcularValores;
 end;
 
 procedure TViewVendasCad.FormCreate(Sender: TObject);
@@ -165,14 +181,20 @@ begin
    end;
 end;
 
+procedure TViewVendasCad.FormShow(Sender: TObject);
+begin
+   inherited;
+   Self.Desliga;
+end;
+
 procedure TViewVendasCad.GetTotalRegistros;
 begin
    lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TOTAL_REGISTROS_DEFAULT;
 
-   if(DS_ItensVenda.DataSet = nil)then
+   if(DSItensVenda.DataSet = nil)then
      Exit;
 
-   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DS_ItensVenda.DataSet.RecordCount);
+   lbTotalRegistros.Caption := TOTAL_REGISTROS_LABEL + TMyLibrary.CompLeft(DSItensVenda.DataSet.RecordCount);
 end;
 
 procedure TViewVendasCad.InitialConfiguration;
@@ -180,9 +202,19 @@ begin
    Self.GetTotalRegistros;
 end;
 
+procedure TViewVendasCad.Liga;
+begin
+   pnTela.Enabled := True;
+end;
+
+procedure TViewVendasCad.Desliga;
+begin
+   pnTela.Enabled := False;
+end;
+
 procedure TViewVendasCad.NewEntitie;
 begin
-   FVendasFactory := TModelVendasFactory.New.DataSourceItens(DS_ItensVenda);
+   FVendasFactory := TModelVendasFactory.New.DataSourceVenda(DSVenda).DataSourceItens(DSItensVenda);
 end;
 
 end.

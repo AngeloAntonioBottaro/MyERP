@@ -15,7 +15,9 @@ uses
   Vcl.Dialogs,
   Vcl.ComCtrls,
   Vcl.ExtCtrls,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls,
+  Vcl.Mask,
+  Vcl.DBCtrls;
 
 type
   TViewBaseCadastros = class(TViewBase)
@@ -118,6 +120,8 @@ begin
    for I := 0 to Pred(Self.ComponentCount) do
    begin
       if(Self.Components[I] is TEdit)then
+        TEdit(Self.Components[I]).Clear
+      else if(Self.Components[I] is TDBEdit)then
         TEdit(Self.Components[I]).Clear
       else if(Self.Components[I] is TDateTimePicker)then
         TDateTimePicker(Self.Components[I]).Date := Now
