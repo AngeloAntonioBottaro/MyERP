@@ -330,6 +330,7 @@
         </DCCReference>
         <DCCReference Include="src\Model\Terminais\Model.Terminais.pas"/>
         <DCCReference Include="src\Model\Vendas\Model.Vendas.Factory.pas"/>
+        <DCCReference Include="src\Model\Vendas\Model.Vendas.Entitie.pas"/>
         <RcItem Include="resources\Images\PNG\MainMenu\BookAndPencil.png">
             <ResourceType>RCDATA</ResourceType>
             <ResourceId>agenda</ResourceId>

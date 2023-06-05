@@ -28,7 +28,7 @@ type
   TViewVendasCad = class(TViewBaseCadastros)
     pnTela: TPanel;
     pnCabecalho: TPanel;
-    pnFinalizacaoVenda: TPanel;
+    pnTotalVenda: TPanel;
     pnItens: TPanel;
     lbId: TLabel;
     edtId: TEdit;
@@ -61,6 +61,7 @@ type
     edtDesconto: TDBEdit;
     edtTotal: TDBEdit;
     edtNomeProduto: TDBEdit;
+    DSItemVenda: TDataSource;
     procedure edtIdClienteKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtIdClienteExit(Sender: TObject);
     procedure edtIdProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -73,12 +74,15 @@ type
     procedure btnIncluirItemClick(Sender: TObject);
     procedure edtQuantidadeExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure cBoxFormaPagExit(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
   private
     FVendasFactory: IModelVendasFactory;
     FConfGrid: TUtilsConfGrid;
     procedure GetTotalRegistros;
     procedure Liga;
     procedure Desliga;
+    procedure EmptyItensFields;
   public
     procedure InitialConfiguration; override;
     procedure NewEntitie; override;
@@ -95,13 +99,19 @@ uses
   MyMessage,
   Common.Utils.MyConsts,
   Common.Utils.MyLibrary,
+  Utils.Types,
   Utils.EditsKeyDownExit,
   Model.Sistema.Imagens.DM;
 
 procedure TViewVendasCad.btnCancelarClick(Sender: TObject);
 begin
+   if(not ShowQuestionNo('Confirmar cancelamento da venda?'))then
+     Exit;
+
    inherited;
    Self.Desliga;
+   DSItensVenda.DataSet := nil;
+   Self.GetTotalRegistros;
 end;
 
 procedure TViewVendasCad.btnNovoClick(Sender: TObject);
@@ -114,11 +124,32 @@ begin
    edtIdCliente.SetFocus;
 end;
 
+procedure TViewVendasCad.cBoxFormaPagExit(Sender: TObject);
+begin
+   inherited;
+   FVendasFactory.Entitie.FormaPagamento(cBoxFormaPag.ItemIndex);
+end;
+
+procedure TViewVendasCad.btnGravarClick(Sender: TObject);
+begin
+   inherited;
+   FVendasFactory
+    .Entitie
+     .Id(edtId.Text)
+     .Data(dtpDataVenda.Date)
+     .IdCliente(edtIdCliente.Text)
+     .FormaPagamento(cBoxFormaPag.ItemIndex)
+     .Observacao('');
+
+   //FVendasFactory.GravarVenda;
+end;
+
 procedure TViewVendasCad.btnIncluirItemClick(Sender: TObject);
 begin
    FVendasFactory.SalvarItem;
    edtIdProduto.SetFocus;
    Self.GetTotalRegistros;
+   Self.EmptyItensFields;
 end;
 
 procedure TViewVendasCad.edtIdClienteExit(Sender: TObject);
@@ -157,9 +188,27 @@ begin
    FVendasFactory.CalcularValores;
 end;
 
+procedure TViewVendasCad.EmptyItensFields;
+begin
+   edtIdProduto.Clear;
+   edtNomeProduto.Clear;
+   edtQuantidade.Clear;
+   edtPreco.Clear;
+   edtDesconto.Clear;
+   edtTotal.Clear;
+end;
+
 procedure TViewVendasCad.FormCreate(Sender: TObject);
+var
+  I: TFormaPagamento;
 begin
    inherited;
+   cBoxFormaPag.Items.Clear;
+   for I := Low(TFormaPagamento) to High(TFormaPagamento) do
+     cBoxFormaPag.Items.Add(I.ToString);
+
+   cBoxFormaPag.ItemIndex := -1;
+
    FConfGrid := TUtilsConfGrid.New(imgConfGrid, GridItensVenda, Self.Name);
 end;
 
@@ -204,17 +253,21 @@ end;
 
 procedure TViewVendasCad.Liga;
 begin
-   pnTela.Enabled := True;
+   pnCabecalho.Enabled  := True;
+   pnItens.Enabled      := True;
+   pnTotalVenda.Enabled := True;
 end;
 
 procedure TViewVendasCad.Desliga;
 begin
-   pnTela.Enabled := False;
+   pnCabecalho.Enabled  := False;
+   pnItens.Enabled      := False;
+   pnTotalVenda.Enabled := False;
 end;
 
 procedure TViewVendasCad.NewEntitie;
 begin
-   FVendasFactory := TModelVendasFactory.New.DataSourceVenda(DSVenda).DataSourceItens(DSItensVenda);
+   FVendasFactory := TModelVendasFactory.New.DataSourceVenda(DSVenda).DataSourceItem(DSItemVenda).DataSourceItens(DSItensVenda);
 end;
 
 end.

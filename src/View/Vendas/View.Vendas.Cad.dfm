@@ -5,6 +5,9 @@ inherited ViewVendasCad: TViewVendasCad
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnButtons: TPanel
+    inherited btnGravar: TButton
+      OnClick = btnGravarClick
+    end
     inherited btnImprimir: TButton
       Visible = True
     end
@@ -132,12 +135,13 @@ inherited ViewVendasCad: TViewVendasCad
         Height = 21
         Style = csDropDownList
         TabOrder = 4
+        OnExit = cBoxFormaPagExit
         Items.Strings = (
           #193' Vista'
           'A Prazo')
       end
     end
-    object pnFinalizacaoVenda: TPanel
+    object pnTotalVenda: TPanel
       Left = 0
       Top = 279
       Width = 808
@@ -257,7 +261,7 @@ inherited ViewVendasCad: TViewVendasCad
         Width = 65
         Height = 21
         DataField = 'QUANTIDADE'
-        DataSource = DSItensVenda
+        DataSource = DSItemVenda
         TabOrder = 2
         OnExit = edtQuantidadeExit
       end
@@ -267,7 +271,7 @@ inherited ViewVendasCad: TViewVendasCad
         Width = 86
         Height = 21
         DataField = 'PRECO'
-        DataSource = DSItensVenda
+        DataSource = DSItemVenda
         TabOrder = 3
         OnExit = edtQuantidadeExit
       end
@@ -277,7 +281,7 @@ inherited ViewVendasCad: TViewVendasCad
         Width = 86
         Height = 21
         DataField = 'DESCONTO'
-        DataSource = DSItensVenda
+        DataSource = DSItemVenda
         TabOrder = 4
         OnExit = edtQuantidadeExit
       end
@@ -288,7 +292,7 @@ inherited ViewVendasCad: TViewVendasCad
         Height = 21
         Color = clBtnFace
         DataField = 'TOTAL'
-        DataSource = DSItensVenda
+        DataSource = DSItemVenda
         ReadOnly = True
         TabOrder = 5
         OnExit = edtQuantidadeExit
@@ -300,7 +304,7 @@ inherited ViewVendasCad: TViewVendasCad
         Height = 21
         Color = clBtnFace
         DataField = 'NOME_PRODUTO'
-        DataSource = DSItensVenda
+        DataSource = DSItemVenda
         ReadOnly = True
         TabOrder = 1
       end
@@ -331,36 +335,60 @@ inherited ViewVendasCad: TViewVendasCad
           item
             Expanded = False
             FieldName = 'ID_PRODUTO'
+            Title.Caption = 'C'#243'd. Prod.'
+            Width = 60
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'NOME_PRODUTO'
+            Title.Caption = 'Produto'
+            Width = 345
             Visible = True
           end
           item
+            Alignment = taCenter
             Expanded = False
             FieldName = 'UNIDADE_PRODUTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'UN'
+            Width = 30
             Visible = True
           end
           item
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'QUANTIDADE'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Quantidade'
+            Width = 70
             Visible = True
           end
           item
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'PRECO'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Pre'#231'o'
+            Width = 80
             Visible = True
           end
           item
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'DESCONTO'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Desconto'
+            Width = 80
             Visible = True
           end
           item
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'TOTAL'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Total'
+            Width = 80
             Visible = True
           end>
       end
@@ -412,11 +440,15 @@ inherited ViewVendasCad: TViewVendasCad
     end
   end
   object DSItensVenda: TDataSource
-    Left = 696
-    Top = 138
+    Left = 640
+    Top = 146
   end
   object DSVenda: TDataSource
-    Left = 696
-    Top = 90
+    Left = 480
+    Top = 146
+  end
+  object DSItemVenda: TDataSource
+    Left = 552
+    Top = 146
   end
 end

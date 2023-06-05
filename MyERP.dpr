@@ -139,7 +139,8 @@ uses
   View.Compras.Busca in 'src\View\Compras\View.Compras.Busca.pas' {ViewComprasBusca},
   View.Caixa.CaixaDiario in 'src\View\Caixa\View.Caixa.CaixaDiario.pas' {ViewCaixaCaixaDiario},
   Model.Terminais in 'src\Model\Terminais\Model.Terminais.pas',
-  Model.Vendas.Factory in 'src\Model\Vendas\Model.Vendas.Factory.pas';
+  Model.Vendas.Factory in 'src\Model\Vendas\Model.Vendas.Factory.pas',
+  Model.Vendas.Entitie in 'src\Model\Vendas\Model.Vendas.Entitie.pas';
 
 {$R *.res}
 
