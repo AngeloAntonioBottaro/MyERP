@@ -20,7 +20,7 @@ uses
 
 type
   TViewSistemaSobre = class(TViewBase)
-    Panel1: TPanel;
+    pnTela: TPanel;
     lbSistema: TLabel;
     pnGithub: TPanel;
     lbGithub: TLabel;
